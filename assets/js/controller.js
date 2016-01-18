@@ -1,5 +1,6 @@
 var appController = angular.module('appController', []);
 
-appControllers.controller('HomeController',['',
-    
-]);
+appControllers.controller('HomeController', ['$scope', '$http',
+    function($scope, $http){
+		
+	}]);

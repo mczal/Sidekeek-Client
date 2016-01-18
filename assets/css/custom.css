@@ -7,8 +7,6 @@
 
 body {
     overflow-x: hidden;
-	background: url(../img/discoverbg.jpg)no-repeat;
-	background-size: cover;
 }
 
 p {
@@ -472,7 +470,18 @@ footer .footer-below {
     opacity: 0;
 }
 
-/*--------------Custom------------*/
+/*--------------Custom-------------*/
+
+footer{
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+}
+
+.index{
+	background: url(../img/discoverbg.jpg) no-repeat;
+	background-size: cover;
+}
 
 .navbar-brand{
 	position: absolute;
@@ -486,23 +495,32 @@ footer .footer-below {
 }
 
 .search{
-    display: block;
-    margin-left: 300px;
-    margin-right: 500px;
+	display: inline-block;
+	margin-left: 200px;
+	margin-right:200px;
 }
 
-.search-bar, input{
-	font-family: "Lato";
-    width: 100%;
-    height: 30px;
-    border-radius: 2px;
-    border: none;
-    padding: 10px;
-    font-size: 15px;
+.search input{
+	width: 640px;
+}
+
+.btn-search{
+	display: inline-block;
+}
+
+.btn-group{
+	position: absolute;
+}
+
+.dropdown-menu p{
+	color: #d0d0d0;
+	padding-top: 10px;
+	padding-left: 20px;
 }
 
 .desc{
-	margin-top:450px;
+	margin-top:300px;
+	margin-bottom: 50px;
 }
 
 .desc h1{
@@ -524,4 +542,30 @@ footer .footer-below {
   color: #fff;
   background-color: #5cb85c;
   border-color: #4cae4c;
+}
+
+.navbar-fixed-top{
+	height: 77px;
+}
+
+.form-control{
+	width: 230px;
+	display: inline-block;
+}
+
+footer .footer-col{
+	margin-bottom: 10px;
+}
+
+footer .footer-above{
+	padding-top: 20px;
+}
+
+.footer-col ul li{
+	list-style: none;
+	font-family: "Montserrat";
+}
+
+.footer-below{
+	font-family: "Montserrat";
 }
