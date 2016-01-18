@@ -1,0 +1,27 @@
+{
+  "name": "Sidekeek.co",
+  "authors": [
+    "Adli Fariz Bonaputra <abathz@gmail.com>"
+  ],
+  "description": "Marketplace B2B",
+  "main": "",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "angular": "~1.4.8",
+    "font-awesome": "~4.5.0",
+    "jquery-easing": "*",
+    "angular-route": "~1.4.8"
+  }
+}
