@@ -1,6 +1,11 @@
 var appController = angular.module('appController', []);
 
-appControllers.controller('HomeController', ['$scope', '$http',
-    function($scope, $http){
-		
-	}]);
+appController.controller('HomeController', ['$scope', '$http',
+    function ($scope, $http){
+        
+}]);
+
+appController.controller('StartController', ['$scope', '$http',
+    function ($scope, $http){
+        
+}]);

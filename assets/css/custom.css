@@ -32,7 +32,7 @@ h3,
 h4,
 h5,
 h6 {
-    text-transform: uppercase;
+	text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
@@ -478,9 +478,8 @@ footer{
 	bottom: 0;
 }
 
-.index{
-	background: url(../img/discoverbg.jpg) no-repeat;
-	background-size: cover;
+.content{
+	margin-top: 100px;
 }
 
 .navbar-brand{
@@ -521,11 +520,16 @@ footer{
 .desc{
 	margin-top:300px;
 	margin-bottom: 50px;
+	color:#fff;
 }
 
 .desc h1{
-	font-size: 5em;
-	color:#fff;
+	text-transform: uppercase;
+	font-size: 4.5em;
+}
+
+.desc p{
+	font-family: "Lato";
 }
 
 .desc button{
@@ -536,6 +540,31 @@ footer{
 	font-family: "Lato";
 	font-weight: 400;
 	font-size: 1.3em;
+}
+
+.desc-start{
+	margin-top: 250px;
+	margin-bottom: 60px;
+}
+
+.desc-start h1{
+	letter-spacing: 3px;
+}
+
+.button-start button{
+	font-size: 2.2em;
+	width: 250px;
+	height: 80px;
+	margin-bottom: 30px;
+}
+
+.start1{
+	margin-top: 200px
+}
+
+.btn-start-next{
+	margin-top: 180px;
+	width: 150px;
 }
 
 .btn-success {
@@ -568,4 +597,65 @@ footer .footer-above{
 
 .footer-below{
 	font-family: "Montserrat";
+}
+
+#logbox {
+	padding: 10px;
+	margin: 200px auto;
+	width: 340px;
+	background-color: #fff;
+	-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+}
+
+.input {
+	width: 75%;
+	height: 50px;
+	display: block;
+	margin: 0 auto 15px;
+	padding: 0 15px;
+	border: none;
+	border-bottom: 2px solid #ebebeb;
+}
+.input:focus {
+	outline: none;
+	border-bottom-color: #3CC !important;
+}
+.input:hover {
+	border-bottom-color: #dcdcdc;
+}
+.input:invalid {
+	box-shadow: none;
+}
+
+.pass:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+.inputButton {
+	position: relative;
+	width: 85%;
+	height: 50px;
+	display: block;
+	margin: 30px auto 30px;
+	color: white;
+	background-color: #3CC;
+	border: none;
+	-webkit-box-shadow: 0 5px 0 #2CADAD;
+	-moz-box-shadow: 0 5px 0 #2CADAD;
+	box-shadow: 0 5px 0 #2CADAD;
+}
+.inputButton:hover {
+	top: 2px;
+	-webkit-box-shadow: 0 3px 0 #2CADAD;
+	-moz-box-shadow: 0 3px 0 #2CADAD;
+	box-shadow: 0 3px 0 #2CADAD;
+}
+.inputButton:active {
+	top: 5px;
+	box-shadow: none;
+}
+.inputButton:focus {
+	outline: none;
 }
