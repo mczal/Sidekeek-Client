@@ -23,7 +23,8 @@ a:focus,
 a:active,
 a.active {
     outline: 0;
-    color: #18bc9c;
+    color: #fff;
+    text-decoration: none;
 }
 
 h1,
@@ -470,7 +471,7 @@ footer .footer-below {
     opacity: 0;
 }
 
-/*--------------Custom-------------*/
+/*------------------------------------CUSTOM--------------------------------------*/
 
 footer{
 	position: absolute;
@@ -484,7 +485,7 @@ footer{
 
 .navbar-brand{
 	position: absolute;
-	top:13px;	
+	top:13px;
 }
 
 .navbar .navbar-nav{
@@ -518,7 +519,7 @@ footer{
 }
 
 .desc{
-	margin-top:300px;
+	margin-top:230px;
 	margin-bottom: 50px;
 	color:#fff;
 }
@@ -551,6 +552,11 @@ footer{
 	letter-spacing: 3px;
 }
 
+.form-control-home{
+    width: 230px;
+    display: inline-block;
+}
+
 .button-start button{
 	font-size: 2.2em;
 	width: 250px;
@@ -578,7 +584,7 @@ footer{
 }
 
 .form-control{
-	width: 230px;
+	width: 100%;
 	display: inline-block;
 }
 
@@ -658,4 +664,37 @@ footer .footer-above{
 }
 .inputButton:focus {
 	outline: none;
+}
+
+.background{
+    background-image: url(../img/discoverbg.jpg);
+    position:absolute;
+    width:100%;
+    height: 100%; /* Change to the height you need */
+    top:0px;
+    left:0px;
+}
+
+.edit-profile{
+    margin-top: 150px;
+}
+
+.box{
+    width:250px;
+    height: 250px;
+    background: transparent;
+    border: 0.5px solid #ccc;
+    border-radius: 5px;
+}
+
+.file-upload{
+    margin-top:55px;
+}
+
+.form-group-xl .form-control {
+    height: 52px;
+    padding: 10px 16px;
+    font-size: 12pt;
+    line-height: 1.3333333;
+    border-radius: 6px;
 }

@@ -15,11 +15,15 @@ sidekeekApp.config(['$routeProvider',
 			'controller' : 'StartController'
 		}).
 		when('/next-start', {
-			'templateUrl' : 'partials/start1.html',
+			'templateUrl' : 'partials/next-start.html',
 			'controller' : 'StartController'
 		}).
 		when('/sign-up', {
-			'templateUrl' : 'partials/start2.html',
+			'templateUrl' : 'partials/sign-up.html',
+			'controller' : 'StartController'
+		}).
+        when('/edit-profile', {
+			'templateUrl' : 'partials/edit-profile.html',
 			'controller' : 'StartController'
 		}).
         otherwise({
