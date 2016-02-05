@@ -496,12 +496,12 @@ footer{
 
 .search{
 	display: inline-block;
-	margin-left: 200px;
-	margin-right:200px;
+	margin-left: 150px;
+	margin-right:150px;
 }
 
 .search input{
-	width: 640px;
+	width: 423px;
 }
 
 .btn-search{
@@ -512,14 +512,14 @@ footer{
 	position: absolute;
 }
 
-.dropdown-menu p{
+.dropdown-menu-login p{
 	color: #d0d0d0;
 	padding-top: 10px;
 	padding-left: 20px;
 }
 
 .desc{
-	margin-top:230px;
+	margin-top:150px;
 	margin-bottom: 50px;
 	color:#fff;
 }
@@ -527,10 +527,6 @@ footer{
 .desc h1{
 	text-transform: uppercase;
 	font-size: 4.5em;
-}
-
-.desc p{
-	font-family: "Lato";
 }
 
 .desc button{
@@ -593,7 +589,7 @@ footer .footer-col{
 }
 
 footer .footer-above{
-	padding-top: 20px;
+	padding-top: 0px;
 }
 
 .footer-col ul li{
@@ -697,4 +693,10 @@ footer .footer-above{
     font-size: 12pt;
     line-height: 1.3333333;
     border-radius: 6px;
+}
+
+.dropdown-login{
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
 }

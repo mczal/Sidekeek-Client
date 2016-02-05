@@ -26,6 +26,10 @@ sidekeekApp.config(['$routeProvider',
 			'templateUrl' : 'partials/edit-profile.html',
 			'controller' : 'StartController'
 		}).
+        when('/edit-profile-full', {
+			'templateUrl' : 'partials/edit-profile-full.html',
+			'controller' : 'StartController'
+		}).
         otherwise({
             'redirectTo': '/home'
         });

@@ -68,7 +68,28 @@
 							<a href="#">Sign Up</a>
 						</li>
 						<li class="page-scroll">
-							<a href="#">Login</a>
+							<div class="dropdown">
+							  <a class="btn btn-success dropdown-toggle" style="vertical-align:-17px; width:80px;" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							    Login
+							</a>
+							  <ul class="dropdown-menu dropdown-login" aria-labelledby="dropdownMenu1">
+								  <h5 style="color:#fff">Login</h5>
+								  <form>
+								    <div class="form-group">
+								      <input type="email" class="form-control" placeholder="Email">
+								    </div>
+								    <div class="form-group">
+								      <input type="password" class="form-control" placeholder="Password">
+								    </div>
+									<div class="checkbox">
+									    <label style="color:#fff; font-family:'Lato'">
+									      <input type="checkbox"> Remember me
+									    </label>
+									  </div>
+								    <button type="submit" class="btn btn-sm btn-default">Submit</button>
+								  </form>
+							  </ul>
+							</div>
 						</li>
 					</ul>
 				</div>
@@ -85,7 +106,7 @@
 		<script src="bower_components/angular/angular.js"></script>
 		<script src="bower_components/angular-route/angular-route.js"></script>
 		<script src="bower_components/jquery-easing/jquery.easing.min.js"></script>
-		
+
 
 		<script src="assets/js/app.js"></script>
 		<script src="assets/js/controller.js"></script>
