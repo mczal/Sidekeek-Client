@@ -683,6 +683,24 @@ footer .footer-above{
     border-radius: 5px;
 }
 
+.box-kecil{
+    margin-top: 10px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: 0.5px solid #ccc;
+    border-radius: 5px;
+}
+
+.box-kecil img{
+    padding-top: 8px;
+    width: 30px;
+}
+
+.upload .box-kecil{
+    display: inline-block;
+}
+
 .file-upload{
     margin-top:55px;
 }
@@ -702,5 +720,28 @@ footer .footer-above{
 }
 
 .edit-profile-full{
-    padding-top:90px;
+    padding-top:40px;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus{
+    font-family: "Montserrat";
+    font-size: 12pt;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.nav-pills > li > a,
+.nav-pills > li > a:hover,
+.nav-pills > li > a:focus{
+    font-family: "Montserrat";
+    font-size: 12pt;
+    color: #000;
+    background-color: #eee;
+}
+
+.btn-edit-profile{
+    margin: 100px 0;
+    width: 150px;
 }

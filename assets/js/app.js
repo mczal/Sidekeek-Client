@@ -2,8 +2,7 @@ var sidekeekApp = angular.module('sidekeekApp', [
     'appController',
     'ui.bootstrap',
     'ui.bootstrap.tabs',
-	'ngRoute',
-    'ngAnimate'
+	'ngRoute'
 ]);
 
 sidekeekApp.config(['$routeProvider',
@@ -32,8 +31,8 @@ sidekeekApp.config(['$routeProvider',
         when('/edit-profile-full', {
 			'templateUrl' : 'partials/edit-profile-full.html',
 			'controller' : 'StartController'
-		})
-        // otherwise({
-        //     'redirectTo': '/home'
-        // });
+		}).
+        otherwise({
+            'redirectTo': '/home'
+        });
 	}]);
