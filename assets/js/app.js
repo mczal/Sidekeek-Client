@@ -12,7 +12,7 @@ sidekeekApp.config(['$routeProvider',
             'templateUrl': 'partials/home.html',
             'controller': 'HomeController'
         }).
-		when('/start', {
+		when('/start-host', {
 			'templateUrl' : 'partials/start.html',
 			'controller' : 'StartController'
 		}).
