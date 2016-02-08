@@ -501,7 +501,7 @@ footer{
 }
 
 .search input{
-	width: 423px;
+	width: 473px;
 }
 
 .btn-search{
@@ -540,7 +540,7 @@ footer{
 }
 
 .desc-start{
-	margin-top: 250px;
+	margin-top: 120px;
 	margin-bottom: 60px;
 }
 
@@ -565,7 +565,14 @@ footer{
 }
 
 .btn-start-next{
-	margin-top: 180px;
+    position: absolute;
+    right: 350px;
+    bottom: 150px;
+	width: 150px;
+}
+
+.btn-next-start{
+    margin-top: 160px;
 	width: 150px;
 }
 
@@ -744,4 +751,12 @@ footer .footer-above{
 .btn-edit-profile{
     margin: 100px 0;
     width: 150px;
+}
+
+.show{
+    display: block;
+}
+
+.hide{
+    display: none;
 }

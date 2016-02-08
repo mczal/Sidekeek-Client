@@ -22,11 +22,11 @@ sidekeekApp.config(['$routeProvider',
 		}).
 		when('/sign-up', {
 			'templateUrl' : 'partials/sign-up.html',
-			'controller' : 'StartController'
+			'controller' : 'SignUpController'
 		}).
         when('/edit-profile', {
 			'templateUrl' : 'partials/edit-profile.html',
-			'controller' : 'StartController'
+			'controller' : 'EditProfileController'
 		}).
         when('/edit-profile-full', {
 			'templateUrl' : 'partials/edit-profile-full.html',

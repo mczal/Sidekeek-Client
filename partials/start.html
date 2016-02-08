@@ -6,23 +6,19 @@
 			</div>
 			<div class="button-start">
 				<div class="col-lg-6">
-					<button class="btn btn-success btn-lg">Goods</button>
-					<div class="col-lg-8 col-lg-offset-2">
-						<p><strong>barang berwujud seperti bahan baku, komponen, maupun produk jadi (termasuk sewa/subkontrak)</strong></p>
-					</div>
+					<button class="btn btn-success btn-lg" value="goods" ng-click="serviceGoodOnClick(1)">Goods</button>
 				</div>
-				<div class="col-lg-6">
-					<button class="btn btn-success btn-lg">Service</button>
-					<div class="col-lg-8 col-lg-offset-2">
-						<p><strong>jasa atau layanan pekerjaan berdasarkan keahlian tertentu</strong></p>
-					</div>
+				<div class="col-lg-6 button-service">
+					<button class="btn btn-success btn-lg" value="services" ng-click="serviceGoodOnClick(2)">Service</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<p id="button-goods">Barang berwujud seperti bahan baku, komponen, maupun produk jadi (termasuk sewa/subkontrak)</p>
+					<p id="button-service">Jasa atau layanan pekerjaan berdasarkan keahlian tertentu</p>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-lg-12">
-			<a href="#/next-start"><button class="btn btn-success btn-lg pull-right btn-start-next">Next</button></a>
-		</div>
-	</div>
+	<a href="#/next-start"><button class="btn btn-success btn-lg pull-right btn-start-next" ng-click="getID()">Next</button></a>
 </div>
