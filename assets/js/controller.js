@@ -2,7 +2,17 @@ var appController = angular.module('appController', []);
 var urlAPI = "http://localhost:3000/sideAPIkeek"
 var token = "eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ";
 var idTipe = null;
-var idHost = null;
+idHost = null;
+
+function generateUniqueCode(){
+   var text = "";
+   var possible = "[&900qnw@ml;kNI./UBI~`189`aklm3076IAKU-PASTI-BISA';l";
+
+   for( var i=0; i < 10; i++ )
+       text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+   idHost = text;
+}
 
 appController.controller('HomeController',['$scope','$http',
     function($scope,$http){
@@ -17,7 +27,7 @@ appController.controller('HomeController',['$scope','$http',
                 $scope.categoriesData = response;
             },
             error: function(xhr, status, error){
-                alert(error);
+                console.log(error);
             }
         });
         $.ajax({
@@ -31,7 +41,7 @@ appController.controller('HomeController',['$scope','$http',
                 $scope.provinceData = response;
             },
             error: function(xhr, status, error){
-                alert(error);
+                console.log(error);
             }
         });
     }
@@ -39,6 +49,7 @@ appController.controller('HomeController',['$scope','$http',
 
 appController.controller('StartController', ['$scope', '$http',
     function ($scope, $http){
+
         $('#button-goods').hide();
         $('#button-service').hide();
 
@@ -53,7 +64,7 @@ appController.controller('StartController', ['$scope', '$http',
                 $scope.categoriesData = response;
             },
             error: function(xhr, status, error){
-                alert(error);
+                console.log(error);
             }
         });
 
@@ -69,24 +80,6 @@ appController.controller('StartController', ['$scope', '$http',
             }
         }
 
-        $scope.getID = function(){
-            var tipe = idTipe;
-            $.ajax({
-                url: urlAPI + '/firstRegister',
-                method: "POST",
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                data:{
-                    token: token,
-                    tipe: tipe
-                },
-                success: function(response){
-                    idHost=response.myId;
-                },
-                error: function(xhr, status, error){
-                    alert(error);
-                }
-            });
-        }
         $scope.submit = function(){
             var myId = idHost;
             var categories = $scope.form.categories;
@@ -107,7 +100,7 @@ appController.controller('StartController', ['$scope', '$http',
                     alert("Berhasil");
                 },
                 error: function(xhr, status, error){
-                    alert(error);
+                    console.log(error);
                 }
             });
         }
