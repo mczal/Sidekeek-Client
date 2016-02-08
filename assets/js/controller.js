@@ -1,8 +1,8 @@
 var appController = angular.module('appController', []);
 var urlAPI = "http://localhost:3000/sideAPIkeek"
 var token = "eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ";
-var idTipe = null;
-idHost = null;
+idTipe = null;
+statTemp = null;
 
 function generateUniqueCode(){
    var text = "";
@@ -11,7 +11,7 @@ function generateUniqueCode(){
    for( var i=0; i < 10; i++ )
        text += possible.charAt(Math.floor(Math.random() * possible.length));
 
-   idHost = text;
+   return text;
 }
 
 appController.controller('HomeController',['$scope','$http',
@@ -80,11 +80,31 @@ appController.controller('StartController', ['$scope', '$http',
             }
         }
 
+        $scope.submitFirst = function(){
+            localStorage.statTemp = generateUniqueCode();
+            $.ajax({
+                url: urlAPI + '/firstRegister',
+                method: 'POST',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data:{
+                    token: token,
+                    tipe: idTipe,
+                    statTemp: localStorage.statTemp
+                },
+                success: function(response){
+                    console.log(response.message +" "+ idTipe);
+                },
+                error: function(xhr, status, error){
+                    console.log(xhr);
+                }
+            });
+        }
+
         $scope.submit = function(){
-            var myId = idHost;
             var categories = $scope.form.categories;
             var company = $scope.form.company;
             var thread = $scope.form.thread;
+            statTemp = localStorage.statTemp;
             $.ajax({
                 url: urlAPI + '/secondRegister',
                 method: "POST",
@@ -92,12 +112,12 @@ appController.controller('StartController', ['$scope', '$http',
                 data:{
                     token: token,
                     cat: categories,
-                    myId: myId,
+                    statTemp: statTemp,
                     compTitle: company,
                     threadTitle: thread
                 },
                 success: function(response){
-                    alert("Berhasil");
+                    console.log(response);
                 },
                 error: function(xhr, status, error){
                     console.log(error);
@@ -119,16 +139,16 @@ appController.controller('SignUpController', ['$scope', '$http',
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 data:{
                     token: token,
-                    myId: idHost,
+                    statTemp: statTemp,
                     email: email,
                     password: pass,
                     confirmation: confirm
                 },
                 success: function(response){
-                    alert("berhasil");
+                    console.log(response);
                 },
                 error: function(xhr, status, error){
-                    alert(error);
+                    console.log(error);
                 }
             });
         }

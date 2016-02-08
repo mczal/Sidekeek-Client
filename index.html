@@ -64,31 +64,26 @@
 						<li class="page-scroll">
 							<a href="#/start-host" onclick="">Start Hosting</a>
 						</li>
-						<li class="page-scroll">
+						<li class="page-scroll" id="btn-hide">
 							<a href="#/sign-up">Sign Up</a>
 						</li>
 						<li class="page-scroll">
-							<div class="dropdown">
-							  <a class="btn btn-success dropdown-toggle" style="vertical-align:-17px; width:80px;" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							    Login
-							</a>
-							  <ul class="dropdown-menu dropdown-login" aria-labelledby="dropdownMenu1">
-								  <h5 style="color:#fff">Login</h5>
-								  <form>
-								    <div class="form-group">
-								      <input type="email" class="form-control" placeholder="Email">
-								    </div>
-								    <div class="form-group">
-								      <input type="password" class="form-control" placeholder="Password">
-								    </div>
-									<div class="checkbox">
-									    <label style="color:#fff; font-family:'Lato'">
-									      <input type="checkbox"> Remember me
-									    </label>
-									  </div>
-								    <button type="submit" class="btn btn-sm btn-default">Submit</button>
-								  </form>
-							  </ul>
+							<div class="dropdown" id="btn-hide">
+								<a class="btn btn-success dropdown-toggle" style="vertical-align:-17px; width:80px;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							    	Login
+							  	</a>
+							  	<ul class="dropdown-menu dropdown-login">
+									<h5 style="color:#fff">Login</h5>
+									<form>
+										<div class="form-group">
+											<input type="email" class="form-control" placeholder="Email" id="email">
+										</div>
+										<div class="form-group">
+											<input type="password" class="form-control" placeholder="Password" id="password">
+										</div>
+										<a href="#"><button type="submit" class="btn btn-sm btn-default" onclick="login()">Submit</button></a>
+									</form>
+							  	</ul>
 							</div>
 						</li>
 					</ul>
@@ -117,6 +112,31 @@
 		<script src="assets/js/cbpAnimatedHeader.js"></script>
 		<script src="assets/js/custom.js"></script>
 
+		<script type="text/javascript">
+			var login = function(){
+				var email = $('#email').val();
+				var pass = $('#password').val();
+				$.ajax({
+					url: 'http://localhost:3000/sideAPIkeek/login',
+					method: 'POST',
+					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+					data:{
+						token: 'eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ',
+						email: email,
+						password: pass
+					},
+					success: function(response){
+						// alert(response.message);
+						// alert("ajhahahahahha");
+						$('#btn-hide').addClass('hide');
+						$('.dropdown').addClass('hide');
+					},
+					error: function(xhr, status, error){
+						console.log(error);
+					}
+				});
+			}
+		</script>
 
 	</body>
 
