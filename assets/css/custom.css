@@ -473,6 +473,14 @@ footer .footer-below {
 
 /*------------------------------------CUSTOM--------------------------------------*/
 
+.show{
+    display: block;
+}
+
+.hide{
+    display: none;
+}
+
 footer{
 	position: absolute;
 	width: 100%;
@@ -553,11 +561,21 @@ footer{
     display: inline-block;
 }
 
-.button-start button{
+.button-start input{
 	font-size: 2.2em;
 	width: 250px;
 	height: 80px;
 	margin-bottom: 30px;
+    background-color: #5cb85c;
+    -webkit-box-shadow: 0 5px 0 #498844;
+	-moz-box-shadow: 0 5px 0 #498844;
+	box-shadow: 0 5px 0 #498844;
+}
+
+.button-start input:hover {
+	-webkit-box-shadow: 0 3px 0 #498844;
+	-moz-box-shadow: 0 3px 0 #498844;
+	box-shadow: 0 3px 0 #498844;
 }
 
 .start1{
@@ -722,7 +740,7 @@ footer .footer-above{
 
 .dropdown-login{
     width: 300px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0,0,0,0.9);
     padding: 20px;
 }
 
@@ -753,10 +771,32 @@ footer .footer-above{
     width: 150px;
 }
 
-.show{
-    display: block;
+.img-acc{
+    width:45px;
+    margin-right: 15px;
+    vertical-align: -35px;
 }
 
-.hide{
-    display: none;
+.img-acc-child{
+    width: 100px;
+    left: 20px;
+}
+
+.dropdown-login-acc{
+    width: 300px;
+    background-color: rgba(0,0,0,0.9);
+    padding: 20px 20px 10px 20px;
+}
+
+.dropdown-login-acc em{
+    color: #5cb85c;
+    font-size: 12pt;
+}
+
+.dropdown-login-acc p{
+    font-family: "Lato";
+}
+
+.dropdown-menu .divider{
+    background-color:#498844;
 }
