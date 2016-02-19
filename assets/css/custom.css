@@ -180,7 +180,7 @@ header .intro-text .skills {
 .navbar-default,
 .navbar-inverse {
     border: 0;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(0, 0, 0, 0.8);
 }
 
 section {
@@ -482,9 +482,12 @@ footer .footer-below {
 }
 
 footer{
-	position: absolute;
 	width: 100%;
 	bottom: 0;
+}
+
+.footer-home{
+    position: absolute;
 }
 
 .content{
@@ -799,4 +802,91 @@ footer .footer-above{
 
 .dropdown-menu .divider{
     background-color:#498844;
+}
+
+.latar{
+    color: #000;
+    padding: 0 30px 30px 30px;
+    width: 100%;
+    background-color: #fafafa;
+    border-radius: 4px;
+}
+
+.latar h2{
+    margin-bottom: 50px;
+}
+
+.latar h3{
+    text-transform: none;
+    margin: 0;
+}
+
+.latar img{
+    width: 100%;
+}
+
+.list-product{
+    margin-top: 20px;
+}
+
+.list-product .box-kecil-product{
+    display: inline-block;
+}
+
+.box-product-profile{
+    width:250px;
+    height: 250px;
+    background: transparent;
+    border: 0.5px solid #ccc;
+    border-radius: 5px;
+}
+
+.box-product-profile img{
+    margin-top: 20px;
+    width: 100px;
+}
+
+.box-kecil-product{
+    margin-top: 10px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border: 0.5px solid #ccc;
+    border-radius: 5px;
+}
+
+.box-kecil-product img{
+    margin-top: 8px;
+    width: 30px;
+}
+
+.list-portofolio{
+    margin-top: 20px;
+}
+
+.portofolio{
+    padding-bottom: 20px;
+}
+
+.portofolio:hover .desc-porto{
+    visibility: visible;
+    opacity: 1;
+}
+
+.desc-porto{
+    position: absolute;
+    padding-left: 15px;
+    padding-right: 15px;
+    top: 0;
+    bottom: 20px;
+    left: 15px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, 0.5);;
+    color: #fff;
+    visibility: hidden;
+}
+
+.desc-porto p{
+    font-family: "Lato";
+    font-size: 10pt;
 }

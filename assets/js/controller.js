@@ -154,3 +154,9 @@ appController.controller('SignUpController', ['$scope', '$http',
         }
     }
 ]);
+
+appController.controller('ProfileController', ['$scope', '$http',
+    function($scope, $http){
+        
+    }
+]);
