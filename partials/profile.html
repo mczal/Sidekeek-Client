@@ -4,7 +4,7 @@
             <div class="container latar">
                 <div class="row">
                     <div class="col-lg-12 text-center container">
-                        <h2>Company Profle</h2>
+                        <h2>{{dataProfile.title}}</h2>
                     </div>
                 </div>
                 <div class="row">
@@ -12,8 +12,10 @@
                         <img src="assets/img/startbg.jpg" alt=""/>
                     </div>
                     <div class="col-lg-6">
-                        <h3>SONY Record Co.</h3>
-                        <p>"Tagline"</p>
+                        <h3>{{dataProfile.company_name}}</h3>
+                        <p>"{{dataProfile.tagline}}"</p>
+                        <p>{{dataProfile.category_name}}</p>
+                        <p>{{dataProfile.city_name}}, {{dataProfile.province_name}}, Indonesia</p>
                     </div>
                 </div>
             </div>
@@ -25,11 +27,7 @@
                             <div class="col-lg-12">
                                 <h4>Company Profile</h4>
                                 <p style="font-size: 11pt; text-align: justify;">
-                                    Lorem ipsum dolor sit amet, mucius essent ut vix. Ius diceret volutpat mediocrem et, usu partem accumsan complectitur ne. Te mel sententiae dissentias, vel facer percipitur ei. Corpora adolescens ad sit, iisque accumsan ex qui. Nam ei ocurreret deseruisse. No everti omnesque vivendum vix, per an graeci eleifend comprehensam.
-                                    Ex nam tale vero semper. Ius recteque contentiones id. Mucius perpetua cu has. Dicam tantas quo ad. Sed alterum invenire ullamcorper ad.
-                                    Pri ea malis omittantur, no sea munere reprehendunt. Te vix nonumy integre repudiandae, ei usu veniam dissentiunt, mel stet dictas noluisse at. Eu sea probo vitae. Pri noster luptatum postulant ex. Fierent consulatu cu vel. Eum ex nostrum prodesset, id duo tamquam appareat adipiscing.
-                                    Pro sensibus platonem conclusionemque id, rebum lorem tantas has ex. Te discere pertinacia eum, liber tollit sanctus no qui. Quis quando sententiae sit eu. Ex pro elitr dicant officiis, labores appetere nominati cum in.
-                                    Mel officiis instructior contentiones ad, modo oportere at pro. Sea corpora epicurei ei, prima congue usu ad. Sit omnesque argumentum ut, sit te omnis vivendum. Consul recusabo pro an, ne ocurreret consulatu signiferumque mei. Eu errem integre mediocritatem his, his ut ancillae officiis liberavisse. Integre fierent mandamus eu est, est et justo vivendo.
+                                    {{dataProfile.profile_desc}}
                                 </p>
                             </div>
                         </div>
@@ -37,96 +35,30 @@
                 </uib-tab>
                 <uib-tab heading="Product">
                     <div class="latar container">
-                        <div class="list-product">
-                            <div class="col-lg-4">
-                                <div class="upload text-center">
-                                    <div class="box-product-profile container-fluid">
-                                        <div class="file-upload text-center">
+                        <div class="list-product" ng-repeat="dataProduct in dataProducts">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="upload text-center">
+                                        <div class="box-product-profile container-fluid">
+                                            <div class="file-upload text-center">
+                                                <img src="assets/img/uploadfoto.png" alt="" />
+                                            </div>
+                                        </div>
+                                        <div class="box-kecil-product">
+                                            <img src="assets/img/uploadfoto.png" alt="" />
+                                        </div>
+                                        <div class="box-kecil-product">
+                                            <img src="assets/img/uploadfoto.png" alt="" />
+                                        </div>
+                                        <div class="box-kecil-product">
                                             <img src="assets/img/uploadfoto.png" alt="" />
                                         </div>
                                     </div>
-                                    <div class="box-kecil-product">
-                                        <img src="assets/img/uploadfoto.png" alt="" />
-                                    </div>
-                                    <div class="box-kecil-product">
-                                        <img src="assets/img/uploadfoto.png" alt="" />
-                                    </div>
-                                    <div class="box-kecil-product">
-                                        <img src="assets/img/uploadfoto.png" alt="" />
-                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="form-group form-group-xl">
-                                    <input type="text" class="form-control" placeholder="Nama Produk">
-                                </div>
-                                <div class="form-group form-group-xl">
-                                    <input type="text" class="form-control" placeholder="Harga">
-                                </div>
-                                <div class="form-group">
-                                    <textarea type="text" class="form-control" rows="10" placeholder="Company Description"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-product">
-                            <div class="col-lg-4">
-                                <div class="upload text-center">
-                                    <div class="box-product-profile container-fluid">
-                                        <div class="file-upload text-center">
-                                            <img src="assets/img/uploadfoto.png" alt="" />
-                                        </div>
-                                    </div>
-                                    <div class="box-kecil-product">
-                                        <img src="assets/img/uploadfoto.png" alt="" />
-                                    </div>
-                                    <div class="box-kecil-product">
-                                        <img src="assets/img/uploadfoto.png" alt="" />
-                                    </div>
-                                    <div class="box-kecil-product">
-                                        <img src="assets/img/uploadfoto.png" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="form-group form-group-xl">
-                                    <input type="text" class="form-control" placeholder="Nama Produk">
-                                </div>
-                                <div class="form-group form-group-xl">
-                                    <input type="text" class="form-control" placeholder="Harga">
-                                </div>
-                                <div class="form-group">
-                                    <textarea type="text" class="form-control" rows="10" placeholder="Company Description"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-product">
-                            <div class="col-lg-4">
-                                <div class="upload text-center">
-                                    <div class="box-product-profile container-fluid">
-                                        <div class="file-upload text-center">
-                                            <img src="assets/img/uploadfoto.png" alt="" />
-                                        </div>
-                                    </div>
-                                    <div class="box-kecil-product">
-                                        <img src="assets/img/uploadfoto.png" alt="" />
-                                    </div>
-                                    <div class="box-kecil-product">
-                                        <img src="assets/img/uploadfoto.png" alt="" />
-                                    </div>
-                                    <div class="box-kecil-product">
-                                        <img src="assets/img/uploadfoto.png" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="form-group form-group-xl">
-                                    <input type="text" class="form-control" placeholder="Nama Produk">
-                                </div>
-                                <div class="form-group form-group-xl">
-                                    <input type="text" class="form-control" placeholder="Harga">
-                                </div>
-                                <div class="form-group">
-                                    <textarea type="text" class="form-control" rows="10" placeholder="Company Description"></textarea>
+                                <div class="col-lg-8">
+                                    <p>{{dataProduct.product_name}}</p>
+                                    <p style="font-size: 11pt">{{dataProduct.product_desc}}</p>
+                                    <p>{{dataProduct.price}}</p>
                                 </div>
                             </div>
                         </div>
@@ -136,66 +68,12 @@
                     <div class="latar container">
                         <div class="list-portofolio">
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-4" ng-repeat="dataPortofolio in dataPortofolios">
                                     <div class="portofolio">
                                         <img src="assets/img/test.jpg" alt="" />
                                         <div class="desc-porto text-center animated fadeInUp">
-                                            <h4>Portofolio</h4>
-                                            <p>Portofolio 1</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="portofolio">
-                                        <img src="assets/img/test2.jpg" alt="" />
-                                        <div class="desc-porto text-center animated fadeInUp">
-                                            <h4>Portofolio</h4>
-                                            <p>Portofolio 1</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="portofolio">
-                                        <img src="assets/img/startbg.jpg" alt="" />
-                                        <div class="desc-porto text-center animated fadeInUp">
-                                            <h4>Portofolio</h4>
-                                            <p>Portofolio 1</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="portofolio">
-                                        <img src="assets/img/startbg.jpg" alt="" />
-                                        <div class="desc-porto text-center animated fadeInUp">
-                                            <h4>Portofolio</h4>
-                                            <p>Portofolio 1</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="portofolio">
-                                        <img src="assets/img/startbg.jpg" alt="" />
-                                        <div class="desc-porto text-center animated fadeInUp">
-                                            <h4>Portofolio</h4>
-                                            <p>Portofolio 1</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="portofolio">
-                                        <img src="assets/img/startbg.jpg" alt="" />
-                                        <div class="desc-porto text-center animated fadeInUp">
-                                            <h4>Portofolio</h4>
-                                            <p>Portofolio 1</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="portofolio">
-                                        <img src="assets/img/startbg.jpg" alt="" />
-                                        <div class="desc-porto text-center animated fadeInUp">
-                                            <h4>Portofolio</h4>
-                                            <p>Portofolio 1</p>
+                                            <h4>{{dataPortofolio.title}}</h4>
+                                            <p>{{dataPortofolio.description}}</p>
                                         </div>
                                     </div>
                                 </div>

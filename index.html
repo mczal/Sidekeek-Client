@@ -75,11 +75,11 @@
 										</div>
 										<div class="text-center">
 											<em class="text-center">sidekeek.co</em>
-											<div role="separator" class="divider"></div>
+											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
 											<a href="#/profile">View Profile</a>
-											<div role="separator" class="divider"></div>
+											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
 											<a href="#/edit-profile-full">Edit Profile</a>
-											<div role="separator" class="divider"></div>
+											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
 											<a href="#" onclick="logout()">Logout</a>
 										</div>
 									</div>
@@ -155,13 +155,21 @@
 				var cur = new Date();
 				var temp = cur +" ";
 				var temp2 = temp.split(" ");
-				localStorage.dodate = temp2[3]+"-"+temp2[2]+"-"+arrOfMonth[temp2[1]]+" "+temp2[4];
+				return temp2[3]+"-"+temp2[2]+"-"+arrOfMonth[temp2[1]]+" "+temp2[4];
 			}
+
+			// var ref = setInterval(function(){ refresh() }, 100);
+		    // function refresh(){
+		    // 	if (localStorage.getItem('session') == 'undefined'){
+		    //     	window.location.assign("/");
+		    //    	}
+		    //  }
 
 			// login session
 			var login = function(){
 				var email = $('#email').val();
 				var pass = $('#password').val();
+				localStorage.setItem('emailHost', email);
 				$.ajax({
 					url: 'http://localhost:3000/sideAPIkeek/login',
 					method: 'POST',
@@ -170,10 +178,10 @@
 						token: 'eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ',
 						email: email,
 						password: pass,
-						timestamp:localStorage.dodate
+						timestamp: curDate()
 					},
 					success: function(response){
-						localStorage.session = response.session;
+						localStorage.setItem('session', response.session);
 						$('#btn-hide').addClass('hide');
 						$('.dropdown').addClass('hide');
 						$('#img-acc').removeClass('hide');
@@ -192,7 +200,7 @@
 					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 					data:{
 						token: 'eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ',
-						sessionCode: localStorage.session
+						sessionCode: localStorage.getItem('session')
 					},
 					success: function(response){
 						$('#btn-hide').removeClass('hide');
@@ -212,7 +220,7 @@
 				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 				data:{
 					token: 'eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ',
-					sessionCode: localStorage.session
+					sessionCode: localStorage.getItem('session')
 				},
 				success: function(response){
 					// alert(response.status);

@@ -7,6 +7,7 @@
 
 body {
     overflow-x: hidden;
+    font-family: "Lato";
 }
 
 p {
@@ -700,7 +701,7 @@ footer .footer-above{
 }
 
 .edit-profile{
-    margin-top: 150px;
+    margin-top: 80px;
 }
 
 .box{

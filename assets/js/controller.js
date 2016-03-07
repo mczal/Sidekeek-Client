@@ -157,6 +157,119 @@ appController.controller('SignUpController', ['$scope', '$http',
 
 appController.controller('ProfileController', ['$scope', '$http',
     function($scope, $http){
-        
+        $.ajax({
+            url : urlAPI + '/getProfile',
+            method : 'POST',
+            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+            data:{
+                token : token,
+                email : localStorage.getItem('emailHost')
+            },
+            success: function(response){
+                $scope.dataProfile = response[0];
+            },
+            error: function(xhr, status, error){
+                console.log(error);
+            }
+        });
+
+        $.ajax({
+            url : urlAPI + '/getProducts',
+            method : 'POST',
+            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+            data:{
+                token : token,
+                email : localStorage.getItem('emailHost')
+            },
+            success: function(response){
+                $scope.dataProducts = response;
+            },
+            error: function(xhr, status, error){
+                console.log(error);
+            }
+        });
+
+        $.ajax({
+            url : urlAPI + '/getPortofolios',
+            method : 'POST',
+            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+            data:{
+                token : token,
+                email : localStorage.getItem('emailHost')
+            },
+            success: function(response){
+                $scope.dataPortofolios = response;
+            },
+            error: function(xhr, status, error){
+                console.log(error);
+            }
+        });
+    }
+]);
+
+appController.controller('EditProfileController', ['$scope', '$http',
+    function($scope, $http){
+        $.ajax({
+            url : urlAPI + '/getProfile',
+            method : 'POST',
+            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+            data:{
+                token : token,
+                email : localStorage.getItem('emailHost')
+            },
+            success: function(response){
+                $scope.dataProfile = response[0];
+            },
+            error: function(xhr, status, error){
+                console.log(error);
+            }
+        });
+
+        $.ajax({
+            url : urlAPI + '/getProducts',
+            method : 'POST',
+            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+            data:{
+                token : token,
+                email : localStorage.getItem('emailHost')
+            },
+            success: function(response){
+                $scope.dataProducts = response;
+            },
+            error: function(xhr, status, error){
+                console.log(error);
+            }
+        });
+
+        $.ajax({
+            url : urlAPI + '/getPortofolios',
+            method : 'POST',
+            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+            data:{
+                token : token,
+                email : localStorage.getItem('emailHost')
+            },
+            success: function(response){
+                $scope.dataPortofolios = response;
+            },
+            error: function(xhr, status, error){
+                console.log(error);
+            }
+        });
+
+        $.ajax({
+            url: urlAPI + '/getProvince',
+            method: "POST",
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data:{
+                token: token
+            },
+            success: function(response){
+                $scope.provinceData = response;
+            },
+            error: function(xhr, status, error){
+                console.log(error);
+            }
+        });
     }
 ]);
