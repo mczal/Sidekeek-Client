@@ -209,6 +209,100 @@ appController.controller('ProfileController', ['$scope', '$http',
 
 appController.controller('EditProfileController', ['$scope', '$http',
     function($scope, $http){
+        $scope.addNewPortofolio = function(){
+          var imgBase64 = "";
+          $.ajax({
+            url : urlAPI + '/addNewPortofolio',
+            method : 'POST',
+            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+            data:{
+              token : token,
+              sessionCode : localStorage.getItem('session'),
+              title : $scope.title,
+              description : $scope.description,
+              timestamp : curDate(),
+              imgBase64 : imgBase64
+            },
+            success: function(response){
+              console.log("success add new portofolio");
+            },
+            error: function(xhr,status,error){
+              console.log(error);
+            },
+          });
+        }
+
+        $scope.editPortofolio = function(){
+          var imgBase64 = "";
+          var idPortofolio = $("#idPortofolio").val();
+          $.ajax({
+            url : urlAPI + '/editPortofolio',
+            method : 'POST',
+            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+            data:{
+              token : token,
+              sessionCode : localStorage.getItem('session'),
+              idPortofolio :  idPortofolio,
+              title : $scope.title,
+              description : $scope.description,
+              timestamp : curDate(),
+              imgBase64 : imgBase64
+            },
+            success: function(response){
+              console.log("success add new portofolio");
+            },
+            error: function(xhr,status,error){
+              console.log(error);
+            },
+          });
+        }
+
+        $scope.addNewProductDesc = function(){
+          $.ajax({
+            url : urlAPI + '/addNewProductDesc',
+            method : 'POST',
+            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+            data:{
+              token : token,
+              sessionCode : localStorage.getItem('session'),
+              namaProduk : $scope.namaProduct,
+              harga : $scope.harga,
+              productDesc : $scope.productDesc,
+              timestamp : curDate()
+            },
+            success: function(response){
+              console.log("success add new product. Id Prod="+response.idProduct);
+            },
+            error: function(xhr,status,error){
+              console.log(error);
+            },
+          });
+        }
+
+        $scope.editProductDesc = function(){
+          var idProduct = $("#idProduct").val()
+          $.ajax({
+            url : urlAPI + '/editProductDesc',
+            method : 'POST',
+            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+            data:{
+              token : token,
+              sessionCode : localStorage.getItem('session'),
+              idProduct : idProduct,
+              namaProduk : $scope.namaProduct,
+              harga : $scope.harga,
+              productDesc : $scope.productDesc,
+              timestamp : curDate()
+            },
+            success: function(response){
+              console.log("success edit product.");
+            },
+            error: function(xhr,status,error){
+              console.log(error);
+            },
+          });
+        }
+
         $.ajax({
             url : urlAPI + '/getProfile',
             method : 'POST',
