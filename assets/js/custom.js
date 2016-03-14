@@ -35,3 +35,27 @@ $('body').scrollspy({
 $('.navbar-collapse ul li a').click(function() {
     $('.navbar-toggle:visible').click();
 });
+
+var addNewProductDesc = function(){
+    alert("berhasil");
+    // $.ajax({
+    //     url : urlAPI + '/addNewProductDesc',
+    //     method : 'POST',
+    //     contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+    //     data:{
+    //         token : token,
+    //         sessionCode : localStorage.getItem('session'),
+    //         namaProduk : $scope.dataProduct.product_name,
+    //         harga : $scope.dataProduct.price,
+    //         productDesc : $("#product-desc").val(),
+    //         timestamp : curDate()
+    //     },
+    //     success: function(response){
+    //         $("#add_produk").show();
+    //         console.log("success add new product. Id Prod="+response.idProduct);
+    //     },
+    //     error: function(xhr,status,error){
+    //         console.log(error);
+    //     },
+    // });
+}

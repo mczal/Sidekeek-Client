@@ -1,8 +1,8 @@
 var sidekeekApp = angular.module('sidekeekApp', [
     'appController',
     'ui.bootstrap',
-    'ui.bootstrap.tabs',
-	'ngRoute'
+	'ngRoute',
+    'ngSanitize'
 ]);
 
 sidekeekApp.config(['$routeProvider',
