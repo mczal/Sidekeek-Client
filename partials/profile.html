@@ -74,6 +74,7 @@
                                         <div class="desc-porto text-center hvr-pop">
                                             <h4>{{dataPortofolio.title}}</h4>
                                             <p>{{dataPortofolio.description}}</p>
+                                            <button type="button" class="btn btn-success" ng-click="viewPortoDetails(dataPortofolio.id_portofolio)">More</button>
                                         </div>
                                     </div>
                                 </div>
@@ -136,6 +137,22 @@
 		</div>
 	</div>
 </footer>
+<div class="overlay-portofolio-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="portofolio-details">
+                    <span class="fa fa-2x fa-times pull-right" style="color: #fff;" ng-click="close()"></span>
+                    <img src="assets/img/startbg.jpg" alt="" />
+                    <div class="text-center" style="position: absolute; text-align: center; left: 210px; top: 135px;">
+                        <h2 style="color: #fff;">{{portoDetail.title}}</h2>
+                        <p style="color: #fff;">{{portoDetail.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- <div class="container content">
     <div class="latar container">

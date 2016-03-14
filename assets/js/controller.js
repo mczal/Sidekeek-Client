@@ -204,11 +204,38 @@ appController.controller('ProfileController', ['$scope', '$http',
                 console.log(error);
             }
         });
+
+        $scope.viewPortoDetails = function (idPortofolio){
+            $.ajax({
+                url : urlAPI + '/getPortofolioDetail',
+                method : 'POST',
+                contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+                data:{
+                    token : token,
+                    idPortofolio : idPortofolio
+                },
+                success: function(response){
+                    console.log(response[0].title);
+                    console.log(response[0].description);
+                    $scope.portoDetail = response[0];
+                    $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
+                    $(".overlay-portofolio-details").show();
+                },
+                error: function(xhr, status, error){
+                    console.log(error);
+                }
+            });
+        }
+
+        $scope.close = function(){
+            $("#freeze").css({'position': '', 'overflow-y': '', 'width': ''});
+            $(".overlay-portofolio-details").hide();
+        }
     }
 ]);
 
-appController.controller('EditProfileController', ['$scope', '$http', '$compile',
-    function($scope, $http, $compile){
+appController.controller('EditProfileController', ['$scope', '$http', '$compile', '$rootScope',
+    function($scope, $http, $compile, $rootScope){
         $scope.addPorto = function (){
             $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
             $(".overlay-portofolio-add").show();
@@ -263,7 +290,7 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
                     imgBase64 : imgBase64
                 },
                 success: function(response){
-                    location.reload();
+                    window.location.reload();
                     $(".overlay").hide();
                     $(".offcanvas-portofolio").hide();
                     console.log("success add new portofolio");
@@ -282,13 +309,14 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
                 data:{
                     token : token,
                     sessionCode : localStorage.getItem('session'),
-                    namaProduk : $scope.dataProduct.product_name,
-                    harga : $scope.dataProduct.price,
+                    namaProduk : $scope.form.product_name,
+                    harga : $scope.form.price,
                     productDesc : $("#product-desc").val(),
                     timestamp : curDate()
                 },
                 success: function(response){
                     $("#add_produk").show();
+                    window.location.reload();
                     console.log("success add new product. Id Prod="+response.idProduct);
                 },
                 error: function(xhr,status,error){
@@ -345,7 +373,7 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
                     timestamp : curDate()
                 },
                 success: function(response){
-                    location.reload();
+                    window.location.reload();
                     console.log(response.message);
                     console.log("success edit product.");
                 },
@@ -379,6 +407,7 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
                     address : $("#address").val()
                 },
                 success: function(response){
+                    window.location.reload();
                     alert(response.message);
                     console.log("success edit profile");
                 },
@@ -467,7 +496,7 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
         });
 
         $scope.addProduk = function (){
-            produk ='<div class="row">',
+            produk =[ '<div class="row">',
             '                            <div class="col-lg-4">',
             '                                <div class="upload text-center">',
             '                                    <div class="box container-fluid">',
@@ -491,11 +520,11 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
             '                            <div class="col-lg-8">',
             '                                <div class="form-group form-group-xl">',
             '                                    <label for="">Product Name</label>',
-            '                                    <input type="text" class="form-control" ng-model="dataProduct.product_name" id="product_name">',
+            '                                    <input type="text" class="form-control" ng-model="form.product_name" id="product_name">',
             '                                </div>',
             '                                <div class="form-group form-group-xl">',
             '                                    <label for="">Price</label>',
-            '                                    <input type="text" class="form-control" ng-model="dataProduct.price" id="price">',
+            '                                    <input type="text" class="form-control" ng-model="form.price" id="price">',
             '                                </div>',
             '                                <div class="form-group">',
             '                                    <label for="">Product Description</label>',
@@ -505,7 +534,7 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
             '                            <div class="col-lg-12">',
             '                                <button type="button" class="btn btn-success btn-lg pull-right" ng-click="addNewProductDesc()" style="margin-bottom:50px;" id="button">Add Product</button>',
             '                            </div>',
-            '                        </div>';
+            '                        </div>'].join('');
             $(".add-produk").append($compile(produk)($scope));
             $("#add_produk").hide();
         }

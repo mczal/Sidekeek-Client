@@ -892,7 +892,7 @@ footer .footer-above{
     bottom: 20px;
     left: 15px;
     right: 15px;
-    background-color: rgba(0, 0, 0, 0.5);;
+    background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     visibility: hidden;
 }
@@ -935,6 +935,16 @@ footer .footer-above{
 	display: none;
 }
 
+.overlay-portofolio-details{
+    background: rgba(0, 0, 0, 0.5);
+	position: fixed;
+    top:0;
+	width: 100%;
+	height: 100%;
+	z-index: 1050;
+	display: none;
+}
+
 .offcanvas-portofolio{
     transform: translateY(35%);
     overflow: auto;
@@ -966,4 +976,31 @@ footer .footer-above{
 
 .close{
     margin-bottom: 10px;
+}
+
+.portofolio-details{
+    transform: translateY(35%);
+}
+
+.portofolio-details img{
+    width: 100%;
+}
+
+.detail-portofolio{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    visibility: visible;
+}
+
+.detail-portofolio h4{
+    color: #fff;
+}
+
+.detail-portofolio p{
+    color: #fff;
 }
