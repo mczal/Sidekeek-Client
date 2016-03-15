@@ -11,16 +11,19 @@ ini adalah _italic_
 ini adalah __strong__
 
 #### List Example
+
 -----------------
 
-## Ordered List
+###### Ordered List
 1. list pertama
 2. list kedua
 3. list ketiga
 
 -------------
 
-## Unordered List
+###### Unordered List
 * list pertama
 * list kedua
 * list ketiga
+
+Ini adalah sebuah [link] (www.google.com)
