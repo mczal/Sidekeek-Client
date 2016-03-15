@@ -6,8 +6,9 @@ Sedang latihan markdown buat uts proif
 |---------|------------|
 |Adli Fariz Bonaputra|Frontend Dev|
 
-ini adalah _italic_.
-ini adalah __strong__.
+ini adalah _italic_
+
+ini adalah __strong__
 
 #### List Example
 -----------------
@@ -16,6 +17,7 @@ ini adalah __strong__.
 1. list pertama
 2. list kedua
 3. list ketiga
+
 -------------
 
 ## Unordered List
