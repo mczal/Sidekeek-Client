@@ -26,4 +26,4 @@ ini adalah __strong__
 * list kedua
 * list ketiga
 
-Ini adalah sebuah [link] (www.google.com)
+Ini adalah sebuah [link] (https://www.google.com)
