@@ -21,6 +21,7 @@ ini adalah __strong__
 1. list pertama
 2. list kedua
 3. list ketiga
+-------------
 ## Unordered List
 * list pertama
 * list kedua
