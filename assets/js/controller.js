@@ -218,11 +218,16 @@ appController.controller('ProfileController', ['$scope', '$http',
                     console.log(response[0].title);
                     console.log(response[0].description);
                     $scope.portoDetail = response[0];
-                    $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
-                    $(".overlay-portofolio-details").show();
+                    console.log("3");
                 },
                 error: function(xhr, status, error){
                     console.log(error);
+                },
+                complete: function(xhr,status){
+                    console.log(status);
+                    $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
+                    $(".overlay-portofolio-details").show();
+                    $scope.$apply();
                 }
             });
         }
@@ -259,12 +264,15 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
                 },
                 success: function(response){
                     $scope.portoDetails = response[0];
-                    $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
-                    $(".overlay-portofolio-edit").show();
-                    $(".offcanvas-portofolio").show();
                 },
                 error: function(xhr, status, error){
                     console.log(error);
+                },
+                complete: function(){
+                    $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
+                    $(".overlay-portofolio-edit").show();
+                    $(".offcanvas-portofolio").show();
+                    $scope.$apply();
                 }
             });
         }
