@@ -20,11 +20,11 @@
 				    </select>
 					<select class="form-control-home input-lg">
 						<option style="display:none;">Categories</option>
-						<option ng-repeat="categories in categoriesData" value="{{categories.category_name}}">{{categories.category_name}}</option>
+						<option ng-repeat="categories in categoriesData" value="{{categories.id_cat}}">{{categories.category_name}}</option>
 					</select>
 					<select class="form-control-home input-lg">
 						<option style="display:none;">Location</option>
-						<option ng-repeat="province in provinceData" value="{{province.province_name}}">{{province.province_name}}</option>
+						<option ng-repeat="province in provinceData" value="{{province.id_province}}">{{province.province_name}}</option>
 					</select>
 				</div>
 				<input class="input-lg" type="text" placeholder="ex. Creative">

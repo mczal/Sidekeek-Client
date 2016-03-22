@@ -16,33 +16,36 @@ function generateUniqueCode(){
 
 appController.controller('HomeController',['$scope','$http',
     function($scope,$http){
-        $.ajax({
+        $http({
+            method: 'POST',
             url: urlAPI + '/getCategories',
-            method: "POST",
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            data:{
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
                 token: token
-            },
-            success: function(response){
-                $scope.categoriesData = response;
-            },
-            error: function(xhr, status, error){
-                console.log(error);
-            }
+            }),
+        }).success(function(data, status, header, config){
+            $scope.categoriesData = data;
+        }).error(function(data, status, header, config){
+            console.log(data.message);
         });
-        $.ajax({
+
+        $http({
+            method: 'POST',
             url: urlAPI + '/getProvince',
-            method: "POST",
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            data:{
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
                 token: token
-            },
-            success: function(response){
-                $scope.provinceData = response;
-            },
-            error: function(xhr, status, error){
-                console.log(error);
-            }
+            }),
+        }).
+        success(function(data, status, header, config){
+            $scope.provinceData = data;
+        }).
+        error(function(data, status, header, config){
+            console.log(data.message);
         });
     }
 ]);
@@ -53,19 +56,19 @@ appController.controller('StartController', ['$scope', '$http',
         $('#button-goods').hide();
         $('#button-service').hide();
 
-        $.ajax({
+        $http({
+            method: 'POST',
             url: urlAPI + '/getCategories',
-            method: "POST",
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            data:{
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
                 token: token
-            },
-            success: function(response){
-                $scope.categoriesData = response;
-            },
-            error: function(xhr, status, error){
-                console.log(error);
-            }
+            }),
+        }).success(function(data, status, header, config){
+            $scope.categoriesData = data;
+        }).error(function(data, status, header, config){
+            console.log(data.message);
         });
 
         $scope.serviceGoodOnClick = function(id){
@@ -457,34 +460,34 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
             }
         });
 
-        $.ajax({
+        $http({
+            method: 'POST',
             url: urlAPI + '/getCities',
-            method: "POST",
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            data:{
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
                 token: token
-            },
-            success: function(response){
-                $scope.citiesData = response;
-            },
-            error: function(xhr, status, error){
-                console.log(error);
-            }
+            }),
+        }).success(function(data, status, header, config){
+            $scope.citiesData = data;
+        }).error(function(data, status, header, config){
+            console.log(data.message);
         });
 
-        $.ajax({
+        $http({
+            method: 'POST',
             url: urlAPI + '/getCategories',
-            method: "POST",
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            data:{
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
                 token: token
-            },
-            success: function(response){
-                $scope.categoriesData = response;
-            },
-            error: function(xhr, status, error){
-                console.log(error);
-            }
+            }),
+        }).success(function(data, status, header, config){
+            $scope.categoriesData = data;
+        }).error(function(data, status, header, config){
+            console.log(data.message);
         });
 
         $.ajax({
