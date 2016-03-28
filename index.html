@@ -38,7 +38,7 @@
 
 	<body id="page-top">
 		<!-- Navigation -->
-		<nav class="navbar navbar-default navbar-fixed-top">
+		<nav class="navbar navbar-default navbar-fixed-top" ng-controller="IndexController">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header page-scroll">
@@ -81,7 +81,7 @@
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
 											<a href="#/edit-profile-full">Edit Profile</a>
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
-											<a href="#" onclick="logout()">Logout</a>
+											<a href="#" ng-click="logout()">Logout</a>
 										</div>
 									</div>
 							  	</div>
@@ -99,12 +99,12 @@
 									<h5 style="color:#fff">Login</h5>
 									<form>
 										<div class="form-group">
-											<input type="email" class="form-control" placeholder="Email" id="email">
+											<input type="email" class="form-control" placeholder="Email" id="emailUser">
 										</div>
 										<div class="form-group">
-											<input type="password" class="form-control" placeholder="Password" id="password">
+											<input type="password" class="form-control" placeholder="Password" id="passwordUser">
 										</div>
-										<a href="#"><button type="submit" class="btn btn-sm btn-default" onclick="login()">Submit</button></a>
+										<a href="#"><button type="submit" class="btn btn-sm btn-default" ng-click="login()">Submit</button></a>
 									</form>
 							  	</ul>
 							</div>
@@ -138,109 +138,109 @@
 		<script src="assets/js/custom-file-input.js"></script>
 
 		<script type="text/javascript">
-			// array of month
-			var arrOfMonth = [];
-			arrOfMonth['Jan']='01';
-			arrOfMonth['Feb']='02';
-			arrOfMonth['Mar']='03';
-			arrOfMonth['Apr']='04';
-			arrOfMonth['May']='05';
-			arrOfMonth['Jun']='06';
-			arrOfMonth['Jul']='07';
-			arrOfMonth['Aug']='08';
-			arrOfMonth['Sep']='09';
-			arrOfMonth['Oct']='10';
-			arrOfMonth['Nov']='11';
-			arrOfMonth['Des']='12';
-
-			// current time using time interval (every 5 second)
-			function curDate(){
-				var cur = new Date();
-				var temp = cur +" ";
-				var temp2 = temp.split(" ");
-				return temp2[3]+"-"+temp2[2]+"-"+arrOfMonth[temp2[1]]+" "+temp2[4];
-			}
-
-			// var ref = setInterval(function(){ refresh() }, 100);
-		    // function refresh(){
-		    // 	if (localStorage.getItem('session') == 'undefined'){
-		    //     	window.location.assign("/");
-		    //    	}
-		    //  }
-
-			// login session
-			var login = function(){
-				var email = $('#email').val();
-				var pass = $('#password').val();
-				localStorage.setItem('emailHost', email);
-				$.ajax({
-					url: 'http://localhost:3000/sideAPIkeek/login',
-					method: 'POST',
-					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-					data:{
-						token: 'eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ',
-						email: email,
-						password: pass,
-						timestamp: curDate()
-					},
-					success: function(response){
-						localStorage.setItem('session', response.session);
-						$('#btn-hide').addClass('hide');
-						$('.dropdown').addClass('hide');
-						$('#img-acc').removeClass('hide');
-					},
-					error: function(xhr, status, error){
-						console.log(error);
-					}
-				});
-			}
-
-			// logout session
-			var logout = function(){
-				$.ajax({
-					url: 'http://localhost:3000/sideAPIkeek/logout',
-					method: 'POST',
-					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-					data:{
-						token: 'eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ',
-						sessionCode: localStorage.getItem('session')
-					},
-					success: function(response){
-						$('#btn-hide').removeClass('hide');
-						$('.dropdown').removeClass('hide');
-						$('#img-acc').addClass('hide');
-					},
-					error: function(xhr, status, error){
-						console.log(error);
-					}
-				});
-			}
-
-			//check if the session is still available
-			$.ajax({
-				url: 'http://localhost:3000/sideAPIkeek/integrityCheck',
-				method: 'POST',
-				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-				data:{
-					token: 'eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ',
-					sessionCode: localStorage.getItem('session')
-				},
-				success: function(response){
-					// alert(response.status);
-					if (response.status == "forbidden") {
-						$('#btn-hide').removeClass('hide');//sign-up button
-						$('.dropdown').removeClass('hide');//login button
-						$('#img-acc').addClass('hide');//profile pict
-					}else{
-						$('#btn-hide').addClass('hide');
-						$('.dropdown').addClass('hide');
-						$('#img-acc').removeClass('hide');
-					}
-				},
-				error: function(xhr, status, error){
-					console.log(error);
-				}
-			});
+			// // array of month
+			// var arrOfMonth = [];
+			// arrOfMonth['Jan']='01';
+			// arrOfMonth['Feb']='02';
+			// arrOfMonth['Mar']='03';
+			// arrOfMonth['Apr']='04';
+			// arrOfMonth['May']='05';
+			// arrOfMonth['Jun']='06';
+			// arrOfMonth['Jul']='07';
+			// arrOfMonth['Aug']='08';
+			// arrOfMonth['Sep']='09';
+			// arrOfMonth['Oct']='10';
+			// arrOfMonth['Nov']='11';
+			// arrOfMonth['Des']='12';
+			//
+			// // current time using time interval (every 5 second)
+			// function curDate(){
+			// 	var cur = new Date();
+			// 	var temp = cur +" ";
+			// 	var temp2 = temp.split(" ");
+			// 	return temp2[3]+"-"+temp2[2]+"-"+arrOfMonth[temp2[1]]+" "+temp2[4];
+			// }
+			//
+			// // var ref = setInterval(function(){ refresh() }, 100);
+		    // // function refresh(){
+		    // // 	if (localStorage.getItem('session') == 'undefined'){
+		    // //     	window.location.assign("/");
+		    // //    	}
+		    // //  }
+			//
+			// // login session
+			// var login = function(){
+			// 	var email = $('#email').val();
+			// 	var pass = $('#password').val();
+			// 	localStorage.setItem('emailHost', email);
+			// 	$.ajax({
+			// 		url: 'http://localhost:3000/sideAPIkeek/login',
+			// 		method: 'POST',
+			// 		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			// 		data:{
+			// 			token: 'eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ',
+			// 			email: email,
+			// 			password: pass,
+			// 			timestamp: curDate()
+			// 		},
+			// 		success: function(response){
+			// 			localStorage.setItem('session', response.session);
+			// 			$('#btn-hide').addClass('hide');
+			// 			$('.dropdown').addClass('hide');
+			// 			$('#img-acc').removeClass('hide');
+			// 		},
+			// 		error: function(xhr, status, error){
+			// 			console.log(error);
+			// 		}
+			// 	});
+			// }
+			//
+			// // logout session
+			// var logout = function(){
+			// 	$.ajax({
+			// 		url: 'http://localhost:3000/sideAPIkeek/logout',
+			// 		method: 'POST',
+			// 		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			// 		data:{
+			// 			token: 'eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ',
+			// 			sessionCode: localStorage.getItem('session')
+			// 		},
+			// 		success: function(response){
+			// 			$('#btn-hide').removeClass('hide');
+			// 			$('.dropdown').removeClass('hide');
+			// 			$('#img-acc').addClass('hide');
+			// 		},
+			// 		error: function(xhr, status, error){
+			// 			console.log(error);
+			// 		}
+			// 	});
+			// }
+			//
+			// //check if the session is still available
+			// $.ajax({
+			// 	url: 'http://localhost:3000/sideAPIkeek/integrityCheck',
+			// 	method: 'POST',
+			// 	contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			// 	data:{
+			// 		token: 'eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ',
+			// 		sessionCode: localStorage.getItem('session')
+			// 	},
+			// 	success: function(response){
+			// 		// alert(response.status);
+			// 		if (response.status == "forbidden") {
+			// 			$('#btn-hide').removeClass('hide');//sign-up button
+			// 			$('.dropdown').removeClass('hide');//login button
+			// 			$('#img-acc').addClass('hide');//profile pict
+			// 		}else{
+			// 			$('#btn-hide').addClass('hide');
+			// 			$('.dropdown').addClass('hide');
+			// 			$('#img-acc').removeClass('hide');
+			// 		}
+			// 	},
+			// 	error: function(xhr, status, error){
+			// 		console.log(error);
+			// 	}
+			// });
 		</script>
 
 	</body>

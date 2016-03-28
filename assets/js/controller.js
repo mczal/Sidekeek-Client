@@ -14,6 +14,107 @@ function generateUniqueCode(){
    return text;
 }
 
+appController.controller('IndexController', ['$scope', '$http',
+    function($scope, $http){
+        // array of month
+        var arrOfMonth = [];
+        arrOfMonth['Jan']='01';
+        arrOfMonth['Feb']='02';
+        arrOfMonth['Mar']='03';
+        arrOfMonth['Apr']='04';
+        arrOfMonth['May']='05';
+        arrOfMonth['Jun']='06';
+        arrOfMonth['Jul']='07';
+        arrOfMonth['Aug']='08';
+        arrOfMonth['Sep']='09';
+        arrOfMonth['Oct']='10';
+        arrOfMonth['Nov']='11';
+        arrOfMonth['Des']='12';
+
+        // current time using time interval (every 5 second)
+        function curDate(){
+            var cur = new Date();
+            var temp = cur +" ";
+            var temp2 = temp.split(" ");
+            return temp2[3]+"-"+temp2[2]+"-"+arrOfMonth[temp2[1]]+" "+temp2[4];
+        }
+
+        $scope.login = function(){
+            var email = $('#emailUser').val();
+            var pass = $('#passwordUser').val();
+            localStorage.setItem('emailHost', email);
+            $http({
+                method: 'POST',
+                url: urlAPI + '/login',
+                headers: {
+                   'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                data: $.param({
+                    token: token,
+                    email: email,
+    				password: pass,
+    				timestamp: curDate()
+                }),
+            }).success(function(data, status, header, config){
+                console.log(data.session);
+                localStorage.setItem('session', data.session);
+                $('#btn-hide').addClass('hide');
+                $('.dropdown').addClass('hide');
+                $('#img-acc').removeClass('hide');
+            }).error(function(data, status, header, config){
+                console.log(data.message);
+            });
+        }
+
+        // logout session
+        $scope.logout = function(){
+            $http({
+                method: 'POST',
+                url: urlAPI + '/logout',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                data: $.param({
+                    token: token,
+                    sessionCode: localStorage.getItem('session')
+                }),
+            }).success(function(data, status, header, config){
+                $('#btn-hide').removeClass('hide');
+                $('.dropdown').removeClass('hide');
+                $('#img-acc').addClass('hide');
+            }).error(function(data, status, header, config){
+                console.log(data.message);
+            });
+        }
+
+        //check if the session is still available
+        $http({
+            method: 'POST',
+            url: urlAPI + '/integrityCheck',
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token: token,
+                sessionCode: localStorage.getItem('session')
+            }),
+        }).success(function(data, status, header, config){
+            console.log(data.status);
+            if (data.status == "forbidden") {
+                $('#btn-hide').removeClass('hide');//sign-up button
+                $('.dropdown').removeClass('hide');//login button
+                $('#img-acc').addClass('hide');//profile pict
+            }else{
+                $('#btn-hide').addClass('hide');
+                $('.dropdown').addClass('hide');
+                $('#img-acc').removeClass('hide');
+            }
+        }).error(function(data, status, header, config){
+            console.log(data.message);
+        });
+    }
+]);
+
 appController.controller('HomeController',['$scope','$http',
     function($scope,$http){
         $http({
@@ -40,11 +141,9 @@ appController.controller('HomeController',['$scope','$http',
             data: $.param({
                 token: token
             }),
-        }).
-        success(function(data, status, header, config){
+        }).success(function(data, status, header, config){
             $scope.provinceData = data;
-        }).
-        error(function(data, status, header, config){
+        }).error(function(data, status, header, config){
             console.log(data.message);
         });
     }
@@ -85,21 +184,21 @@ appController.controller('StartController', ['$scope', '$http',
 
         $scope.submitFirst = function(){
             localStorage.statTemp = generateUniqueCode();
-            $.ajax({
-                url: urlAPI + '/firstRegister',
-                method: 'POST',
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                data:{
-                    token: token,
-                    tipe: idTipe,
-                    statTemp: localStorage.statTemp
+            $http({
+                url : urlAPI +'/firstRegister',
+                method : 'POST',
+                header : {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                 },
-                success: function(response){
-                    console.log(response.message +" "+ idTipe);
-                },
-                error: function(xhr, status, error){
-                    console.log(xhr);
-                }
+                data:$.param({
+                    token : token,
+                    tipe : idTipe,
+                    statTemp : localStorage.statTemp
+                }),
+            }).success(function(data, status, header, config){
+                console.log(data.message + " " + idTipe);
+            }).error(function(data, status, header, config){
+                console.log(data.message);
             });
         }
 
@@ -108,23 +207,21 @@ appController.controller('StartController', ['$scope', '$http',
             var company = $scope.form.company;
             var thread = $scope.form.thread;
             statTemp = localStorage.statTemp;
-            $.ajax({
-                url: urlAPI + '/secondRegister',
-                method: "POST",
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                data:{
-                    token: token,
-                    cat: categories,
-                    statTemp: statTemp,
-                    compTitle: company,
-                    threadTitle: thread
-                },
-                success: function(response){
-                    console.log(response);
-                },
-                error: function(xhr, status, error){
-                    console.log(error);
-                }
+            $http({
+                url : urlAPI + '/secondRegister',
+                method : 'POST',
+                header : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'},
+                data : $.param({
+                    token : token,
+                    cat : categories,
+                    statTemp : statTemp,
+                    compTitle : company,
+                    threadTitle : thread
+                }),
+            }).success(function(data, status, header, config){
+                console.log(data.message);
+            }).error(function(data, statuc, header, config){
+                console.log(data.message);
             });
         }
     }
@@ -136,23 +233,21 @@ appController.controller('SignUpController', ['$scope', '$http',
             var email = $scope.form.email;
             var pass = $scope.form.password;
             var confirm = $scope.form.confirmation;
-            $.ajax({
-                url: urlAPI + '/sign-up',
+            $http({
+                utl: urlAPI + '/sign-up',
                 method: 'POST',
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                data:{
+                header: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'},
+                data: $.param({
                     token: token,
                     statTemp: statTemp,
                     email: email,
                     password: pass,
                     confirmation: confirm
-                },
-                success: function(response){
-                    console.log(response);
-                },
-                error: function(xhr, status, error){
-                    console.log(error);
-                }
+                }),
+            }).success(function(data, status, header, config){
+                console.log(data);
+            }).error(function(data, status, header, config){
+                console.log(data);
             });
         }
     }
@@ -160,52 +255,58 @@ appController.controller('SignUpController', ['$scope', '$http',
 
 appController.controller('ProfileController', ['$scope', '$http',
     function($scope, $http){
-        $.ajax({
-            url : urlAPI + '/getProfile',
-            method : 'POST',
-            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-            data:{
+        $http({
+            method: 'POST',
+            url: urlAPI + '/getProfile',
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
                 token : token,
                 email : localStorage.getItem('emailHost')
-            },
-            success: function(response){
-                $scope.dataProfile = response[0];
-            },
-            error: function(xhr, status, error){
-                console.log(error);
-            }
+            }),
+        }).
+        success(function(data, status, header, config){
+            $scope.dataProfile = data[0];
+        }).
+        error(function(data, status, header, config){
+            console.log(data.message);
         });
 
-        $.ajax({
-            url : urlAPI + '/getProducts',
-            method : 'POST',
-            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-            data:{
+        $http({
+            method: 'POST',
+            url: urlAPI + '/getProducts',
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
                 token : token,
                 email : localStorage.getItem('emailHost')
-            },
-            success: function(response){
-                $scope.dataProducts = response;
-            },
-            error: function(xhr, status, error){
-                console.log(error);
-            }
+            }),
+        }).
+        success(function(data, status, header, config){
+            $scope.dataProducts = data;
+        }).
+        error(function(data, status, header, config){
+            console.log(data.message);
         });
 
-        $.ajax({
-            url : urlAPI + '/getPortofolios',
-            method : 'POST',
-            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-            data:{
+        $http({
+            method: 'POST',
+            url: urlAPI + '/getPortofolios',
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
                 token : token,
                 email : localStorage.getItem('emailHost')
-            },
-            success: function(response){
-                $scope.dataPortofolios = response;
-            },
-            error: function(xhr, status, error){
-                console.log(error);
-            }
+            }),
+        }).
+        success(function(data, status, header, config){
+            $scope.dataPortofolios = data;
+        }).
+        error(function(data, status, header, config){
+            console.log(data.message);
         });
 
         $scope.viewPortoDetails = function (idPortofolio){
