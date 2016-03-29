@@ -56,7 +56,6 @@ appController.controller('IndexController', ['$scope', '$http',
     				timestamp: curDate()
                 }),
             }).success(function(data, status, header, config){
-                console.log(data.session);
                 localStorage.setItem('session', data.session);
                 $('#btn-hide').addClass('hide');
                 $('.dropdown').addClass('hide');
@@ -79,6 +78,8 @@ appController.controller('IndexController', ['$scope', '$http',
                     sessionCode: localStorage.getItem('session')
                 }),
             }).success(function(data, status, header, config){
+                localStorage.removeItem('emailHost');
+                localStorage.removeItem('session');
                 $('#btn-hide').removeClass('hide');
                 $('.dropdown').removeClass('hide');
                 $('#img-acc').addClass('hide');
@@ -99,7 +100,6 @@ appController.controller('IndexController', ['$scope', '$http',
                 sessionCode: localStorage.getItem('session')
             }),
         }).success(function(data, status, header, config){
-            console.log(data.status);
             if (data.status == "forbidden") {
                 $('#btn-hide').removeClass('hide');//sign-up button
                 $('.dropdown').removeClass('hide');//login button
@@ -310,29 +310,22 @@ appController.controller('ProfileController', ['$scope', '$http',
         });
 
         $scope.viewPortoDetails = function (idPortofolio){
-            $.ajax({
-                url : urlAPI + '/getPortofolioDetail',
-                method : 'POST',
-                contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-                data:{
+            $http({
+                method: 'POST',
+                url: urlAPI + '/getPortofolioDetail',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                data: $.param({
                     token : token,
                     idPortofolio : idPortofolio
-                },
-                success: function(response){
-                    console.log(response[0].title);
-                    console.log(response[0].description);
-                    $scope.portoDetail = response[0];
-                    console.log("3");
-                },
-                error: function(xhr, status, error){
-                    console.log(error);
-                },
-                complete: function(xhr,status){
-                    console.log(status);
-                    $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
-                    $(".overlay-portofolio-details").show();
-                    $scope.$apply();
-                }
+                }),
+            }).success(function(data, status, header, config){
+                $scope.portoDetail = data[0];
+                $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
+                $(".overlay-portofolio-details").show();
+            }).error(function(data, status, header, config){
+                console.log(data.message);
             });
         }
 
@@ -358,26 +351,23 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
         }
 
         $scope.editPorto = function(idPortofolio){
-            $.ajax({
-                url : urlAPI + '/getPortofolioDetail',
-                method : 'POST',
-                contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-                data:{
+            $http({
+                method: 'POST',
+                url: urlAPI + '/getPortofolioDetail',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                data: $.param({
                     token : token,
                     idPortofolio : idPortofolio
-                },
-                success: function(response){
-                    $scope.portoDetails = response[0];
-                },
-                error: function(xhr, status, error){
-                    console.log(error);
-                },
-                complete: function(){
-                    $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
-                    $(".overlay-portofolio-edit").show();
-                    $(".offcanvas-portofolio").show();
-                    $scope.$apply();
-                }
+                }),
+            }).success(function(data, status, header, config){
+                $scope.portoDetails = data[0];
+                $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
+                $(".overlay-portofolio-edit").show();
+                $(".offcanvas-portofolio").show();
+            }).error(function(data, status, header, config){
+                console.log(data.message);
             });
         }
 
@@ -389,61 +379,63 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
 
         $scope.addNewPortofolio = function (){
             var imgBase64 = "";
-            $.ajax({
-                url : urlAPI + '/addNewPortofolio',
-                method : 'POST',
-                contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-                data:{
-                    token : 'eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ',
+            $http({
+                method: 'POST',
+                url: urlAPI + '/addNewPortofolio',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                data: $.param({
+                    token : token,
                     sessionCode : localStorage.getItem('session'),
                     title : $scope.form.title,
                     description : $("#portoDesc").val(),
                     timestamp : curDate(),
                     imgBase64 : imgBase64
-                },
-                success: function(response){
-                    window.location.reload();
-                    $(".overlay").hide();
-                    $(".offcanvas-portofolio").hide();
-                    console.log("success add new portofolio");
-                },
-                error: function(xhr,status,error){
-                    console.log(error);
-                },
+                }),
+            }).success(function(data, status, header, config){
+                window.location.reload();
+                $(".overlay").hide();
+                $(".offcanvas-portofolio").hide();
+                console.log("success add new portofolio");
+            }).error(function(data, status, header, config){
+                console.log(data.message);
             });
         }
 
         $scope.addNewProductDesc = function(){
-            $.ajax({
-                url : urlAPI + '/addNewProductDesc',
-                method : 'POST',
-                contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-                data:{
+            $http({
+                method: 'POST',
+                url: urlAPI + '/addNewProductDesc',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                data: $.param({
                     token : token,
                     sessionCode : localStorage.getItem('session'),
                     namaProduk : $scope.form.product_name,
                     harga : $scope.form.price,
                     productDesc : $("#product-desc").val(),
                     timestamp : curDate()
-                },
-                success: function(response){
-                    $("#add_produk").show();
-                    window.location.reload();
-                    console.log("success add new product. Id Prod="+response.idProduct);
-                },
-                error: function(xhr,status,error){
-                    console.log(error);
-                },
+                }),
+            }).success(function(data, status, header, config){
+                $("#add_produk").show();
+                window.location.reload();
+                console.log("success add new product. Id Prod="+data.idProduct);
+            }).error(function(data, status, header, config){
+                console.log(data.message);
             });
         }
 
         $scope.editPortofolio = function(idPortofolio){
             var imgBase64 = "";
-            $.ajax({
-                url : urlAPI + '/editPortofolio',
-                method : 'POST',
-                contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-                data:{
+            $http({
+                method: 'POST',
+                url: urlAPI + '/editPortofolio',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                data: $.param({
                     token : token,
                     sessionCode : localStorage.getItem("session"),
                     idPortofolio : idPortofolio,
@@ -451,14 +443,12 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
                     title : $scope.portoDetails.title,
                     description : $("#portoDesc_edit").val(),
                     imgBase64 : imgBase64
-                },
-                success: function(response){
-                    window.location.reload();
-                    console.log("berhasil");
-                },
-                error: function(xhr, status, error){
-                    console.log(error);
-                }
+                }),
+            }).success(function(data, status, header, config){
+                window.location.reload();
+                console.log("berhasil");
+            }).error(function(data, status, header, config){
+                console.log(data.message);
             });
         }
 
@@ -471,11 +461,13 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
             console.log(harga);
             console.log(productDesc);
             console.log(idProduct);
-            $.ajax({
-                url : urlAPI + '/editProductDesc',
-                method : 'POST',
-                contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-                data:{
+            $http({
+                method: 'POST',
+                url: urlAPI + '/editProductDesc',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                data: $.param({
                     token : token,
                     sessionCode : localStorage.getItem("session"),
                     idProduct : idProduct,
@@ -483,15 +475,13 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
                     harga : harga,
                     productDesc : productDesc,
                     timestamp : curDate()
-                },
-                success: function(response){
-                    window.location.reload();
-                    console.log(response.message);
-                    console.log("success edit product.");
-                },
-                error: function(xhr,status,error){
-                    console.log(error);
-                },
+                }),
+            }).success(function(data, status, header, config){
+                window.location.reload();
+                console.log(data.message);
+                console.log("success edit product.");
+            }).error(function(data, status, header, config){
+                console.log(data.message);
             });
         }
 
@@ -502,11 +492,13 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
             console.log(companyName);
             console.log(title);
             console.log(tagline);
-            $.ajax({
-                url : urlAPI + "/editProfileFull",
-                method : 'POST',
-                contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-                data:{
+            $http({
+                method: 'POST',
+                url: urlAPI + '/editProfileFull',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                data: $.param({
                     token : token,
                     sessionCode : localStorage.getItem("session"),
                     timestamp : curDate(),
@@ -517,48 +509,50 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
                     companyDesc : $("#companyDesc").val(),
                     region : $("#region").val(),
                     address : $("#address").val()
-                },
-                success: function(response){
-                    window.location.reload();
-                    alert(response.message);
-                    console.log("success edit profile");
-                },
-                error: function(xhr, status, error){
-                    console.log(error);
-                }
+                }),
+            }).success(function(data, status, header, config){
+                window.location.reload();
+                alert(data.message);
+                console.log("success edit profile");
+            }).error(function(data, status, header, config){
+                console.log(data.message);
             });
         }
 
-        $.ajax({
-            url : urlAPI + '/getProfile',
-            method : 'POST',
-            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-            data:{
+        $http({
+            method: 'POST',
+            url: urlAPI + '/getProfile',
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
                 token : token,
                 email : localStorage.getItem('emailHost')
-            },
-            success: function(response){
-                $scope.dataProfile = response[0];
-            },
-            error: function(xhr, status, error){
-                console.log(error);
-            }
+            }),
+        }).
+        success(function(data, status, header, config){
+            $scope.dataProfile = data[0];
+        }).
+        error(function(data, status, header, config){
+            console.log(data.message);
         });
 
-        $.ajax({
-            url : urlAPI + '/getPortofolios',
-            method : 'POST',
-            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-            data:{
+        $http({
+            method: 'POST',
+            url: urlAPI + '/getPortofolios',
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
                 token : token,
                 email : localStorage.getItem('emailHost')
-            },
-            success: function(response){
-                $scope.dataPortofolios = response;
-            },
-            error: function(xhr, status, error){
-                console.log(error);
-            }
+            }),
+        }).
+        success(function(data, status, header, config){
+            $scope.dataPortofolios = data;
+        }).
+        error(function(data, status, header, config){
+            console.log(data.message);
         });
 
         $http({
@@ -591,20 +585,20 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
             console.log(data.message);
         });
 
-        $.ajax({
-            url : urlAPI + '/getProducts',
-            method : 'POST',
-            contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
-            data:{
+        $http({
+            method: 'POST',
+            url: urlAPI + '/getProducts',
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
                 token : token,
                 email : localStorage.getItem('emailHost')
-            },
-            success: function(response){
-                $scope.dataProducts = response;
-            },
-            error: function(xhr, status, error){
-                console.log(error);
-            }
+            }),
+        }).success(function(data, status, header, config){
+            $scope.dataProducts = data;
+        }).error(function(data, status, header, config){
+            console.log(data.message);
         });
 
         $scope.addProduk = function (){
