@@ -338,6 +338,19 @@ appController.controller('ProfileController', ['$scope', '$http',
 
 appController.controller('EditProfileController', ['$scope', '$http', '$compile', '$rootScope',
     function($scope, $http, $compile, $rootScope){
+        $scope.setActiveTab = function (activeTab) {
+            sessionStorage.setItem("activeTab", activeTab);
+            console.log(sessionStorage.getItem("activeTab"));
+        };
+        $scope.active = [{status: true}, {status: false}, {status: false}];
+        if (sessionStorage.getItem("activeTab") == 1) {
+            $scope.active[0].status = true;
+        }else if(sessionStorage.getItem("activeTab") == 2){
+            $scope.active[1].status = true;
+        }else{
+            $scope.active[2].status = true;
+        }
+        
         $scope.addPorto = function (){
             $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
             $(".overlay-portofolio-add").show();
