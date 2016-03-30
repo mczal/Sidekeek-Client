@@ -4,11 +4,46 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+@font-face{
+    font-family: "Montserrat-Regular";
+    src:url(../fonts/Montserrat-Regular.ttf);
+    font-weight: 400;
+}
+
+@font-face{
+    font-family: "Montserrat-Bold";
+    src:url(../fonts/Montserrat-Bold.ttf);
+    font-weight: 700;
+}
+
+@font-face{
+    font-family: "Lato-Regular";
+    src:url(../fonts/Lato-Regular.ttf);
+    font-weight: 400;
+}
+
+@font-face{
+    font-family: "Lato-italic";
+    src:url(../fonts/Lato-Italic.ttf);
+    font-weight: 400;
+}
+
+@font-face{
+    font-family: "Lato-Bold";
+    src:url(../fonts/Lato-Bold.ttf);
+    font-weight: 700;
+}
+
+@font-face{
+    font-family: "Lato-BoldItalic";
+    src:url(../fonts/Lato-BoldItalic.ttf);
+    font-weight: 700;
+}
 
 body {
     z-index: 1049;
     overflow-x: hidden;
-    font-family: "Lato";
+    font-family: "Lato-Regular";
 }
 
 p {
@@ -36,7 +71,7 @@ h4,
 h5,
 h6 {
 	text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Montserrat-Bold,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
 
@@ -101,7 +136,7 @@ header img {
 header .intro-text .name {
     display: block;
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Montserrat-Bold,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 2em;
     font-weight: 700;
 }
@@ -151,7 +186,7 @@ header .intro-text .skills {
 }
 
 .navbar {
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Montserrat-Bold,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
 
@@ -547,7 +582,7 @@ footer{
 	color:#fff;
 	padding-left: 25px;
 	padding-right: 25px;
-	font-family: "Lato";
+	font-family: "Lato-Regular";
 	font-weight: 400;
 	font-size: 1.3em;
 }
@@ -810,7 +845,7 @@ footer .footer-above{
 }
 
 .dropdown-login-acc p{
-    font-family: "Lato";
+    font-family: "Lato-Regular";
 }
 
 .dropdown-menu .divider{
@@ -898,7 +933,7 @@ footer .footer-above{
 }
 
 .desc-porto p{
-    font-family: "Lato";
+    font-family: "Lato-Regular";
     font-size: 10pt;
 }
 
@@ -1003,4 +1038,31 @@ footer .footer-above{
 
 .detail-portofolio p{
     color: #fff;
+}
+
+.category_button {
+	position: relative;
+	width: 100%;
+	height: 50px;
+	display: block;
+	margin-bottom: 20px;
+	color: white;
+	background-color: #5cb85c;
+	border: none;
+	-webkit-box-shadow: 0 5px 0 #498844;
+	-moz-box-shadow: 0 5px 0 #498844;
+	box-shadow: 0 5px 0 #498844;
+}
+.category_button:hover {
+	top: 2px;
+	-webkit-box-shadow: 0 3px 0 #498844;
+	-moz-box-shadow: 0 3px 0 #498844;
+	box-shadow: 0 3px 0 #498844;
+}
+.category_button:active {
+	top: 5px;
+	box-shadow: none;
+}
+.category_button:focus {
+	outline: none;
 }

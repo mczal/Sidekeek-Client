@@ -57,6 +57,7 @@ appController.controller('IndexController', ['$scope', '$http',
                 }),
             }).success(function(data, status, header, config){
                 localStorage.setItem('session', data.session);
+                sessionStorage.setItem("activeTab", 1);
                 $('#btn-hide').addClass('hide');
                 $('.dropdown').addClass('hide');
                 $('#img-acc').removeClass('hide');
@@ -80,6 +81,7 @@ appController.controller('IndexController', ['$scope', '$http',
             }).success(function(data, status, header, config){
                 localStorage.removeItem('emailHost');
                 localStorage.removeItem('session');
+                sessionStorage.removeItem('activeTab');
                 $('#btn-hide').removeClass('hide');
                 $('.dropdown').removeClass('hide');
                 $('#img-acc').addClass('hide');
@@ -110,6 +112,26 @@ appController.controller('IndexController', ['$scope', '$http',
                 $('#img-acc').removeClass('hide');
             }
         }).error(function(data, status, header, config){
+            console.log(data.message);
+        });
+
+        $http({
+            method: 'POST',
+            url: urlAPI + '/getProfile',
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token : token,
+                email : localStorage.getItem('emailHost')
+            }),
+        }).
+        success(function(data, status, header, config){
+            temp = data[0].email + " ";
+            namaUser = temp.split("@");
+            $scope.namaUser = namaUser[0];
+        }).
+        error(function(data, status, header, config){
             console.log(data.message);
         });
     }
@@ -336,13 +358,13 @@ appController.controller('ProfileController', ['$scope', '$http',
     }
 ]);
 
-appController.controller('EditProfileController', ['$scope', '$http', '$compile', '$rootScope',
-    function($scope, $http, $compile, $rootScope){
+appController.controller('EditProfileController', ['$scope', '$http', '$compile', '$rootScope', 'FileUploader',
+    function($scope, $http, $compile, $rootScope, FileUploader){
+        $scope.uploader = new FileUploader();
         $scope.setActiveTab = function (activeTab) {
             sessionStorage.setItem("activeTab", activeTab);
-            console.log(sessionStorage.getItem("activeTab"));
         };
-        $scope.active = [{status: true}, {status: false}, {status: false}];
+        $scope.active = [{status: false}, {status: false}, {status: false}];
         if (sessionStorage.getItem("activeTab") == 1) {
             $scope.active[0].status = true;
         }else if(sessionStorage.getItem("activeTab") == 2){
@@ -350,7 +372,7 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
         }else{
             $scope.active[2].status = true;
         }
-        
+
         $scope.addPorto = function (){
             $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
             $(".overlay-portofolio-add").show();
@@ -502,9 +524,6 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
             var companyName = $scope.dataProfile.company_name;
             var title = $scope.dataProfile.title;
             var tagline = $scope.dataProfile.tagline;
-            console.log(companyName);
-            console.log(title);
-            console.log(tagline);
             $http({
                 method: 'POST',
                 url: urlAPI + '/editProfileFull',
@@ -657,5 +676,42 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
             $(".add-produk").append($compile(produk)($scope));
             $("#add_produk").hide();
         }
+    }
+]);
+
+appController.controller('AccountController', ['$scope','$http',
+    function($scope, $http){
+        $http({
+            method: 'POST',
+            url: urlAPI + '/getProfile',
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token : token,
+                email : localStorage.getItem('emailHost')
+            }),
+        }).
+        success(function(data, status, header, config){
+            $scope.dataProfile = data[0];
+        }).
+        error(function(data, status, header, config){
+            console.log(data.message);
+        });
+
+        $http({
+            method: 'POST',
+            url: urlAPI + '/getCities',
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token: token
+            }),
+        }).success(function(data, status, header, config){
+            $scope.citiesData = data;
+        }).error(function(data, status, header, config){
+            console.log(data.message);
+        });
     }
 ]);

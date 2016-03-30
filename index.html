@@ -25,8 +25,8 @@
 
 		<!-- Custom Fonts -->
 		<link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-		<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-		<link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+		<!-- <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+		<link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css"> -->
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -72,12 +72,12 @@
 							  	<div class="dropdown-menu dropdown-login-acc">
 									<div class="row">
 										<div class="col-lg-12 text-center">
-											<img src="assets/img/imgacc.png" alt="" class="img-circle img-acc-child" data-toggle="dropdown">
+											<a href="#/profile"><img src="assets/img/imgacc.png" alt="" class="img-circle img-acc-child"></a>
 										</div>
 										<div class="text-center">
-											<em class="text-center">sidekeek.co</em>
+											<a href="#/profile"></a><em class="text-center" style="font-family: Lato-Regular">{{namaUser}}</em>
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
-											<a href="#/profile">View Profile</a>
+											<a href="#/account">Edit Account</a>
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
 											<a href="#/edit-profile-full">Edit Profile</a>
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
@@ -125,9 +125,10 @@
 		<script src="bower_components/angular-route/angular-route.js"></script>
 		<script src="bower_components/angular-animate/angular-animate.js"></script>
 		<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+		<script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
 		<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
 		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-		<!-- <script src="bower_components/jquery-easing/jquery.easing.js"></script> -->
+		<script src="bower_components/jquery-easing/jquery.easing.js"></script>
 
 
 		<script src="assets/js/app.js"></script>

@@ -2,7 +2,8 @@ var sidekeekApp = angular.module('sidekeekApp', [
     'appController',
     'ui.bootstrap',
 	'ngRoute',
-    'ngSanitize'
+    'ngSanitize',
+    'angularFileUpload'
 ]);
 
 sidekeekApp.config(['$routeProvider',
@@ -39,6 +40,10 @@ sidekeekApp.config(['$routeProvider',
         when('/start1', {
             'templateUrl' : 'partials/unamed1.html',
             'controller' : 'StartController'
+        }).
+        when('/account', {
+            'templateUrl' : 'partials/account.html',
+            'controller' : 'AccountController'
         }).
         otherwise({
             'redirectTo': '/home'
