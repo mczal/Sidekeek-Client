@@ -358,9 +358,8 @@ appController.controller('ProfileController', ['$scope', '$http',
     }
 ]);
 
-appController.controller('EditProfileController', ['$scope', '$http', '$compile', '$rootScope', 'FileUploader',
-    function($scope, $http, $compile, $rootScope, FileUploader){
-        $scope.uploader = new FileUploader();
+appController.controller('EditProfileController', ['$scope', '$http', '$compile', '$rootScope',
+    function($scope, $http, $compile, $rootScope){
         $scope.setActiveTab = function (activeTab) {
             sessionStorage.setItem("activeTab", activeTab);
         };
@@ -439,27 +438,28 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
         }
 
         $scope.addNewProductDesc = function(){
-            $http({
-                method: 'POST',
-                url: urlAPI + '/addNewProductDesc',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                },
-                data: $.param({
-                    token : token,
-                    sessionCode : localStorage.getItem('session'),
-                    namaProduk : $scope.form.product_name,
-                    harga : $scope.form.price,
-                    productDesc : $("#product-desc").val(),
-                    timestamp : curDate()
-                }),
-            }).success(function(data, status, header, config){
-                $("#add_produk").show();
-                window.location.reload();
-                console.log("success add new product. Id Prod="+data.idProduct);
-            }).error(function(data, status, header, config){
-                console.log(data.message);
-            });
+            console.log($scope.myFile.base64);
+            // $http({
+            //     method: 'POST',
+            //     url: urlAPI + '/addNewProductDesc',
+            //     headers: {
+            //         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            //     },
+            //     data: $.param({
+            //         token : token,
+            //         sessionCode : localStorage.getItem('session'),
+            //         namaProduk : $scope.form.product_name,
+            //         harga : $scope.form.price,
+            //         productDesc : $("#product-desc").val(),
+            //         timestamp : curDate()
+            //     }),
+            // }).success(function(data, status, header, config){
+            //     $("#add_produk").show();
+            //     window.location.reload();
+            //     console.log("success add new product. Id Prod="+data.idProduct);
+            // }).error(function(data, status, header, config){
+            //     console.log(data.message);
+            // });
         }
 
         $scope.editPortofolio = function(idPortofolio){
@@ -640,8 +640,8 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
             '                                    <div class="box container-fluid">',
             '                                        <div class="file-upload text-center">',
             '                                            <img src="assets/img/uploadfoto.png" alt="" />',
-            '                                            <input type="file" name="file" id="file-product-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />',
-            '                                            <label for="file-product-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg><span>Choose a file&hellip;</span></label>',
+            '                                            <input type="file" name="file" id="fileUpload" class="inputfile inputfile-1" ng-model="myFile" base-sixty-four-input/>',
+            '                                            <label for="fileUpload"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>',
             '                                        </div>',
             '                                    </div>',
             '                                    <div class="box-kecil">',
@@ -672,7 +672,8 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
             '                            <div class="col-lg-12">',
             '                                <button type="button" class="btn btn-success btn-lg pull-right" ng-click="addNewProductDesc()" style="margin-bottom:50px;" id="button">Add Product</button>',
             '                            </div>',
-            '                        </div>'].join('');
+            '                        </div>',
+            '                        <script src="assets/js/custom-file-input.js"></script>'].join('');
             $(".add-produk").append($compile(produk)($scope));
             $("#add_produk").hide();
         }
@@ -681,6 +682,28 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
 
 appController.controller('AccountController', ['$scope','$http',
     function($scope, $http){
+        $scope.cropper = {};
+        $scope.cropper.sourceImage = null;
+        $scope.cropper.croppedImage = null;
+        $scope.bounds = {};
+        $scope.bounds.left = 0;
+        $scope.bounds.right = 0;
+        $scope.bounds.top = 0;
+        $scope.bounds.bottom = 0;
+
+        $scope.uploadAndCrop = function(){
+            var temp = $scope.cropper.croppedImage;
+            var temp2 = temp.substring(22);
+            var tempAkhir = temp2.substring(0, 50);
+
+            var temp3 = $scope.cropper.sourceImage
+            var temp4 = temp3.substring(22);
+            var tempAkhir2 = ""+temp4.substring(0, 50);
+
+            console.log(tempAkhir);
+            console.log(tempAkhir2);
+        }
+
         $http({
             method: 'POST',
             url: urlAPI + '/getProfile',

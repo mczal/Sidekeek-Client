@@ -125,124 +125,17 @@
 		<script src="bower_components/angular-route/angular-route.js"></script>
 		<script src="bower_components/angular-animate/angular-animate.js"></script>
 		<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-		<script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+		<script src="bower_components/angular-base64-upload/dist/angular-base64-upload.min.js"></script>
+		<script src="bower_components/angular-img-cropper/dist/angular-img-cropper.min.js"></script>
 		<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
 		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 		<script src="bower_components/jquery-easing/jquery.easing.js"></script>
-
 
 		<script src="assets/js/app.js"></script>
 		<script src="assets/js/controller.js"></script>
 		<script src="assets/js/classie.js"></script>
 		<script src="assets/js/cbpAnimatedHeader.js"></script>
 		<script src="assets/js/custom.js"></script>
-		<script src="assets/js/custom-file-input.js"></script>
-
-		<script type="text/javascript">
-			// // array of month
-			// var arrOfMonth = [];
-			// arrOfMonth['Jan']='01';
-			// arrOfMonth['Feb']='02';
-			// arrOfMonth['Mar']='03';
-			// arrOfMonth['Apr']='04';
-			// arrOfMonth['May']='05';
-			// arrOfMonth['Jun']='06';
-			// arrOfMonth['Jul']='07';
-			// arrOfMonth['Aug']='08';
-			// arrOfMonth['Sep']='09';
-			// arrOfMonth['Oct']='10';
-			// arrOfMonth['Nov']='11';
-			// arrOfMonth['Des']='12';
-			//
-			// // current time using time interval (every 5 second)
-			// function curDate(){
-			// 	var cur = new Date();
-			// 	var temp = cur +" ";
-			// 	var temp2 = temp.split(" ");
-			// 	return temp2[3]+"-"+temp2[2]+"-"+arrOfMonth[temp2[1]]+" "+temp2[4];
-			// }
-			//
-			// // var ref = setInterval(function(){ refresh() }, 100);
-		    // // function refresh(){
-		    // // 	if (localStorage.getItem('session') == 'undefined'){
-		    // //     	window.location.assign("/");
-		    // //    	}
-		    // //  }
-			//
-			// // login session
-			// var login = function(){
-			// 	var email = $('#email').val();
-			// 	var pass = $('#password').val();
-			// 	localStorage.setItem('emailHost', email);
-			// 	$.ajax({
-			// 		url: 'http://localhost:3000/sideAPIkeek/login',
-			// 		method: 'POST',
-			// 		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-			// 		data:{
-			// 			token: 'eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ',
-			// 			email: email,
-			// 			password: pass,
-			// 			timestamp: curDate()
-			// 		},
-			// 		success: function(response){
-			// 			localStorage.setItem('session', response.session);
-			// 			$('#btn-hide').addClass('hide');
-			// 			$('.dropdown').addClass('hide');
-			// 			$('#img-acc').removeClass('hide');
-			// 		},
-			// 		error: function(xhr, status, error){
-			// 			console.log(error);
-			// 		}
-			// 	});
-			// }
-			//
-			// // logout session
-			// var logout = function(){
-			// 	$.ajax({
-			// 		url: 'http://localhost:3000/sideAPIkeek/logout',
-			// 		method: 'POST',
-			// 		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-			// 		data:{
-			// 			token: 'eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ',
-			// 			sessionCode: localStorage.getItem('session')
-			// 		},
-			// 		success: function(response){
-			// 			$('#btn-hide').removeClass('hide');
-			// 			$('.dropdown').removeClass('hide');
-			// 			$('#img-acc').addClass('hide');
-			// 		},
-			// 		error: function(xhr, status, error){
-			// 			console.log(error);
-			// 		}
-			// 	});
-			// }
-			//
-			// //check if the session is still available
-			// $.ajax({
-			// 	url: 'http://localhost:3000/sideAPIkeek/integrityCheck',
-			// 	method: 'POST',
-			// 	contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-			// 	data:{
-			// 		token: 'eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ',
-			// 		sessionCode: localStorage.getItem('session')
-			// 	},
-			// 	success: function(response){
-			// 		// alert(response.status);
-			// 		if (response.status == "forbidden") {
-			// 			$('#btn-hide').removeClass('hide');//sign-up button
-			// 			$('.dropdown').removeClass('hide');//login button
-			// 			$('#img-acc').addClass('hide');//profile pict
-			// 		}else{
-			// 			$('#btn-hide').addClass('hide');
-			// 			$('.dropdown').addClass('hide');
-			// 			$('#img-acc').removeClass('hide');
-			// 		}
-			// 	},
-			// 	error: function(xhr, status, error){
-			// 		console.log(error);
-			// 	}
-			// });
-		</script>
 
 	</body>
 

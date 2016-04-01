@@ -25,6 +25,7 @@
     "angular-animate": "~1.5.0",
     "angular-sanitize": "~1.5.0",
     "hover": "Hover#~2.0.2",
-    "angular-file-upload": "~2.2.0"
+    "angular-img-cropper": "~1.1.0",
+    "angular-base64-upload": "^0.1.19"
   }
 }

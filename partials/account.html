@@ -9,11 +9,21 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="upload">
-                    <div class="box container-fluid">
-                        <div class="file-upload text-center">
-                            <img src="assets/img/uploadfoto.png" alt="" />
-                            <input type="file" id="file" class="inputfile inputfile-1 upload" nv-file-select uploader="uploader"/>
-                            <label for="file"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>
+                    <div class="container-fluid">
+                        <div class="text-center" style="margin-top:10px">
+                            <canvas class="box-account" style="margin-bottom: 10px;" height="300" id="canvas" image-cropper image="cropper.sourceImage" cropped-image="cropper.croppedImage" crop-width="300" crop-height="300" keep-aspect="true" touch-radius="30" crop-area-bounds="bounds"></canvas>
+                            <input type="file" id="fileUpload" class="inputfile inputfile-1" img-cropper-fileread image="cropper.sourceImage"/>
+                            <label ng-hide="cropper.sourceImage != null" for="fileUpload"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>
+                            <div ng-show="cropper.sourceImage != null">
+                                <div class="container-fluid">
+                                    <div class="col-lg-6">
+                    					<input type="submit" value="Crop" class="crop_button" ng-click="uploadAndCrop()"/>
+                    				</div>
+                    				<div class="col-lg-6 button-service">
+                    					<input type="submit" value="Cancel" class="cancel_button"/>
+                    				</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -48,4 +58,6 @@
             <button type="button" class="btn btn-success btn-lg pull-right btn-edit-profile">Save Changes</button>
         </div>
     </div>
+    <label class="col-lg-12">{{cropper.croppedImage.substring(0,30)}}</label>
 </div>
+<script src="assets/js/custom-file-input.js"></script>

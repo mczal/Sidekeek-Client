@@ -3,7 +3,8 @@ var sidekeekApp = angular.module('sidekeekApp', [
     'ui.bootstrap',
 	'ngRoute',
     'ngSanitize',
-    'angularFileUpload'
+    'naif.base64',
+    'angular-img-cropper'
 ]);
 
 sidekeekApp.config(['$routeProvider',
