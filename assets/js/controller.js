@@ -355,6 +355,11 @@ appController.controller('ProfileController', ['$scope', '$http',
             $("#freeze").css({'position': '', 'overflow-y': '', 'width': ''});
             $(".overlay-portofolio-details").hide();
         }
+
+        $scope.escape = function(keyCode){
+            $("#freeze").css({'position': '', 'overflow-y': '', 'width': ''});
+            $(".overlay-portofolio-details").hide();
+        }
     }
 ]);
 
@@ -370,6 +375,18 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
             $scope.active[1].status = true;
         }else{
             $scope.active[2].status = true;
+        }
+
+        $scope.escapeAdd = function(keyCode){
+            $("#freeze").css({'position': '', 'overflow-y': '', 'width': ''});
+            $(".overlay-portofolio-add").hide();
+            $(".offcanvas-portofolio").hide();
+        }
+
+        $scope.escapeEdit = function(keyCode){
+            $("#freeze").css({'position': '', 'overflow-y': '', 'width': ''});
+            $(".overlay-portofolio-edit").hide();
+            $(".offcanvas-portofolio").hide();
         }
 
         $scope.addPorto = function (){
@@ -692,16 +709,16 @@ appController.controller('AccountController', ['$scope','$http',
         $scope.bounds.bottom = 0;
 
         $scope.uploadAndCrop = function(){
-            var temp = $scope.cropper.croppedImage;
-            var temp2 = temp.substring(22);
-            var tempAkhir = temp2.substring(0, 50);
+            // var temp = $scope.cropper.croppedImage;
+            // var temp2 = temp.substring(22);
+            // var tempAkhir = temp2.substring(0, 50);
+            //
+            // var temp3 = $scope.cropper.sourceImage
+            // var temp4 = temp3.substring(22);
+            // var tempAkhir2 = ""+temp4.substring(0, 50);
 
-            var temp3 = $scope.cropper.sourceImage
-            var temp4 = temp3.substring(22);
-            var tempAkhir2 = ""+temp4.substring(0, 50);
-
-            console.log(tempAkhir);
-            console.log(tempAkhir2);
+            console.log($scope.cropper.croppedImage);
+            // console.log(tempAkhir2);
         }
 
         $http({
