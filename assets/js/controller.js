@@ -14,31 +14,30 @@ function generateUniqueCode(){
    return text;
 }
 
+// array of month
+var arrOfMonth = [];
+arrOfMonth['Jan']='01';
+arrOfMonth['Feb']='02';
+arrOfMonth['Mar']='03';
+arrOfMonth['Apr']='04';
+arrOfMonth['May']='05';
+arrOfMonth['Jun']='06';
+arrOfMonth['Jul']='07';
+arrOfMonth['Aug']='08';
+arrOfMonth['Sep']='09';
+arrOfMonth['Oct']='10';
+arrOfMonth['Nov']='11';
+arrOfMonth['Des']='12';
+
+function curDate(){
+    var cur = new Date();
+    var temp = cur +" ";
+    var temp2 = temp.split(" ");
+    return temp2[3]+"-"+temp2[2]+"-"+arrOfMonth[temp2[1]]+" "+temp2[4];
+}
+
 appController.controller('IndexController', ['$scope', '$http',
     function($scope, $http){
-        // array of month
-        var arrOfMonth = [];
-        arrOfMonth['Jan']='01';
-        arrOfMonth['Feb']='02';
-        arrOfMonth['Mar']='03';
-        arrOfMonth['Apr']='04';
-        arrOfMonth['May']='05';
-        arrOfMonth['Jun']='06';
-        arrOfMonth['Jul']='07';
-        arrOfMonth['Aug']='08';
-        arrOfMonth['Sep']='09';
-        arrOfMonth['Oct']='10';
-        arrOfMonth['Nov']='11';
-        arrOfMonth['Des']='12';
-
-        // current time using time interval (every 5 second)
-        function curDate(){
-            var cur = new Date();
-            var temp = cur +" ";
-            var temp2 = temp.split(" ");
-            return temp2[3]+"-"+temp2[2]+"-"+arrOfMonth[temp2[1]]+" "+temp2[4];
-        }
-
         $scope.login = function(){
             var email = $('#emailUser').val();
             var pass = $('#passwordUser').val();
@@ -537,13 +536,23 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
             });
         }
 
+        var idTipeProfile = null;
+        $scope.serviceGoodOnClick = function(id){
+            if(id==1){
+                idTipeProfile = 1;
+                $(".button_goods").css({'top': '5px', 'box-shadow': 'none', 'outline': 'none'});
+                $(".button_service").css({'top': '', 'box-shadow': '', 'outline': ''});
+            }else{
+                idTipeProfile = 2;
+                $(".button_service").css({'top': '5px', 'box-shadow': 'none', 'outline': 'none'});
+                $(".button_goods").css({'top': '', 'box-shadow': '', 'outline': ''});
+            }
+        }
+
         $scope.editProfiledesc = function (){
-            var companyName = $scope.dataProfile.company_name;
-            var title = $scope.dataProfile.title;
-            var tagline = $scope.dataProfile.tagline;
             $http({
                 method: 'POST',
-                url: urlAPI + '/editProfileFull',
+                url: urlAPI + '/editProfile',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                 },
@@ -551,13 +560,10 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
                     token : token,
                     sessionCode : localStorage.getItem("session"),
                     timestamp : curDate(),
-                    companyName : companyName,
-                    title : title,
-                    businessField : $("#category").val(),
-                    tagline : tagline,
-                    companyDesc : $("#companyDesc").val(),
-                    region : $("#region").val(),
-                    address : $("#address").val()
+                    tipe: idTipeProfile,
+                    title : $scope.dataProfile.title,
+                    businessCategory : $("#category").val(),
+                    companyDesc : $("#companyDesc").val()
                 }),
             }).success(function(data, status, header, config){
                 window.location.reload();
@@ -581,6 +587,13 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
         }).
         success(function(data, status, header, config){
             $scope.dataProfile = data[0];
+            if ($scope.dataProfile.tipe == "goods") {
+                $(".button_goods").css({'top': '5px', 'box-shadow': 'none', 'outline': 'none'});
+                $(".button_service").css({'top': '', 'box-shadow': '', 'outline': ''});
+            }else{
+                $(".button_service").css({'top': '5px', 'box-shadow': 'none', 'outline': 'none'});
+                $(".button_goods").css({'top': '', 'box-shadow': '', 'outline': ''});
+            }
         }).
         error(function(data, status, header, config){
             console.log(data.message);
@@ -699,31 +712,54 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
 
 appController.controller('AccountController', ['$scope','$http',
     function($scope, $http){
-        $scope.cropper = {};
-        $scope.cropper.sourceImage = null;
-        $scope.cropper.croppedImage = null;
-        $scope.bounds = {};
-        $scope.bounds.left = 0;
-        $scope.bounds.right = 0;
-        $scope.bounds.top = 0;
-        $scope.bounds.bottom = 0;
+        // $scope.cropper = {};
+        // $scope.cropper.sourceImage = null;
+        // $scope.cropper.croppedImage = null;
+        // $scope.bounds = {};
+        // $scope.bounds.left = 0;
+        // $scope.bounds.right = 0;
+        // $scope.bounds.top = 0;
+        // $scope.bounds.bottom = 0;
+        //
+        // $scope.cropImg = null;
+        // $scope.crop = function(){
+        //     $scope.cropImg = $scope.cropper.croppedImage;
+        //     $(".crop_button").hide();
+        //     $(".cancel_button").hide();
+        // }
 
-        $scope.uploadAndCrop = function(){
-            // var temp = $scope.cropper.croppedImage;
-            // var temp2 = temp.substring(22);
-            // var tempAkhir = temp2.substring(0, 50);
-            //
-            // var temp3 = $scope.cropper.sourceImage
-            // var temp4 = temp3.substring(22);
-            // var tempAkhir2 = ""+temp4.substring(0, 50);
+        $scope.cancel = function(){
+            window.location.reload();
+        }
 
-            console.log($scope.cropper.croppedImage);
-            // console.log(tempAkhir2);
+        $scope.editAccount = function(){
+            $http({
+                method: 'POST',
+                url: urlAPI + '/editAccount',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                data: $.param({
+                    token: token,
+                    sessionCode: localStorage.getItem('session'),
+                    companyName: $scope.dataAccount.company_name,
+                    imgbase64: $scope.cropImg,
+                    about: $("#about").val(),
+                    handphone: $scope.dataAccount.handphone,
+                    city: $("#region").val(),
+                    address: $("#address").val()
+                })
+            }).success(function(data, status, header, config){
+                window.location.reload();
+                console.log("success update account");
+            }).error(function(data, status, header, config){
+                console.log(data.message);
+            });
         }
 
         $http({
             method: 'POST',
-            url: urlAPI + '/getProfile',
+            url: urlAPI + '/getAccount',
             headers: {
                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             },
@@ -733,7 +769,7 @@ appController.controller('AccountController', ['$scope','$http',
             }),
         }).
         success(function(data, status, header, config){
-            $scope.dataProfile = data[0];
+            $scope.dataAccount = data[0];
         }).
         error(function(data, status, header, config){
             console.log(data.message);

@@ -217,7 +217,7 @@ header .intro-text .skills {
 .navbar-default,
 .navbar-inverse {
     border: 0;
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: #333;
 }
 
 section {
@@ -818,7 +818,12 @@ footer .footer-above{
 }
 
 .btn-edit-profile{
-    margin: 100px 0;
+    margin: 25px 0;
+    width: 150px;
+}
+
+.btn-edit-account{
+    margin: 25px 0;
     width: 150px;
 }
 
@@ -835,7 +840,7 @@ footer .footer-above{
 
 .dropdown-login-acc{
     width: 300px;
-    background-color: rgba(0,0,0,0.9);
+    background-color: #353535;
     padding: 20px 20px 10px 20px;
 }
 
@@ -1059,12 +1064,10 @@ footer .footer-above{
 	-moz-box-shadow: 0 3px 0 #498844;
 	box-shadow: 0 3px 0 #498844;
 }
-.category_button:active {
+.category_button:focus {
 	top: 5px;
 	box-shadow: none;
-}
-.category_button:focus {
-	outline: none;
+    outline: none;
 }
 
 .box-account{

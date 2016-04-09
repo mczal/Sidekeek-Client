@@ -11,16 +11,15 @@
                 <div class="upload">
                     <div class="container-fluid">
                         <div class="text-center" style="margin-top:10px">
-                            <canvas class="box-account" style="margin-bottom: 10px;" height="300" id="canvas" image-cropper image="cropper.sourceImage" cropped-image="cropper.croppedImage" crop-width="300" crop-height="300" keep-aspect="true" touch-radius="30" crop-area-bounds="bounds"></canvas>
-                            <input type="file" id="fileUpload" class="inputfile inputfile-1" img-cropper-fileread image="cropper.sourceImage"/>
-                            <label ng-hide="cropper.sourceImage != null" for="fileUpload"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>
-                            <div ng-show="cropper.sourceImage != null">
+                            <input type="file" id="fileUpload" class="inputfile inputfile-1" ng-model= base-sixty-four-input/>
+                            <label for="fileUpload"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>
+                            <div >
                                 <div class="container-fluid">
                                     <div class="col-lg-6">
-                    					<input type="submit" value="Crop" class="crop_button" ng-click="uploadAndCrop()"/>
+                    					<input type="submit" value="Crop" class="crop_button" ng-click="crop()"/>
                     				</div>
                     				<div class="col-lg-6 button-service">
-                    					<input type="submit" value="Cancel" class="cancel_button"/>
+                    					<input type="submit" value="Cancel" class="cancel_button" ng-click="cancel()"/>
                     				</div>
                                 </div>
                             </div>
@@ -31,33 +30,32 @@
             <div class="col-lg-8">
                 <div class="form-group">
                     <label for="">Company Name</label>
-                    <input type="text" class="form-control" ng-model="dataProfile.company_name">
+                    <input type="text" class="form-control" ng-model="dataAccount.company_name">
                 </div>
                 <div class="form-group">
                     <label for="">About</label>
-                    <textarea type="text" class="form-control" rows="10"></textarea>
+                    <textarea type="text" class="form-control" rows="10" id="about">{{dataAccount.about}}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="">No. Handphone</label>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="dataAccount.handphone">
                 </div>
                 <label for="">City</label>
                 <select class="form-group form-control" id="region">
-                    <option ng-repeat="cities in citiesData" value="{{cities.id_city}}" ng-if="dataProfile.city_name == cities.city_name" selected="selected">{{cities.city_name}}</option>
-                    <option ng-repeat="cities in citiesData" value="{{cities.id_city}}" ng-if="dataProfile.city_name != cities.city_name">{{cities.city_name}}</option>
+                    <option ng-repeat="cities in citiesData" value="{{cities.id_city}}" ng-if="dataAccount.city_name == cities.city_name" selected="selected">{{cities.city_name}}</option>
+                    <option ng-repeat="cities in citiesData" value="{{cities.id_city}}" ng-if="dataAccount.city_name != cities.city_name">{{cities.city_name}}</option>
                 </select>
                 <div class="form-group">
                     <label for="">Address</label>
-                    <textarea type="text" class="form-control" rows="2">{{dataProfile.address}}</textarea>
+                    <textarea type="text" class="form-control" rows="2" id="address">{{dataAccount.address}}</textarea>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <button type="button" class="btn btn-success btn-lg pull-right btn-edit-profile">Save Changes</button>
+            <button type="button" class="btn btn-success btn-lg pull-right btn-edit-account" ng-click="editAccount()">Save Changes</button>
         </div>
     </div>
-    <label class="col-lg-12">{{cropper.croppedImage.substring(0,30)}}</label>
 </div>
 <script src="assets/js/custom-file-input.js"></script>
