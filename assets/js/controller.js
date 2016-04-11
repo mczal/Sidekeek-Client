@@ -133,6 +133,25 @@ appController.controller('IndexController', ['$scope', '$http',
         error(function(data, status, header, config){
             console.log(data.message);
         });
+
+        $http({
+            method: 'POST',
+            url: urlAPI + '/getAccount',
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token : token,
+                email : localStorage.getItem('emailHost')
+            }),
+        }).
+        success(function(data, status, header, config){
+            $scope.dataAccount = data[0];
+            $scope.img = data[0].img_base64;
+        }).
+        error(function(data, status, header, config){
+            console.log(data.message);
+        });
     }
 ]);
 
@@ -377,15 +396,19 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
         }
 
         $scope.escapeAdd = function(keyCode){
-            $("#freeze").css({'position': '', 'overflow-y': '', 'width': ''});
-            $(".overlay-portofolio-add").hide();
-            $(".offcanvas-portofolio").hide();
+            if (keyCode == 27) {
+                $("#freeze").css({'position': '', 'overflow-y': '', 'width': ''});
+                $(".overlay-portofolio-add").hide();
+                $(".offcanvas-portofolio").hide();
+            }
         }
 
         $scope.escapeEdit = function(keyCode){
-            $("#freeze").css({'position': '', 'overflow-y': '', 'width': ''});
-            $(".overlay-portofolio-edit").hide();
-            $(".offcanvas-portofolio").hide();
+            if (keyCode == 27) {
+                $("#freeze").css({'position': '', 'overflow-y': '', 'width': ''});
+                $(".overlay-portofolio-edit").hide();
+                $(".offcanvas-portofolio").hide();
+            }
         }
 
         $scope.addPorto = function (){
@@ -400,27 +423,6 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
             $(".offcanvas-portofolio").hide();
         }
 
-        $scope.editPorto = function(idPortofolio){
-            $http({
-                method: 'POST',
-                url: urlAPI + '/getPortofolioDetail',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                },
-                data: $.param({
-                    token : token,
-                    idPortofolio : idPortofolio
-                }),
-            }).success(function(data, status, header, config){
-                $scope.portoDetails = data[0];
-                $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
-                $(".overlay-portofolio-edit").show();
-                $(".offcanvas-portofolio").show();
-            }).error(function(data, status, header, config){
-                console.log(data.message);
-            });
-        }
-
         $scope.closeOffcanvas_edit = function(){
             $("#freeze").css({'position': '', 'overflow-y': '', 'width': ''});
             $(".overlay-portofolio-edit").hide();
@@ -428,7 +430,9 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
         }
 
         $scope.addNewPortofolio = function (){
-            var imgBase64 = "";
+            var typeData = "data:" + $scope.myFile.filetype + ";";
+            var base64Data = "base64," + $scope.myFile.base64;
+            var imageBase64 = typeData + base64Data;
             $http({
                 method: 'POST',
                 url: urlAPI + '/addNewPortofolio',
@@ -441,12 +445,12 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
                     title : $scope.form.title,
                     description : $("#portoDesc").val(),
                     timestamp : curDate(),
-                    imgBase64 : imgBase64
+                    imgbase64 : imageBase64
                 }),
             }).success(function(data, status, header, config){
                 window.location.reload();
-                $(".overlay").hide();
-                $(".offcanvas-portofolio").hide();
+                // $(".overlay-portofolio-add").hide();
+                // $(".offcanvas-portofolio").hide();
                 console.log("success add new portofolio");
             }).error(function(data, status, header, config){
                 console.log(data.message);
@@ -454,32 +458,78 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
         }
 
         $scope.addNewProductDesc = function(){
-            console.log($scope.myFile.base64);
-            // $http({
-            //     method: 'POST',
-            //     url: urlAPI + '/addNewProductDesc',
-            //     headers: {
-            //         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            //     },
-            //     data: $.param({
-            //         token : token,
-            //         sessionCode : localStorage.getItem('session'),
-            //         namaProduk : $scope.form.product_name,
-            //         harga : $scope.form.price,
-            //         productDesc : $("#product-desc").val(),
-            //         timestamp : curDate()
-            //     }),
-            // }).success(function(data, status, header, config){
-            //     $("#add_produk").show();
-            //     window.location.reload();
-            //     console.log("success add new product. Id Prod="+data.idProduct);
-            // }).error(function(data, status, header, config){
-            //     console.log(data.message);
-            // });
+            $http({
+                method: 'POST',
+                url: urlAPI + '/addNewProductDesc',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                data: $.param({
+                    token : token,
+                    sessionCode : localStorage.getItem('session'),
+                    namaProduk : $scope.form.product_name,
+                    harga : $scope.form.price,
+                    productDesc : $("#product-desc").val(),
+                    timestamp : curDate()
+                }),
+            }).success(function(data, status, header, config){
+                $("#add_produk").show();
+                for (var i = 0; i < $scope.myFile.length; i++) {
+                    var typeData = "data:" + $scope.myFile[i].filetype + ";";
+                    var base64Data = "base64," + $scope.myFile[i].base64;
+                    var imageBase64 = typeData + base64Data;
+                    $http({
+                        method: 'POST',
+                        url: urlAPI + "/addProductImage",
+                        headers:{
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                        },
+                        data: $.param({
+                            token: token,
+                            sessionCode: localStorage.getItem('session'),
+                            idProduct: data.idProduct,
+                            imgbase64: imageBase64,
+                            timestamp: curDate()
+                        })
+                    }).success(function(data, status, header, config){
+                        window.location.reload();
+                        console.log(data.message);
+                    }).error(function(data, status, header, config){
+                        console.log(data.message);
+                    });
+                }
+                console.log("success add new product. Id Prod="+data.idProduct);
+            }).error(function(data, status, header, config){
+                console.log(data.message);
+            });
+        }
+
+        $scope.viewPortoEditDetails = function(idPortofolio){
+            $http({
+                method: 'POST',
+                url: urlAPI + '/getPortofolioDetail',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                data: $.param({
+                    token : token,
+                    idPortofolio : idPortofolio
+                }),
+            }).success(function(data, status, header, config){
+                $scope.img = data[0].img_base64;
+                $scope.portoDetails = data[0];
+                $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
+                $(".overlay-portofolio-edit").show();
+                $(".offcanvas-portofolio").show();
+            }).error(function(data, status, header, config){
+                console.log(data.message);
+            });
         }
 
         $scope.editPortofolio = function(idPortofolio){
-            var imgBase64 = "";
+            var typeData = "data:" + $scope.myFile.filetype + ";";
+            var base64Data = "base64," + $scope.myFile.base64;
+            var imgBase64 = typeData + base64Data;
             $http({
                 method: 'POST',
                 url: urlAPI + '/editPortofolio',
@@ -608,7 +658,7 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
             data: $.param({
                 token : token,
                 email : localStorage.getItem('emailHost')
-            }),
+            })
         }).
         success(function(data, status, header, config){
             $scope.dataPortofolios = data;
@@ -670,18 +720,9 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
             '                                    <div class="box container-fluid">',
             '                                        <div class="file-upload text-center">',
             '                                            <img src="assets/img/uploadfoto.png" alt="" />',
-            '                                            <input type="file" name="file" id="fileUpload" class="inputfile inputfile-1" ng-model="myFile" base-sixty-four-input/>',
+            '                                            <input type="file" name="file" id="fileUpload" class="inputfile inputfile-1" ng-model="myFile" multiple base-sixty-four-input/>',
             '                                            <label for="fileUpload"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>',
             '                                        </div>',
-            '                                    </div>',
-            '                                    <div class="box-kecil">',
-            '                                        <img src="assets/img/uploadfoto.png" alt="" />',
-            '                                    </div>',
-            '                                    <div class="box-kecil">',
-            '                                        <img src="assets/img/uploadfoto.png" alt="" />',
-            '                                    </div>',
-            '                                    <div class="box-kecil">',
-            '                                        <img src="assets/img/uploadfoto.png" alt="" />',
             '                                    </div>',
             '                                </div>',
             '                            </div>',
@@ -712,27 +753,16 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
 
 appController.controller('AccountController', ['$scope','$http',
     function($scope, $http){
-        // $scope.cropper = {};
-        // $scope.cropper.sourceImage = null;
-        // $scope.cropper.croppedImage = null;
-        // $scope.bounds = {};
-        // $scope.bounds.left = 0;
-        // $scope.bounds.right = 0;
-        // $scope.bounds.top = 0;
-        // $scope.bounds.bottom = 0;
-        //
-        // $scope.cropImg = null;
-        // $scope.crop = function(){
-        //     $scope.cropImg = $scope.cropper.croppedImage;
-        //     $(".crop_button").hide();
-        //     $(".cancel_button").hide();
-        // }
+
 
         $scope.cancel = function(){
             window.location.reload();
         }
 
         $scope.editAccount = function(){
+            var typeData = "data:" + $scope.fileUpload.filetype + ";";
+            var base64Data = "base64," + $scope.fileUpload.base64;
+            var imageBase64 = typeData + base64Data;
             $http({
                 method: 'POST',
                 url: urlAPI + '/editAccount',
@@ -743,7 +773,7 @@ appController.controller('AccountController', ['$scope','$http',
                     token: token,
                     sessionCode: localStorage.getItem('session'),
                     companyName: $scope.dataAccount.company_name,
-                    imgbase64: $scope.cropImg,
+                    imgbase64: imageBase64,
                     about: $("#about").val(),
                     handphone: $scope.dataAccount.handphone,
                     city: $("#region").val(),
@@ -770,6 +800,7 @@ appController.controller('AccountController', ['$scope','$http',
         }).
         success(function(data, status, header, config){
             $scope.dataAccount = data[0];
+            $scope.img = data[0].img_base64;
         }).
         error(function(data, status, header, config){
             console.log(data.message);

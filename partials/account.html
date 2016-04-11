@@ -11,19 +11,11 @@
                 <div class="upload">
                     <div class="container-fluid">
                         <div class="text-center" style="margin-top:10px">
-                            <input type="file" id="fileUpload" class="inputfile inputfile-1" ng-model= base-sixty-four-input/>
-                            <label for="fileUpload"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>
-                            <div >
-                                <div class="container-fluid">
-                                    <div class="col-lg-6">
-                    					<input type="submit" value="Crop" class="crop_button" ng-click="crop()"/>
-                    				</div>
-                    				<div class="col-lg-6 button-service">
-                    					<input type="submit" value="Cancel" class="cancel_button" ng-click="cancel()"/>
-                    				</div>
-                                </div>
-                            </div>
+                            <div ng-show="img != null" class="box-account"><img width="100%" ng-src={{img}}></div>
+                            <input type="file" id="fileUploadImg" class="inputfile inputfile-1" ng-model="fileUpload" maxsize="2000" base-sixty-four-input/>
+                            <label for="fileUploadImg"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>
                         </div>
+                        <label>max. size file 2MB</label>
                     </div>
                 </div>
             </div>
