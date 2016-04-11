@@ -1,4 +1,4 @@
-var appController = angular.module('appController', []);
+var appControllers = angular.module('appControllers', []);
 var urlAPI = "http://localhost:3000/sideAPIkeek"
 var token = "eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ";
 idTipe = null;
@@ -36,7 +36,7 @@ function curDate(){
     return temp2[3]+"-"+temp2[2]+"-"+arrOfMonth[temp2[1]]+" "+temp2[4];
 }
 
-appController.controller('IndexController', ['$scope', '$http',
+appControllers.controller('IndexController', ['$scope', '$http',
     function($scope, $http){
         $scope.login = function(){
             var email = $('#emailUser').val();
@@ -155,7 +155,7 @@ appController.controller('IndexController', ['$scope', '$http',
     }
 ]);
 
-appController.controller('HomeController',['$scope','$http',
+appControllers.controller('HomeController',['$scope','$http',
     function($scope,$http){
         $http({
             method: 'POST',
@@ -189,7 +189,7 @@ appController.controller('HomeController',['$scope','$http',
     }
 ]);
 
-appController.controller('StartController', ['$scope', '$http',
+appControllers.controller('StartController', ['$scope', '$http',
     function ($scope, $http){
 
         $('#button-goods').hide();
@@ -267,7 +267,7 @@ appController.controller('StartController', ['$scope', '$http',
     }
 ]);
 
-appController.controller('SignUpController', ['$scope', '$http',
+appControllers.controller('SignUpController', ['$scope', '$http',
     function($scope, $http){
         $scope.signUp = function(){
             var email = $scope.form.email;
@@ -293,7 +293,7 @@ appController.controller('SignUpController', ['$scope', '$http',
     }
 ]);
 
-appController.controller('ProfileController', ['$scope', '$http',
+appControllers.controller('ProfileController', ['$scope', '$http',
     function($scope, $http){
         $http({
             method: 'POST',
@@ -381,7 +381,7 @@ appController.controller('ProfileController', ['$scope', '$http',
     }
 ]);
 
-appController.controller('EditProfileController', ['$scope', '$http', '$compile', '$rootScope',
+appControllers.controller('EditProfileController', ['$scope', '$http', '$compile', '$rootScope',
     function($scope, $http, $compile, $rootScope){
         $scope.setActiveTab = function (activeTab) {
             sessionStorage.setItem("activeTab", activeTab);
@@ -751,7 +751,7 @@ appController.controller('EditProfileController', ['$scope', '$http', '$compile'
     }
 ]);
 
-appController.controller('AccountController', ['$scope','$http',
+appControllers.controller('AccountController', ['$scope','$http',
     function($scope, $http){
 
 
@@ -819,6 +819,21 @@ appController.controller('AccountController', ['$scope','$http',
             $scope.citiesData = data;
         }).error(function(data, status, header, config){
             console.log(data.message);
+        });
+    }
+]);
+
+appControllers.controller('ConfirmationController', ['$scope', '$http', '$timeout', '$location',
+    function($scope, $http, $timeout, $location){
+        var redirectTimeout;
+        var redirect = function() {
+            $location.path("/");
+            // alert('redirect');
+        }
+        $timeout.cancel(redirectTimeout);
+        redirectTimeout = $timeout(function() {
+            var timeoutTime = 3000;
+            redirectTimeout = $timeout(redirect, timeoutTime);
         });
     }
 ]);

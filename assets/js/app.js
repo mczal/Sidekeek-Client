@@ -1,5 +1,5 @@
 var sidekeekApp = angular.module('sidekeekApp', [
-    'appController',
+    'appControllers',
     'ui.bootstrap',
 	'ngRoute',
     'ngSanitize',
@@ -34,13 +34,13 @@ sidekeekApp.config(['$routeProvider',
             'templateUrl' : 'partials/profile.html',
             'controller' : 'ProfileController'
         }).
-        when('/start1', {
-            'templateUrl' : 'partials/unamed1.html',
-            'controller' : 'StartController'
-        }).
         when('/account', {
             'templateUrl' : 'partials/account.html',
             'controller' : 'AccountController'
+        }).
+        when('/confirmation', {
+            'templateUrl' : 'partials/confirmation.html',
+            'controller' : 'ConfirmationController'
         }).
         otherwise({
             'redirectTo': '/home'
