@@ -42,6 +42,10 @@ sidekeekApp.config(['$routeProvider',
             'templateUrl' : 'partials/confirmation.html',
             'controller' : 'ConfirmationController'
         }).
+        when('/confirm', {
+            'templateUrl' : 'partials/confirm.html',
+            'controller' : 'ConfirmController'
+        }).
         otherwise({
             'redirectTo': '/home'
         });

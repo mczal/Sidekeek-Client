@@ -267,29 +267,78 @@ appControllers.controller('StartController', ['$scope', '$http',
     }
 ]);
 
-appControllers.controller('SignUpController', ['$scope', '$http',
-    function($scope, $http){
+appControllers.controller('SignUpController', ['$scope', '$http', '$window',
+    function($scope, $http, $window){
         $scope.signUp = function(){
             var email = $scope.form.email;
             var pass = $scope.form.password;
             var confirm = $scope.form.confirmation;
             $http({
-                utl: urlAPI + '/sign-up',
                 method: 'POST',
-                header: {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'},
+                url: urlAPI + '/sign-up',
+                headers: {
+                    'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
                 data: $.param({
                     token: token,
                     statTemp: statTemp,
                     email: email,
                     password: pass,
                     confirmation: confirm
-                }),
+                })
             }).success(function(data, status, header, config){
-                console.log(data);
+                console.log(data.message);
+                $window.location.href = '#/confirm';
             }).error(function(data, status, header, config){
                 console.log(data);
             });
         }
+    }
+]);
+
+appControllers.controller('ConfirmationController', ['$scope', '$http', '$timeout', '$window', '$location',
+    function($scope, $http, $timeout, $window, $location){
+        var unique = $location.search().uq;
+        $http({
+            method: 'POST',
+            url: urlAPI + '/confirmation',
+            headers:{
+                'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token: token,
+                uniqueCode: unique
+            })
+        }).success(function(data){
+            console.log(data)
+            var redirectTimeout;
+            var redirect = function() {
+                $window.location.href = '#/home';
+                // alert('redirect');
+            }
+            $timeout.cancel(redirectTimeout);
+            redirectTimeout = $timeout(function() {
+                var timeoutTime = 10000;
+                redirectTimeout = $timeout(redirect, timeoutTime);
+            });
+        }).error(function(data){
+            console.log(data.message);
+        });
+    }
+]);
+
+appControllers.controller('ConfirmController', ['$scope', '$http', '$timeout', '$window',
+    function($scope, $http, $timeout, $window){
+        var redirectTimeout;
+        var redirect = function() {
+            $window.location.href = '#/home';
+            // alert('redirect');
+        }
+        $timeout.cancel(redirectTimeout);
+        redirectTimeout = $timeout(function() {
+            var timeoutTime = 10000;
+            redirectTimeout = $timeout(redirect, timeoutTime);
+        });
     }
 ]);
 
@@ -819,21 +868,6 @@ appControllers.controller('AccountController', ['$scope','$http',
             $scope.citiesData = data;
         }).error(function(data, status, header, config){
             console.log(data.message);
-        });
-    }
-]);
-
-appControllers.controller('ConfirmationController', ['$scope', '$http', '$timeout', '$location',
-    function($scope, $http, $timeout, $location){
-        var redirectTimeout;
-        var redirect = function() {
-            $location.path("/");
-            // alert('redirect');
-        }
-        $timeout.cancel(redirectTimeout);
-        redirectTimeout = $timeout(function() {
-            var timeoutTime = 3000;
-            redirectTimeout = $timeout(redirect, timeoutTime);
         });
     }
 ]);
