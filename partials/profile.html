@@ -12,10 +12,10 @@
                         <img src="assets/img/startbg.jpg" alt=""/>
                     </div>
                     <div class="col-lg-6">
-                        <h3>{{dataProfile.company_name}}</h3>
-                        <p>"{{dataProfile.tagline}}"</p>
+                        <h3>{{dataAccount.company_name}}</h3>
                         <p>{{dataProfile.category_name}}</p>
-                        <p>{{dataProfile.city_name}}, {{dataProfile.province_name}}, Indonesia</p>
+                        <p>{{dataAccount.address}}</p>
+                        <p>{{dataAccount.city_name}}, Indonesia</p>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                             <div class="col-lg-12">
                                 <h4>Company Profile</h4>
                                 <p style="font-size: 11pt; text-align: justify;">
-                                    {{dataProfile.profile_desc}}
+                                    {{dataProfile.company_desc}}
                                 </p>
                             </div>
                         </div>
@@ -57,8 +57,8 @@
                                 </div>
                                 <div class="col-lg-8">
                                     <p>{{dataProduct.product_name}}</p>
+                                    <p>Rp. {{dataProduct.price}}</p>
                                     <p style="font-size: 11pt">{{dataProduct.product_desc}}</p>
-                                    <p>{{dataProduct.price}}</p>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                             <div class="row">
                                 <div class="col-lg-4" ng-repeat="dataPortofolio in dataPortofolios">
                                     <div class="portofolio">
-                                        <img src="assets/img/startbg.jpg" alt="" />
+                                        <img ng-src={{dataPortofolio.img_base64}}>
                                         <div class="desc-porto text-center hvr-pop">
                                             <h4>{{dataPortofolio.title}}</h4>
                                             <p>{{dataPortofolio.description}}</p>
@@ -143,7 +143,7 @@
             <div class="col-lg-8 col-lg-offset-2">
                 <div class="portofolio-details">
                     <span class="fa fa-2x fa-times pull-right" style="color: #fff;" ng-click="close()"></span>
-                    <img src="assets/img/startbg.jpg" alt="" />
+                    <img ng-src={{portoDetail.img_base64}}>
                     <div class="text-center" style="position: absolute; text-align: center; left: 210px; top: 135px;">
                         <h2 style="color: #fff;">{{portoDetail.title}}</h2>
                         <p style="color: #fff;">{{portoDetail.description}}</p>

@@ -57,6 +57,7 @@ appControllers.controller('IndexController', ['$scope', '$http',
             }).success(function(data, status, header, config){
                 localStorage.setItem('session', data.session);
                 sessionStorage.setItem("activeTab", 1);
+                window.location.reload();
                 $('#btn-hide').addClass('hide');
                 $('.dropdown').addClass('hide');
                 $('#img-acc').removeClass('hide');
@@ -81,6 +82,7 @@ appControllers.controller('IndexController', ['$scope', '$http',
                 localStorage.removeItem('emailHost');
                 localStorage.removeItem('session');
                 sessionStorage.removeItem('activeTab');
+                window.location.reload();
                 $('#btn-hide').removeClass('hide');
                 $('.dropdown').removeClass('hide');
                 $('#img-acc').addClass('hide');
@@ -346,6 +348,25 @@ appControllers.controller('ProfileController', ['$scope', '$http',
     function($scope, $http){
         $http({
             method: 'POST',
+            url: urlAPI + '/getAccount',
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token : token,
+                email : localStorage.getItem('emailHost')
+            }),
+        }).
+        success(function(data, status, header, config){
+            $scope.dataAccount = data[0];
+            $scope.img = data[0].img_base64;
+        }).
+        error(function(data, status, header, config){
+            console.log(data.message);
+        });
+
+        $http({
+            method: 'POST',
             url: urlAPI + '/getProfile',
             headers: {
                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -410,6 +431,7 @@ appControllers.controller('ProfileController', ['$scope', '$http',
                     idPortofolio : idPortofolio
                 }),
             }).success(function(data, status, header, config){
+                console.log(data[0]);
                 $scope.portoDetail = data[0];
                 $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
                 $(".overlay-portofolio-details").show();
