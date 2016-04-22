@@ -38,34 +38,6 @@ function curDate(){
 
 appControllers.controller('IndexController', ['$scope', '$http',
     function($scope, $http){
-        $scope.login = function(){
-            var email = $('#emailUser').val();
-            var pass = $('#passwordUser').val();
-            localStorage.setItem('emailHost', email);
-            $http({
-                method: 'POST',
-                url: urlAPI + '/login',
-                headers: {
-                   'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                },
-                data: $.param({
-                    token: token,
-                    email: email,
-    				password: pass,
-    				timestamp: curDate()
-                }),
-            }).success(function(data, status, header, config){
-                localStorage.setItem('session', data.session);
-                sessionStorage.setItem("activeTab", 1);
-                window.location.reload();
-                $('#btn-hide').addClass('hide');
-                $('.dropdown').addClass('hide');
-                $('#img-acc').removeClass('hide');
-            }).error(function(data, status, header, config){
-                console.log(data.message);
-            });
-        }
-
         // logout session
         $scope.logout = function(){
             $http({
@@ -110,6 +82,7 @@ appControllers.controller('IndexController', ['$scope', '$http',
             }else{
                 $('#btn-hide').addClass('hide');
                 $('.dropdown').addClass('hide');
+                $('#loginBtn').addClass('hide');
                 $('#img-acc').removeClass('hide');
             }
         }).error(function(data, status, header, config){
@@ -128,9 +101,11 @@ appControllers.controller('IndexController', ['$scope', '$http',
             }),
         }).
         success(function(data, status, header, config){
+          console.log(data);
             temp = data[0].email + " ";
             namaUser = temp.split("@");
             $scope.namaUser = namaUser[0];
+            console.log(data[0].email);
         }).
         error(function(data, status, header, config){
             console.log(data.message);
@@ -154,6 +129,38 @@ appControllers.controller('IndexController', ['$scope', '$http',
         error(function(data, status, header, config){
             console.log(data.message);
         });
+    }
+]);
+
+appControllers.controller('LogInController', ['$scope','$http', '$window',
+  function($scope,$http,$window){
+    $scope.login = function(){
+      var email = $('#emailUser').val();
+      var pass = $('#passwordUser').val();
+      localStorage.setItem('emailHost', email);
+      $http({
+        method : 'POST',
+        url: urlAPI + '/login',
+        headers: {
+           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        data: $.param({
+            token: token,
+            email: email,
+            password: pass,
+            timestamp: curDate()
+        }),
+    }).
+    success(function(data, status, header, config){
+        localStorage.setItem('session', data.session);
+        sessionStorage.setItem("activeTab", 1);
+        $window.location.reload();
+        alert(data.message);
+    }).
+    error(function(data, status, header, config){
+        console.log(data.message);
+    });
+    }
     }
 ]);
 
