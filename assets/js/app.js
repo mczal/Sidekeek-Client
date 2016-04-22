@@ -26,6 +26,10 @@ sidekeekApp.config(['$routeProvider',
 			'templateUrl' : 'partials/sign-up.html',
 			'controller' : 'SignUpController'
 		}).
+    when('/login', {
+      'templateUrl' : 'partials/login.html',
+      'controller' : 'LogInController'
+    }).
         when('/edit-profile', {
 			'templateUrl' : 'partials/edit-profile.html',
 			'controller' : 'EditProfileController'
