@@ -229,7 +229,7 @@ appControllers.controller('StartController', ['$scope', '$http',
             $http({
                 url : urlAPI +'/firstRegister',
                 method : 'POST',
-                header : {
+                headers: {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                 },
                 data:$.param({
@@ -252,7 +252,7 @@ appControllers.controller('StartController', ['$scope', '$http',
             $http({
                 url : urlAPI + '/secondRegister',
                 method : 'POST',
-                header : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'},
+                headers : {'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'},
                 data : $.param({
                     token : token,
                     cat : categories,
@@ -312,7 +312,7 @@ appControllers.controller('ConfirmationController', ['$scope', '$http', '$timeou
                 uniqueCode: unique
             })
         }).success(function(data){
-            console.log(data)
+            console.log(data);
             var redirectTimeout;
             var redirect = function() {
                 $window.location.href = '#/home';
@@ -598,30 +598,31 @@ appControllers.controller('EditProfileController', ['$scope', '$http', '$compile
         }
 
         $scope.editPortofolio = function(idPortofolio){
-            var typeData = "data:" + $scope.myFile.filetype + ";";
-            var base64Data = "base64," + $scope.myFile.base64;
-            var imgBase64 = typeData + base64Data;
-            $http({
-                method: 'POST',
-                url: urlAPI + '/editPortofolio',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                },
-                data: $.param({
-                    token : token,
-                    sessionCode : localStorage.getItem("session"),
-                    idPortofolio : idPortofolio,
-                    timestamp : curDate(),
-                    title : $scope.portoDetails.title,
-                    description : $("#portoDesc_edit").val(),
-                    imgBase64 : imgBase64
-                }),
-            }).success(function(data, status, header, config){
-                window.location.reload();
-                console.log("berhasil");
-            }).error(function(data, status, header, config){
-                console.log(data.message);
-            });
+            console.log($scope.myFile);
+            // var typeData = "data:" + $scope.myFile.filetype + ";";
+            // var base64Data = "base64," + $scope.myFile.base64;
+            // var imgBase64 = typeData + base64Data;
+            // $http({
+            //     method: 'POST',
+            //     url: urlAPI + '/editPortofolio',
+            //     headers: {
+            //         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            //     },
+            //     data: $.param({
+            //         token : token,
+            //         sessionCode : localStorage.getItem("session"),
+            //         idPortofolio : idPortofolio,
+            //         timestamp : curDate(),
+            //         title : $scope.portoDetails.title,
+            //         description : $("#portoDesc_edit").val(),
+            //         imgBase64 : imgBase64
+            //     }),
+            // }).success(function(data, status, header, config){
+            //     window.location.reload();
+            //     console.log("berhasil");
+            // }).error(function(data, status, header, config){
+            //     console.log(data.message);
+            // });
         }
 
         $scope.editProductDesc = function(idProduct){
@@ -657,14 +658,13 @@ appControllers.controller('EditProfileController', ['$scope', '$http', '$compile
             });
         }
 
-        var idTipeProfile = null;
         $scope.serviceGoodOnClick = function(id){
             if(id==1){
-                idTipeProfile = 1;
+                sessionStorage.setItem('idTipeProfile','1');
                 $(".button_goods").css({'top': '5px', 'box-shadow': 'none', 'outline': 'none'});
                 $(".button_service").css({'top': '', 'box-shadow': '', 'outline': ''});
             }else{
-                idTipeProfile = 2;
+                sessionStorage.setItem('idTipeProfile','2');
                 $(".button_service").css({'top': '5px', 'box-shadow': 'none', 'outline': 'none'});
                 $(".button_goods").css({'top': '', 'box-shadow': '', 'outline': ''});
             }
@@ -681,15 +681,15 @@ appControllers.controller('EditProfileController', ['$scope', '$http', '$compile
                     token : token,
                     sessionCode : localStorage.getItem("session"),
                     timestamp : curDate(),
-                    tipe: idTipeProfile,
+                    tipe: sessionStorage.getItem('idTipeProfile'),
                     title : $scope.dataProfile.title,
                     businessCategory : $("#category").val(),
                     companyDesc : $("#companyDesc").val()
                 }),
             }).success(function(data, status, header, config){
-                window.location.reload();
-                alert(data.message);
-                console.log("success edit profile");
+                // window.location.reload();
+                console.log(localStorage.getItem("session")+" "+curDate()+" "+idTipeProfile+" "+$scope.dataProfile.title+" "+$("#category").val()+" "+$("#companyDesc").val());
+                // console.log('HAI');
             }).error(function(data, status, header, config){
                 console.log(data.message);
             });
@@ -834,6 +834,7 @@ appControllers.controller('AccountController', ['$scope','$http',
             var typeData = "data:" + $scope.fileUpload.filetype + ";";
             var base64Data = "base64," + $scope.fileUpload.base64;
             var imageBase64 = typeData + base64Data;
+            console.log($scope.dataAccount.company_name);
             $http({
                 method: 'POST',
                 url: urlAPI + '/editAccount',
@@ -851,8 +852,8 @@ appControllers.controller('AccountController', ['$scope','$http',
                     address: $("#address").val()
                 })
             }).success(function(data, status, header, config){
-                window.location.reload();
                 console.log("success update account");
+                window.location.reload();
             }).error(function(data, status, header, config){
                 console.log(data.message);
             });
