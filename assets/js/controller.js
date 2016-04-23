@@ -2,7 +2,6 @@ var appControllers = angular.module('appControllers', []);
 var urlAPI = "http://localhost:3000/sideAPIkeek"
 var token = "eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ";
 idTipe = null;
-statTemp = null;
 
 function generateUniqueCode(){
    var text = "";
@@ -101,11 +100,9 @@ appControllers.controller('IndexController', ['$scope', '$http',
             }),
         }).
         success(function(data, status, header, config){
-          console.log(data);
             temp = data[0].email + " ";
             namaUser = temp.split("@");
             $scope.namaUser = namaUser[0];
-            console.log(data[0].email);
         }).
         error(function(data, status, header, config){
             console.log(data.message);
@@ -133,34 +130,33 @@ appControllers.controller('IndexController', ['$scope', '$http',
 ]);
 
 appControllers.controller('LogInController', ['$scope','$http', '$window',
-  function($scope,$http,$window){
-    $scope.login = function(){
-      var email = $('#emailUser').val();
-      var pass = $('#passwordUser').val();
-      localStorage.setItem('emailHost', email);
-      $http({
-        method : 'POST',
-        url: urlAPI + '/login',
-        headers: {
-           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-        },
-        data: $.param({
-            token: token,
-            email: email,
-            password: pass,
-            timestamp: curDate()
-        }),
-    }).
-    success(function(data, status, header, config){
-        localStorage.setItem('session', data.session);
-        sessionStorage.setItem("activeTab", 1);
-        $window.location.reload();
-        alert(data.message);
-    }).
-    error(function(data, status, header, config){
-        console.log(data.message);
-    });
-    }
+    function($scope,$http,$window){
+        $scope.login = function(){
+            var email = $('#emailUser').val();
+            var pass = $('#passwordUser').val();
+            localStorage.setItem('emailHost', email);
+            $http({
+                method : 'POST',
+                url: urlAPI + '/login',
+                headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                data: $.param({
+                    token: token,
+                    email: email,
+                    password: pass,
+                    timestamp: curDate()
+                }),
+            }).
+            success(function(data, status, header, config){
+            localStorage.setItem('session', data.session);
+            sessionStorage.setItem("activeTab", 1);
+            $window.location.reload();
+            }).
+            error(function(data, status, header, config){
+            console.log(data.message);
+            });
+        }
     }
 ]);
 
@@ -232,7 +228,7 @@ appControllers.controller('StartController', ['$scope', '$http',
         }
 
         $scope.submitFirst = function(){
-            localStorage.statTemp = generateUniqueCode();
+            localStorage.setItem('statTemp', generateUniqueCode());
             $http({
                 url : urlAPI +'/firstRegister',
                 method : 'POST',
@@ -242,7 +238,7 @@ appControllers.controller('StartController', ['$scope', '$http',
                 data:$.param({
                     token : token,
                     tipe : idTipe,
-                    statTemp : localStorage.statTemp
+                    statTemp : localStorage.getItem('statTemp')
                 }),
             }).success(function(data, status, header, config){
                 console.log(data.message + " " + idTipe);
@@ -255,7 +251,6 @@ appControllers.controller('StartController', ['$scope', '$http',
             var categories = $scope.form.categories;
             var company = $scope.form.company;
             var thread = $scope.form.thread;
-            statTemp = localStorage.statTemp;
             $http({
                 url : urlAPI + '/secondRegister',
                 method : 'POST',
@@ -263,7 +258,7 @@ appControllers.controller('StartController', ['$scope', '$http',
                 data : $.param({
                     token : token,
                     cat : categories,
-                    statTemp : statTemp,
+                    statTemp : localStorage.getItem('statTemp'),
                     compTitle : company,
                     threadTitle : thread
                 }),
@@ -290,7 +285,7 @@ appControllers.controller('SignUpController', ['$scope', '$http', '$window',
                 },
                 data: $.param({
                     token: token,
-                    statTemp: statTemp,
+                    statTemp: localStorage.getItem('statTemp'),
                     email: email,
                     password: pass,
                     confirmation: confirm
@@ -319,15 +314,17 @@ appControllers.controller('ConfirmationController', ['$scope', '$http', '$timeou
                 uniqueCode: unique
             })
         }).success(function(data){
-            console.log(data);
+            localStorage.setItem('session', data.session);
+            localStorage.setItem('emailHost', data.email);
             var redirectTimeout;
             var redirect = function() {
-                $window.location.href = '#/home';
+                $window.location.href = '#/account';
+                $window.location.reload();
                 // alert('redirect');
             }
             $timeout.cancel(redirectTimeout);
             redirectTimeout = $timeout(function() {
-                var timeoutTime = 10000;
+                var timeoutTime = 5000;
                 redirectTimeout = $timeout(redirect, timeoutTime);
             });
         }).error(function(data){
@@ -345,7 +342,7 @@ appControllers.controller('ConfirmController', ['$scope', '$http', '$timeout', '
         }
         $timeout.cancel(redirectTimeout);
         redirectTimeout = $timeout(function() {
-            var timeoutTime = 10000;
+            var timeoutTime = 5000;
             redirectTimeout = $timeout(redirect, timeoutTime);
         });
     }
@@ -865,7 +862,7 @@ appControllers.controller('AccountController', ['$scope','$http',
                 console.log(data.message);
             });
         }
-
+        console.log(localStorage.getItem('emailHost'));
         $http({
             method: 'POST',
             url: urlAPI + '/getAccount',
@@ -878,6 +875,7 @@ appControllers.controller('AccountController', ['$scope','$http',
             }),
         }).
         success(function(data, status, header, config){
+            console.log(data);
             $scope.dataAccount = data[0];
             $scope.img = data[0].img_base64;
         }).
