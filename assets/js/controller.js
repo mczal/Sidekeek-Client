@@ -1,7 +1,6 @@
 var appControllers = angular.module('appControllers', []);
 var urlAPI = "http://localhost:3000/sideAPIkeek"
 var token = "eyJhbGciOiJIUzI1NiJ9.dXNlcg.2Tbs8TkRGe7ZNu4CeiR5BXpK7-MMQZXc6ZTOLZiBoLQ";
-idTipe = null;
 
 function generateUniqueCode(){
    var text = "";
@@ -37,6 +36,20 @@ function curDate(){
 
 appControllers.controller('IndexController', ['$scope', '$http',
     function($scope, $http){
+
+        temp = localStorage.getItem('emailHost') + " ";
+        namaUser = temp.split("@");
+        $scope.namaUser = namaUser[0];
+
+        $scope.url = "#/start-host";
+
+        $scope.checkHost = function(){
+            sessionStorage.setItem('activeTab', 1);
+            if (localStorage.getItem('tipeMember') == 0) {
+                $scope.url = "#/edit-profile";
+            }
+        }
+
         // logout session
         $scope.logout = function(){
             $http({
@@ -50,9 +63,8 @@ appControllers.controller('IndexController', ['$scope', '$http',
                     sessionCode: localStorage.getItem('session')
                 }),
             }).success(function(data, status, header, config){
-                localStorage.removeItem('emailHost');
-                localStorage.removeItem('session');
-                sessionStorage.removeItem('activeTab');
+                localStorage.clear();
+                sessionStorage.clear();
                 window.location.reload();
                 $('#btn-hide').removeClass('hide');
                 $('.dropdown').removeClass('hide');
@@ -74,7 +86,7 @@ appControllers.controller('IndexController', ['$scope', '$http',
                 sessionCode: localStorage.getItem('session')
             }),
         }).success(function(data, status, header, config){
-            if (data.status == "forbidden") {
+            if (data.status == "forbidden" ) {
                 $('#btn-hide').removeClass('hide');//sign-up button
                 $('.dropdown').removeClass('hide');//login button
                 $('#img-acc').addClass('hide');//profile pict
@@ -90,23 +102,28 @@ appControllers.controller('IndexController', ['$scope', '$http',
 
         $http({
             method: 'POST',
-            url: urlAPI + '/getProfile',
+            url: urlAPI + '/isHost',
             headers: {
-               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             },
             data: $.param({
-                token : token,
-                email : localStorage.getItem('emailHost')
-            }),
-        }).
-        success(function(data, status, header, config){
-            temp = data[0].email + " ";
-            namaUser = temp.split("@");
-            $scope.namaUser = namaUser[0];
-        }).
-        error(function(data, status, header, config){
+                token: token,
+                email: localStorage.getItem('emailHost')
+            })
+        }).success(function(data){
+            localStorage.setItem('tipeMember', data.code);
+            if (data.code == 1) {
+                $("#startHosting").hide();
+            }else{
+                $("#startHosting").show();
+            }
+            console.log(localStorage.getItem('tipeMember'));
+            console.log(data.ket);
+        }).error(function(data){
             console.log(data.message);
         });
+
+
 
         $http({
             method: 'POST',
@@ -139,7 +156,7 @@ appControllers.controller('LogInController', ['$scope','$http', '$window',
                 method : 'POST',
                 url: urlAPI + '/login',
                 headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                 },
                 data: $.param({
                     token: token,
@@ -147,14 +164,13 @@ appControllers.controller('LogInController', ['$scope','$http', '$window',
                     password: pass,
                     timestamp: curDate()
                 }),
-            }).
-            success(function(data, status, header, config){
-            localStorage.setItem('session', data.session);
-            sessionStorage.setItem("activeTab", 1);
-            $window.location.reload();
-            }).
-            error(function(data, status, header, config){
-            console.log(data.message);
+            }).success(function(data, status, header, config){
+                localStorage.setItem('session', data.session);
+                sessionStorage.setItem("activeTab", 1);
+                console.log(data);
+                $window.location.reload();
+            }).error(function(data, status, header, config){
+                console.log(data.message);
             });
         }
     }
@@ -215,8 +231,10 @@ appControllers.controller('StartController', ['$scope', '$http',
             console.log(data.message);
         });
 
+        var idTipe = null;
         $scope.serviceGoodOnClick = function(id){
             if(id==1){
+                sessionStorage.setItem('idTipeProfile','1');
                 idTipe = "goods";
                 $('#button-goods').show();
                 $('#button-service').hide();
@@ -317,11 +335,26 @@ appControllers.controller('ConfirmationController', ['$scope', '$http', '$timeou
             localStorage.setItem('session', data.session);
             localStorage.setItem('emailHost', data.email);
             var redirectTimeout;
-            var redirect = function() {
-                $window.location.href = '#/account';
-                $window.location.reload();
-                // alert('redirect');
+            if (localStorage.getItem('tipeMember') == 0) {
+                var redirect = function(){
+                    $window.location.href = '#/home'
+                    $window.location.reload();
+                }
+            }else{
+                var redirect = function(){
+                    $window.location.href = '#/account-host'
+                    $window.location.reload();
+                }
             }
+            // var redirect = function() {
+            //     if (localStorage.getItem('tipeMember') == 0) {
+            //         $window.location.href = '#/home'
+            //         $window.location.reload();
+            //     }else{
+            //         $window.location.href = '#/account-temp'
+            //         $window.location.reload();
+            //     }
+            // }
             $timeout.cancel(redirectTimeout);
             redirectTimeout = $timeout(function() {
                 var timeoutTime = 5000;
@@ -338,7 +371,7 @@ appControllers.controller('ConfirmController', ['$scope', '$http', '$timeout', '
         var redirectTimeout;
         var redirect = function() {
             $window.location.href = '#/home';
-            // alert('redirect');
+            $window.location.reload();
         }
         $timeout.cancel(redirectTimeout);
         redirectTimeout = $timeout(function() {
@@ -456,8 +489,8 @@ appControllers.controller('ProfileController', ['$scope', '$http',
     }
 ]);
 
-appControllers.controller('EditProfileController', ['$scope', '$http', '$compile', '$rootScope',
-    function($scope, $http, $compile, $rootScope){
+appControllers.controller('EditProfileController', ['$scope', '$http', '$compile', '$rootScope', '$window',
+    function($scope, $http, $compile, $rootScope, $window){
         $scope.setActiveTab = function (activeTab) {
             sessionStorage.setItem("activeTab", activeTab);
         };
@@ -523,9 +556,7 @@ appControllers.controller('EditProfileController', ['$scope', '$http', '$compile
                     imgbase64 : imageBase64
                 }),
             }).success(function(data, status, header, config){
-                window.location.reload();
-                // $(".overlay-portofolio-add").hide();
-                // $(".offcanvas-portofolio").hide();
+                $window.location.reload();
                 console.log("success add new portofolio");
             }).error(function(data, status, header, config){
                 console.log(data.message);
@@ -567,7 +598,7 @@ appControllers.controller('EditProfileController', ['$scope', '$http', '$compile
                             timestamp: curDate()
                         })
                     }).success(function(data, status, header, config){
-                        window.location.reload();
+                        $window.location.reload();
                         console.log(data.message);
                     }).error(function(data, status, header, config){
                         console.log(data.message);
@@ -634,10 +665,6 @@ appControllers.controller('EditProfileController', ['$scope', '$http', '$compile
             var harga = $("#price_"+idProduct).val();
             var productDesc = $("#product_desc_"+idProduct).val();
             var buttonVal = $("#button").val();
-            console.log(namaProduk);
-            console.log(harga);
-            console.log(productDesc);
-            console.log(idProduct);
             $http({
                 method: 'POST',
                 url: urlAPI + '/editProductDesc',
@@ -654,7 +681,7 @@ appControllers.controller('EditProfileController', ['$scope', '$http', '$compile
                     timestamp : curDate()
                 }),
             }).success(function(data, status, header, config){
-                window.location.reload();
+                $window.location.reload();
                 console.log(data.message);
                 console.log("success edit product.");
             }).error(function(data, status, header, config){
@@ -691,8 +718,8 @@ appControllers.controller('EditProfileController', ['$scope', '$http', '$compile
                     companyDesc : $("#companyDesc").val()
                 }),
             }).success(function(data, status, header, config){
-                // window.location.reload();
-                console.log(localStorage.getItem("session")+" "+curDate()+" "+idTipeProfile+" "+$scope.dataProfile.title+" "+$("#category").val()+" "+$("#companyDesc").val());
+                window.location.reload();
+                // console.log(localStorage.getItem("session")+" "+curDate()+" "+sessionStorage.getItem('idTipeProfile')+" "+$scope.dataProfile.title+" "+$("#category").val()+" "+$("#companyDesc").val());
                 // console.log('HAI');
             }).error(function(data, status, header, config){
                 console.log(data.message);
@@ -826,12 +853,48 @@ appControllers.controller('EditProfileController', ['$scope', '$http', '$compile
     }
 ]);
 
-appControllers.controller('AccountController', ['$scope','$http',
-    function($scope, $http){
+appControllers.controller('AccountController', ['$scope','$http', '$window',
+    function($scope, $http, $window){
 
 
         $scope.cancel = function(){
-            window.location.reload();
+            $window.location.reload();
+        }
+
+        $scope.editAccountTemp = function(){
+            var typeData = "data:" + $scope.fileUpload.filetype + ";";
+            var base64Data = "base64," + $scope.fileUpload.base64;
+            var imageBase64 = typeData + base64Data;
+            $http({
+                method: 'POST',
+                url: urlAPI + '/editAccount',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                data: $.param({
+                    token: token,
+                    sessionCode: localStorage.getItem('session'),
+                    companyName: $scope.dataAccount.company_name,
+                    imgbase64: imageBase64,
+                    about: $("#about").val(),
+                    handphone: $scope.dataAccount.handphone,
+                    city: $("#region").val(),
+                    address: $("#address").val()
+                })
+            }).success(function(data, status, header, config){
+                if (localStorage.getItem('tipeMember') == 1) {
+                    console.log("success update account");
+                    $window.location.href="#/edit-profile-host";
+                    $window.location.reload();
+                    sessionStorage.setItem("activeTab", 1);
+                }else{
+                    $window.location.href="#/home";
+                    $window.location.reload();
+                }
+
+            }).error(function(data, status, header, config){
+                console.log(data.message);
+            });
         }
 
         $scope.editAccount = function(){
@@ -857,12 +920,12 @@ appControllers.controller('AccountController', ['$scope','$http',
                 })
             }).success(function(data, status, header, config){
                 console.log("success update account");
-                window.location.reload();
+                $window.location.reload();
             }).error(function(data, status, header, config){
                 console.log(data.message);
             });
         }
-        console.log(localStorage.getItem('emailHost'));
+
         $http({
             method: 'POST',
             url: urlAPI + '/getAccount',
@@ -875,7 +938,6 @@ appControllers.controller('AccountController', ['$scope','$http',
             }),
         }).
         success(function(data, status, header, config){
-            console.log(data);
             $scope.dataAccount = data[0];
             $scope.img = data[0].img_base64;
         }).

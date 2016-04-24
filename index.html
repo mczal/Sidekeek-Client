@@ -60,17 +60,25 @@
 	<!--					<input type="text" placeholder="Search">-->
 	<!--				</div>-->
 					<ul class="nav navbar-nav navbar-right">
-						<li class="page-scroll">
+						<li class="page-scroll" id="discover">
 							<a href="#">Discover</a>
 						</li>
-						<li class="page-scroll">
-							<a href="#/start-host">Start Hosting</a>
+						<li class="page-scroll" id="startHosting">
+							<a ng-href="{{url}}" ng-click="checkHost()">Start Hosting</a>
+						</li>
+						<li class="page-scroll" id="btn-hide">
+							<a href="#/sign-up">Sign Up</a>
+						</li>
+						<li class="page-scroll" id="loginBtn">
+							<a class="btn btn-success" href="#/login" style="vertical-align:-17px; width:80px;" type="button" aria-haspopup="true" aria-expanded="true">
+								Login
+							</a>
 						</li>
 						<li class="page-scroll">
 							<div class="dropdown hide" id="img-acc">
 								<img ng-if="img != null" ng-src={{img}} alt="" class="img-circle img-acc" data-toggle="dropdown">
 								<img ng-if="img == null" src="assets/img/imgacc.png" alt="" class="img-circle img-acc" data-toggle="dropdown">
-							  	<div class="dropdown-menu dropdown-login-acc">
+							<div class="dropdown-menu dropdown-login-acc">
 									<div class="row">
 										<div class="col-lg-12 text-center">
 											<a href="#/profile"><img ng-if="img != null" ng-src={{img}} alt="" class="img-circle img-acc-child"></a>
@@ -88,14 +96,6 @@
 									</div>
 							  	</div>
 							</div>
-						</li>
-						<li class="page-scroll" id="btn-hide">
-							<a href="#/sign-up">Sign Up</a>
-						</li>
-						<li class="page-scroll" id="loginBtn">
-							<a class="btn btn-success" href="#/login" style="vertical-align:-17px; width:80px;" type="button" aria-haspopup="true" aria-expanded="true">
-									Login
-								</a>
 						</li>
 					</ul>
 				</div>

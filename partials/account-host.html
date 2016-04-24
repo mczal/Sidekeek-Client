@@ -1,0 +1,53 @@
+<div class="container content">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>My Account</h1>
+            <hr>
+        </div>
+    </div>
+    <div style="margin-top:10px">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="upload">
+                    <div class="container-fluid">
+                        <div class="text-center" style="margin-top:10px">
+                            <div ng-show="img != null" class="box-account"><img width="100%" ng-src={{img}}></div>
+                            <input type="file" id="fileUploadImg" class="inputfile inputfile-1" ng-model="fileUpload" maxsize="2000" base-sixty-four-input/>
+                            <label for="fileUploadImg"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>
+                        </div>
+                        <label>max. size file 2MB</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <label for="">Company Name</label>
+                    <input type="text" class="form-control" ng-model="dataAccount.company_name">
+                </div>
+                <div class="form-group">
+                    <label for="">About</label>
+                    <textarea type="text" class="form-control" rows="10" id="about">{{dataAccount.about}}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="">No. Handphone</label>
+                    <input type="text" class="form-control" ng-model="dataAccount.handphone">
+                </div>
+                <label for="">City</label>
+                <select class="form-group form-control" id="region">
+                    <option ng-repeat="cities in citiesData" value="{{cities.id_city}}" ng-if="dataAccount.city_name == cities.city_name" selected="selected">{{cities.city_name}}</option>
+                    <option ng-repeat="cities in citiesData" value="{{cities.id_city}}" ng-if="dataAccount.city_name != cities.city_name">{{cities.city_name}}</option>
+                </select>
+                <div class="form-group">
+                    <label for="">Address</label>
+                    <textarea type="text" class="form-control" rows="2" id="address">{{dataAccount.address}}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="button" class="btn btn-success btn-lg pull-right btn-edit-account" ng-click="editAccountTemp()">Save Changes</button>
+        </div>
+    </div>
+</div>
+<script src="assets/js/custom-file-input.js"></script>

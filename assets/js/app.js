@@ -15,7 +15,7 @@ sidekeekApp.config(['$routeProvider',
             'controller': 'HomeController'
         }).
 		when('/start-host', {
-			'templateUrl' : 'partials/start.html',
+			'templateUrl' : 'partials/start-host.html',
 			'controller' : 'StartController'
 		}).
 		when('/next-start', {
@@ -26,10 +26,14 @@ sidekeekApp.config(['$routeProvider',
 			'templateUrl' : 'partials/sign-up.html',
 			'controller' : 'SignUpController'
 		}).
-    when('/login', {
-      'templateUrl' : 'partials/login.html',
-      'controller' : 'LogInController'
-    }).
+        when('/login', {
+          'templateUrl' : 'partials/login.html',
+          'controller' : 'LogInController'
+        }).
+        when('/edit-profile-host', {
+			'templateUrl' : 'partials/edit-profile-host.html',
+			'controller' : 'EditProfileController'
+		}).
         when('/edit-profile', {
 			'templateUrl' : 'partials/edit-profile.html',
 			'controller' : 'EditProfileController'
@@ -40,6 +44,10 @@ sidekeekApp.config(['$routeProvider',
         }).
         when('/account', {
             'templateUrl' : 'partials/account.html',
+            'controller' : 'AccountController'
+        }).
+        when('/account-host', {
+            'templateUrl' : 'partials/account-host.html',
             'controller' : 'AccountController'
         }).
         when('/confirmation', {
