@@ -117,8 +117,6 @@ appControllers.controller('IndexController', ['$scope', '$http',
             }else{
                 $("#startHosting").show();
             }
-            console.log(localStorage.getItem('tipeMember'));
-            console.log(data.ket);
         }).error(function(data){
             console.log(data.message);
         });
@@ -713,7 +711,7 @@ appControllers.controller('EditProfileController', ['$scope', '$http', '$compile
                     sessionCode : localStorage.getItem("session"),
                     timestamp : curDate(),
                     tipe: sessionStorage.getItem('idTipeProfile'),
-                    title : $scope.dataProfile.title,
+                    title : $('#title').val(),
                     businessCategory : $("#category").val(),
                     companyDesc : $("#companyDesc").val()
                 }),

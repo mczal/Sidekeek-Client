@@ -19,7 +19,7 @@
                         </select>
                         <div class="form-group form-group-xl">
                             <label for="">Title</label>
-                            <input type="text" class="form-control" ng-model="dataProfile.title">
+                            <input type="text" class="form-control" ng-model="dataProfile.title" id="title">
                         </div>
                         <div class="form-group">
                             <label for="">Company Description</label>
@@ -77,7 +77,7 @@
                     <div class="add-produk"></div>
                     <div class="row">
                         <div class="col-lg-12 text-center">
-                            <div class="circle" style="margin: 0 auto; margin-bottom:110px;" ng-click="addProduk()" id="add_produk">
+                            <div class="circle" ng-click="addProduk()" id="add_produk">
                                 <img src="assets/img/add.png" alt="" />
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <div class="circle" ng-click="addPorto()">
+                                    <div class="circle" style="margin-top: 35px" ng-click="addPorto()">
                                         <img src="assets/img/add.png" alt="" />
                                     </div>
                                 </div>
