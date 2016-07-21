@@ -38,15 +38,13 @@
 
 	<body id="page-top">
 		<!-- Navigation -->
-		<nav class="navbar navbar-default navbar-fixed-top" ng-controller="IndexController">
+		<nav class="navbar navbar-default navbar-fixed-top navbar-custom" ng-controller="IndexController">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
+
 				<div class="navbar-header page-scroll">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
+						<span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
 					</button>
 					<a class="navbar-brand" href="#/home">
 						<span style="padding-right:10px; padding-left:10px; vertical-align: 2px;"><img src="assets/img/sidekeek.png" width="35px" alt=""></span>
@@ -56,10 +54,7 @@
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	<!--				<div class="search">-->
-	<!--					<input type="text" placeholder="Search">-->
-	<!--				</div>-->
-					<ul class="nav navbar-nav navbar-right">
+					<ul class="nav navbar-nav navbar-right text-center">
 						<li class="page-scroll" id="discover">
 							<a href="#">Discover</a>
 						</li>
@@ -70,7 +65,7 @@
 							<a href="#/sign-up">Sign Up</a>
 						</li>
 						<li class="page-scroll" id="loginBtn">
-							<a class="btn btn-success" href="#/login" style="vertical-align:-17px; width:80px;" type="button" aria-haspopup="true" aria-expanded="true">
+							<a class="btn btn-success loginBtn" href="#/login" type="button" aria-haspopup="true" aria-expanded="true">
 								Login
 							</a>
 						</li>
@@ -108,6 +103,7 @@
 		<div id="freeze" ng-view></div>
 
 		<script src="bower_components/jquery/dist/jquery.js"></script>
+		<script src="bower_components/jquery-easing/jquery.easing.min.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 		<script src="bower_components/angular/angular.js"></script>
 		<script src="bower_components/angular-route/angular-route.js"></script>
@@ -117,7 +113,6 @@
 		<script src="bower_components/angular-img-cropper/dist/angular-img-cropper.min.js"></script>
 		<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
 		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-		<script src="bower_components/jquery-easing/jquery.easing.js"></script>
 
 		<script src="assets/js/app.js"></script>
 		<script src="assets/js/controller.js"></script>

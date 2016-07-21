@@ -542,12 +542,6 @@ footer{
 	top:15px;
 }
 
-.search{
-	display: inline-block;
-	margin-left: 150px;
-	margin-right:150px;
-}
-
 .search input{
 	width: 473px;
 }
@@ -728,7 +722,9 @@ footer .footer-above{
 }
 
 .background{
-    background-image: url(../img/discoverbg.jpg);
+    background-image: url(../img/1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     position:absolute;
     width:100%;
     height: 100%; /* Change to the height you need */
@@ -1027,11 +1023,19 @@ footer .footer-above{
 }
 
 .portofolio-details{
-    transform: translateY(35%);
+    transform: translateY(40%);
+    width: 100%;
+    height: 400px;
+    background-color: #fcfcfc;
+    border-radius: 5px;
 }
 
 .portofolio-details img{
-    width: 100%;
+    width: 250px;
+}
+
+.portofolio-details p{
+    font-size: 11pt;
 }
 
 .detail-portofolio{
@@ -1135,4 +1139,115 @@ footer .footer-above{
 }
 .cancel_button:focus {
 	outline: none;
+}
+
+.offcanvas{
+	background: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 1049;
+	display: none;
+}
+
+.navbar-toggle{
+    color:#fff;
+}
+
+.loginBtn{
+    width:80px;
+    vertical-align:-17px;
+}
+
+.navbar-right{
+    background-color: #333;
+    border-top: none;
+}
+
+.navbar-default .navbar-collapse{
+    border-color: #333;
+}
+/*--------------RESPONSIVE----------------*/
+
+ /* xs */
+@media(max-width: 768px){
+    .navbar-toggle{
+        margin-top: 21px;
+    }
+
+    .desc h1{
+        font-size: 3em;
+    }
+
+    .form-control-home{
+        width: 100%;
+        left: 0;
+        margin-bottom: 5px;
+    }
+
+    .search input{
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .search button{
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .btn-search{
+        display: block;
+    }
+
+    .navbar .navbar-nav{
+        position: relative;
+    	right:0px !important;
+    	top:0px !important;
+    }
+
+    .loginBtn{
+        width: 100%;
+    }
+
+    .navbar-collapse .page-scroll{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .navbar-collapse ul{
+        padding-bottom: 10px;
+    }
+}
+
+/* sm */
+@media(min-width: 768px) and (max-width: 992px){
+    .desc h1{
+        font-size: 3em;
+    }
+
+    .search input{
+        margin-top: 10px;
+        width: 607px;
+    }
+}
+
+/* md */
+@media(min-width: 992px) and (max-width: 1200px){
+    .desc h1{
+        font-size: 3.5em;
+    }
+
+    .search input{
+        margin-top: 10px;
+        width: 767px;
+    }
+
+    .form-control-home{
+        width: 283px;
+    }
+}
+
+/* lg */
+@media(min-width: 1200px){
+
 }

@@ -813,6 +813,32 @@ appControllers.controller('EditProfileController', ['$scope', '$http', '$compile
             console.log(data.message);
         });
 
+        $http({
+            method: 'POST',
+            url: urlAPI + '/getProductsEager',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token: token,
+                sessionCode: localStorage.getItem('session')
+            })
+        }).success(function(data, status, header, config){
+            $scope.dataProductEager = data;
+            // console.log($scope.dataProductEager.images.length);
+            // for (var i = 0; i < $scope.dataProductEager.images.length; i++) {
+            //     if ($scope.dataProductEager.images[i].id_product == $scope.dataProductEager.product[i].id_product) {
+            //         console.log($scope.dataProductEager.images[i].id_product);
+            //         $scope.data = angular.extend({},$scope.dataProductEager.images[i],$scope.dataProductEager.product[i]);
+            //     }
+            // }
+            // console.log($scope.dataProductEager.images[0].id_product);
+            console.log(data);
+            // console.log($scope.data);
+        }).error(function(data, status, header, config){
+            console.log(data.message);
+        });
+
         $scope.addProduk = function (){
             produk =[ '<div class="row">',
             '                            <div class="col-lg-4">',
