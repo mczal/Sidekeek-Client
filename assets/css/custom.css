@@ -617,15 +617,13 @@ footer{
 }
 
 .btn-start-next{
-    position: absolute;
-    right: 350px;
-    bottom: 150px;
-	width: 150px;
+    margin-top: 50px;
+	width: 200px;
 }
 
 .btn-next-start{
-    margin-top: 160px;
-	width: 150px;
+    margin-top: 100px;
+	width: 200px;
 }
 
 .btn-success {
@@ -1217,6 +1215,48 @@ footer .footer-above{
     .navbar-collapse ul{
         padding-bottom: 10px;
     }
+
+    .footer-home{
+        top:700px;
+    }
+
+    .footer-col h3{
+        font-size: 1.8em;
+    }
+
+    .footer-col h4{
+        font-size: 1.1em;
+    }
+
+    .footer-col ul{
+        margin-bottom: 30px;
+    }
+
+    .btn-start-next{
+        margin-top: 25px;
+    	width: 200px;
+    }
+
+    .btn-next-start{
+    	width: 100%;
+    }
+
+    .desc-start{
+    	margin-top: 70px;
+    	margin-bottom: 60px;
+    }
+
+    .btn-edit-account{
+        margin-top: 25px;
+        margin-bottom: 100px;
+        width: 100%;
+    }
+
+    .btn-edit-profile{
+        margin-top: 25px;
+        margin-bottom: 100px;
+        width: 100%;
+    }
 }
 
 /* sm */
@@ -1228,6 +1268,43 @@ footer .footer-above{
     .search input{
         margin-top: 10px;
         width: 607px;
+    }
+
+    .footer-home{
+        top:500px;
+    }
+
+    .footer-col h3{
+        font-size: 1.8em;
+    }
+
+    .footer-col h4{
+        font-size: 1.1em;
+    }
+
+    .footer-col ul{
+        margin-bottom: 30px;
+    }
+
+    .btn-start-next{
+        margin-top: 30px;
+    	width: 200px;
+    }
+
+    .btn-next-start{
+    	width: 100%;
+    }
+
+    .btn-edit-account{
+        margin-top: 25px;
+        margin-bottom: 100px;
+        width: 100%;
+    }
+
+    .btn-edit-profile{
+        margin-top: 25px;
+        margin-bottom: 100px;
+        width: 100%;
     }
 }
 
@@ -1244,6 +1321,23 @@ footer .footer-above{
 
     .form-control-home{
         width: 283px;
+    }
+
+    .btn-start-next{
+        margin-top: 30px;
+    	width: 200px;
+    }
+
+    .btn-edit-account{
+        margin-top: 25px;
+        margin-bottom: 100px;
+        width: 150px;
+    }
+
+    .btn-edit-profile{
+        margin-top: 25px;
+        margin-bottom: 100px;
+        width: 150px;
     }
 }
 

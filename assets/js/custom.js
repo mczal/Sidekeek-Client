@@ -4,7 +4,7 @@
     "use strict"; // Start of use strict
 
     // jQuery for page scrolling feature - requires jQuery Easing plugin
-    $('.page-scroll a').click(function(event) {
+    $(".page-scroll a").click(function(event) {
         $('.navbar-toggle:visible').click();
     });
 
