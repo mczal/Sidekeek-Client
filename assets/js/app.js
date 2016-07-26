@@ -58,6 +58,10 @@ sidekeekApp.config(['$routeProvider',
             'templateUrl' : 'partials/confirm.html',
             'controller' : 'ConfirmController'
         }).
+        when('/discover', {
+            'templateUrl' : 'partials/discover.html',
+            'controller' : 'DiscoverController'
+        }).
         otherwise({
             'redirectTo': '/home'
         });

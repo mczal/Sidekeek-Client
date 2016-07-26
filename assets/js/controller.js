@@ -985,3 +985,9 @@ appControllers.controller('AccountController', ['$scope','$http', '$window',
         });
     }
 ]);
+
+appControllers.controller('DiscoverController', [ '$scope', '$http',
+    function($scope, $http){
+
+    }
+]);
