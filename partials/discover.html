@@ -6,99 +6,140 @@
                 <p>Seek what you need</p>
             </div>
         </div>
+        <div class="row">
+    		<div class="col-lg-8 col-lg-offset-2 text-center">
+    			<div class="search-discover">
+    				<div class="btn-search-discover">
+    					<select name="selectedData" class="form-control-discover input-lg">
+    						<option value="">---Please select---</option> <!-- not selected / blank option -->
+    				      	<option value="goods">Goods</option>
+    				      	<option value="service">Service</option>
+    				    </select>
+    					<select class="form-control-discover input-lg">
+    						<option style="display:none;">Categories</option>
+    						<option ng-repeat="categories in categoriesData" value="{{categories.id_cat}}">{{categories.category_name}}</option>
+    					</select>
+    					<select class="form-control-discover input-lg">
+    						<option style="display:none;">Location</option>
+    						<option ng-repeat="province in provinceData" value="{{province.id_province}}">{{province.province_name}}</option>
+    					</select>
+                        <input class="input-lg" type="text" placeholder="ex. Creative">
+                        <button class="btn btn-success btn-lg" style="vertical-align:0px">Search</button>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
     </div>
 </div>
 <div class="container" style="margin-top: 50px;">
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="thumbnail">
-                <img src="assets/img/test2.jpg" alt="...">
-                <div class="caption">
-                    <h3>Title</h3>
-                    <h5>Company Name</h5>
-                    <p>Description</p>
+            <a href="#">
+                <div class="thumbnail">
+                    <img src="assets/img/test2.jpg" alt="...">
+                    <div class="caption">
+                        <h3>Title</h3>
+                        <h5>Company Name</h5>
+                        <p>Description</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="thumbnail">
-                <img src="assets/img/test2.jpg" alt="...">
-                <div class="caption">
-                    <h3>Title</h3>
-                    <h5>Company Name</h5>
-                    <p>Description</p>
+            <a href="#">
+                <div class="thumbnail">
+                    <img src="assets/img/test2.jpg" alt="...">
+                    <div class="caption">
+                        <h3>Title</h3>
+                        <h5>Company Name</h5>
+                        <p>Description</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="thumbnail">
-                <img src="assets/img/test2.jpg" alt="...">
-                <div class="caption">
-                    <h3>Title</h3>
-                    <h5>Company Name</h5>
-                    <p>Description</p>
+            <a href="#">
+                <div class="thumbnail">
+                    <img src="assets/img/test2.jpg" alt="...">
+                    <div class="caption">
+                        <h3>Title</h3>
+                        <h5>Company Name</h5>
+                        <p>Description</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="thumbnail">
-                <img src="assets/img/test2.jpg" alt="...">
-                <div class="caption">
-                    <h3>Title</h3>
-                    <h5>Company Name</h5>
-                    <p>Description</p>
+            <a href="#">
+                <div class="thumbnail">
+                    <img src="assets/img/test2.jpg" alt="...">
+                    <div class="caption">
+                        <h3>Title</h3>
+                        <h5>Company Name</h5>
+                        <p>Description</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="thumbnail">
-                <img src="assets/img/test2.jpg" alt="...">
-                <div class="caption">
-                    <h3>Title</h3>
-                    <h5>Company Name</h5>
-                    <p>Description</p>
+            <a href="#">
+                <div class="thumbnail">
+                    <img src="assets/img/test2.jpg" alt="...">
+                    <div class="caption">
+                        <h3>Title</h3>
+                        <h5>Company Name</h5>
+                        <p>Description</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="thumbnail">
-                <img src="assets/img/test2.jpg" alt="...">
-                <div class="caption">
-                    <h3>Title</h3>
-                    <h5>Company Name</h5>
-                    <p>Description</p>
+            <a href="#">
+                <div class="thumbnail">
+                    <img src="assets/img/test2.jpg" alt="...">
+                    <div class="caption">
+                        <h3>Title</h3>
+                        <h5>Company Name</h5>
+                        <p>Description</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="thumbnail">
-                <img src="assets/img/test2.jpg" alt="...">
-                <div class="caption">
-                    <h3>Title</h3>
-                    <h5>Company Name</h5>
-                    <p>Description</p>
+            <a href="#">
+                <div class="thumbnail">
+                    <img src="assets/img/test2.jpg" alt="...">
+                    <div class="caption">
+                        <h3>Title</h3>
+                        <h5>Company Name</h5>
+                        <p>Description</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="thumbnail">
-                <img src="assets/img/test2.jpg" alt="...">
-                <div class="caption">
-                    <h3>Title</h3>
-                    <h5>Company Name</h5>
-                    <p>Description</p>
+            <a href="#">
+                <div class="thumbnail">
+                    <img src="assets/img/test2.jpg" alt="...">
+                    <div class="caption">
+                        <h3>Title</h3>
+                        <h5>Company Name</h5>
+                        <p>Description</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="thumbnail">
-                <img src="assets/img/test2.jpg" alt="...">
-                <div class="caption">
-                    <h3>Title</h3>
-                    <h5>Company Name</h5>
-                    <p>Description</p>
+            <a href="#">
+                <div class="thumbnail">
+                    <img src="assets/img/test2.jpg" alt="...">
+                    <div class="caption">
+                        <h3>Title</h3>
+                        <h5>Company Name</h5>
+                        <p>Description</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>
