@@ -520,11 +520,11 @@ footer .footer-below {
 
 footer{
 	width: 100%;
-	bottom: 0;
 }
 
 .footer-home{
     position: absolute;
+    bottom: -60px;
 }
 
 .content{
