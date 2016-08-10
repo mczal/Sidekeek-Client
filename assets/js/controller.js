@@ -991,3 +991,9 @@ appControllers.controller('DiscoverController', [ '$scope', '$http',
 
     }
 ]);
+
+appControllers.controller('FAQController', ['$scope', '$http',
+    function($scope, $http){
+        
+    }
+]);

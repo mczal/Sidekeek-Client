@@ -522,10 +522,10 @@ footer{
 	width: 100%;
 }
 
-.footer-home{
-    position: absolute;
-    bottom: -60px;
-}
+/*.footer-home{
+    position: relative;
+    height: 100%;
+}*/
 
 .content{
 	margin-top: 100px;
@@ -548,10 +548,6 @@ footer{
 
 .btn-search{
 	display: inline-block;
-}
-
-.btn-group{
-	position: absolute;
 }
 
 .dropdown-menu-login p{
@@ -596,7 +592,7 @@ footer{
 }
 
 .form-control-discover{
-    width: 247px;
+    width: 188px;
     display: inline-block;
 }
 
@@ -738,11 +734,11 @@ footer .footer-above{
     background-image: url(../img/1.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    position:absolute;
+    position:relative;
     width:100%;
-    height: 100%; /* Change to the height you need */
-    top:0px;
-    left:0px;
+    height: 600px; /* Change to the height you need */
+    /*top:0px;
+    left:0px;*/
 }
 
 .edit-profile{
@@ -1187,7 +1183,7 @@ footer .footer-above{
     background-size: cover;
     position: relative;
     width: 100%;
-    height: 350px;
+    height: 300px;
     margin-top: 75px;
 }
 
@@ -1204,6 +1200,22 @@ footer .footer-above{
 
 .caption p{
     font-size: 11pt;
+}
+
+.sidebar-affix a{
+    color: #000;
+}
+
+.sidebar-affix a:first-child{
+    margin-top: 40px;
+}
+
+.border-green{
+    border-top: 6px solid #5cb85c;
+}
+
+.border-blue{
+    border-top: 6px solid #207CC7;
 }
 
 /*--------------RESPONSIVE----------------*/
@@ -1322,6 +1334,10 @@ footer .footer-above{
         margin-top: 10px;
         width: 100%;
     }
+
+    .background{
+        height: 700px;
+    }
 }
 
 /* sm */
@@ -1385,6 +1401,10 @@ footer .footer-above{
         margin-top: 10px;
         width: 719px;
     }
+
+    .background{
+        height: 450px;
+    }
 }
 
 /* md */
@@ -1427,6 +1447,10 @@ footer .footer-above{
     .search-discover button{
         margin-top: 10px;
         width: 748px;
+    }
+
+    .background{
+        height: 500px;
     }
 }
 

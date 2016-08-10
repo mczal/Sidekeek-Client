@@ -1,0 +1,50 @@
+<div class="top-background">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>Goods Catalogue</h1>
+                <p>Seek what you need</p>
+            </div>
+        </div>
+        <div class="row">
+            
+    		<div class="col-lg-8 col-lg-offset-2 text-center">
+    			<div class="search-discover">
+    				<div class="btn-search-discover">
+    					<select name="selectedData" class="form-control-discover input-lg">
+    						<option value="">---Please select---</option> <!-- not selected / blank option -->
+    				      	<option value="goods">Goods</option>
+    				      	<option value="service">Service</option>
+    				    </select>
+    					<select class="form-control-discover input-lg">
+    						<option style="display:none;">Categories</option>
+    						<option ng-repeat="categories in categoriesData" value="{{categories.id_cat}}">{{categories.category_name}}</option>
+    					</select>
+    					<select class="form-control-discover input-lg">
+    						<option style="display:none;">Location</option>
+    						<option ng-repeat="province in provinceData" value="{{province.id_province}}">{{province.province_name}}</option>
+    					</select>
+                        <input class="input-lg" type="text" placeholder="ex. Creative">
+                        <button class="btn btn-success btn-lg" style="vertical-align:0px">Search</button>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="page-header" id="test">Test Affix</h1>
+        </div>
+        <div class="col-lg-3">
+            <div class="affix sidebar-affix">
+                <ul class="nav">
+                    <li class="active">
+                        <a href="#test">test</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

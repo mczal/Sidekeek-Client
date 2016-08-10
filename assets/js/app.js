@@ -62,6 +62,10 @@ sidekeekApp.config(['$routeProvider',
             'templateUrl' : 'partials/discover.html',
             'controller' : 'DiscoverController'
         }).
+        when('/faq', {
+            'templateUrl' : 'partials/FAQ.html',
+            'controller' : 'FAQController'
+        }).
         otherwise({
             'redirectTo': '/home'
         });

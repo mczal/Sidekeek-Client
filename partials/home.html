@@ -1,33 +1,34 @@
-<div class="background"></div>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12 text-center">
-			<div class="desc">
-				<h1>Business-to-Business Marketplace</h1>
-				<p>Temukan berbagai supplier barang dan jasa, hanya disini.</p>
+<div class="background">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 text-center">
+				<div class="desc">
+					<h1>Business-to-Business Marketplace</h1>
+					<p>Temukan berbagai supplier barang dan jasa, hanya disini.</p>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-12 text-center">
-			<div class="search">
-				<div class="btn-search">
-					<select name="selectedData" class="form-control-home input-lg">
-						<option value="">---Please select---</option> <!-- not selected / blank option -->
-				      	<option value="goods">Goods</option>
-				      	<option value="service">Service</option>
-				    </select>
-					<select class="form-control-home input-lg">
-						<option style="display:none;">Categories</option>
-						<option ng-repeat="categories in categoriesData" value="{{categories.id_cat}}">{{categories.category_name}}</option>
-					</select>
-					<select class="form-control-home input-lg">
-						<option style="display:none;">Location</option>
-						<option ng-repeat="province in provinceData" value="{{province.id_province}}">{{province.province_name}}</option>
-					</select>
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<div class="search">
+					<div class="btn-search">
+						<select name="selectedData" class="form-control-home input-lg">
+							<option value="">---Please select---</option> <!-- not selected / blank option -->
+					      	<option value="goods">Goods</option>
+					      	<option value="service">Service</option>
+					    </select>
+						<select class="form-control-home input-lg">
+							<option style="display:none;">Categories</option>
+							<option ng-repeat="categories in categoriesData" value="{{categories.id_cat}}">{{categories.category_name}}</option>
+						</select>
+						<select class="form-control-home input-lg">
+							<option style="display:none;">Location</option>
+							<option ng-repeat="province in provinceData" value="{{province.id_province}}">{{province.province_name}}</option>
+						</select>
+					</div>
+					<input class="input-lg" type="text" placeholder="ex. Creative">
+					<button class="btn btn-success btn-lg" style="vertical-align:0px">Search</button>
 				</div>
-				<input class="input-lg" type="text" placeholder="ex. Creative">
-				<button class="btn btn-success btn-lg" style="vertical-align:0px">Search</button>
 			</div>
 		</div>
 	</div>
