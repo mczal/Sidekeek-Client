@@ -1204,10 +1204,35 @@ footer .footer-above{
 
 .sidebar-affix a{
     color: #000;
+    font-family: "Lato-Regular";
 }
 
-.sidebar-affix a:first-child{
+.sidebar-affix li:active{
+    color: #5cb85c;
+}
+
+.sidebar-affix li:hover,
+.sidebar-affix p:hover{
+    cursor: pointer;
+    color: #555;
+}
+
+.sidebar-affix h4{
     margin-top: 40px;
+}
+
+.sidebar-affix > ul > li > a{
+    padding: 0;
+}
+
+.sidebar-affix > ul > li > a:hover{
+    background-color: transparent;
+}
+
+.content-faq p{
+    font-size: 11pt;
+    text-align: justify;
+    margin-bottom: 50px;
 }
 
 .border-green{
@@ -1216,6 +1241,11 @@ footer .footer-above{
 
 .border-blue{
     border-top: 6px solid #207CC7;
+}
+
+.affix{
+    position: fixed;
+    top: 60px;
 }
 
 /*--------------RESPONSIVE----------------*/

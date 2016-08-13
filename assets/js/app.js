@@ -4,7 +4,8 @@ var sidekeekApp = angular.module('sidekeekApp', [
 	'ngRoute',
     'ngSanitize',
     'naif.base64',
-    'angular-img-cropper'
+    'angular-img-cropper',
+    'mgcrea.bootstrap.affix'
 ]);
 
 sidekeekApp.config(['$routeProvider',

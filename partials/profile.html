@@ -74,7 +74,7 @@
                                         <div class="desc-porto text-center hvr-pop">
                                             <h4>{{dataPortofolio.title}}</h4>
                                             <p>{{dataPortofolio.description}}</p>
-                                            <button type="button" class="btn btn-success" ng-click="viewPortoDetails(dataPortofolio.id_portofolio)">More</button>
+                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#viewPorto" ng-click="viewPortoDetails(dataPortofolio.id_portofolio)">More</button>
                                         </div>
                                     </div>
                                 </div>
@@ -94,16 +94,17 @@
 					<h3>About Us</h3>
 					<a href="#"><h4 style="padding-bottom:8px">What is Sidekeek?</h4></a>
 					<a href="#"><h4 style="padding-bottom:8px">How it Works</h4></a>
-					<a href="#"><h4 style="padding-bottom:8px">Feedback</h4></a>
+                    <a href="#profile" ng-click="contactus()"><h4 style="padding-bottom:8px">Contact Us</h4></a>
+					<a href="#profile" ng-click="feedback()"><h4 style="padding-bottom:8px">Feedback</h4></a>
 				</div>
 				<div class="footer-col col-md-6 text-center">
 					<h3>Help</h3>
 					<ul style="padding:0">
-						<a href="#"><li>FAQ</li></a>
+						<a href="#faq"><li>FAQ</li></a>
 						<a href="#"><li>Terms of Use</li></a>
 						<a href="#"><li>Rules and Regulations</li></a>
 						<a href="#"><li>Privacy Policy</li></a>
-						<a href="#"><li>Support</li></a>
+						<a href="#profile" ng-click="support()"><li>Support</li></a>
 					<ul>
 				</div>
 			</div>
@@ -137,46 +138,101 @@
 		</div>
 	</div>
 </footer>
-<div class="overlay-portofolio-details">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <div class="portofolio-details">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <span class="fa fa-2x fa-times" style="color: #cecece; margin-left: 3px;" ng-click="close()"></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="text-center col-lg-12">
-                            <img ng-src={{portoDetail.img_base64}}>
-                            <div class="text-center">
-                                <h3 style="color: #000;">{{portoDetail.title}}</h3>
-                                <p style="color: #000;">{{portoDetail.description}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<script type="text/ng-template" id="contactus.html">
+	<div class="modal-header">
+        <h3 class="modal-title">Contact Us</h3>
     </div>
-    <input class="hide" autofocus ng-keyup="escape($event.keyCode)">
-</div>
+    <div class="modal-body">
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label for="inputName" class="col-sm-2 control-label">Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="inputName" placeholder="Name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputEmail" class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-10">
+					<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputSubject" class="col-sm-2 control-label">Subject</label>
+				<div class="col-sm-10">
+					<input type="email" class="form-control" id="inputSubject" placeholder="Email">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputMessage" class="col-sm-2 control-label">Message</label>
+				<div class="col-sm-10">
+					<textarea type="text" col="5" class="form-control" id="inputMessage" placeholder="Message"></textarea>
+				</div>
+			</div>
+		</form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button">Send</button>
+    </div>
+</script>
 
-<!-- <div class="container content">
-    <div class="latar container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2>Company Profle</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <img src="assets/img/startbg.jpg" alt=""/>
-            </div>
-            <div class="col-lg-6">
-                <h1>SONY Record Co.</h1>
-            </div>
-        </div>
+<script type="text/ng-template" id="feedback.html">
+	<div class="modal-header">
+        <h3 class="modal-title">Feedback</h3>
     </div>
-</div> -->
+    <div class="modal-body">
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="inputName" placeholder="Name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputPassword3" class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-10">
+					<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputPassword3" class="col-sm-2 control-label">Message</label>
+				<div class="col-sm-10">
+					<textarea type="text" col="5" class="form-control" id="inputMessage" placeholder="Message"></textarea>
+				</div>
+			</div>
+		</form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button">Send</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="support.html">
+	<div class="modal-header">
+        <h3 class="modal-title">Support</h3>
+    </div>
+    <div class="modal-body">
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="inputName" placeholder="Name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputPassword3" class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-10">
+					<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputPassword3" class="col-sm-2 control-label">Message</label>
+				<div class="col-sm-10">
+					<textarea type="text" rows="5" class="form-control" id="inputMessage" placeholder="Message"></textarea>
+				</div>
+			</div>
+		</form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button">Send</button>
+    </div>
+</script>

@@ -174,8 +174,8 @@ appControllers.controller('LogInController', ['$scope','$http', '$window',
     }
 ]);
 
-appControllers.controller('HomeController',['$scope','$http',
-    function($scope,$http){
+appControllers.controller('HomeController',['$scope','$http','$uibModal',
+    function($scope,$http,$uibModal){
         $http({
             method: 'POST',
             url: urlAPI + '/getCategories',
@@ -205,6 +205,22 @@ appControllers.controller('HomeController',['$scope','$http',
         }).error(function(data, status, header, config){
             console.log(data.message);
         });
+
+        $scope.contactus = function (size) {
+            var modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: 'contactus.html',
+              size: size
+            });
+        };
+
+        $scope.feedback = function (size) {
+            var modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: 'feedback.html',
+              size: size
+            });
+        };
     }
 ]);
 
@@ -379,8 +395,8 @@ appControllers.controller('ConfirmController', ['$scope', '$http', '$timeout', '
     }
 ]);
 
-appControllers.controller('ProfileController', ['$scope', '$http',
-    function($scope, $http){
+appControllers.controller('ProfileController', ['$scope', '$http', '$uibModal',
+    function($scope, $http, $uibModal){
         $http({
             method: 'POST',
             url: urlAPI + '/getAccount',
@@ -468,8 +484,6 @@ appControllers.controller('ProfileController', ['$scope', '$http',
             }).success(function(data, status, header, config){
                 console.log(data[0]);
                 $scope.portoDetail = data[0];
-                $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
-                $(".overlay-portofolio-details").show();
             }).error(function(data, status, header, config){
                 console.log(data.message);
             });
@@ -484,6 +498,30 @@ appControllers.controller('ProfileController', ['$scope', '$http',
             $("#freeze").css({'position': '', 'overflow-y': '', 'width': ''});
             $(".overlay-portofolio-details").hide();
         }
+
+        $scope.contactus = function (size) {
+            var modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: 'contactus.html',
+              size: size
+            });
+        };
+
+        $scope.feedback = function (size) {
+            var modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: 'feedback.html',
+              size: size
+            });
+        };
+
+        $scope.support = function (size) {
+            var modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: 'support.html',
+              size: size
+            });
+        };
     }
 ]);
 
@@ -622,9 +660,6 @@ appControllers.controller('EditProfileController', ['$scope', '$http', '$compile
             }).success(function(data, status, header, config){
                 $scope.img = data[0].img_base64;
                 $scope.portoDetails = data[0];
-                $("#freeze").css({'position': 'fixed', 'overflow-y': 'scroll', 'width': '100%'});
-                $(".overlay-portofolio-edit").show();
-                $(".offcanvas-portofolio").show();
             }).error(function(data, status, header, config){
                 console.log(data.message);
             });
@@ -986,14 +1021,36 @@ appControllers.controller('AccountController', ['$scope','$http', '$window',
     }
 ]);
 
-appControllers.controller('DiscoverController', [ '$scope', '$http',
-    function($scope, $http){
+appControllers.controller('DiscoverController', [ '$scope', '$http', '$uibModal',
+    function($scope, $http, $uibModal){
+        $scope.contactus = function (size) {
+            var modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: 'contactus.html',
+              size: size
+            });
+        };
 
+        $scope.feedback = function (size) {
+            var modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: 'feedback.html',
+              size: size
+            });
+        };
+
+        $scope.support = function (size) {
+            var modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: 'support.html',
+              size: size
+            });
+        };
     }
 ]);
 
 appControllers.controller('FAQController', ['$scope', '$http',
     function($scope, $http){
-        
+
     }
 ]);
