@@ -34,8 +34,8 @@ function curDate(){
     return temp2[3]+"-"+temp2[2]+"-"+arrOfMonth[temp2[1]]+" "+temp2[4];
 }
 
-appControllers.controller('IndexController', ['$scope', '$http',
-    function($scope, $http){
+appControllers.controller('IndexController', ['$scope', '$http', '$uibModal',
+    function($scope, $http, $uibModal){
 
         temp = localStorage.getItem('emailHost') + " ";
         namaUser = temp.split("@");
@@ -141,6 +141,14 @@ appControllers.controller('IndexController', ['$scope', '$http',
         error(function(data, status, header, config){
             console.log(data.message);
         });
+
+        $scope.settings = function (size) {
+            var modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: 'settings.html',
+              size: size
+            });
+        };
     }
 ]);
 
@@ -218,6 +226,14 @@ appControllers.controller('HomeController',['$scope','$http','$uibModal',
             var modalInstance = $uibModal.open({
               animation: true,
               templateUrl: 'feedback.html',
+              size: size
+            });
+        };
+
+        $scope.support = function (size) {
+            var modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: 'support.html',
               size: size
             });
         };
@@ -1051,6 +1067,38 @@ appControllers.controller('DiscoverController', [ '$scope', '$http', '$uibModal'
 
 appControllers.controller('FAQController', ['$scope', '$http',
     function($scope, $http){
+        $scope.head = "Basic Question";
+        $scope.sub = "Sidekeek 101";
+        $http.get('assets/js/JSON/faq-101.json').success(function(data){
+            $scope.dataFAQ = data;
+        });
 
+        $scope.changeView = function(x){
+            if (x == "basic") {
+                $scope.head = "Basic Question";
+                $scope.sub = "Sidekeek 101";
+                $http.get('assets/js/JSON/faq-101.json').success(function(data){
+                    $scope.dataFAQ = data;
+                });
+            } else if (x == "seekr"){
+                $scope.head = "Seekr Question";
+                $scope.sub = "General";
+                $http.get('assets/js/JSON/faq-seekr.json').success(function(data){
+                    $scope.dataFAQ = data;
+                });
+            } else if (x == "host-start"){
+                $scope.head = "Host Question";
+                $scope.sub = "Start Hosting";
+                $http.get('assets/js/JSON/faq-host-start.json').success(function(data){
+                    $scope.dataFAQ = data;
+                });
+            } else{
+                $scope.head = "Host Question";
+                $scope.sub = "profile settings";
+                $http.get('assets/js/JSON/faq-host-profile.json').success(function(data){
+                    $scope.dataFAQ = data;
+                });
+            }
+        }
     }
 ]);

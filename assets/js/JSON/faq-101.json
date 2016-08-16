@@ -1,0 +1,37 @@
+[
+    {
+        "id": "1",
+        "question": "What is Sidekeek?",
+        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+        "id": "2",
+        "question": "Terms",
+        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+        "id": "3",
+        "question": "What is Sidekeek for?",
+        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+        "id": "4",
+        "question": "How it works?",
+        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+        "id": "5",
+        "question": "How do i report a user?",
+        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+        "id": "6",
+        "question": "I have more question to ask, what should i do?",
+        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+        "id": "7",
+        "question": "i'm interesting in partnering with Sidekeek, how can i get in touch?",
+        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }
+]

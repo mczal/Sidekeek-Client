@@ -1222,11 +1222,12 @@ footer .footer-above{
 }
 
 .sidebar-affix > ul > li > a{
-    padding: 0;
+    padding: 0 0 10px;
 }
 
 .sidebar-affix > ul > li > a:hover{
     background-color: transparent;
+    color: #5cb85c;
 }
 
 .content-faq p{

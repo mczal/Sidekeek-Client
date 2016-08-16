@@ -75,10 +75,17 @@
 								<img ng-if="img == null" src="assets/img/imgacc.png" alt="" class="img-circle img-acc" data-toggle="dropdown">
 							<div class="dropdown-menu dropdown-login-acc">
 									<div class="row">
+										<div class="col-lg-12 text-right">
+											<i class="fa fa-cog fa-1x" style="color:#fff" ng-click="settings()"></i>
+										</div>
+									</div>
+									<div class="row">
 										<div class="col-lg-12 text-center">
 											<a href="#/profile"><img ng-if="img != null" ng-src={{img}} alt="" class="img-circle img-acc-child"></a>
 											<a href="#/profile"><img ng-if="img == null" src="assets/img/imgacc.png" alt="" class="img-circle img-acc-child"></a>
 										</div>
+									</div>
+									<div class="row">
 										<div class="text-center">
 											<a href="#/profile"></a><em class="text-center" style="font-family: Lato-Regular">{{namaUser}}</em>
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
@@ -101,6 +108,25 @@
 
 		<!-----------CONTENT----------->
 		<div id="freeze" ng-view></div>
+
+		<script type="text/ng-template" id="settings.html">
+			<div class="modal-header">
+		        <h3 class="modal-title">Support</h3>
+		    </div>
+		    <div class="modal-body">
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-4 control-label">Change Password</label>
+						<div class="col-sm-8">
+							<button class="btn btn-primary">Change Password</button>
+						</div>
+					</div>
+				</form>
+				<div class="text-center">
+					<button class="btn btn-danger">Delete Account</button>
+				</div>
+		    </div>
+		</script>
 
 		<script src="bower_components/jquery/dist/jquery.js"></script>
 		<script src="bower_components/jquery-easing/jquery.easing.min.js"></script>
