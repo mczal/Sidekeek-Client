@@ -1,9 +1,9 @@
 angular.module("app.index",["app.service"])
        .controller('IndexController', IndexController);
 
-IndexController.$inject = ['$scope', '$http','userService','summaryService'];
+IndexController.$inject = ['$scope', '$http','userService','summaryService','uiService'];
 
-function IndexController($scope, $http,userService,summaryService){
+function IndexController($scope, $http,userService,summaryService,uiService){
 
     temp = localStorage.getItem('emailHost') + " ";
     namaUser = temp.split("@");
@@ -80,4 +80,8 @@ function IndexController($scope, $http,userService,summaryService){
         console.log(data);
         console.log(data.message);
     });
+
+    $scope.settings = function () {
+        uiService.showModal(size,'settings.html');
+    };
 };
