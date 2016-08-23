@@ -23,8 +23,7 @@
     "branch": "master",
     "commit": "a6f21ff77c84cee11562d36c51fb5b9c95f2eec0"
   },
-  "_source": "git://github.com/danro/jquery-easing.git",
+  "_source": "https://github.com/danro/jquery-easing.git",
   "_target": "*",
-  "_originalSource": "jquery-easing",
-  "_direct": true
+  "_originalSource": "jquery-easing"
 }

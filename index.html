@@ -93,7 +93,7 @@
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
 											<a href="#/edit-profile">Edit Profile</a>
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
-											<a href="#" ng-click="logout()">Logout</a>
+											<a ng-click="logout()">Logout</a>
 										</div>
 									</div>
 							  	</div>
@@ -143,7 +143,22 @@
 		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
 		<script src="assets/js/app.js"></script>
-		<script src="assets/js/controller.js"></script>
+
+		<!-- build:js assets/js/controller.min.js -->
+		<script src="assets/js/controllers/indexController.js"></script>
+		<script src="assets/js/controllers/loginController.js"></script>
+		<script src="assets/js/controllers/faqController.js"></script>
+		<script src="assets/js/controllers/discoverController.js"></script>
+		<script src="assets/js/controllers/homeController.js"></script>
+		<script src="assets/js/controllers/signupController.js"></script>
+		<script src="assets/js/controllers/accountController.js"></script>
+		<script src="assets/js/controllers/profileController.js"></script>
+		<script src="assets/js/controllers/confirmController.js"></script>
+		<script src="assets/js/controllers/confirmationController.js"></script>
+		<script src="assets/js/controllers/startController.js"></script>
+		<!-- endbuild -->
+
+		<script src="assets/js/service.js"></script>
 		<script src="assets/js/classie.js"></script>
 		<script src="assets/js/cbpAnimatedHeader.js"></script>
 		<script src="assets/js/custom.js"></script>
