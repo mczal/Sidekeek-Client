@@ -1,0 +1,27 @@
+[
+    {
+        "id": "1",
+        "question": "How do i start discover?",
+        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+        "id": "2",
+        "question": "How to optimize my search?",
+        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+        "id": "3",
+        "question": "Do i have create an account to discover?",
+        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+        "id": "4",
+        "question": "How can i contact host?",
+        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+        "id": "5",
+        "question": "What information can i see on a host's rofile?",
+        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }
+]

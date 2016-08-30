@@ -1,0 +1,15 @@
+<div class="container content">
+	<div class="row">
+		<div class="col-lg-12">
+			<div id="logbox">
+				<form>
+					<h3 class="text-center">Sign Up</h3>
+					<input name="user[email]" type="email" placeholder="Email address" class="input pass" ng-model="form.email"/>
+					<input name="user[password]" type="password" placeholder="Choose a password" required="required" class="input pass" ng-model="form.password"/>
+					<input name="user[password2]" type="password" placeholder="Confirm password" required="required" class="input pass" ng-model="form.confirmation"/>
+					<input type="submit" value="Sign me up!" class="inputButton" ng-click="signUp()"/>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
