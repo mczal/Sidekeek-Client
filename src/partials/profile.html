@@ -1,0 +1,88 @@
+<div class="container content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="container latar">
+                <div class="row">
+                    <div class="col-lg-12 text-center container">
+                        <h2>{{dataProfile.title}}</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img src="assets/img/startbg.jpg" alt=""/>
+                    </div>
+                    <div class="col-lg-6">
+                        <h3>{{dataAccount.company_name}}</h3>
+                        <p>{{dataProfile.category_name}}</p>
+                        <p>{{dataAccount.address}}</p>
+                        <p>{{dataAccount.city_name}}, Indonesia</p>
+                    </div>
+                </div>
+            </div>
+            <uib-tabset justified="true" type="pills">
+                <uib-tab heading="Profile">
+                    <div class="container latar">
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h4>Company Profile</h4>
+                                <p style="font-size: 11pt; text-align: justify;">
+                                    {{dataProfile.company_desc}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="Product">
+                    <div class="latar container">
+                        <div class="list-product" ng-repeat="dataProduct in dataProducts">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="upload text-center">
+                                        <div class="box-product-profile container-fluid">
+                                            <div class="file-upload text-center">
+                                                <img src="assets/img/uploadfoto.png" alt="" />
+                                            </div>
+                                        </div>
+                                        <div class="box-kecil-product">
+                                            <img src="assets/img/uploadfoto.png" alt="" />
+                                        </div>
+                                        <div class="box-kecil-product">
+                                            <img src="assets/img/uploadfoto.png" alt="" />
+                                        </div>
+                                        <div class="box-kecil-product">
+                                            <img src="assets/img/uploadfoto.png" alt="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <p>{{dataProduct.product_name}}</p>
+                                    <p>Rp. {{dataProduct.price}}</p>
+                                    <p style="font-size: 11pt">{{dataProduct.product_desc}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="Portofolio">
+                    <div class="latar container">
+                        <div class="list-portofolio">
+                            <div class="row">
+                                <div class="col-lg-4" ng-repeat="dataPortofolio in dataPortofolios">
+                                    <div class="portofolio">
+                                        <img ng-src={{dataPortofolio.img_base64}}>
+                                        <div class="desc-porto text-center hvr-pop">
+                                            <h4>{{dataPortofolio.title}}</h4>
+                                            <p>{{dataPortofolio.description}}</p>
+                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#viewPorto" ng-click="viewPortoDetails(dataPortofolio.id_portofolio)">More</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+    </div>
+</div>

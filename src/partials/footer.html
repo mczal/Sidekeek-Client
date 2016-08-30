@@ -1,39 +1,4 @@
-<div class="background">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-12 col-md-12 col-sm-12 text-center">
-				<div class="desc">
-					<h1>Business-to-Business Marketplace</h1>
-					<p>Temukan berbagai supplier barang dan jasa, hanya disini.</p>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<div class="search">
-					<div class="btn-search">
-						<select name="selectedData" class="form-control-home input-lg">
-							<option value="">---Please select---</option> <!-- not selected / blank option -->
-					      	<option value="goods">Goods</option>
-					      	<option value="service">Service</option>
-					    </select>
-						<select class="form-control-home input-lg">
-							<option style="display:none;">Categories</option>
-							<option ng-repeat="categories in categoriesData" value="{{categories.id_cat}}">{{categories.category_name}}</option>
-						</select>
-						<select class="form-control-home input-lg">
-							<option style="display:none;">Location</option>
-							<option ng-repeat="province in provinceData" value="{{province.id_province}}">{{province.province_name}}</option>
-						</select>
-					</div>
-					<input class="input-lg" type="text" placeholder="ex. Creative">
-					<button class="btn btn-success btn-lg" style="vertical-align:0px">Search</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<footer class="footer-home">
+<footer style="margin-top: 50px">
 	<div class="footer-above">
 		<div class="container">
 			<div class="row">
@@ -41,8 +6,8 @@
 					<h3>About Us</h3>
 					<a href="#"><h4 style="padding-bottom:8px">What is Sidekeek?</h4></a>
 					<a href="#"><h4 style="padding-bottom:8px">How it Works</h4></a>
-					<a href="#" ng-click="contactus()"><h4 style="padding-bottom:8px">Contact Us</h4></a>
-					<a href="#" ng-click="feedback()"><h4 style="padding-bottom:8px">Feedback</h4></a>
+                    <a href="#discover" ng-click="contactus()"><h4 style="padding-bottom:8px">Contact Us</h4></a>
+					<a href="#discover" ng-click="feedback()"><h4 style="padding-bottom:8px">Feedback</h4></a>
 				</div>
 				<div class="footer-col col-md-6 text-center">
 					<h3>Help</h3>
@@ -51,7 +16,7 @@
 						<a href="#"><li>Terms of Use</li></a>
 						<a href="#"><li>Rules and Regulations</li></a>
 						<a href="#"><li>Privacy Policy</li></a>
-						<a href="#" ng-click="support()"><li>Support</li></a>
+						<a ng-click="support()"><li>Support</li></a>
 					<ul>
 				</div>
 			</div>
@@ -85,6 +50,7 @@
 		</div>
 	</div>
 </footer>
+
 <script type="text/ng-template" id="contactus.html">
 	<div class="modal-header">
         <h3 class="modal-title">Contact Us</h3>
@@ -112,7 +78,7 @@
 			<div class="form-group">
 				<label for="inputMessage" class="col-sm-2 control-label">Message</label>
 				<div class="col-sm-10">
-					<textarea type="text" col="5" class="form-control" id="inputMessage" placeholder="Message"></textarea>
+					<textarea type="text" rows="5" class="form-control" id="inputMessage" placeholder="Message"></textarea>
 				</div>
 			</div>
 		</form>
@@ -143,7 +109,7 @@
 			<div class="form-group">
 				<label for="inputPassword3" class="col-sm-2 control-label">Message</label>
 				<div class="col-sm-10">
-					<textarea type="text" col="5" class="form-control" id="inputMessage" placeholder="Message"></textarea>
+					<textarea type="text" rows="5" class="form-control" id="inputMessage" placeholder="Message"></textarea>
 				</div>
 			</div>
 		</form>

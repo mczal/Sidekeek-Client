@@ -40,7 +40,7 @@ appServices.factory('authService',function($http){
     },
     getUserToken : function(eAuth,pAuth){
       return $http({
-        method:'POST'
+        method:'POST',
         url: credentials.url + '/auth',
         headers: {
            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -50,7 +50,7 @@ appServices.factory('authService',function($http){
           'passwordAuth':pAuth
         }
       })
-    }
+    },
     setToken: function(token){
       return credentials.token = token;
     },
