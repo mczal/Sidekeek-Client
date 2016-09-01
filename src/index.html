@@ -34,6 +34,7 @@
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
+
 	</head>
 
 	<body id="page-top">
@@ -46,7 +47,7 @@
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 						<span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
 					</button>
-					<a class="navbar-brand" href="#/home">
+					<a class="navbar-brand" ng-href="#/home">
 						<span style="padding-right:10px; padding-left:10px; vertical-align: 2px;"><img src="assets/img/sidekeek.png" width="35px" alt=""></span>
 						Sidekeek
 					</a>
@@ -56,16 +57,16 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right text-center">
 						<li class="page-scroll" id="discover">
-							<a href="#/discover">Discover</a>
+							<a ng-href="#/discover">Discover</a>
 						</li>
 						<li class="page-scroll" id="startHosting">
 							<a ng-href="{{url}}" ng-click="checkHost()">Start Hosting</a>
 						</li>
 						<li class="page-scroll" id="btn-hide">
-							<a href="#/sign-up">Sign Up</a>
+							<a ng-href="#/sign-up">Sign Up</a>
 						</li>
 						<li class="page-scroll" id="loginBtn">
-							<a class="btn btn-success loginBtn" href="#/login" type="button" aria-haspopup="true" aria-expanded="true">
+							<a class="btn btn-success loginBtn" ng-href="#/login" type="button" aria-haspopup="true" aria-expanded="true">
 								Login
 							</a>
 						</li>
@@ -81,17 +82,17 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-12 text-center">
-											<a href="#/profile"><img ng-if="img != null" ng-src={{img}} alt="" class="img-circle img-acc-child"></a>
-											<a href="#/profile"><img ng-if="img == null" src="assets/img/imgacc.png" alt="" class="img-circle img-acc-child"></a>
+											<a ng-href="#/profile"><img ng-if="img != null" ng-src={{img}} alt="" class="img-circle img-acc-child"></a>
+											<a ng-href="#/profile"><img ng-if="img == null" src="assets/img/imgacc.png" alt="" class="img-circle img-acc-child"></a>
 										</div>
 									</div>
 									<div class="row">
 										<div class="text-center">
-											<a href="#/profile"></a><em class="text-center" style="font-family: Lato-Regular">{{namaUser}}</em>
+											<a ng-href="#/profile"></a><em class="text-center" style="font-family: Lato-Regular">{{namaUser}}</em>
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
-											<a href="#/account">Edit Account</a>
+											<a ng-href="#/account">Edit Account</a>
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
-											<a href="#/edit-profile">Edit Profile</a>
+											<a ng-href="#/edit-profile">Edit Profile</a>
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
 											<a ng-click="logout()">Logout</a>
 										</div>
