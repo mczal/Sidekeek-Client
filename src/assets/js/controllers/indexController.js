@@ -51,7 +51,8 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
         let uEmail = localStorage.getItem('emailHost');
 
         if (uEmail != null){
-          userService.getAccount().success(function(data, status, header, config){
+          let idHost = localStorage.getItem('idHost');
+          userService.getAccount(idHost).success(function(data, status, header, config){
               console.log(data);
               if(data.error = "success"){
                 console.log("success");

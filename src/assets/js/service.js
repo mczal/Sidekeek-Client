@@ -99,7 +99,7 @@ appServices.factory('summaryService',
 
       getCities : function(){
         return $http({
-            method: 'POST',
+            method: 'GET',
             url: credentials.url + '/getCities',
             headers: {
                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -203,11 +203,11 @@ appServices.factory('userService',
         })
       },
 
-      getAccount : function(){
+      getAccount : function(idHost){
         console.log(credentials.token);
         return $http({
             method: 'GET',
-            url: credentials.url + '/getAccount',
+            url: credentials.url + '/getAccount/'+ idHost,
             headers: {
                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             },
@@ -239,15 +239,16 @@ appServices.factory('userService',
       },
 
       getProfile : function(){
+        let idHost = localStorage.getItem('idHost');
+        console.log("idHost = " + idHost);
         return $http({
-            method: 'POST',
-            url: credentials.url + '/getProfile',
+            method: 'GET',
+            url: credentials.url + '/getProfile/' + idHost,
             headers: {
                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             },
             data: $.param({
-                token : credentials.token,
-                email : localStorage.getItem('emailHost')
+                token : credentials.token
             })
         })
       },
@@ -273,7 +274,7 @@ appServices.factory('userService',
 
       getProducts: function(){
         return $http({
-            method: 'POST',
+            method: 'GET',
             url: credentials.url + '/getProducts',
             headers: {
                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -285,24 +286,26 @@ appServices.factory('userService',
         })
       },
 
-      getProductsEager: function(){
+      getProductsEager: function(size, page){
+        let idHost = localStorage.getItem('idHost');
         return $http({
-            method: 'POST',
-            url: credentials.url + '/getProductsEager',
+            method: 'GET',
+            url: credentials.url + '/getProductsEager/' + idHost + '?size='+ size +'&page=' + page,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             },
             data: $.param({
                 token: credentials.token,
-                sessionCode: localStorage.getItem('session')
+                sessionCode: localStorage.getItem('session'),
             })
         })
       },
 
       getPortofolios: function(){
+        let idHost = localStorage.getItem('idHost');
         return $http({
-            method: 'POST',
-            url: credentials.url + '/getPortofolios',
+            method: 'GET',
+            url: credentials.url + '/getPortofolios/' + idHost,
             headers: {
                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             },

@@ -8,6 +8,7 @@ var sidekeekApp = angular.module('sidekeekApp', [
     'app.signup',
     'app.account',
     'app.profile',
+    'app.editProfile',
     'app.confirm',
     'app.confirmation',
     'app.start',

@@ -7,10 +7,12 @@ function loginController($scope,$http,$window,userService,$location){
     $scope.login = function(){
         let email = $('#emailUser').val();
         let pass = $('#passwordUser').val();
-        localStorage.setItem('emailHost', email);
+        // localStorage.setItem('emailHost', email);
         userService.login(email,pass)
         .success(function(data, status, header, config){
           console.log(data);
+            localStorage.setItem('emailHost', email);
+            localStorage.setItem('idHost', data.idHost);
             localStorage.setItem('session', data.session);
             sessionStorage.setItem("activeTab", 1);
             console.log(data);

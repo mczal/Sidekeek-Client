@@ -3,7 +3,7 @@ angular.module("app.editProfile",["app.service"])
 
 editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$window','userService','summaryService']
 
- function editProfileController($scope, $http, $compile, $rootScope, $window){
+ function editProfileController($scope, $http, $compile, $rootScope, $window, userService, summaryService ){
      $scope.setActiveTab = function (activeTab) {
          sessionStorage.setItem("activeTab", activeTab);
      };
@@ -208,7 +208,8 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
 
     userService.getProfile().
      success(function(data, status, header, config){
-         $scope.dataProfile = data[0];
+       console.log(data);
+         $scope.dataProfile = data.content[0];
          if ($scope.dataProfile.tipe == "goods") {
              $(".button_goods").css({'top': '5px', 'box-shadow': 'none', 'outline': 'none'});
              $(".button_service").css({'top': '', 'box-shadow': '', 'outline': ''});
@@ -242,27 +243,28 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
          console.log(data.message);
      });
 
-    userService.getProducts().success(function(data, status, header, config){
+    userService.getProductsEager(10,1).success(function(data, status, header, config){
+      console.log(data);
          $scope.dataProducts = data;
      }).error(function(data, status, header, config){
          console.log(data.message);
      });
 
-    userService.getProductsEager().success(function(data, status, header, config){
-         $scope.dataProductEager = data;
-         // console.log($scope.dataProductEager.images.length);
-         // for (var i = 0; i < $scope.dataProductEager.images.length; i++) {
-         //     if ($scope.dataProductEager.images[i].id_product == $scope.dataProductEager.product[i].id_product) {
-         //         console.log($scope.dataProductEager.images[i].id_product);
-         //         $scope.data = angular.extend({},$scope.dataProductEager.images[i],$scope.dataProductEager.product[i]);
-         //     }
-         // }
-         // console.log($scope.dataProductEager.images[0].id_product);
-         console.log(data);
-         // console.log($scope.data);
-     }).error(function(data, status, header, config){
-         console.log(data.message);
-     });
+    // userService.getProductsEager().success(function(data, status, header, config){
+    //      $scope.dataProductEager = data;
+    //      // console.log($scope.dataProductEager.images.length);
+    //      // for (var i = 0; i < $scope.dataProductEager.images.length; i++) {
+    //      //     if ($scope.dataProductEager.images[i].id_product == $scope.dataProductEager.product[i].id_product) {
+    //      //         console.log($scope.dataProductEager.images[i].id_product);
+    //      //         $scope.data = angular.extend({},$scope.dataProductEager.images[i],$scope.dataProductEager.product[i]);
+    //      //     }
+    //      // }
+    //      // console.log($scope.dataProductEager.images[0].id_product);
+    //      console.log(data);
+    //      // console.log($scope.data);
+    //  }).error(function(data, status, header, config){
+    //      console.log(data.message);
+    //  });
 
      $scope.addProduk = function (){
          produk =[ '<div class="row">',

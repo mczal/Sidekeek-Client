@@ -16,10 +16,11 @@ function profileController($scope, $http, $uibModal,userService){
 
         userService.getProfile().
         success(function(data, status, header, config){
-            $scope.dataProfile = data[0];
+            $scope.dataProfile = data.content[0];
+            console.log(data.content[0]); debugger;
         }).
         error(function(data, status, header, config){
-            console.log(data.message);
+            console.log(data);
         });
 
         userService.getProducts().
