@@ -4,67 +4,81 @@ angular.module("app.index",["app.service"])
 IndexController.$inject = ['$scope', '$http','userService','summaryService','uiService','authService'];
 
 function IndexController($scope, $http,userService,summaryService,uiService,authService){
+  let count = 0;
   temp = localStorage.getItem('emailHost') + " ";
   namaUser = temp.split("@");
   $scope.namaUser = namaUser[0];
 
   $scope.url = "#/start-host";
 
-  authService.getToken().success(function(data){
-    if(data.success == true){
-      console.log("Token Success");
-      console.log(data);
-      credentials.token = data.token;
-      console.log("AAAA :   " + credentials.token);
+  function start(){
 
-      authService.setToken(data.token);
-      //check if the session is still available
-      userService.integrityCheck().success(function(data, status, header, config){
-          if (data.status == "forbidden" ) {
-              $('#btn-hide').removeClass('hide');//sign-up button
-              $('.dropdown').removeClass('hide');//login button
-              $('#img-acc').addClass('hide');//profile pict
-          }else{
-              $('#btn-hide').addClass('hide');
-              $('.dropdown').addClass('hide');
-              $('#loginBtn').addClass('hide');
-              $('#img-acc').removeClass('hide');
-          }
-      }).error(function(data, status, header, config){
-          console.log(data.message);
-      });
+    authService.getToken().success(function(data){
+      if(data.error == "success"){
+        console.log("Token Success");
+        console.log(data);
+        credentials.token = data.token;
+        console.log("AAAA :   " + credentials.token);
 
-      summaryService.isHost().success(function(data){
-          localStorage.setItem('tipeMember', data.code);
-          if (data.code == 1) {
-              $("#startHosting").hide();
-          }else{
-              $("#startHosting").show();
-          }
-      }).error(function(data){
-          console.log(data.message);
-      });
+        authService.setToken(data.token);
+        //check if the session is still available
+        userService.integrityCheck().success(function(data, status, header, config){
+            if (data.status == "forbidden" ) {
+                $('#btn-hide').removeClass('hide');//sign-up button
+                $('.dropdown').removeClass('hide');//login button
+                $('#img-acc').addClass('hide');//profile pict
+            }else{
+                $('#btn-hide').addClass('hide');
+                $('.dropdown').addClass('hide');
+                $('#loginBtn').addClass('hide');
+                $('#img-acc').removeClass('hide');
+            }
+        }).error(function(data, status, header, config){
+            console.log(data.message);
+        });
 
-      userService.getAccount().success(function(data, status, header, config){
-          console.log(data);
-          if(data.success){
-            console.log("success");
-            console.log(data[0]);
-          }else{
-            console.log("failed");
-            console.log(data[0]);
-          }
-          // $scope.dataAccount = data[0];
-          // $scope.img = data[0].img_base64;
-      }).
-      error(function(data, status, header, config){
-          console.log(data);
-          console.log(data.message);
-      });
-    }else{
-      console.log(data);
-    }
-  });
+        summaryService.isHost().success(function(data){
+            localStorage.setItem('tipeMember', data.code);
+            if (data.code == 1) {
+                $("#startHosting").hide();
+            }else{
+                $("#startHosting").show();
+            }
+        }).error(function(data){
+            console.log(data.message);
+        });
+
+        let uEmail = localStorage.getItem('emailHost');
+
+        if (uEmail != null){
+          userService.getAccount().success(function(data, status, header, config){
+              console.log(data);
+              if(data.error = "success"){
+                console.log("success");
+                console.log(data.message);
+              }else{
+                console.log("failed");
+                console.log(data.message);
+              }
+              // $scope.dataAccount = data[0];
+              // $scope.img = data[0].img_base64;
+          }).
+          error(function(data, status, header, config){
+              console.log(data);
+              console.log(data.message);
+          });
+        }
+
+      } else {
+        count +=1;
+        if(count > 10){
+          console.log("server error");
+        }else{
+          start();
+        }
+      }
+    });
+  }
 
     $scope.checkHost = function(){
         sessionStorage.setItem('activeTab', 1);
@@ -93,4 +107,6 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
     $scope.settings = function (size) {
         uiService.showModal(size,'settings.html');
     };
+
+    start();
 };

@@ -204,6 +204,7 @@ appServices.factory('userService',
       },
 
       getAccount : function(){
+        console.log(credentials.token);
         return $http({
             method: 'GET',
             url: credentials.url + '/getAccount',
