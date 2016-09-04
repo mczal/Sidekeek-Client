@@ -4,6 +4,7 @@ angular.module("app.index",["app.service"])
 IndexController.$inject = ['$scope', '$http','userService','summaryService','uiService','authService'];
 
 function IndexController($scope, $http,userService,summaryService,uiService,authService){
+
   let count = 0;
   temp = localStorage.getItem('emailHost') + " ";
   namaUser = temp.split("@");
@@ -52,11 +53,12 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
 
         if (uEmail != null){
           let idHost = localStorage.getItem('idHost');
+          $scope.idHost = idHost;
           userService.getAccount(idHost).success(function(data, status, header, config){
               console.log(data);
               if(data.error = "success"){
                 console.log("success");
-                console.log(data.message);
+                console.log(data);
               }else{
                 console.log("failed");
                 console.log(data.message);
@@ -82,7 +84,7 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
   }
 
     $scope.checkHost = function(){
-        sessionStorage.setItem('activeTab', 1);
+      sessionStorage.setItem('activeTab', 1);
         if (localStorage.getItem('tipeMember') == 0) {
             $scope.url = "#/edit-profile";
         }

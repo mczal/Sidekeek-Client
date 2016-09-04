@@ -51,7 +51,7 @@ sidekeekApp.config(['$routeProvider',
 			'templateUrl' : 'partials/edit-profile.html',
 			'controller' : 'EditProfileController'
 		}).
-        when('/profile', {
+        when('/profile/:idHost', {
             'templateUrl' : 'partials/profile.html',
             'controller' : 'ProfileController'
         }).

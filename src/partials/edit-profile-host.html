@@ -18,8 +18,8 @@
                             <option ng-repeat="categories in categoriesData" value="{{categories.id_cat}}" ng-if="dataProfile.category_name != categories.category_name">{{categories.category_name}}</option>
                         </select>
                         <div class="form-group form-group-xl">
-                            <label for="">Title</label>
-                            <input type="text" class="form-control"ng-model="dataProfile.title">
+                            <label for="">Company Name</label>
+                            <input type="text" class="form-control" ng-model="dataProfile.title" id="title"/>
                         </div>
                         <div class="form-group">
                             <label for="">Company Description</label>
@@ -92,7 +92,7 @@
                                     <div class="box-portofolio">
                                         <!-- <label for="">{{portofolio.id_portofolio}}</label> -->
                                         <div class="edit-portofolio">
-                                            <img ng-src="{{portofolio.img_base64}}">
+                                            <img ng-src="{{portofolio.img_base64}}"/>
                                             <div class="desc-porto-edit text-center hvr-pop">
                                                 <button type="button" class="btn btn-success btn-lg" ng-click="viewPortoEditDetails(portofolio.id_portofolio)" style="margin-top:150px;">Edit</button>
                                             </div>

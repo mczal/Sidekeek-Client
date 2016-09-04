@@ -4,15 +4,31 @@ angular.module("app.editProfile",["app.service"])
 editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$window','userService','summaryService']
 
  function editProfileController($scope, $http, $compile, $rootScope, $window, userService, summaryService ){
-     $scope.setActiveTab = function (activeTab) {
-         sessionStorage.setItem("activeTab", activeTab);
+     function activateTab (activeTab) {
+      console.log("changing tab");
+      console.log(activeTab);
+         sessionStorage.setItem("profileActiveTab", activeTab);
      };
+
+     activateTab(0);
+
+     $scope.setActiveTab = function(active){
+       activateTab(active);
+     }
+
+
      $scope.active = [{status: false}, {status: false}, {status: false}];
-     if (sessionStorage.getItem("activeTab") == 1) {
+     if (sessionStorage.getItem("profileActiveTab") == 1) {
          $scope.active[0].status = true;
-     }else if(sessionStorage.getItem("activeTab") == 2){
+         $scope.active[1].status = false;
+         $scope.active[2].status = false;
+     }else if(sessionStorage.getItem("profileActiveTab") == 2){
+         $scope.active[0].status = false;
          $scope.active[1].status = true;
+         $scope.active[2].status = false;
      }else{
+         $scope.active[0].status = false;
+         $scope.active[1].status = false;
          $scope.active[2].status = true;
      }
 
@@ -66,21 +82,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      }
 
      $scope.addNewProductDesc = function(){
-         $http({
-             method: 'POST',
-             url: urlAPI + '/addNewProductDesc',
-             headers: {
-                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-             },
-             data: $.param({
-                 token : token,
-                 sessionCode : localStorage.getItem('session'),
-                 namaProduk : $scope.form.product_name,
-                 harga : $scope.form.price,
-                 productDesc : $("#product-desc").val(),
-                 timestamp : curDate()
-             })
-         }).success(function(data, status, header, config){
+         userService.addNewProductDesc().success(function(data, status, header, config){
              $("#add_produk").show();
              for (var i = 0; i < $scope.myFile.length; i++) {
                  var typeData = "data:" + $scope.myFile[i].filetype + ";";
@@ -182,23 +184,15 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      }
 
      $scope.editProfiledesc = function (){
-         $http({
-             method: 'POST',
-             url: urlAPI + '/editProfile',
-             headers: {
-                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-             },
-             data: $.param({
-                 token : token,
-                 sessionCode : localStorage.getItem("session"),
-                 timestamp : curDate(),
-                 tipe: sessionStorage.getItem('idTipeProfile'),
-                 title : $('#title').val(),
-                 businessCategory : $("#category").val(),
-                 companyDesc : $("#companyDesc").val()
-             })
-         }).success(function(data, status, header, config){
-             window.location.reload();
+       let newData = {
+         title : $('#title').val(),
+         category : $("#category").val(),
+         desc : $("#companyDesc").val()
+       };
+         userService.editProfile(newData).success(function(data, status, header, config){
+            //  window.location.reload();
+            console.log(data);
+            activateTab(2);
              // console.log(localStorage.getItem("session")+" "+curDate()+" "+sessionStorage.getItem('idTipeProfile')+" "+$scope.dataProfile.title+" "+$("#category").val()+" "+$("#companyDesc").val());
              // console.log('HAI');
          }).error(function(data, status, header, config){

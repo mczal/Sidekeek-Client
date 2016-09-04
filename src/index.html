@@ -82,13 +82,13 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-12 text-center">
-											<a ng-href="#/profile"><img ng-if="img != null" ng-src={{img}} alt="" class="img-circle img-acc-child"></a>
-											<a ng-href="#/profile"><img ng-if="img == null" src="assets/img/imgacc.png" alt="" class="img-circle img-acc-child"></a>
+											<a ng-href="#/profile/{{idHost}}"><img ng-if="img != null" ng-src={{img}} alt="" class="img-circle img-acc-child"></a>
+											<a ng-href="#/profile/{{idHost}}"><img ng-if="img == null" src="assets/img/imgacc.png" alt="" class="img-circle img-acc-child"></a>
 										</div>
 									</div>
 									<div class="row">
 										<div class="text-center">
-											<a ng-href="#/profile"></a><em class="text-center" style="font-family: Lato-Regular">{{namaUser}}</em>
+											<a ng-href="#/profile/{{idHost}}"></a><em class="text-center" style="font-family: Lato-Regular">{{namaUser}}</em>
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
 											<a ng-href="#/account">Edit Account</a>
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>

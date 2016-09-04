@@ -1,12 +1,15 @@
 angular.module("app.profile",["app.service"])
        .controller("ProfileController", profileController);
 
-profileController.$inject = ['$scope', '$http', '$uibModal','userService'];
+profileController.$inject = ['$scope', '$http', '$uibModal','$routeParams','userService'];
 
-function profileController($scope, $http, $uibModal,userService){
+function profileController($scope, $http, $uibModal, $routeParams, userService){
 
-      userService.getAccount().
+      //let idHost = localStorage.getItem("idHost");
+      let idHost = $routeParams.idHost;
+      userService.getAccount(idHost).
         success(function(data, status, header, config){
+          console.log(data);
             $scope.dataAccount = data[0];
             $scope.img = data[0].img_base64;
         }).
@@ -14,24 +17,26 @@ function profileController($scope, $http, $uibModal,userService){
             console.log(data.message);
         });
 
-        userService.getProfile().
+        userService.getProfile(idHost).
         success(function(data, status, header, config){
-            $scope.dataProfile = data.content[0];
-            console.log(data.content[0]); debugger;
+            $scope.dataProfile = data[0];
+            console.log(data[0]);
         }).
         error(function(data, status, header, config){
             console.log(data);
         });
 
-        userService.getProducts().
+        userService.getProductsEager().
         success(function(data, status, header, config){
-            $scope.dataProducts = data;
+          console.log(data.products);
+          console.log("getProductsEager complete");
+            $scope.dataProducts = data.products;
         }).
         error(function(data, status, header, config){
             console.log(data.message);
         });
 
-        userService.getProtofolios().
+        userService.getPortofolios().
         success(function(data, status, header, config){
             $scope.dataPortofolios = data;
         }).

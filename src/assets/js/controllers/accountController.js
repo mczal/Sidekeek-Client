@@ -1,9 +1,9 @@
 angular.module("app.account",['app.service'])
        .controller("AccountController",accountController);
 
-accountController.$inject = ['$scope','$http','$window'];
+accountController.$inject = ['$scope','$http','$window','userService','summaryService'];
 
-function accountController($scope, $http, $window){
+function accountController($scope, $http, $window,userService,summaryService){
         $scope.cancel = function(){
             $window.location.reload();
         }
@@ -40,16 +40,20 @@ function accountController($scope, $http, $window){
                 console.log(data.message);
             });
         }
-
-          userService.getAccount().success(function(data, status, header, config){
-            $scope.dataAccount = data[0];
-            $scope.img = data[0].img_base64;
+          let idHost = localStorage.getItem('idHost');
+          userService.getAccount(idHost).success(function(data, status, header, config){
+            console.log(data);
+            let userData = data.content[0];
+            $scope.dataAccount = userData;
+            $scope.img = userData.img_base64;
         }).
         error(function(data, status, header, config){
             console.log(data.message);
         });
 
-        userService.getCities().success(function(data, status, header, config){
+        summaryService.getCities().success(function(data, status, header, config){
+          console.log("cities success");
+          console.log(data);
             $scope.citiesData = data;
         }).error(function(data, status, header, config){
             console.log(data.message);

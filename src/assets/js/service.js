@@ -67,6 +67,34 @@ appServices.factory('authService',function($http){
   }
 });
 
+appServices.factory('searchService',
+function($http){
+  return{
+    searchTemplate : function(searchData){
+      console.log(searchData);
+      console.log(searchData.query);
+      return $http({
+        method : 'GET',
+        url: credentials.url + '/search-template',
+        headers:{
+          'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        params:{
+          // info:null,
+          query:searchData.query,
+          // keywords:{
+          //   "category":[searchData.category],
+          //   "location":[searchData.location],
+          //   "tipe":[searchData.tipe]
+          // },
+          size:10,
+          page:1
+        }
+      })
+    }
+  }
+});
+
 appServices.factory('summaryService',
   function($http){
     return{
@@ -238,9 +266,9 @@ appServices.factory('userService',
         })
       },
 
-      getProfile : function(){
-        let idHost = localStorage.getItem('idHost');
-        console.log("idHost = " + idHost);
+      getProfile : function(idHost){
+        // let idHost = localStorage.getItem('idHost');
+        //console.log("idHost = " + idHost);
         return $http({
             method: 'GET',
             url: credentials.url + '/getProfile/' + idHost,
@@ -253,8 +281,27 @@ appServices.factory('userService',
         })
       },
 
+      editProfile : function(newData){
+        return $http({
+            method: 'POST',
+            url: credentials.url + '/editProfile',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token : credentials.token,
+                sessionCode : localStorage.getItem("session"),
+                timestamp : curDate(),
+                tipe: sessionStorage.getItem('idTipeProfile'),
+                title : newData.title,
+                businessCategory : newData.category,
+                companyDesc : newData.desc
+            })
+        })
+      },
+
       editProductDesc: function(productData){
-        $http({
+        return $http({
             method: 'POST',
             url: credentials.url + '/editProductDesc',
             headers: {
@@ -272,19 +319,19 @@ appServices.factory('userService',
         })
       },
 
-      getProducts: function(){
-        return $http({
-            method: 'GET',
-            url: credentials.url + '/getProducts',
-            headers: {
-               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            },
-            data: $.param({
-                token : credentials.token,
-                email : localStorage.getItem('emailHost')
-            })
-        })
-      },
+      // getProducts: function(){
+      //   return $http({
+      //       method: 'GET',
+      //       url: credentials.url + '/getProducts',
+      //       headers: {
+      //          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      //       },
+      //       params:{
+      //           token : credentials.token,
+      //           email : localStorage.getItem('emailHost')
+      //       }
+      //   })
+      // },
 
       getProductsEager: function(size, page){
         let idHost = localStorage.getItem('idHost');
@@ -347,6 +394,24 @@ appServices.factory('userService',
             })
         })
 
+      },
+
+      addNewProductDesc: function(productData){
+        return $http({
+            method: 'POST',
+            url: urlAPI + '/addNewProductDesc',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token : token,
+                sessionCode : localStorage.getItem('session'),
+                namaProduk : $scope.form.product_name,
+                harga : $scope.form.price,
+                productDesc : $("#product-desc").val(),
+                timestamp : curDate()
+            })
+        })
       }
 
 		}
