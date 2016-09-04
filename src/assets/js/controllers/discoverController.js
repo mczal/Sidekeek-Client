@@ -27,6 +27,8 @@ function discoverController($scope, $http, $uibModal,uiService,searchService){
       if (data.error == "success"){
         $scope.hosts = data.content.hosts;
         $scope.products = data.content.products;
+        console.log($scope.hosts[0].img_base64);
+        console.log($scope.products[0]);
 
         console.log("success");
         console.log(data);
