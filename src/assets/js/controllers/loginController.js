@@ -1,9 +1,9 @@
 angular.module("app.login",["app.service"])
        .controller("LoginController",loginController);
 
-loginController.$inject = ['$scope','$http', '$window','userService','$location'];
+loginController.$inject = ['$scope','$http', '$window','userService','$location','$state','$route'];
 
-function loginController($scope,$http,$window,userService,$location){
+function loginController($scope,$http,$window,userService,$location,$state,$route){
     $scope.login = function(){
         let email = $('#emailUser').val();
         let pass = $('#passwordUser').val();
@@ -16,7 +16,7 @@ function loginController($scope,$http,$window,userService,$location){
             localStorage.setItem('session', data.session);
             sessionStorage.setItem("activeTab", 1);
             console.log(data);
-            $location.path('/home');
+            $state.go('home');
         }).error(function(data, status, header, config){
             console.log(data.message);
         });

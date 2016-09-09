@@ -1,12 +1,12 @@
 angular.module("app.profile",["app.service"])
        .controller("ProfileController", profileController);
 
-profileController.$inject = ['$scope', '$http', '$uibModal','$routeParams','userService'];
+profileController.$inject = ['$scope', '$http', '$uibModal','$routeParams','userService','$stateParams'];
 
-function profileController($scope, $http, $uibModal, $routeParams, userService){
+function profileController($scope, $http, $uibModal, $routeParams, userService,$stateParams){
 
       //let idHost = localStorage.getItem("idHost");
-      let idHost = $routeParams.idHost;
+      let idHost = $stateParams.idHost;
       userService.getAccount(idHost).
         success(function(data, status, header, config){
           console.log(data);

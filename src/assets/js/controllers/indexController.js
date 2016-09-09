@@ -10,7 +10,7 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
   namaUser = temp.split("@");
   $scope.namaUser = namaUser[0];
 
-  $scope.url = "#/start-host";
+  $scope.url = "start-host";
 
   function start(){
 
@@ -86,7 +86,7 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
     $scope.checkHost = function(){
       sessionStorage.setItem('activeTab', 1);
         if (localStorage.getItem('tipeMember') == 0) {
-            $scope.url = "#/edit-profile";
+            $scope.url = "edit-profile";
         }
     }
 
