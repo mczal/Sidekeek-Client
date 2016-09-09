@@ -5,17 +5,17 @@
 					<h3>About Us</h3>
 					<a href="#"><h4 style="padding-bottom:8px">What is Sidekeek?</h4></a>
 					<a href="#"><h4 style="padding-bottom:8px">How it Works</h4></a>
-                    <a href="#discover" ng-click="contactus()"><h4 style="padding-bottom:8px">Contact Us</h4></a>
-					<a href="#discover" ng-click="feedback()"><h4 style="padding-bottom:8px">Feedback</h4></a>
+                    <a href="#discover" ng-click="openModal('contactus.html')"><h4 style="padding-bottom:8px">Contact Us</h4></a>
+					<a href="#discover" ng-click="openModal('feedback.html')"><h4 style="padding-bottom:8px">Feedback</h4></a>
 				</div>
 				<div class="footer-col col-md-6 text-center">
 					<h3>Help</h3>
 					<ul style="padding:0">
-						<a href="#faq"><li>FAQ</li></a>
+						<a ui-sref="faq"><li>FAQ</li></a>
 						<a href="#"><li>Terms of Use</li></a>
 						<a href="#"><li>Rules and Regulations</li></a>
 						<a href="#"><li>Privacy Policy</li></a>
-						<a ng-click="support()"><li>Support</li></a>
+						<a ng-click="openModal('support.html')"><li>Support</li></a>
 					<ul>
 				</div>
 			</div>

@@ -1,4 +1,4 @@
-var appServices = angular.module('app.service', []);
+var appServices = angular.module('app.service', ['ui.bootstrap']);
 
 // array of month
 var arrOfMonth = [];
@@ -157,11 +157,10 @@ appServices.factory('summaryService',
 appServices.factory('uiService',
   function($uibModal){
     return{
-      showModal: function(size,url){
+      showModal: function(url){
         let modalInstance = $uibModal.open({
           animation: true,
-          templateUrl: url,
-          size: size
+          templateUrl: url
         });
       }
     }

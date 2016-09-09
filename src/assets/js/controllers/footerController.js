@@ -1,9 +1,11 @@
-angular.module("app.footer",['app.service'])
+angular.module("app.footer",['app.service','ui.bootstrap'])
        .controller("FooterController",footerController);
 
-footerController.$inject = ['$scope','uiService'];
+footerController.$inject = ['$scope','uiService','$uibModal'];
 
-function footerController($scope, $http, uiService){
-  console.log("footer Hello");
+function footerController($scope,uiService,$uibModal){
+  $scope.openModal = function(url){
+     uiService.showModal(url);
+  }
 
 };
