@@ -11,7 +11,7 @@ function confirmController($scope, $http, $timeout, $window){
     }
     $timeout.cancel(redirectTimeout);
     redirectTimeout = $timeout(function() {
-        var timeoutTime = 5000;
+        var timeoutTime = 10000;
         redirectTimeout = $timeout(redirect, timeoutTime);
     });
 };

@@ -11,7 +11,7 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
   namaUser = temp.split("@");
   $scope.namaUser = namaUser[0];
 
-  $scope.url = "start-host";
+  // $scope.url = "start-host";
 
   authService.getToken().success(function(data){
     console.log("Connected to API");

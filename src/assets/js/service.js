@@ -27,6 +27,36 @@ const credentials = {
   token : ""
 }
 
+appServices.factory('generalSerivce',function(){
+  return{
+    generateUniqueCode: function(){
+       var text = "";
+       var possible = "[&900qnw@ml;kNI./UBI~`189`aklm3076IAKU-PASTI-BISA';l";
+
+       for( var i=0; i < 10; i++ ){
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+       }
+       return text;
+    }
+
+  }
+});
+
+appServices.factory('registerService',function(){
+  var registerData;
+  return{
+    saveRegisterData: function(data){
+      return registerData = data;
+    },
+    getRegisterData: function(){
+      return registerData;
+    },
+    clearRegisterData: function(){
+      return registerData = null;
+    }
+  }
+});
+
 appServices.factory('authService',function($http){
   return{
     getToken : function(){
@@ -182,6 +212,26 @@ appServices.factory('userService',
                 email: email,
                 password: pass,
                 confirmation: confirm
+            })
+        })
+      },
+
+      hostSignup : function(regData){
+        return  $http({
+            method: 'POST',
+            url: credentials.url + '/hostSignUp',
+            headers: {
+                'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token: credentials.token,
+                idTipe: regData.idTemp,
+                idCat: regData.categories,
+                compName: regData.company,
+                threadTitle: regData.thread,
+                email: regData.email,
+                password: regData.password,
+                confirmation: regData.confirm
             })
         })
       },
