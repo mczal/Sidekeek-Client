@@ -16,7 +16,11 @@ function loginController($scope,$http,$window,userService,$location,$state,$rout
             localStorage.setItem('session', data.session);
             sessionStorage.setItem("activeTab", 1);
             console.log(data);
-            $state.go('home');
+            $state.go('home', {}).then(function() {
+              console.log("state go home");
+              window.location.reload();
+            });
+            //$state.go('home');
         }).error(function(data, status, header, config){
             console.log(data.message);
         });

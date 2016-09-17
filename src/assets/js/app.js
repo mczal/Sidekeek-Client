@@ -96,7 +96,7 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           }
         })
         .state('profile',{
-          url:'/profile/:idHost',
+          url:'/profile/:idHost/:type',
           views:{
             '':{
               templateUrl:'partials/profile.html',

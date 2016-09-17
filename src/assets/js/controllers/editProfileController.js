@@ -4,33 +4,48 @@ angular.module("app.editProfile",["app.service"])
 editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$window','userService','summaryService']
 
  function editProfileController($scope, $http, $compile, $rootScope, $window, userService, summaryService ){
-     function activateTab (activeTab) {
-      console.log("changing tab");
-      console.log(activeTab);
-         sessionStorage.setItem("profileActiveTab", activeTab);
+     function activateTab (tabIndex) {
+       var activeTab;
+       activeTab = tabIndex;
+       
+       switch (activeTab) {
+         case 0:
+           $scope.active = [{status: true}, {status: false}, {status: false}];
+           break;
+         case 1:
+           $scope.active = [{status: false}, {status: true}, {status: false}];
+           break;
+         case 2:
+           $scope.active = [{status: false}, {status: false}, {status: true}];
+           break;
+         default:
+           $scope.active = [{status: true}, {status: false}, {status: false}];
+       }
      };
 
      activateTab(0);
 
-     $scope.setActiveTab = function(active){
-       activateTab(active);
-     }
-
-
-     $scope.active = [{status: false}, {status: false}, {status: false}];
-     if (sessionStorage.getItem("profileActiveTab") == 1) {
-         $scope.active[0].status = true;
-         $scope.active[1].status = false;
-         $scope.active[2].status = false;
-     }else if(sessionStorage.getItem("profileActiveTab") == 2){
-         $scope.active[0].status = false;
-         $scope.active[1].status = true;
-         $scope.active[2].status = false;
-     }else{
-         $scope.active[0].status = false;
-         $scope.active[1].status = false;
-         $scope.active[2].status = true;
-     }
+    //  activateTab(0);
+     //
+    //  $scope.setActiveTab = function(active){
+    //    activateTab(active);
+    //  }
+     //
+     //
+    //  $scope.active = [{status: false}, {status: false}, {status: false}];
+    //  if (sessionStorage.getItem("profileActiveTab") == 1) {
+    //      $scope.active[0].status = true;
+    //      $scope.active[1].status = false;
+    //      $scope.active[2].status = false;
+    //  }else if(sessionStorage.getItem("profileActiveTab") == 2){
+    //      $scope.active[0].status = false;
+    //      $scope.active[1].status = true;
+    //      $scope.active[2].status = false;
+    //  }else{
+    //      $scope.active[0].status = false;
+    //      $scope.active[1].status = false;
+    //      $scope.active[2].status = true;
+    //  }
 
      $scope.escapeAdd = function(keyCode){
          if (keyCode == 27) {
@@ -192,7 +207,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
          userService.editProfile(newData).success(function(data, status, header, config){
             //  window.location.reload();
             console.log(data);
-            activateTab(2);
+            activateTab(1);
              // console.log(localStorage.getItem("session")+" "+curDate()+" "+sessionStorage.getItem('idTipeProfile')+" "+$scope.dataProfile.title+" "+$("#category").val()+" "+$("#companyDesc").val());
              // console.log('HAI');
          }).error(function(data, status, header, config){

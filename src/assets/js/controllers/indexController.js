@@ -1,87 +1,76 @@
 angular.module("app.index",["app.service"])
        .controller('IndexController', IndexController);
 
-IndexController.$inject = ['$scope', '$http','userService','summaryService','uiService','authService'];
+IndexController.$inject = ['$scope', '$http','userService','summaryService','uiService','authService','$state'];
 
-function IndexController($scope, $http,userService,summaryService,uiService,authService){
+function IndexController($scope, $http,userService,summaryService,uiService,authService,$state){
 
   let count = 0;
+
   temp = localStorage.getItem('emailHost') + " ";
   namaUser = temp.split("@");
   $scope.namaUser = namaUser[0];
 
   $scope.url = "start-host";
 
-  function start(){
+  authService.getToken().success(function(data){
+    console.log("Connected to API");
+    if(data.error == "success"){
+      console.log("Token Success");
+      console.log(data);
+      //credentials.token = data.token;
+      // console.log("AAAA :   " + credentials.token);
+      authService.setToken(data.token);
+      //check if the session is still available
+      userService.integrityCheck().success(function(data, status, header, config){
+          if (data.status == "forbidden" ) {
+              $('#btn-hide').removeClass('hide');//sign-up button
+              $('.dropdown').removeClass('hide');//login button
+              $('#img-acc').addClass('hide');//profile pict
+          }else{
+              $('#btn-hide').addClass('hide');
+              $('.dropdown').addClass('hide');
+              $('#loginBtn').addClass('hide');
+              $('#img-acc').removeClass('hide');
+          }
+      }).error(function(data, status, header, config){
+          console.log(data.message);
+      });
 
-    authService.getToken().success(function(data){
-      if(data.error == "success"){
-        console.log("Token Success");
-        console.log(data);
-        credentials.token = data.token;
-        console.log("AAAA :   " + credentials.token);
+      summaryService.isHost().success(function(data){
+          localStorage.setItem('tipeMember', data.code);
+          if (data.code == 1) {
+              $("#startHosting").hide();
+          }else{
+              $("#startHosting").show();
+          }
+      }).error(function(data){
+          console.log(data.message);
+      });
 
-        authService.setToken(data.token);
-        //check if the session is still available
-        userService.integrityCheck().success(function(data, status, header, config){
-            if (data.status == "forbidden" ) {
-                $('#btn-hide').removeClass('hide');//sign-up button
-                $('.dropdown').removeClass('hide');//login button
-                $('#img-acc').addClass('hide');//profile pict
-            }else{
-                $('#btn-hide').addClass('hide');
-                $('.dropdown').addClass('hide');
-                $('#loginBtn').addClass('hide');
-                $('#img-acc').removeClass('hide');
-            }
-        }).error(function(data, status, header, config){
-            console.log(data.message);
-        });
+      let uEmail = localStorage.getItem('emailHost');
 
-        summaryService.isHost().success(function(data){
-            localStorage.setItem('tipeMember', data.code);
-            if (data.code == 1) {
-                $("#startHosting").hide();
-            }else{
-                $("#startHosting").show();
-            }
-        }).error(function(data){
-            console.log(data.message);
-        });
-
-        let uEmail = localStorage.getItem('emailHost');
-
-        if (uEmail != null){
-          let idHost = localStorage.getItem('idHost');
-          $scope.idHost = idHost;
-          userService.getAccount(idHost).success(function(data, status, header, config){
+      if (uEmail != null){
+        let idHost = localStorage.getItem('idHost');
+        $scope.idHost = idHost;
+        userService.getAccount(idHost).success(function(data, status, header, config){
+            console.log(data);
+            if(data.error = "success"){
+              console.log("success");
               console.log(data);
-              if(data.error = "success"){
-                console.log("success");
-                console.log(data);
-              }else{
-                console.log("failed");
-                console.log(data.message);
-              }
-              // $scope.dataAccount = data[0];
-              // $scope.img = data[0].img_base64;
-          }).
-          error(function(data, status, header, config){
+            }else{
+              console.log("error Get Account Data")
               console.log(data);
               console.log(data.message);
-          });
-        }
-
-      } else {
-        count +=1;
-        if(count > 10){
-          console.log("server error");
-        }else{
-          start();
-        }
+            }
+        })
       }
-    });
-  }
+    } else {
+      console.log("Error");
+      alert("Error Connecting to API");
+    }
+  });
+
 
     $scope.checkHost = function(){
       sessionStorage.setItem('activeTab', 1);
@@ -97,10 +86,14 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
             console.log(data);
             localStorage.clear();
             sessionStorage.clear();
-            window.location.reload();
-            $('#btn-hide').removeClass('hide');
-            $('.dropdown').removeClass('hide');
-            $('#img-acc').addClass('hide');
+            $state.go('home', {}).then(function() {
+              console.log("state go home");
+              window.location.reload();
+            });
+            // window.location.reload();
+            // $('#btn-hide').removeClass('hide');
+            // $('.dropdown').removeClass('hide');
+            // $('#img-acc').addClass('hide');
         }).error(function(data, status, header, config){
             console.log(data);
             console.log(data.message);
@@ -110,6 +103,4 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
     $scope.settings = function (size) {
         uiService.showModal(size,'settings.html');
     };
-
-    start();
 };

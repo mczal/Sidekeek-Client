@@ -20,7 +20,7 @@
                 </div>
             </div>
             <uib-tabset justified="true" type="pills">
-                <uib-tab heading="Profile">
+                <uib-tab index="0" heading="Profile" active="active[0].status">
                     <div class="container latar">
                         <br>
                         <div class="row">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </uib-tab>
-                <uib-tab heading="Product">
+                <uib-tab index="1" heading="Product" active="active[1].status">
                     <div class="latar container">
                         <div class="list-product" ng-repeat="dataProduct in dataProducts">
                             <div class="row">
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </uib-tab>
-                <uib-tab heading="Portofolio">
+                <uib-tab index="2" heading="Portofolio" active="active[2].status">
                     <div class="latar container">
                         <div class="list-portofolio">
                             <div class="row">

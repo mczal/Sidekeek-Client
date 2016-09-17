@@ -50,7 +50,7 @@
     </div>
     <div class="row">
       <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" ng-repeat="host in hosts">
-          <a ui-sref="profile({idHost:{{host.id_host}}})">
+          <a ui-sref="profile({idHost:{{host.id_host}},type:'0'})">
               <div class="thumbnail border-green">
                   <img ng-src="{{host.img_base64}}" alt="...">
                   <div class="caption">
@@ -61,7 +61,7 @@
           </a>
       </div>
       <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" ng-repeat="product in products">
-          <a ui-sref="#/profile/{{product.id_host}}">
+          <a ui-sref="profile({idHost:{{product.id_host}},type:'1'})">
               <div class="thumbnail border-blue">
                   <img ng-src="{{product.img_base64}}" alt="...">
                   <div class="caption">

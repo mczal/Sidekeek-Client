@@ -33,7 +33,7 @@ function startController($scope, $http, summaryService){
   $scope.submitFirst = function(){
       localStorage.setItem('statTemp', generateUniqueCode());
       $http({
-          url : urlAPI +'/firstRegister',
+          url : credentials.url +'/firstRegister',
           method : 'POST',
           headers: {
               'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -45,6 +45,7 @@ function startController($scope, $http, summaryService){
           })
       }).success(function(data, status, header, config){
           console.log(data.message + " " + idTipe);
+          //
       }).error(function(data, status, header, config){
           console.log(data.message);
       });

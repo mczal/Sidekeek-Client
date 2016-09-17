@@ -82,13 +82,13 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-12 text-center">
-											<a ui-sref="profile/{{idHost}}"><img ng-if="img != null" ng-src={{img}} alt="" class="img-circle img-acc-child"></a>
-											<a ui-sref="profile/{{idHost}}"><img ng-if="img == null" src="assets/img/imgacc.png" alt="" class="img-circle img-acc-child"></a>
+											<a ui-sref="profile({idHost:{{host.id_host}},type:'0'})"><img ng-if="img != null" ng-src={{img}} alt="" class="img-circle img-acc-child"></a>
+											<a ui-sref="profile({idHost:{{host.id_host}},type:'0'})"><img ng-if="img == null" src="assets/img/imgacc.png" alt="" class="img-circle img-acc-child"></a>
 										</div>
 									</div>
 									<div class="row">
 										<div class="text-center">
-											<a ui-sref="profile/{{idHost}}"></a><em class="text-center" style="font-family: Lato-Regular">{{namaUser}}</em>
+											<a ui-sref="profile({idHost:{{host.id_host}},type:'0'})"><em class="text-center" style="font-family: Lato-Regular">{{namaUser}}</em></a>
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
 											<a ui-sref="account">Edit Account</a>
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>

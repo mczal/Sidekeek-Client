@@ -43,7 +43,7 @@ function accountController($scope, $http, $window,userService,summaryService){
           let idHost = localStorage.getItem('idHost');
           userService.getAccount(idHost).success(function(data, status, header, config){
             console.log(data);
-            let userData = data.content[0];
+            let userData = data[0];
             $scope.dataAccount = userData;
             $scope.img = userData.img_base64;
         }).

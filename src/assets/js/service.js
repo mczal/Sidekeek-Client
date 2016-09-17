@@ -398,7 +398,7 @@ appServices.factory('userService',
       addNewProductDesc: function(productData){
         return $http({
             method: 'POST',
-            url: urlAPI + '/addNewProductDesc',
+            url: credentials.url + '/addNewProductDesc',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             },
