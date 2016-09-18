@@ -32,6 +32,11 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
               $('.dropdown').addClass('hide');
               $('#loginBtn').addClass('hide');
               $('#img-acc').removeClass('hide');
+              let idHost = localStorage.getItem('idHost');
+              userService.getAccount(idHost).success(function(data){
+                console.log("success get image");
+                $scope.img = data.content[0].img_base64;
+              })
           }
       }).error(function(data, status, header, config){
           console.log(data.message);

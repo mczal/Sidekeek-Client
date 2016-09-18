@@ -306,11 +306,26 @@ appServices.factory('userService',
                 token: credentials.token,
                 sessionCode: localStorage.getItem('session'),
                 companyName: accountData.companyName,
-                imgbase64: accountData.imageBase64,
+                // imgbase64: accountData.imageBase64,
                 about: accountData.about,
                 handphone: accountData.handphone,
                 city: accountData.city,
                 address: accountData.address
+            })
+        })
+      },
+
+      editAccountPic : function(img){
+        return $http({
+            method: 'POST',
+            url: credentials.url + '/editAccountPic',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token: credentials.token,
+                sessionCode: localStorage.getItem('session'),
+                imgbase64: img
             })
         })
       },
@@ -340,11 +355,10 @@ appServices.factory('userService',
             data: $.param({
                 token : credentials.token,
                 sessionCode : localStorage.getItem("session"),
-                timestamp : curDate(),
-                tipe: sessionStorage.getItem('idTipeProfile'),
                 title : newData.title,
                 businessCategory : newData.category,
-                companyDesc : newData.desc
+                companyDesc : newData.desc,
+                tipe: newData.tipe
             })
         })
       },
@@ -397,8 +411,8 @@ appServices.factory('userService',
         })
       },
 
-      getPortofolios: function(){
-        let idHost = localStorage.getItem('idHost');
+      getPortofolios: function(idHost){
+        //let idHost = localStorage.getItem('idHost');
         return $http({
             method: 'GET',
             url: credentials.url + '/getPortofolios/' + idHost,
@@ -414,7 +428,7 @@ appServices.factory('userService',
 
       getPortofolioDetail: function(idPortofolio){
         return $http({
-            method: 'POST',
+            method: 'GET',
             url: credentials.url + '/getPortofolioDetail',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -437,7 +451,7 @@ appServices.factory('userService',
                 token : credentials.token,
                 sessionCode : localStorage.getItem('session'),
                 title : portfolioData.title,
-                description : portoflioData.desc,
+                description : portfolioData.desc,
                 timestamp : curDate(),
                 imgbase64 : portfolioData.imageBase64
             })
@@ -453,15 +467,32 @@ appServices.factory('userService',
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             },
             data: $.param({
-                token : token,
+                token : credentials.token,
                 sessionCode : localStorage.getItem('session'),
-                namaProduk : $scope.form.product_name,
-                harga : $scope.form.price,
-                productDesc : $("#product-desc").val(),
+                namaProduk : productData.name,
+                harga : productData.price,
+                productDesc : productData.desc,
                 timestamp : curDate()
             })
         })
+      },
+
+      addProductImage: function(imageData){
+        return $http({
+            method: 'POST',
+            url: credentials.url + '/addProductImage',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token : credentials.token,
+                sessionCode : localStorage.getItem('session'),
+                idProduct : imageData.id,
+                imgbase64 : imageData.source
+            })
+        })
       }
+
 
 		}
 });

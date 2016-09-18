@@ -7,7 +7,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      function activateTab (tabIndex) {
        var activeTab;
        activeTab = tabIndex;
-       
+
        switch (activeTab) {
          case 0:
            $scope.active = [{status: true}, {status: false}, {status: false}];
@@ -89,7 +89,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
        }
 
       userService.addNewPortofolio(portfolioData).success(function(data, status, header, config){
-             $window.location.reload();
+             //$window.location.reload();
              console.log("success add new portofolio");
          }).error(function(data, status, header, config){
              console.log(data.message);
@@ -97,28 +97,44 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      }
 
      $scope.addNewProductDesc = function(){
-         userService.addNewProductDesc().success(function(data, status, header, config){
+        let productData = {
+          name: $("#product_name").val(),
+          price :$("#price").val(),
+          desc : $("#product-desc").val()
+        }
+        console.log(productData);
+         userService.addNewProductDesc(productData).success(function(data, status, header, config){
+           console.log("add new produk");
+           console.log(data);
              $("#add_produk").show();
              for (var i = 0; i < $scope.myFile.length; i++) {
                  var typeData = "data:" + $scope.myFile[i].filetype + ";";
                  var base64Data = "base64," + $scope.myFile[i].base64;
                  var imageBase64 = typeData + base64Data;
-                 $http({
-                     method: 'POST',
-                     url: urlAPI + "/addProductImage",
-                     headers:{
-                         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                     },
-                     data: $.param({
-                         token: token,
-                         sessionCode: localStorage.getItem('session'),
-                         idProduct: data.idProduct,
-                         imgbase64: imageBase64,
-                         timestamp: curDate()
-                     })
-                 }).success(function(data, status, header, config){
-                     $window.location.reload();
+                //  $http({
+                //      method: 'POST',
+                //      url: urlAPI + "/addProductImage",
+                //      headers:{
+                //          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                //      },
+                //      data: $.param({
+                //          token: token,
+                //          sessionCode: localStorage.getItem('session'),
+                //          idProduct: data.idProduct,
+                //          imgbase64: imageBase64,
+                //          timestamp: curDate()
+                //      })
+                //  })
+
+                let imageData = {
+                  id : data.idProduct ,
+                  source: imageBase64
+                }
+                console.log(imageData);
+
+                 userService.addProductImage(imageData).success(function(data, status, header, config){
                      console.log(data.message);
+                     $window.location.reload();
                  }).error(function(data, status, header, config){
                      console.log(data.message);
                  });
@@ -202,8 +218,15 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
        let newData = {
          title : $('#title').val(),
          category : $("#category").val(),
-         desc : $("#companyDesc").val()
+         desc : $("#companyDesc").val(),
+        //  tipe: sessionStorage.getItem('idTipeProfile')
        };
+       if (sessionStorage.getItem('idTipeProfile') == null){
+         newData.tipe = $scope.dataProfile.id_tipe;
+       }else{
+         newData.tipe = sessionStorage.getItem('idTipeProfile');
+       }
+       console.log(newData);
          userService.editProfile(newData).success(function(data, status, header, config){
             //  window.location.reload();
             console.log(data);
@@ -214,12 +237,13 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
              console.log(data.message);
          });
      }
-
-    userService.getProfile().
+    let idHost = localStorage.getItem('idHost');
+    console.log("Getting Profile for " + idHost);
+    userService.getProfile(idHost).
      success(function(data, status, header, config){
        console.log(data);
          $scope.dataProfile = data.content[0];
-         if ($scope.dataProfile.tipe == "goods") {
+         if ($scope.dataProfile.id_tipe == 1) {
              $(".button_goods").css({'top': '5px', 'box-shadow': 'none', 'outline': 'none'});
              $(".button_service").css({'top': '', 'box-shadow': '', 'outline': ''});
          }else{
@@ -231,9 +255,12 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
          console.log(data.message);
      });
 
-    userService.getPortofolios().
+    console.log("Getting Portfolios for " + idHost);
+    userService.getPortofolios(idHost).
      success(function(data, status, header, config){
-         $scope.dataPortofolios = data;
+       console.log("success getting Portfolio");
+         $scope.dataPortofolios = data.content;
+         console.log(data);
      }).
      error(function(data, status, header, config){
          console.log(data.message);
@@ -254,7 +281,27 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
 
     userService.getProductsEager(10,1).success(function(data, status, header, config){
       console.log(data);
-         $scope.dataProducts = data;
+      $scope.dataProducts = data.content.products_with_images;
+      let tempData = data.content.products_with_images;
+      console.log(tempData.length);
+
+      for (let i = 0; i < tempData.length; i++){
+        console.log(tempData[i].images);
+        var tempImage = tempData[i].images.split(";");
+        console.log(tempImage);
+
+        for(let j = 0; j < tempImage.length - 1; j++){
+          console.log(tempImage[j]);
+          let image = tempImage[j].split(",");
+          console.log(i);
+          console.log(image);
+        }
+      }
+      // console.log(tempImages);
+      // let prodImages = tempImages;
+      // console.log(prodImages);
+      console.log($scope.dataProducts);
+
      }).error(function(data, status, header, config){
          console.log(data.message);
      });
