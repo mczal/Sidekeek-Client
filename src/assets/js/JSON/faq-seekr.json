@@ -2,26 +2,26 @@
     {
         "id": "1",
         "question": "How do i start discover?",
-        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        "summary": "Gunakan fitur advance search box yang tersedia di halaman utama atau di halaman discover untuk memperoleh hasil pencarian yang optimal.<br>Instruksi:<br>1. Pilih jenis produk, goods atau service<br>2. Pilih kategori, anda bisa memilih lebih dari 1 kategori<br>3. Masukan keyword mengenai produk yang anda cari<br><br><p>Anda juga bisa menggunakan search box yang tertera di header seluruh halaman (kecuali homepage) namun hasil pencariannya kurang spesifik.</p>"
     },
     {
         "id": "2",
         "question": "How to optimize my search?",
-        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        "summary": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>"
     },
     {
         "id": "3",
         "question": "Do i have create an account to discover?",
-        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        "summary": "<p>Tidak, anda bisa melakukan pencarian dan membuka company page milik host tanpa perlu sign up atau log in terlebih dahulu.</p>"
     },
     {
         "id": "4",
         "question": "How can i contact host?",
-        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        "summary": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>"
     },
     {
         "id": "5",
         "question": "What information can i see on a host's rofile?",
-        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        "summary": "- Nama Perusahaan*<br>- Bidang Usaha*<br>- Profil Usaha*<br>- Nama & Deskripsi Produk*<br>- Harga Produk*<br>- Foto/gambar Produk*<br>- Portofolio Perusahaan*<br>- Review*<br>- Lokasi<br><p>*<em>opsional</em></p>"
     }
 ]

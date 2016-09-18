@@ -2,36 +2,36 @@
     {
         "id": "1",
         "question": "What is Sidekeek?",
-        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        "summary": "<p>Sidekeek.co adalah marketplace business-to-business (B2B) khusus industri kreatif. Sidekeek bekerja sebagai platform yang membantu mempertemukan pelaku usaha dengan vendor (supplier).</p>"
     },
     {
         "id": "2",
         "question": "Terms",
-        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        "summary": "<strong>Company page</strong> berisi profil perusahaan, deskripsi produk, dan portofolio perusahaan.<br><br>Kami membagi produk ke dalam dua kelompok, yaitu <strong>goods</strong> (barang) dan <strong>service</strong> (jasa). Kelompok goods khusus untuk barang-barang berwujud seperti bahan baku, komponen, maupun produk jadi (jual/sewa/subkontrak). Kelompok service khusus untuk jasa atau layanan pekerjaan berdasarkan keahlian tertentu.<br><br><strong>Seekr</strong> adalah calon pembeli yang sedang mencari vendor.<br><br><p><strong>Host</strong> adalah perusahaan vendor yang telah membuat company page.</p>"
     },
     {
         "id": "3",
         "question": "What is Sidekeek for?",
-        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        "summary": "Host harus mewakili sebuah perusahaan, baik perusahaan yang sudah berbadan hukum maupun belum. Sidekeek tidak mengizinkan pekerja lepasan (freelancer) untuk menjadi host atas nama karir pribadi.<br><br><p>Baca rules & regulations kami untuk lebih jelas.</p>"
     },
     {
         "id": "4",
         "question": "How it works?",
-        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        "summary": "Bagaimana cara melakukan pencarian (discover)?<br>1. Discover<br>Gunakan fitur advance search box yang tersedia di halaman utama atau di halaman discover. Pilih jenis produk, kategori, dan masukkan keyword mengenai produk yang anda cari untuk memperoleh hasil pencarian yang optimal.<br><br>Bagaimana cara mendaftarkan perusahaan (hosting)?<br>1. List a company page<br><p>Untuk membuat halaman perusahaan tekan ‘start hosting’ yang tertera di header tiap halaman. Kami akan memandu anda secara bertahap untuk mengisi informasi mengenai profil perusahaan, deskripsi produk, serta portofolio (hasil kerja lalu) perusahaan anda.</p>"
     },
     {
         "id": "5",
         "question": "How do i report a user?",
-        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        "summary": "<p>Jika anda menganggap ada user baik host maupun seekr yang telah melanggar rules & regulations, atau terms of use, maka anda bisa melaporkannya kepada kami melalui halaman support dan memilih report host di subject category. Pastikan anda menyertakan penjelasan mengenai penyalahgunaan atau pelanggaran yang anda maksud sebelum anda mengirim laporan tersebut kepada kami.</p>"
     },
     {
         "id": "6",
         "question": "I have more question to ask, what should i do?",
-        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        "summary": "Jangan khawatir! Anda bisa mencari jawabannya di bagian seekr dan host.<br><br><p>Anda juga bisa menghubungi kami melalui halaman support.</p>"
     },
     {
         "id": "7",
         "question": "i'm interesting in partnering with Sidekeek, how can i get in touch?",
-        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        "summary": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>"
     }
 ]

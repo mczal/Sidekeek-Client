@@ -24,7 +24,7 @@
             <h1 class="page-header">{{head}} : {{sub}}</h1>
             <div ng-repeat="data in dataFAQ">
                 <h4>{{data.question}}</h4>
-                <p>{{data.summary}}</p>
+                <div ng-bind-html="data.summary"></div>
             </div>
         </div>
         <div class="col-lg-3">
@@ -43,3 +43,5 @@
         </div>
     </div>
 </div>
+<footer ui-view="footer">
+</footer>

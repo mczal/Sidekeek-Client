@@ -1,9 +1,9 @@
 angular.module("app.faq",[])
 .controller("FAQController",faqController);
 
-faqController.$inject = ["$scope","$http"];
+faqController.$inject = ["$scope","$http","$sce"];
 
-function faqController($scope, $http){
+function faqController($scope, $http, $sce){
     $scope.head = "Basic Question";
     $scope.sub = "Sidekeek 101";
     $http.get('assets/js/JSON/faq-101.json').success(function(data){
