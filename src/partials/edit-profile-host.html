@@ -93,14 +93,14 @@
                                         <!-- <label for="">{{portofolio.id_portofolio}}</label> -->
                                         <div class="edit-portofolio">
                                             <img ng-src="{{portofolio.img_base64}}"/>
-                                            <div class="desc-porto-edit text-center hvr-pop">
+                                            <div class="desc-porto-edit text-center hvr-pop" data-toggle="modal" data-target="#editPorto">
                                                 <button type="button" class="btn btn-success btn-lg" ng-click="viewPortoEditDetails({{portofolio.id_portofolio}})" style="margin-top:150px;">Edit</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <div class="circle" ng-click="addPorto()">
+                                    <div class="circle" style="margin-top: 35px" data-toggle="modal" data-target="#addPorto">
                                         <img src="assets/img/add.png" alt="" />
                                     </div>
                                 </div>
@@ -112,97 +112,79 @@
         </div>
     </div>
 </div>
-<div class="overlay-portofolio-add">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="offcanvas-portofolio">
-                    <div class="box-add-portofolio">
-                        <div class="row">
-                            <div class="pull-right">
-                                <div class="close">
-                                    <span class="fa fa-2x fa-times" ng-click="closeOffcanvas_add()"></span>
+<div class="modal fade" id="addPorto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Add Portofolio</h4>
+			</div>
+			<div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="upload">
+                            <div class="box container-fluid">
+                                <div class="file-upload text-center">
+                                    <img src="assets/img/uploadfoto.png" alt="" />
+                                    <input type="file" id="fileUploadImg" class="inputfile inputfile-1" ng-model="myFile" base-sixty-four-input/>
+                                    <label for="fileUploadImg"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="upload">
-                                    <div class="box container-fluid">
-                                        <div class="file-upload text-center">
-                                            <img src="assets/img/uploadfoto.png" alt="" />
-                                            <input type="file" id="fileUploadImg" class="inputfile inputfile-1" ng-model="myFile" base-sixty-four-input/>
-                                            <label for="fileUploadImg"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="form-group form-group-xl">
-                                    <label for="">Title</label>
-                                    <input type="text" class="form-control" ng-model="form.title" autofocus ng-keyup="escapeAdd($event.keyCode)">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Description</label>
-                                    <textarea type="text" class="form-control" rows="6" id="portoDesc"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3 pull-right">
-                                <button type="submit" class="inputButton" ng-click="addNewPortofolio()">Save</button>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-8">
+                        <div class="form-group form-group-xl">
+                            <label for="">Title</label>
+                            <input type="text" class="form-control" ng-model="form.title" autofocus ng-keyup="escapeAdd($event.keyCode)">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Description</label>
+                            <textarea type="text" class="form-control" rows="6" id="portoDesc"></textarea>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="inputButton" ng-click="addNewPortofolio()">Save</button>
+			</div>
+		</div>
+	</div>
 </div>
-<div class="overlay-portofolio-edit">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="offcanvas-portofolio">
-                    <div class="box-add-portofolio">
-                        <div class="row">
-                            <div class="pull-right">
-                                <div class="close">
-                                    <span class="fa fa-2x fa-times" ng-click="closeOffcanvas_edit()"></span>
+<div class="modal fade" id="editPorto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Edit Portofolio</h4>
+			</div>
+			<div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="upload">
+                            <div class="box container-fluid">
+                                <div class="file-upload text-center">
+                                    <img src="assets/img/uploadfoto.png" alt="" />
+                                    <input type="file" id="fileUploadImg" class="inputfile inputfile-1" ng-model="myFile" base-sixty-four-input/>
+                                    <label for="fileUploadImg"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="upload">
-                                    <div class="box container-fluid">
-                                        <div class="file-upload text-center">
-                                            <img ng-src={{img}}>
-                                        </div>
-                                    </div>
-                                </div>
-                                <input type="file" id="fileUploadImg" class="inputfile inputfile-1" ng-model="myFile" base-sixty-four-input/>
-                                <label for="fileUploadImg"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="form-group form-group-xl">
-                                    <label for="">Title</label>
-                                    <input type="text" class="form-control" ng-model="portoDetails.title" autofocus ng-keyup="escapeEdit($event.keyCode)">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Description</label>
-                                    <textarea type="text" class="form-control" rows="6" id="portoDesc_edit">{{portoDetails.description}}</textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3 pull-right">
-                                <button type="submit" class="inputButton" ng-click="editPortofolio(portoDetails.id_portofolio)">Save</button>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-8">
+                        <div class="form-group form-group-xl">
+                            <label for="">Title</label>
+                            <input type="text" class="form-control" ng-model="form.title" autofocus ng-keyup="escapeAdd($event.keyCode)">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Description</label>
+                            <textarea type="text" class="form-control" rows="6" id="portoDesc"></textarea>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="inputButton" ng-click="addNewPortofolio()">Save</button>
+			</div>
+		</div>
+	</div>
 </div>
