@@ -12,6 +12,9 @@ var sidekeekApp = angular.module('sidekeekApp', [
     'app.confirm',
     'app.confirmation',
     'app.start',
+    'app.rule',
+    'app.community',
+    'app.aboutus',
     'ui.bootstrap',
     'ui.router',
     'app.footer',
@@ -149,12 +152,55 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
             }
           }
         })
+        .state('rules-regulations',{
+          url:'/rules-regulations',
+          views:{
+            '':{
+              templateUrl:'partials/rules_regulations.html',
+              controller:'RulesRegulationsController'
+            },
+            'footer@rules-regulations': {
+                templateUrl: 'partials/footer.html',
+                controller:'FooterController'
+            }
+          }
+        })
+        .state('community-guidelines',{
+          url:'/community-guidelines',
+          views:{
+            '':{
+              templateUrl:'partials/community_guidelines.html',
+              controller:'CommunityGuidelinesController'
+            },
+            'footer@community-guidelines': {
+                templateUrl: 'partials/footer.html',
+                controller:'FooterController'
+            }
+          }
+        })
+        .state('about-us',{
+          url:'/about-us',
+          views:{
+            '':{
+              templateUrl:'partials/aboutus.html',
+              controller:'AboutUsController'
+            },
+            'footer@about-us': {
+                templateUrl: 'partials/footer.html',
+                controller:'FooterController'
+            }
+          }
+        })
         .state('faq',{
           url:'/faq',
           views:{
             '':{
               templateUrl:'partials/FAQ.html',
               controller:'FAQController'
+            },
+            'footer@faq' :{
+              templateUrl: 'partials/footer.html',
+              controller:'FooterController'
             }
           }
         })
