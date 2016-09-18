@@ -429,14 +429,10 @@ appServices.factory('userService',
       getPortofolioDetail: function(idPortofolio){
         return $http({
             method: 'GET',
-            url: credentials.url + '/getPortofolioDetail',
+            url: credentials.url + '/getPortofolioDetail/' + idPortofolio,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            },
-            data: $.param({
-                token : credentials.token,
-                idPortofolio : idPortofolio
-            })
+            }
         })
       },
 
@@ -457,6 +453,39 @@ appServices.factory('userService',
             })
         })
 
+      },
+
+      editPortofolio: function(newData){
+        return $http({
+            method: 'POST',
+            url: credentials.url + '/editPortofolio',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token : credentials.token,
+                sessionCode : localStorage.getItem("session"),
+                idPortofolio : newData.id,
+                title : newData.title,
+                description : newData.desc
+            })
+        })
+      },
+
+      editPortofolioImg: function(imageData){
+        return $http({
+            method: 'POST',
+            url: urlAPI + '/editPortofolioImg',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token : token,
+                sessionCode : localStorage.getItem("session"),
+                idPortofolio : imageData.id,
+                imagebase64 : imageData.source
+            })
+        })
       },
 
       addNewProductDesc: function(productData){

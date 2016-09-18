@@ -93,8 +93,8 @@
                                         <!-- <label for="">{{portofolio.id_portofolio}}</label> -->
                                         <div class="edit-portofolio">
                                             <img ng-src="{{portofolio.img_base64}}"/>
-                                            <div class="desc-porto-edit text-center hvr-pop" data-toggle="modal" data-target="#editPorto">
-                                                <button type="button" class="btn btn-success btn-lg" ng-click="viewPortoEditDetails({{portofolio.id_portofolio}})" style="margin-top:150px;">Edit</button>
+                                            <div class="desc-porto-edit text-center hvr-pop" ng-click="viewPortoEditDetails(portofolio.id_portofolio)" data-toggle="modal" data-target="#editPorto">
+                                              <button  class="btn btn-success btn-lg" style="margin-top:150px;">Edit</button>
                                             </div>
                                         </div>
                                     </div>
@@ -163,7 +163,7 @@
                         <div class="upload">
                             <div class="box container-fluid">
                                 <div class="file-upload text-center">
-                                    <img src="assets/img/uploadfoto.png" alt="" />
+                                    <img ng-src="{{editPortoDetails.img_base64}}" alt="" />
                                     <input type="file" id="fileUploadImg" class="inputfile inputfile-1" ng-model="myFile" base-sixty-four-input/>
                                     <label for="fileUploadImg"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>
                                 </div>
@@ -173,17 +173,17 @@
                     <div class="col-lg-8">
                         <div class="form-group form-group-xl">
                             <label for="">Title</label>
-                            <input type="text" class="form-control" ng-model="form.title" autofocus ng-keyup="escapeAdd($event.keyCode)">
+                            <input type="text" class="form-control" ng-model="editPortoDetails.title" autofocus ng-keyup="escapeAdd($event.keyCode)">
                         </div>
                         <div class="form-group">
                             <label for="">Description</label>
-                            <textarea type="text" class="form-control" rows="6" id="portoDesc"></textarea>
+                            <textarea type="text" class="form-control" rows="6" id="portoDesc" ng-model="editPortoDetails.description"></textarea>
                         </div>
                     </div>
                 </div>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="inputButton" ng-click="addNewPortofolio()">Save</button>
+				<button type="submit" class="inputButton" ng-click="editPortofolio(editPortoDetails.id_portofolio)">Save</button>
 			</div>
 		</div>
 	</div>

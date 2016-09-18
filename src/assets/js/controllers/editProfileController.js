@@ -146,9 +146,14 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      }
 
      $scope.viewPortoEditDetails = function(idPortofolio){
+      console.log("getting porto data");
+      console.log(idPortofolio);
       userService.getPortofolioDetail(idPortofolio).success(function(data, status, header, config){
-             $scope.img = data[0].img_base64;
-             $scope.portoDetails = data[0];
+          console.log("success get porto detail");
+             console.log(data);
+             //$scope.img = data.content[0].img_base64;
+             $scope.editPortoDetails = data.content[0];
+            //  $scope.form.title = data.content[0].title;
          }).error(function(data, status, header, config){
              console.log(data.message);
          });
@@ -156,30 +161,39 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
 
      $scope.editPortofolio = function(idPortofolio){
          console.log($scope.myFile);
-         // var typeData = "data:" + $scope.myFile.filetype + ";";
-         // var base64Data = "base64," + $scope.myFile.base64;
-         // var imgBase64 = typeData + base64Data;
-         // $http({
-         //     method: 'POST',
-         //     url: urlAPI + '/editPortofolio',
-         //     headers: {
-         //         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-         //     },
-         //     data: $.param({
-         //         token : token,
-         //         sessionCode : localStorage.getItem("session"),
-         //         idPortofolio : idPortofolio,
-         //         timestamp : curDate(),
-         //         title : $scope.portoDetails.title,
-         //         description : $("#portoDesc_edit").val(),
-         //         imgBase64 : imgBase64
-         //     }),
-         // }).success(function(data, status, header, config){
-         //     window.location.reload();
-         //     console.log("berhasil");
-         // }).error(function(data, status, header, config){
-         //     console.log(data.message);
-         // });
+        //  var typeData = "data:" + $scope.myFile.filetype + ";";
+        //  var base64Data = "base64," + $scope.myFile.base64;
+        //  var imgBase64 = typeData + base64Data;
+        //  console.log(imageBase64);
+         console.log(idPortofolio);
+         let newPortoData = {
+           id: idPortofolio,
+           title: $scope.editPortoDetails.title,
+           desc: $scope.editPortoDetails.description
+         }
+         console.log(newPortoData)
+         userService.editPortofolio(newPortoData).success(function(data, status, header, config){
+            //  console.log("berhasil");
+             console.log(data);
+
+             if ($scope.myFile == undefined){
+                console.log("No new images");
+             }else{
+               //  var typeData = "data:" + $scope.myFile.filetype + ";";
+               //  var base64Data = "base64," + $scope.myFile.base64;
+               var imgBase64 = "data:" + $scope.myFile.filetype + ";" + "base64," + $scope.myFile.base64;
+               let imgData = {
+                 id: idPortofolio,
+                 source: imgBase64
+               }
+               userService.editPortofolioImg(imgData).success(function(data){
+                 console.log("edit portfolio image");
+                 console.log(data);
+               })
+             }
+         }).error(function(data, status, header, config){
+             console.log(data.message);
+         });
      }
 
      $scope.editProductDesc = function(idProduct){
