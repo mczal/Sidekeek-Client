@@ -1174,6 +1174,10 @@ footer .footer-above{
     vertical-align:-17px;
 }
 
+.loginBtn:hover{
+    color: #fff;
+}
+
 .navbar-right{
     background-color: #333;
     border-top: none;

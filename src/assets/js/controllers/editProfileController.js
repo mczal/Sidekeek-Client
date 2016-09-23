@@ -25,6 +25,12 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
 
      activateTab(0);
 
+     $scope.removeDisable = function(){
+         $(".inputDisable").prop("disabled", false);
+         $scope.check = 1;
+     }
+
+
     //  activateTab(0);
      //
     //  $scope.setActiveTab = function(active){

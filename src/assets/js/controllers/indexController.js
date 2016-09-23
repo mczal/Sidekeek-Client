@@ -45,9 +45,9 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
       summaryService.isHost().success(function(data){
           localStorage.setItem('tipeMember', data.code);
           if (data.code == 1) {
-              $("#startHosting").show();
-          }else{
               $("#startHosting").hide();
+          }else{
+              $("#startHosting").show();
           }
       }).error(function(data){
           console.log(data.message);
