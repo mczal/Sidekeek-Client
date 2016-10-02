@@ -303,23 +303,83 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
       console.log(data);
       $scope.dataProducts = data.content.products_with_images;
       let tempData = data.content.products_with_images;
-      console.log(tempData.length);
 
-      for (let i = 0; i < tempData.length; i++){
-        console.log(tempData[i].images);
-        var tempImage = tempData[i].images.split(";");
-        console.log(tempImage);
 
-        for(let j = 0; j < tempImage.length - 1; j++){
-          console.log(tempImage[j]);
-          let image = tempImage[j].split(",");
-          console.log(i);
-          console.log(image);
-        }
-      }
+      // console.log(tempData.length);
+      // for (let i = 0; i < tempData.length; i++){
+      //   console.log(tempData[i].images);
+      //   var tempImage = tempData[i].images.split(";");
+      //   console.log(tempImage);
+      //
+      //   for(let j = 0; j < tempImage.length - 1; j++){
+      //     console.log(tempImage[j]);
+      //     let image = tempImage[j].split(",");
+      //     console.log(i);
+      //     console.log(image);
+      //   }
+      // }
       // console.log(tempImages);
       // let prodImages = tempImages;
       // console.log(prodImages);
+      $scope.dataProducts.forEach(function(item){
+        // let tempImg = item.images.split(';');
+        // //console.log(tempImg);
+        // //let img = tempImg[0].split(',');
+        // let imgArr = [];
+        // tempImg.forEach(function(x){
+        //   let img = x.split(",");
+        //   //console.log(img);
+        //   let imgObj = {
+        //     id: img[0],
+        //     src: img[1]
+        //   }
+        //   //console.log(imgObj);
+        //   imgArr.push(imgObj);
+        //   console.log(imgArr);
+        // })
+
+        //console.log(img);
+        // let imgObj = {
+        //   id: img[0],
+        //   src: img[1]
+        // }
+        //console.log(imgObj);
+        // imgArr.push(imgObj);
+        // console.log(imgArr);
+        // tempImg.forEach(function(x){
+        //   let imgArr = [];
+        //   let img = x.split(',');
+        //   let imgObj = {
+        //     id: img[0],
+        //     src: img[1]
+        //   }
+        //   imgArr.push(imgObj);
+        //   console.log(imgArr);
+        // })
+        var imgs = item.images
+        .split(';')
+        .map(imgData => ({
+            id: imgData.split(',')[0],
+            src: imgData.split(',')[1]
+          })
+        )
+        .filter(imgData =>
+          imgData && imgData.id
+        );
+
+        item.featured_img = imgs.shift();
+        item.images = imgs.filter(imgData => imgData && imgData.id);
+        console.log(item);
+
+        // let imgObj = {
+        //   featured_img: imgs.shift(),
+        //   other_imgs: imgs.filter(imgData => imgData && imgData.id)
+        // };
+        //
+        // console.log(imgObj);
+      })
+
+
       console.log($scope.dataProducts);
 
      }).error(function(data, status, header, config){

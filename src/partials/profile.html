@@ -44,16 +44,22 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12">
-                                <h4>Review</h4>
+                          <div class="col-lg-12">
+                            <h4>Review</h4>
+                          </div>
+                            <div class="col-lg-12" ng-repeat="review in reviewData">
                                 <hr>
-                                <div class="col-lg-2 text-center">
-                                    <img class="img-circle" src="assets/img/profile.png" style="width: 50%" alt="" />
-                                    <h6>nama profile</h6>
-                                </div>
-                                <div class="col-lg-10">
-                                    <p style="font-size: 11pt; text-align: justify;">Commentnya disini</p>
-                                </div>
+                                  <div class="col-lg-2 text-center">
+                                      <img class="img-circle" src="assets/img/profile.png" style="width: 50%" alt="" />
+                                      <h6>{{review.name}}
+                                      </h6>
+                                  </div>
+                                  <div class="col-lg-10">
+                                      <div class="star-img">
+                                        <img ng-repeat="star in review.rate track by $index" src="assets/img/star.png" style="width:20px" alt="" />
+                                      </div>
+                                      <p style="font-size: 11pt; text-align: justify;">{{review.comment}}</p>
+                                  </div>
                             </div>
                         </div>
                     </div>

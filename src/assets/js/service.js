@@ -520,8 +520,34 @@ appServices.factory('userService',
                 imgbase64 : imageData.source
             })
         })
+      },
+
+      addHostReview: function(reviewData){
+        return $http({
+            method: 'POST',
+            url: credentials.url + '/addHostReview',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token : credentials.token,
+                sessionCode : localStorage.getItem('session'),
+                score : reviewData.score,
+                idHost : reviewData.idHost,
+                comment: reviewData.comment,
+                name: reviewData.name
+            })
+        })
+      },
+
+      getHostReview: function(id){
+        return $http({
+            method: 'GET',
+            url: credentials.url + '/getHostReview/' + id,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+        })
       }
-
-
 		}
 });
