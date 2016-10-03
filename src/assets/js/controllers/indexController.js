@@ -10,6 +10,14 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
   temp = localStorage.getItem('emailHost') + " ";
   namaUser = temp.split("@");
   $scope.namaUser = namaUser[0];
+  console.log("hello");
+  if(localStorage.getItem('idHost') != null){
+    $scope.idHost = localStorage.getItem('idHost');
+    console.log($scope.idHost);
+  }else{
+    $scope.idHost = null;
+    console.log($scope.idHost);
+  }
 
   // $scope.url = "start-host";
 
@@ -27,13 +35,17 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
               $('#btn-hide').removeClass('hide');//sign-up button
               $('.dropdown').removeClass('hide');//login button
               $('#img-acc').addClass('hide');//profile pict
+              $scope.loggedIn = false;
           }else{
+              $scope.loggedIn = true;
               $('#btn-hide').addClass('hide');
               $('.dropdown').addClass('hide');
               $('#loginBtn').addClass('hide');
               $('#img-acc').removeClass('hide');
               let idHost = localStorage.getItem('idHost');
               userService.getAccount(idHost).success(function(data){
+                // $scope.host = data.content[0];
+                // $scope.host.idHost = localStorage.getItem('idHost');
                 console.log("success get image");
                 $scope.img = data.content[0].img_base64;
               })

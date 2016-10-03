@@ -48,7 +48,11 @@
                           <div class="col-lg-12">
                             <h4>Review</h4>
                           </div>
-                            <div class="col-lg-12" ng-repeat="review in reviewData">
+                          <div ng-if="reviewData.length == 0" class="col-lg-12">
+                            <p style="font-size: 11pt; text-align: justify;">No Review Yet</p>
+                          </div>
+
+                            <div ng-if="reviewData.length > 0" class="col-lg-12" ng-repeat="review in reviewData">
                                 <hr>
                                   <div class="col-lg-2 text-center">
                                       <img class="img-circle" src="assets/img/profile.png" style="width: 50%" alt="" />
