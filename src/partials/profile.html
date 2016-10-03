@@ -71,19 +71,23 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="upload text-center">
-                                        <div class="box-product-profile container-fluid">
-                                            <div class="file-upload text-center">
-                                                <img src="assets/img/uploadfoto.png" alt="" />
+                                        <div class="box container-fluid">
+                                            <div class="text-center">
+                                                <img ng-if="(product.featured_img == null)" src="assets/img/uploadfoto.png" alt="" style="margin-top:80px; width:100px;"/>
+                                                <img ng-if="(product.featured_img != null)" ng-src="{{product.featured_img.src}}" alt="" width="100%"/>
                                             </div>
                                         </div>
-                                        <div class="box-kecil-product">
-                                            <img src="assets/img/uploadfoto.png" alt="" />
+                                        <div class="box-kecil">
+                                            <img ng-if="(product.images[0] == null)" src="assets/img/uploadfoto.png" alt="" style="width: 30px;"/>
+                                            <img ng-if="(product.images[0] != null)" ng-src="{{product.images[0].src}}" alt="" />
                                         </div>
-                                        <div class="box-kecil-product">
-                                            <img src="assets/img/uploadfoto.png" alt="" />
+                                        <div class="box-kecil">
+                                            <img ng-if="(product.images[1] == null)" src="assets/img/uploadfoto.png" alt="" style="width: 30px;"/>
+                                            <img ng-if="(product.images[1] != null)" ng-src="{{product.images[1].src}}" alt="" />
                                         </div>
-                                        <div class="box-kecil-product">
-                                            <img src="assets/img/uploadfoto.png" alt="" />
+                                        <div class="box-kecil">
+                                            <img ng-if="(product.images[2] == null)" src="assets/img/uploadfoto.png" alt="" style="width: 30px;"/>
+                                            <img ng-if="(product.images[2] != null)" ng-src="{{product.images[2].src}}" alt="" />
                                         </div>
                                     </div>
                                 </div>

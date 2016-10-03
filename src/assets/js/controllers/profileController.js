@@ -30,8 +30,8 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
       }
       setTab($stateParams.type);
 
-      //let idHost = localStorage.getItem("idHost");
-      let idHost = $stateParams.idHost;
+      let idHost = localStorage.getItem("idHost");
+    //   let idHost = $stateParams.idHost;
       userService.getAccount(idHost).
         success(function(data, status, header, config){
           console.log(data);
@@ -55,23 +55,25 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
             //console.log(data);
         });
 
-        userService.getProductsEager().
+        userService.getProductsEager(10,1).
         success(function(data, status, header, config){
           //console.log(data);
           //console.log("getProductsEager complete");
-          $scope.dataProducts = data.products;
+          $scope.dataProducts = data.content.products_with_images;
         }).
         error(function(data, status, header, config){
             //console.log(data.message);
         });
 
-        userService.getPortofolios().
-        success(function(data, status, header, config){
-            $scope.dataPortofolios = data;
-        }).
-        error(function(data, status, header, config){
-            //console.log(data.message);
-        });
+        userService.getPortofolios(idHost).
+         success(function(data, status, header, config){
+           console.log("success getting Portfolio");
+             $scope.dataPortofolios = data.content;
+             console.log(data);
+         }).
+         error(function(data, status, header, config){
+             console.log(data.message);
+         });
 
         userService.getHostReview(idHost).
         success(function(data,status,header,config){
