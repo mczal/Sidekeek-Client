@@ -30,8 +30,8 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
       }
       setTab($stateParams.type);
 
-      let idHost = localStorage.getItem("idHost");
-    //   let idHost = $stateParams.idHost;
+      // let idHost = localStorage.getItem("idHost");
+      let idHost = $stateParams.idHost;
       userService.getAccount(idHost).
         success(function(data, status, header, config){
           console.log(data);
