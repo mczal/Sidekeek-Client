@@ -45,7 +45,10 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
         userService.getProfile(idHost).
         success(function(data, status, header, config){
             $scope.dataProfile = data.content[0];
-            //console.log(data);
+            console.log(data);
+            //console.log();
+            $scope.dataProfile.rate = new Array (Math.floor(data.content[0].sumrate_totalreview.split('_')[0] / data.content[0].sumrate_totalreview.split('_')[1]));
+            console.log($scope.dataProfile.rate);
             //console.log(data[0]);
         }).
         error(function(data, status, header, config){
