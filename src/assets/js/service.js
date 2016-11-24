@@ -23,7 +23,7 @@ function curDate(){
 }
 
 const credentials = {
-  url : "http://localhost:3000/sideAPIkeek",
+  url : "http://103.236.201.92:3000/sideAPIkeek",
   token : ""
 }
 
