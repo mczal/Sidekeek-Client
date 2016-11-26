@@ -8,23 +8,23 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<link rel="SHORTCUT ICON" href="assets/img/favicon.ico"/>
+		<link rel="SHORTCUT ICON" href="./src/assets/img/favicon.ico"/>
 
 		<title>Sidekeek</title>
 
 		<!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
-		<link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+		<link href="./bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 
 		<!-- Custom CSS -->
-		<link href="assets/css/custom.css" rel="stylesheet">
-		<link href="assets/css/animate.css" rel="stylesheet">
-		<link href="assets/css/component.css" rel="stylesheet">
-		<link href="assets/css/demo.css" rel="stylesheet">
-		<link href="assets/css/normalize.css" rel="stylesheet">
-		<link href="../bower_components/hover/css/hover-min.css" rel="stylesheet">
+		<link href="./src/assets/css/custom.css" rel="stylesheet">
+		<link href="./src/assets/css/animate.css" rel="stylesheet">
+		<link href="./src/assets/css/component.css" rel="stylesheet">
+		<link href="./src/assets/css/demo.css" rel="stylesheet">
+		<link href="./src/assets/css/normalize.css" rel="stylesheet">
+		<link href="./bower_components/hover/css/hover-min.css" rel="stylesheet">
 
 		<!-- Custom Fonts -->
-		<link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="./bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		<!-- <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 		<link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css"> -->
 
@@ -48,7 +48,7 @@
 						<span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
 					</button>
 					<a class="navbar-brand" ui-sref="home">
-						<span style="padding-right:10px; padding-left:10px; vertical-align: 2px;"><img src="assets/img/sidekeek.png" width="35px" alt=""></span>
+						<span style="padding-right:10px; padding-left:10px; vertical-align: 2px;"><img src="./src/assets/img/sidekeek.png" width="35px" alt=""></span>
 						Sidekeek
 					</a>
 				</div>
@@ -73,7 +73,7 @@
 						<li class="page-scroll">
 							<div class="dropdown hide" id="img-acc">
 								<img ng-if="img != null" ng-src={{img}} alt="" class="img-circle img-acc" data-toggle="dropdown">
-								<img ng-if="img == null" src="assets/img/imgacc.png" alt="" class="img-circle img-acc" data-toggle="dropdown">
+								<img ng-if="img == null" src="./src/assets/img/imgacc.png" alt="" class="img-circle img-acc" data-toggle="dropdown">
 							<div class="dropdown-menu dropdown-login-acc">
 									<div class="row">
 										<div class="col-lg-12 text-right">
@@ -83,7 +83,7 @@
 									<div class="row">
 										<div class="col-lg-12 text-center">
 											<a ui-sref="profile({idHost:{{idHost}},type:'0'})"><img ng-if="loggedIn == true && img != null" ng-src={{img}} alt="" class="img-circle img-acc-child"></a>
-											<a ui-sref="profile({idHost:{{idHost}},type:'0'})"><img ng-if="loggedIn == true && img == null" src="assets/img/imgacc.png" alt="" class="img-circle img-acc-child"></a>
+											<a ui-sref="profile({idHost:{{idHost}},type:'0'})"><img ng-if="loggedIn == true && img == null" src="./src/assets/img/imgacc.png" alt="" class="img-circle img-acc-child"></a>
 										</div>
 									</div>
 									<div class="row">
@@ -129,47 +129,47 @@
 		    </div>
 		</script>
 
-		<script src="../bower_components/jquery/dist/jquery.js"></script>
-		<script src="../bower_components/jquery-easing/jquery.easing.min.js"></script>
-		<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-		<script src="../bower_components/angular/angular.js"></script>
-		<script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
-		<script src="../bower_components/angular-jquery/dist/angular-jquery.min.js"></script>
-		<script src="../bower_components/angular-bootstrap-affix/dist/angular-bootstrap-affix.min.js"></script>
-		<script src="../bower_components/angular-route/angular-route.js"></script>
-		<script src="../bower_components/angular-animate/angular-animate.js"></script>
-		<script src="../bower_components/angular-base64-upload/dist/angular-base64-upload.min.js"></script>
-		<script src="../bower_components/angular-img-cropper/dist/angular-img-cropper.min.js"></script>
-		<script src="../bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-		<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-		<script src="../node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+		<script src="./bower_components/jquery/dist/jquery.js"></script>
+		<script src="./bower_components/jquery-easing/jquery.easing.min.js"></script>
+		<script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
+		<script src="./bower_components/angular/angular.js"></script>
+		<script src="./bower_components/angular-sanitize/angular-sanitize.js"></script>
+		<script src="./bower_components/angular-jquery/dist/angular-jquery.min.js"></script>
+		<script src="./bower_components/angular-bootstrap-affix/dist/angular-bootstrap-affix.min.js"></script>
+		<script src="./bower_components/angular-route/angular-route.js"></script>
+		<script src="./bower_components/angular-animate/angular-animate.js"></script>
+		<script src="./bower_components/angular-base64-upload/dist/angular-base64-upload.min.js"></script>
+		<script src="./bower_components/angular-img-cropper/dist/angular-img-cropper.min.js"></script>
+		<script src="./bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+		<script src="./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+		<script src="./node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
 
-		<script src="assets/js/app.js"></script>
+		<script src="./src/assets/js/app.js"></script>
 
-		<!-- build:js assets/js/controller.min.js -->
-		<script src="assets/js/controllers/indexController.js"></script>
-		<script src="assets/js/controllers/loginController.js"></script>
-		<script src="assets/js/controllers/faqController.js"></script>
-		<script src="assets/js/controllers/discoverController.js"></script>
-		<script src="assets/js/controllers/homeController.js"></script>
-		<script src="assets/js/controllers/signupController.js"></script>
-		<script src="assets/js/controllers/accountController.js"></script>
-		<script src="assets/js/controllers/profileController.js"></script>
-		<script src="assets/js/controllers/editProfileController.js"></script>
-		<script src="assets/js/controllers/confirmController.js"></script>
-		<script src="assets/js/controllers/confirmationController.js"></script>
-		<script src="assets/js/controllers/startController.js"></script>
-		<script src="assets/js/controllers/footerController.js"></script>
-		<script src="assets/js/controllers/rulesRegulationsController.js"></script>
-		<script src="assets/js/controllers/communityGuidelinesController.js"></script>
-		<script src="assets/js/controllers/aboutUsController.js"></script>
+		<!-- build:js ./src/assets/js/controller.min.js -->
+		<script src="./src/assets/js/controllers/indexController.js"></script>
+		<script src="./src/assets/js/controllers/loginController.js"></script>
+		<script src="./src/assets/js/controllers/faqController.js"></script>
+		<script src="./src/assets/js/controllers/discoverController.js"></script>
+		<script src="./src/assets/js/controllers/homeController.js"></script>
+		<script src="./src/assets/js/controllers/signupController.js"></script>
+		<script src="./src/assets/js/controllers/accountController.js"></script>
+		<script src="./src/assets/js/controllers/profileController.js"></script>
+		<script src="./src/assets/js/controllers/editProfileController.js"></script>
+		<script src="./src/assets/js/controllers/confirmController.js"></script>
+		<script src="./src/assets/js/controllers/confirmationController.js"></script>
+		<script src="./src/assets/js/controllers/startController.js"></script>
+		<script src="./src/assets/js/controllers/footerController.js"></script>
+		<script src="./src/assets/js/controllers/rulesRegulationsController.js"></script>
+		<script src="./src/assets/js/controllers/communityGuidelinesController.js"></script>
+		<script src="./src/assets/js/controllers/aboutUsController.js"></script>
 		<!-- endbuild -->
 
-		<script src="assets/js/service.js"></script>
-		<script src="assets/js/classie.js"></script>
-		<script src="assets/js/cbpAnimatedHeader.js"></script>
-		<script src="assets/js/custom.js"></script>
-		<script src="assets/js/custom-file-input.js"></script>
+		<script src="./src/assets/js/service.js"></script>
+		<script src="./src/assets/js/classie.js"></script>
+		<script src="./src/assets/js/cbpAnimatedHeader.js"></script>
+		<script src="./src/assets/js/custom.js"></script>
+		<script src="./src/assets/js/custom-file-input.js"></script>
 	</body>
 
 </html>

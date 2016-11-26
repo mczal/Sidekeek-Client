@@ -33,11 +33,11 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/home',
             views:{
               '':{
-                  templateUrl: 'partials/home.html',
+                  templateUrl: './src/partials/home.html',
                   controller:'HomeController'
                 },
               'footer@home' :{
-                  templateUrl: 'partials/footer.html',
+                  templateUrl: './src/partials/footer.html',
                   controller:'FooterController'
                 }
             }
@@ -46,7 +46,7 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/start-host',
           views:{
             '':{
-              templateUrl:'partials/start-host.html',
+              templateUrl:'./src/partials/start-host.html',
               controller: 'StartController'
             }
           }
@@ -56,7 +56,7 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url: '/next-start',
           views:{
             '':{
-              templateUrl: 'partials/next-start.html',
+              templateUrl: './src/partials/next-start.html',
               controller: 'StartController'
             }
           }
@@ -65,7 +65,7 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/sign-up',
           views:{
             '':{
-              templateUrl: 'partials/sign-up.html',
+              templateUrl: './src/partials/sign-up.html',
               controller:'SignUpController'
             }
           }
@@ -75,7 +75,7 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/login',
           views:{
             '':{
-              templateUrl:'partials/login.html',
+              templateUrl:'./src/partials/login.html',
               controller:'LoginController'
             }
           }
@@ -84,7 +84,7 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/edit-profile-host',
           views:{
             '':{
-              templateUrl:'partials/edit-profile-host.html',
+              templateUrl:'./src/partials/edit-profile-host.html',
               controller:'EditProfileController'
             }
           }
@@ -93,7 +93,7 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/edit-profile',
           views:{
             '':{
-              templateUrl:'partials/edit-profile.html',
+              templateUrl:'./src/partials/edit-profile.html',
               controller:'EditProfileController'
             }
           }
@@ -102,7 +102,7 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/profile/:idHost/:type',
           views:{
             '':{
-              templateUrl:'partials/profile.html',
+              templateUrl:'./src/partials/profile.html',
               controller:'ProfileController'
             }
           }
@@ -111,7 +111,7 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/account',
           views:{
             '':{
-              templateUrl:'partials/account.html',
+              templateUrl:'./src/partials/account.html',
               controller:'AccountController'
             }
           }
@@ -120,7 +120,7 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/account-host',
           views:{
             '':{
-              templateUrl:'partials/acccount-host.html',
+              templateUrl:'./src/partials/acccount-host.html',
               controller:'AvvountController'
             }
           }
@@ -129,7 +129,7 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/confirmation',
           views:{
             '':{
-              templateUrl:'partials/confirmation.html',
+              templateUrl:'./src/partials/confirmation.html',
               controller:'ConfirmationController'
             }
           }
@@ -138,7 +138,7 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/confirm',
           views:{
             '':{
-              templateUrl:'partials/confirm.html',
+              templateUrl:'./src/partials/confirm.html',
               controller:'ConfirmController'
             }
           }
@@ -147,7 +147,7 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/discover',
           views:{
             '':{
-              templateUrl:'partials/discover.html',
+              templateUrl:'./src/partials/discover.html',
               controller:'DiscoverController'
             }
           }
@@ -156,11 +156,11 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/rules-regulations',
           views:{
             '':{
-              templateUrl:'partials/rules_regulations.html',
+              templateUrl:'./src/partials/rules_regulations.html',
               controller:'RulesRegulationsController'
             },
             'footer@rules-regulations': {
-                templateUrl: 'partials/footer.html',
+                templateUrl: './src/partials/footer.html',
                 controller:'FooterController'
             }
           }
@@ -169,11 +169,11 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/community-guidelines',
           views:{
             '':{
-              templateUrl:'partials/community_guidelines.html',
+              templateUrl:'./src/partials/community_guidelines.html',
               controller:'CommunityGuidelinesController'
             },
             'footer@community-guidelines': {
-                templateUrl: 'partials/footer.html',
+                templateUrl: './src/partials/footer.html',
                 controller:'FooterController'
             }
           }
@@ -182,11 +182,11 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/about-us',
           views:{
             '':{
-              templateUrl:'partials/aboutus.html',
+              templateUrl:'./src/partials/aboutus.html',
               controller:'AboutUsController'
             },
             'footer@about-us': {
-                templateUrl: 'partials/footer.html',
+                templateUrl: './src/partials/footer.html',
                 controller:'FooterController'
             }
           }
@@ -195,11 +195,11 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/faq',
           views:{
             '':{
-              templateUrl:'partials/FAQ.html',
+              templateUrl:'./src/partials/FAQ.html',
               controller:'FAQController'
             },
             'footer@faq' :{
-              templateUrl: 'partials/footer.html',
+              templateUrl: './src/partials/footer.html',
               controller:'FooterController'
             }
           }
