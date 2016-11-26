@@ -10,22 +10,22 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
   temp = localStorage.getItem('emailHost') + " ";
   namaUser = temp.split("@");
   $scope.namaUser = namaUser[0];
-  console.log("hello");
+  //console.log("hello");
   if(localStorage.getItem('idHost') != null){
     $scope.idHost = localStorage.getItem('idHost');
-    console.log($scope.idHost);
+    //console.log($scope.idHost);
   }else{
     $scope.idHost = null;
-    console.log($scope.idHost);
+    //console.log($scope.idHost);
   }
 
   // $scope.url = "start-host";
 
   authService.getToken().success(function(data){
-    console.log("Connected to API");
+    //console.log("Connected to API");
     if(data.error == "success"){
-      console.log("Token Success");
-      console.log(data);
+      //console.log("Token Success");
+      //console.log(data);
       //credentials.token = data.token;
       // console.log("AAAA :   " + credentials.token);
       authService.setToken(data.token);
@@ -46,12 +46,12 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
               userService.getAccount(idHost).success(function(data){
                 // $scope.host = data.content[0];
                 // $scope.host.idHost = localStorage.getItem('idHost');
-                console.log("success get image");
+                //console.log("success get image");
                 $scope.img = data.content[0].img_base64;
               })
           }
       }).error(function(data, status, header, config){
-          console.log(data.message);
+          //console.log(data.message);
       });
 
       summaryService.isHost().success(function(data){
@@ -62,7 +62,7 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
               $("#startHosting").show();
           }
       }).error(function(data){
-          console.log(data.message);
+          //console.log(data.message);
       });
 
       let uEmail = localStorage.getItem('emailHost');
@@ -71,14 +71,14 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
         let idHost = localStorage.getItem('idHost');
         $scope.idHost = idHost;
         userService.getAccount(idHost).success(function(data, status, header, config){
-            console.log(data);
+            //console.log(data);
             if(data.error = "success"){
-              console.log("success");
-              console.log(data);
+              //console.log("success");
+              //console.log(data);
             }else{
-              console.log("error Get Account Data")
-              console.log(data);
-              console.log(data.message);
+              //console.log("error Get Account Data")
+              //console.log(data);
+              //console.log(data.message);
             }
         })
       }
@@ -98,13 +98,13 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
 
     // logout session
     $scope.logout = function(){
-      console.log("logout");
+      //console.log("logout");
         userService.logout().success(function(data, status, header, config){
-            console.log(data);
+            //console.log(data);
             localStorage.clear();
             sessionStorage.clear();
             $state.go('home', {}).then(function() {
-              console.log("state go home");
+              //console.log("state go home");
               window.location.reload();
             });
             // window.location.reload();
@@ -112,8 +112,8 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
             // $('.dropdown').removeClass('hide');
             // $('#img-acc').addClass('hide');
         }).error(function(data, status, header, config){
-            console.log(data);
-            console.log(data.message);
+            //console.log(data);
+            //console.log(data.message);
         });
     }
 

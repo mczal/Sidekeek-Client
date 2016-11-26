@@ -37,7 +37,7 @@
 
 	</head>
 
-	<body id="page-top">
+	<body id="page-top" ng-cloak>
 		<!-- Navigation -->
 		<nav class="navbar navbar-default navbar-fixed-top navbar-custom" ng-controller="IndexController">
 			<div class="container-fluid">
@@ -82,11 +82,11 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-12 text-center">
-											<a ui-sref="profile({idHost:{{idHost}},type:'0'})"><img ng-if="loggedIn == true && img != null" ng-src={{img}} alt="" class="img-circle img-acc-child"></a>
-											<a ui-sref="profile({idHost:{{idHost}},type:'0'})"><img ng-if="loggedIn == true && img == null" src="./src/assets/img/imgacc.png" alt="" class="img-circle img-acc-child"></a>
+											<a ng-if="loggedIn == true" ui-sref="profile({idHost:{{idHost}},type:'0'})"><img ng-if="loggedIn == true && img != null" ng-src={{img}} alt="" class="img-circle img-acc-child"></a>
+											<a ng-if="loggedIn == true" ui-sref="profile({idHost:{{idHost}},type:'0'})"><img ng-if="loggedIn == true && img == null" src="./src/assets/img/imgacc.png" alt="" class="img-circle img-acc-child"></a>
 										</div>
 									</div>
-									<div class="row">
+									<div ng-if="loggedIn == true" class="row">
 										<div class="text-center">
 											<a ui-sref="profile({idHost:{{idHost}},type:'0'})"><em class="text-center" style="font-family: Lato-Regular">{{namaUser}}</em></a>
 											<div style="border-top: 1px solid #498844; margin: 9px 0;"></div>
