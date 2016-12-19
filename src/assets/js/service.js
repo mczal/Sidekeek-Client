@@ -24,7 +24,8 @@ function curDate(){
 
 const credentials = {
   url : "http://103.236.201.92:3000/sideAPIkeek",
-  token : ""
+  token : "",
+  tempSearch: null
 }
 
 appServices.factory('generalSerivce',function(){
@@ -91,8 +92,7 @@ appServices.factory('authService',function($http){
        for( var i=0; i < 10; i++ )
            text += possible.charAt(Math.floor(Math.random() * possible.length));
 
-       //return text;
-       localStorage.setItem("session", text);
+       return text;
     }
   }
 });
@@ -121,6 +121,14 @@ function($http){
           page:1
         }
       })
+    },
+
+    setTempSearch : function(tempSearch){
+      return credentials.tempSearch = tempSearch;
+    },
+
+    getTempSearch : function(){
+      return credentials.tempSearch;
     }
   }
 });
@@ -276,6 +284,20 @@ appServices.factory('userService',
             data: $.param({
                 token: credentials.token,
                 sessionCode: localStorage.getItem('session')
+            })
+        })
+      },
+
+      confirmAccount: function(uq){
+        return $http({
+            method: 'POST',
+            url: credentials.url + '/confirmation',
+            headers:{
+                'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token: credentials.token,
+                uniqueCode: uq
             })
         })
       },

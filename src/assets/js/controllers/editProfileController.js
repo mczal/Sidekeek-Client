@@ -88,9 +88,9 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      }
 
      $scope.addNewPortofolio = function (){
-       let portfolioData = {
+       var portfolioData = {
          title : $scope.form.title,
-         imageBase64 : "data:" + $scope.myFile.filetype + ";" + "base64," + $scope.myFile.base64,
+         imageBase64 : "data:" + $scope.myFile.fivarype + ";" + "base64," + $scope.myFile.base64,
          desc:  $("#portoDesc").val()
        }
 
@@ -103,7 +103,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      }
 
      $scope.addNewProductDesc = function(){
-        let productData = {
+        var productData = {
           name: $("#product_name").val(),
           price :$("#price").val(),
           desc : $("#product-desc").val()
@@ -114,7 +114,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
            console.log(data);
              $("#add_produk").show();
              for (var i = 0; i < $scope.myFile.length; i++) {
-                 var typeData = "data:" + $scope.myFile[i].filetype + ";";
+                 var typeData = "data:" + $scope.myFile[i].fivarype + ";";
                  var base64Data = "base64," + $scope.myFile[i].base64;
                  var imageBase64 = typeData + base64Data;
                 //  $http({
@@ -132,7 +132,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
                 //      })
                 //  })
 
-                let imageData = {
+                var imageData = {
                   id : data.idProduct ,
                   source: imageBase64
                 }
@@ -167,12 +167,12 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
 
      $scope.editPortofolio = function(idPortofolio){
          console.log($scope.myFile);
-        //  var typeData = "data:" + $scope.myFile.filetype + ";";
+        //  var typeData = "data:" + $scope.myFile.fivarype + ";";
         //  var base64Data = "base64," + $scope.myFile.base64;
         //  var imgBase64 = typeData + base64Data;
         //  console.log(imageBase64);
          console.log(idPortofolio);
-         let newPortoData = {
+         var newPortoData = {
            id: idPortofolio,
            title: $scope.editPortoDetails.title,
            desc: $scope.editPortoDetails.description
@@ -185,10 +185,10 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
              if ($scope.myFile == undefined){
                 console.log("No new images");
              }else{
-               //  var typeData = "data:" + $scope.myFile.filetype + ";";
+               //  var typeData = "data:" + $scope.myFile.fivarype + ";";
                //  var base64Data = "base64," + $scope.myFile.base64;
-               var imgBase64 = "data:" + $scope.myFile.filetype + ";" + "base64," + $scope.myFile.base64;
-               let imgData = {
+               var imgBase64 = "data:" + $scope.myFile.fivarype + ";" + "base64," + $scope.myFile.base64;
+               var imgData = {
                  id: idPortofolio,
                  source: imgBase64
                }
@@ -203,7 +203,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      }
 
      $scope.editProductDesc = function(idProduct){
-       let productData = {
+       var productData = {
          namaProduk : $("#product_name_"+idProduct).val(),
          harga : $("#price_"+idProduct).val(),
          productDesc : $("#product_desc_"+idProduct).val(),
@@ -235,7 +235,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      }
 
      $scope.editProfiledesc = function (){
-       let newData = {
+       var newData = {
          title : $('#title').val(),
          category : $("#category").val(),
          desc : $("#companyDesc").val(),
@@ -257,7 +257,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
              console.log(data.message);
          });
      }
-    let idHost = localStorage.getItem('idHost');
+    var idHost = localStorage.getItem('idHost');
     console.log("Getting Profile for " + idHost);
     userService.getProfile(idHost).
      success(function(data, status, header, config){
@@ -302,34 +302,34 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
     userService.getProductsEager(10,1).success(function(data, status, header, config){
       console.log(data);
       $scope.dataProducts = data.content.products_with_images;
-      let tempData = data.content.products_with_images;
+      var tempData = data.content.products_with_images;
 
 
       // console.log(tempData.length);
-      // for (let i = 0; i < tempData.length; i++){
+      // for (var i = 0; i < tempData.length; i++){
       //   console.log(tempData[i].images);
       //   var tempImage = tempData[i].images.split(";");
       //   console.log(tempImage);
       //
-      //   for(let j = 0; j < tempImage.length - 1; j++){
+      //   for(var j = 0; j < tempImage.length - 1; j++){
       //     console.log(tempImage[j]);
-      //     let image = tempImage[j].split(",");
+      //     var image = tempImage[j].split(",");
       //     console.log(i);
       //     console.log(image);
       //   }
       // }
       // console.log(tempImages);
-      // let prodImages = tempImages;
+      // var prodImages = tempImages;
       // console.log(prodImages);
       $scope.dataProducts.forEach(function(item){
-        // let tempImg = item.images.split(';');
+        // var tempImg = item.images.split(';');
         // //console.log(tempImg);
-        // //let img = tempImg[0].split(',');
-        // let imgArr = [];
+        // //var img = tempImg[0].split(',');
+        // var imgArr = [];
         // tempImg.forEach(function(x){
-        //   let img = x.split(",");
+        //   var img = x.split(",");
         //   //console.log(img);
-        //   let imgObj = {
+        //   var imgObj = {
         //     id: img[0],
         //     src: img[1]
         //   }
@@ -339,7 +339,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
         // })
 
         //console.log(img);
-        // let imgObj = {
+        // var imgObj = {
         //   id: img[0],
         //   src: img[1]
         // }
@@ -347,9 +347,9 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
         // imgArr.push(imgObj);
         // console.log(imgArr);
         // tempImg.forEach(function(x){
-        //   let imgArr = [];
-        //   let img = x.split(',');
-        //   let imgObj = {
+        //   var imgArr = [];
+        //   var img = x.split(',');
+        //   var imgObj = {
         //     id: img[0],
         //     src: img[1]
         //   }
@@ -371,7 +371,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
         item.images = imgs.filter(imgData => imgData && imgData.id);
         console.log(item);
 
-        // let imgObj = {
+        // var imgObj = {
         //   featured_img: imgs.shift(),
         //   other_imgs: imgs.filter(imgData => imgData && imgData.id)
         // };

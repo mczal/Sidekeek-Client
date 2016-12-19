@@ -1,4 +1,13 @@
 var sidekeekApp = angular.module('sidekeekApp', [
+    'ngSanitize',
+    'naif.base64',
+    'angular-img-cropper',
+    'mgcrea.bootstrap.affix',
+    'angulartics',
+    'angulartics.google.analytics',
+    'ngRoute',
+    'ui.router',
+    'ui.bootstrap',
     'app.service',
     'app.index',
     'app.login',
@@ -15,14 +24,7 @@ var sidekeekApp = angular.module('sidekeekApp', [
     'app.rule',
     'app.community',
     'app.aboutus',
-    'ui.bootstrap',
-    'ui.router',
     'app.footer',
-	'ngRoute',
-    'ngSanitize',
-    'naif.base64',
-    'angular-img-cropper',
-    'mgcrea.bootstrap.affix'
 ]);
 sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
 
@@ -120,13 +122,13 @@ sidekeekApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/account-host',
           views:{
             '':{
-              templateUrl:'./src/partials/acccount-host.html',
-              controller:'AvvountController'
+              templateUrl:'./src/partials/account-host.html',
+              controller:'AccountController'
             }
           }
         })
         .state('confirmation',{
-          url:'/confirmation',
+          url:'/confirmation/:uq',
           views:{
             '':{
               templateUrl:'./src/partials/confirmation.html',

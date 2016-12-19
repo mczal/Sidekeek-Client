@@ -2,23 +2,19 @@ angular.module('app.confirmation',[])
 
 .controller('ConfirmationController',confirmationController);
 
-confirmationController.$inject = ['$scope', '$http', '$timeout', '$window', '$location'];
+confirmationController.$inject = ['$scope', '$http', '$timeout', '$window', '$location','$stateParams','userService','authService'];
 
-function confirmationController($scope, $http, $timeout, $window, $location){
-  var unique = $location.search().uq;
-  $http({
-      method: 'POST',
-      url: urlAPI + '/confirmation',
-      headers:{
-          'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-      },
-      data: $.param({
-          token: token,
-          uniqueCode: unique
-      })
-  }).success(function(data){
+function confirmationController($scope, $http, $timeout, $window, $location,$stateParams,userService,authService){
+  var unique = $stateParams.uq;
+  userService.confirmAccount(unique).success(function(data){
+    console.log(data);
+    if (data.error != undefined){
+
+    }
       localStorage.setItem('session', data.session);
       localStorage.setItem('emailHost', data.email);
+      localStorage.setItem('idHost', data.idHost);
+      authService.setToken(data.token);
       var redirectTimeout;
       if (localStorage.getItem('tipeMember') == 0) {
           var redirect = function(){

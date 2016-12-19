@@ -28,6 +28,7 @@
     "angular-img-cropper": "~1.1.0",
     "angular-base64-upload": "^0.1.19",
     "angular-bootstrap-affix": "^0.2.2",
-    "angular-ui-router": "^0.3.1"
+    "angular-ui-router": "^0.3.1",
+    "sweetalert2": "^6.2.1"
   }
 }

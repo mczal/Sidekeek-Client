@@ -8,23 +8,24 @@ function accountController($scope, $http, $window,userService,summaryService){
             $window.location.reload();
         }
         $scope.editAccount = function(){
-          let about = $("#about").val();
-          let city = $("#region").val();
-          let address = $("#address").val();
+          var about = $("#about").val();
+          var city = $("#region").val();
+          var address = $("#address").val();
 
-          // let companyName = $scope.dataAccount.company_name;
-          // let imageBase64 = "data:" + $scope.fileUpload.filetype + ";" + "base64," + $scope.fileUpload.base64;
-          // let handphone = $scope.dataAccount.handphone;
+          // var companyName = $scope.dataAccount.company_name;
+          // var imageBase64 = "data:" + $scope.fileUpload.filetype + ";" + "base64," + $scope.fileUpload.base64;
+          // var handphone = $scope.dataAccount.handphone;
 
-          let accountData = {
+          var accountData = {
             companyName : $scope.dataAccount.company_name,
             about: about,
             handphone: $scope.dataAccount.handphone,
             city: city,
             address: address
           }
-
-          let imageBase64 = "data:" + $scope.fileUpload.filetype + ";" + "base64," + $scope.fileUpload.base64;
+          if($scope.fileUpload != undefined){
+            var imageBase64 = "data:" + $scope.fileUpload.filetype + ";" + "base64," + $scope.fileUpload.base64;
+          }
 
             userService.editAccount(accountData).success(function(data, status, header, config){
               if (localStorage.getItem('tipeMember') == 1) {
@@ -45,10 +46,10 @@ function accountController($scope, $http, $window,userService,summaryService){
                 console.log(data.message);
             });
         }
-          let idHost = localStorage.getItem('idHost');
+          var idHost = localStorage.getItem('idHost');
           userService.getAccount(idHost).success(function(data, status, header, config){
             console.log(data);
-            let userData = data.content[0];
+            var userData = data.content[0];
             $scope.dataAccount = userData;
             $scope.img = userData.img_base64;
         }).

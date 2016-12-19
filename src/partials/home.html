@@ -12,22 +12,22 @@
 			<div class="col-lg-12 text-center">
 				<div class="search">
 					<div class="btn-search">
-						<select name="selectedData" class="form-control-home input-lg">
+						<select name="selectedData" class="form-control-home input-lg" id="search-tipe">
 							<option value="">---Please select---</option> <!-- not selected / blank option -->
 					      	<option value="goods">Goods</option>
 					      	<option value="service">Service</option>
 					    </select>
-						<select class="form-control-home input-lg">
+						<select class="form-control-home input-lg" id="search-cat">
 							<option style="display:none;">Categories</option>
 							<option ng-repeat="categories in categoriesData" value="{{categories.id_cat}}">{{categories.category_name}}</option>
 						</select>
-						<select class="form-control-home input-lg">
+						<select class="form-control-home input-lg" id="search-loc">
 							<option style="display:none;">Location</option>
 							<option ng-repeat="province in provinceData" value="{{province.id_province}}">{{province.province_name}}</option>
 						</select>
 					</div>
-					<input class="input-lg" type="text" placeholder="ex. Creative">
-					<button class="btn btn-success btn-lg" style="vertical-align:0px">Search</button>
+					<input id="search-query" class="input-lg" type="text" placeholder="ex. Creative">
+					<button class="btn btn-success btn-lg" style="vertical-align:0px" ng-click="startSearch()">Search</button>
 				</div>
 			</div>
 		</div>
