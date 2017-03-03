@@ -232,6 +232,16 @@
     background-color: #722040;
 }
 
+.footer-above a, .footer-below a{
+  cursor: pointer;
+}
+
+.swal2-confirm.swal2-styled{
+  color: #fff !important;
+  background-color: #5cb85c !important;
+  border-color: #4cae4c !important;
+}
+
 @media screen and (max-width: 50em) {
 	.inputfile-6 + label strong {
 		display: block;
