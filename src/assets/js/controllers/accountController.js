@@ -27,11 +27,11 @@ function accountController($scope, $http, $window,userService,summaryService){
             var imageBase64 = "data:" + $scope.fileUpload.filetype + ";" + "base64," + $scope.fileUpload.base64;
           }
 
-            userService.editAccount(accountData).then(function(data, status, header, config){
+            userService.editAccount(accountData).then(function(response){
               if (localStorage.getItem('tipeMember') == 1) {
                   console.log("success update account");
-                  userService.editAccountPic(imageBase64).then(function(data){
-                    console.log(data);
+                  userService.editAccountPic(imageBase64).then(function(response){
+                    console.log(response);
                     console.log("success update Pic");
                     $window.location.href="#/edit-profile-host";
                     $window.location.reload();
@@ -43,25 +43,25 @@ function accountController($scope, $http, $window,userService,summaryService){
                   $window.location.reload();
               }
             },
-            function(data, status, header, config){
-                console.log(data.message);
+            function(response){
+                console.log(response.data.message);
             });
         }
           var idHost = localStorage.getItem('idHost');
-          userService.getAccount(idHost).then(function(data, status, header, config){
-            console.log(data);
-            var userData = data.content[0];
+          userService.getAccount(idHost).then(function(response){
+            console.log(response.data);
+            var userData = response.data.content[0];
             $scope.dataAccount = userData;
             $scope.img = userData.img_base64;
-        },function(data, status, header, config){
-            console.log(data.message);
+        },function(response){
+            console.log(response.data.message);
         });
 
-        summaryService.getCities().then(function(data, status, header, config){
+        summaryService.getCities().then(function(response){
           console.log("cities success");
-          console.log(data);
-            $scope.citiesData = data;
-        },function(data, status, header, config){
-            console.log(data.message);
+          console.log(response.data);
+            $scope.citiesData = response.data;
+        },function(response){
+            console.log(response.data.message);
         });
     };

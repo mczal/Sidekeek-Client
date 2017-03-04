@@ -10,10 +10,10 @@ function startController($scope, $http, summaryService,generalSerivce,registerSe
   $('#button-goods').hide();
   $('#button-service').hide();
 
-  summaryService.getCategories().then(function(data, status, header, config){
-      $scope.categoriesData = data;
-  },function(data, status, header, config){
-      console.log(data.message);
+  summaryService.getCategories().then(function(response){
+      $scope.categoriesData = response.data;
+  },function(response){
+      console.log(response.data.message);
   });
 
   var idTipe = null;

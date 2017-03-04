@@ -16,14 +16,14 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
     $scope.idHost = null;
   }
 
-  authService.getToken().then(function(data){
-    if(data.error == "success"){
+  authService.getToken().then(function(response){
+    if(response.data.error == "success"){
       let idHost = localStorage.getItem('idHost');
-      authService.setToken(data.token);
+      authService.setToken(response.data.token);
       userService.getAccount(idHost)
-      .then(function(data){
-        console.log(data);
-        if(data.error == 'error'){
+      .then(function(response){
+        console.log(response.data);
+        if(response.data.error == 'error'){
           $('#btn-hide').removeClass('hide');//sign-up button
           $('.dropdown').removeClass('hide');//login button
           $('#img-acc').addClass('hide');//profile pict
@@ -35,12 +35,12 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
           $('#loginBtn').addClass('hide');
           $('#img-acc').removeClass('hide');
         }
-      },function(data){
+      },function(response){
           $('#btn-hide').removeClass('hide');//sign-up button
           $('.dropdown').removeClass('hide');//login button
           $('#img-acc').addClass('hide');//profile pict
           $scope.loggedIn = false;
-          console.log(data.message);
+          console.log(response.data.message);
       });
 
       // userService.integrityCheck().success(function(data, status, header, config){
@@ -65,15 +65,15 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
       //     console.log(data.message);
       // });
 
-      summaryService.isHost().then(function(data){
-          localStorage.setItem('tipeMember', data.code);
-          if (data.code == 1) {
+      summaryService.isHost().then(function(response){
+          localStorage.setItem('tipeMember', response.data.code);
+          if (response.data.code == 1) {
               $("#startHosting").hide();
           }else{
               $("#startHosting").show();
           }
-      },function(data){
-          console.log(data.message);
+      },function(response){
+          console.log(response.data.message);
       });
 
       let uEmail = localStorage.getItem('emailHost');
@@ -81,8 +81,8 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
       if (uEmail != null){
         let idHost = localStorage.getItem('idHost');
         $scope.idHost = idHost;
-        userService.getAccount(idHost).success(function(data, status, header, config){
-            if(data.error = "success"){
+        userService.getAccount(idHost).success(function(response){
+            if(response.data.error = "success"){
             }else{
             }
         })
@@ -104,7 +104,7 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
     // logout session
     $scope.logout = function(){
       //console.log("logout");
-        userService.logout().then(function(data, status, header, config){
+        userService.logout().then(function(response){
             //console.log(data);
             $scope.loggedIn = false;
             localStorage.clear();
@@ -117,7 +117,7 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
             // $('#btn-hide').removeClass('hide');
             // $('.dropdown').removeClass('hide');
             // $('#img-acc').addClass('hide');
-        },function(data, status, header, config){
+        },function(response){
             //console.log(data);
             //console.log(data.message);
         });

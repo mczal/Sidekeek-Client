@@ -33,21 +33,21 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
       // let idHost = localStorage.getItem("idHost");
       let idHost = $stateParams.idHost;
       userService.getAccount(idHost).
-        then(function(data, status, header, config){
-          console.log(data);
-            $scope.dataAccount = data.content[0];
-            $scope.img = data.content[0].img_base64;
-        },function(data, status, header, config){
-            //console.log(data.message);
+        then(function(response){
+          console.log(response.data);
+            $scope.dataAccount = response.data.content[0];
+            $scope.img = response.data.content[0].img_base64;
+        },function(response){
+
         });
 
         userService.getProfile(idHost).
-        then(function(data, status, header, config){
-            $scope.dataProfile = data.content[0];
-            console.log(data);
+        then(function(response){
+            $scope.dataProfile = response.data.content[0];
+            console.log(response.data);
             //console.log();
-            if (data.content[0].sumrate_totalreview != ""){
-              $scope.dataProfile.rate = new Array (Math.floor(data.content[0].sumrate_totalreview.split('_')[0] / data.content[0].sumrate_totalreview.split('_')[1]));
+            if (response.data.content[0].sumrate_totalreview != ""){
+              $scope.dataProfile.rate = new Array (Math.floor(response.data.content[0].sumrate_totalreview.split('_')[0] / response.data.content[0].sumrate_totalreview.split('_')[1]));
             }else{
               $scope.dataProfile.rate = null;
             }
