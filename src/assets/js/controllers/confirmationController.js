@@ -7,7 +7,7 @@ confirmationController.$inject = ['$scope', '$http', '$state','$stateParams','us
 function confirmationController($scope, $http, $state, $stateParams, userService, authService){
   authService.getToken().then(function(response) {
     authService.setToken(response.data.token);
-    userService.confirmAccount(unique).then(function(response){
+    userService.confirmAccount($stateParams.uq).then(function(response){
       console.log(response);
       if (response.data.error != undefined){
 
@@ -24,8 +24,8 @@ function confirmationController($scope, $http, $state, $stateParams, userService
           localStorage.setItem('tipeMember', 1);
           $state.go("account-host");
         }
-    },function(data){
-        console.log(data.message);
+    },function(response){
+        console.log(response.data.message);
     });
   })
 };
