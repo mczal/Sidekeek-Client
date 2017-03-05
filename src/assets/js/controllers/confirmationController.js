@@ -2,46 +2,28 @@ angular.module('app.confirmation',[])
 
 .controller('ConfirmationController',confirmationController);
 
-confirmationController.$inject = ['$scope', '$http', '$timeout', '$window', '$location','$stateParams','userService','authService'];
+confirmationController.$inject = ['$scope', '$http', '$state','$stateParams','userService','authService'];
 
-function confirmationController($scope, $http, $timeout, $window, $location,$stateParams,userService,authService){
+function confirmationController($scope, $http, $state, $stateParams, userService, authService){
   var unique = $stateParams.uq;
-  userService.confirmAccount(unique).success(function(response){
+  userService.confirmAccount(unique).then(function(response){
     console.log(response);
     if (response.data.error != undefined){
 
     }
+      authService.setToken(response.data.token);
       localStorage.setItem('session', response.data.session);
       localStorage.setItem('emailHost', response.data.email);
-      localStorage.setItem('idHost', response.data.idHost);
-      authService.setToken(response.data.token);
-      var redirectTimeout;
-      if (localStorage.getItem('tipeMember') == 0) {
-          var redirect = function(){
-              $window.location.href = '#/home'
-              $window.location.reload();
-          }
+      localStorage.setItem('idHost', response.data.idHost
+      
+      if (response.data.idHost == null) {
+        localStorage.setItem('tipeMember', 0);
+        $state.go("home");
       }else{
-          var redirect = function(){
-              $window.location.href = '#/account-host'
-              $window.location.reload();
-          }
+        localStorage.setItem('tipeMember', 1);
+        $state.go("account-host");
       }
-      // var redirect = function() {
-      //     if (localStorage.getItem('tipeMember') == 0) {
-      //         $window.location.href = '#/home'
-      //         $window.location.reload();
-      //     }else{
-      //         $window.location.href = '#/account-temp'
-      //         $window.location.reload();
-      //     }
-      // }
-      $timeout.cancel(redirectTimeout);
-      redirectTimeout = $timeout(function() {
-          var timeoutTime = 5000;
-          redirectTimeout = $timeout(redirect, timeoutTime);
-      });
-  }).error(function(data){
+  },function(data){
       console.log(data.message);
   });
 };
