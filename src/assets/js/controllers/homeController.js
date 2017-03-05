@@ -4,16 +4,16 @@ angular.module("app.home",["app.service"])
 homeController.$inject = ['$scope',"$http","$uibModal","summaryService","searchService"];
 
 function homeController($scope,$http,$uibModal,summaryService,searchService){
-  summaryService.getCategories().then(function(data, status, header, config){
-      $scope.categoriesData = data;
-  },function(data, status, header, config){
-      console.log(data.message);
+  summaryService.getCategories().then(function(response){
+      $scope.categoriesData = response.data;
+  },function(response){
+      console.log(response.data.message);
   });
 
-  summaryService.getProvince().then(function(data, status, header, config){
-      $scope.provinceData = data;
-  },function(data, status, header, config){
-      console.log(data.message);
+  summaryService.getProvince().then(function(response){
+      $scope.provinceData = response.data;
+  },function(response){
+      console.log(response.data.message);
   });
 
   $scope.contactus = function (size) {
@@ -42,14 +42,14 @@ function homeController($scope,$http,$uibModal,summaryService,searchService){
 
     console.log(searchData);
 
-    searchService.searchTemplate(searchData).then(function(data){
-      console.log(data);
-      if (data.error == "success"){
-        if(data.content.hosts.length > 0 || data.content.products.length > 0){
-          $scope.hosts = data.content.hosts;
-          $scope.products = data.content.products;
-          console.log(data);
-          searchService.setTempSearch(data);
+    searchService.searchTemplate(searchData).then(function(response){
+      console.log(response.data);
+      if (response.data.error == "success"){
+        if(response.data.content.hosts.length > 0 || response.data.content.products.length > 0){
+          $scope.hosts = response.data.content.hosts;
+          $scope.products = response.data.content.products;
+          console.log(response.data);
+          searchService.setTempSearch(response.data);
           $state.go('discover');
         } else {
           swal('Oops!','No data found, please try another query.','error');

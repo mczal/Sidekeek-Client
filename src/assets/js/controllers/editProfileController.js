@@ -94,11 +94,11 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
          desc:  $("#portoDesc").val()
        }
 
-      userService.addNewPortofolio(portfolioData).then(function(data, status, header, config){
+      userService.addNewPortofolio(portfolioData).then(function(response){
              //$window.location.reload();
              console.log("success add new portofolio");
-         },function(data, status, header, config){
-             console.log(data.message);
+         },function(response){
+             console.log(response.data.message);
          });
      }
 
@@ -109,9 +109,9 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
           desc : $("#product-desc").val()
         }
         console.log(productData);
-         userService.addNewProductDesc(productData).then(function(data, status, header, config){
+         userService.addNewProductDesc(productData).then(function(response){
            console.log("add new produk");
-           console.log(data);
+           console.log(response.data);
              $("#add_produk").show();
              for (var i = 0; i < $scope.myFile.length; i++) {
                  var typeData = "data:" + $scope.myFile[i].fivarype + ";";
@@ -138,30 +138,30 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
                 }
                 console.log(imageData);
 
-                 userService.addProductImage(imageData).then(function(data, status, header, config){
-                     console.log(data.message);
+                 userService.addProductImage(imageData).then(function(response){
+                     console.log(response.data.message);
                      $window.location.reload();
-                 },function(data, status, header, config){
-                     console.log(data.message);
+                 },function(response){
+                     console.log(response.data.message);
                  });
              }
-             console.log("success add new product. Id Prod="+data.idProduct);
-         },function(data, status, header, config){
-             console.log(data.message);
+             console.log("success add new product. Id Prod="+response.data.idProduct);
+         },function(response){
+             console.log(response.data.message);
          });
      }
 
      $scope.viewPortoEditDetails = function(idPortofolio){
       console.log("getting porto data");
       console.log(idPortofolio);
-      userService.getPortofolioDetail(idPortofolio).then(function(data, status, header, config){
+      userService.getPortofolioDetail(idPortofolio).then(function(response){
           console.log("success get porto detail");
-             console.log(data);
+             console.log(response.data);
              //$scope.img = data.content[0].img_base64;
-             $scope.editPortoDetails = data.content[0];
+             $scope.editPortoDetails = response.data.content[0];
             //  $scope.form.title = data.content[0].title;
-         },function(data, status, header, config){
-             console.log(data.message);
+         },function(response){
+             console.log(response.data.message);
          });
      }
 
@@ -178,9 +178,9 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
            desc: $scope.editPortoDetails.description
          }
          console.log(newPortoData)
-         userService.editPortofolio(newPortoData).then(function(data, status, header, config){
+         userService.editPortofolio(newPortoData).then(function(response){
             //  console.log("berhasil");
-             console.log(data);
+             console.log(response.data);
 
              if ($scope.myFile == undefined){
                 console.log("No new images");
@@ -192,13 +192,13 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
                  id: idPortofolio,
                  source: imgBase64
                }
-               userService.editPortofolioImg(imgData).then(function(data){
+               userService.editPortofolioImg(imgData).then(function(response){
                  console.log("edit portfolio image");
-                 console.log(data);
+                 console.log(response.data);
                })
              }
-         },function(data, status, header, config){
-             console.log(data.message);
+         },function(response){
+             console.log(response.data.message);
          });
      }
 
@@ -213,12 +213,12 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
 
        var buttonVal = $("#button").val();
 
-       userService.editProductDesc(productData).then(function(data, status, header, config){
+       userService.editProductDesc(productData).then(function(response){
              //$window.location.reload();
-             console.log(data.message);
+             console.log(response.data.message);
              console.log("success edit product.");
-         },function(data, status, header, config){
-             console.log(data.message);
+         },function(response){
+             console.log(response.data.message);
          });
      }
 
@@ -247,22 +247,22 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
          newData.tipe = sessionStorage.getItem('idTipeProfile');
        }
        console.log(newData);
-         userService.editProfile(newData).then(function(data, status, header, config){
+         userService.editProfile(newData).then(function(response){
             //  window.location.reload();
-            console.log(data);
+            console.log(response.data);
             activateTab(1);
              // console.log(localStorage.getItem("session")+" "+curDate()+" "+sessionStorage.getItem('idTipeProfile')+" "+$scope.dataProfile.title+" "+$("#category").val()+" "+$("#companyDesc").val());
              // console.log('HAI');
-         },function(data, status, header, config){
-             console.log(data.message);
+         },function(response){
+             console.log(response.data.message);
          });
      }
     var idHost = localStorage.getItem('idHost');
     console.log("Getting Profile for " + idHost);
     userService.getProfile(idHost).
-     success(function(data, status, header, config){
-       console.log(data);
-         $scope.dataProfile = data.content[0];
+     success(function(response){
+       console.log(response.data);
+         $scope.dataProfile = response.data.content[0];
          if ($scope.dataProfile.id_tipe == 1) {
              $(".button_goods").css({'top': '5px', 'box-shadow': 'none', 'outline': 'none'});
              $(".button_service").css({'top': '', 'box-shadow': '', 'outline': ''});
@@ -270,37 +270,37 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
              $(".button_service").css({'top': '5px', 'box-shadow': 'none', 'outline': 'none'});
              $(".button_goods").css({'top': '', 'box-shadow': '', 'outline': ''});
          }
-     },function(data, status, header, config){
-         console.log(data.message);
+     },function(response){
+         console.log(response.data.message);
      });
 
     console.log("Getting Portfolios for " + idHost);
     userService.getPortofolios(idHost).
-     then(function(data, status, header, config){
+     then(function(response){
        console.log("success getting Portfolio");
-         $scope.dataPortofolios = data.content;
-         console.log(data);
-     },function(data, status, header, config){
-         console.log(data.message);
+         $scope.dataPortofolios = response.data.content;
+         console.log(response.data);
+     },function(response){
+         console.log(response.data.message);
      });
 
      summaryService.getCities()
-     .then(function(data, status, header, config){
-         $scope.citiesData = data;
-     },function(data, status, header, config){
-         console.log(data.message);
+     .then(function(response){
+         $scope.citiesData = response.data;
+     },function(response){
+         console.log(response.data.message);
      });
 
-     summaryService.getCategories().then(function(data, status, header, config){
-         $scope.categoriesData = data;
-     },function(data, status, header, config){
-         console.log(data.message);
+     summaryService.getCategories().then(function(response){
+         $scope.categoriesData = response.data;
+     },function(response){
+         console.log(response.data.message);
      });
 
-    userService.getProductsEager(10,1).then(function(data, status, header, config){
-      console.log(data);
-      $scope.dataProducts = data.content.products_with_images;
-      var tempData = data.content.products_with_images;
+    userService.getProductsEager(10,1).then(function(response){
+      console.log(response.data);
+      $scope.dataProducts = response.data.content.products_with_images;
+      var tempData = response.data.content.products_with_images;
 
 
       // console.log(tempData.length);
@@ -380,8 +380,8 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
 
       console.log($scope.dataProducts);
 
-    },function(data, status, header, config){
-         console.log(data.message);
+    },function(response){
+         console.log(response.data.message);
      });
 
     // userService.getProductsEager().success(function(data, status, header, config){

@@ -6,15 +6,15 @@ confirmationController.$inject = ['$scope', '$http', '$timeout', '$window', '$lo
 
 function confirmationController($scope, $http, $timeout, $window, $location,$stateParams,userService,authService){
   var unique = $stateParams.uq;
-  userService.confirmAccount(unique).success(function(data){
-    console.log(data);
-    if (data.error != undefined){
+  userService.confirmAccount(unique).success(function(response){
+    console.log(response);
+    if (response.data.error != undefined){
 
     }
-      localStorage.setItem('session', data.session);
-      localStorage.setItem('emailHost', data.email);
-      localStorage.setItem('idHost', data.idHost);
-      authService.setToken(data.token);
+      localStorage.setItem('session', response.data.session);
+      localStorage.setItem('emailHost', response.data.email);
+      localStorage.setItem('idHost', response.data.idHost);
+      authService.setToken(response.data.token);
       var redirectTimeout;
       if (localStorage.getItem('tipeMember') == 0) {
           var redirect = function(){

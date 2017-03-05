@@ -8,19 +8,24 @@ function signUpController($scope, $http, $window, userService,registerService,au
        let email = $scope.form.email;
        let pass = $scope.form.password;
        let confirm = $scope.form.confirmation;
-       authService.getToken().then(function(data){
-         console.log(data);
-         if(data.error == "success"){
-           authService.setToken(data.token);
+       authService.getToken().then(function(response){
+         console.log(response.data);
+         if(response.data.error == "success"){
+           authService.setToken(response.data.token);
            let regData = registerService.getRegisterData();
            console.log(regData);
            if(regData == null){
-             userService.signup(email,pass,confirm).success(function(data, status, header, config){
-                 console.log(data.message);
+             userService.signup(email,pass,confirm).then(function(response){
+               if(response.data.error == "success"){
+                 console.log(response.data.message);
                  //$window.location.href = '#/confirm';
                  $state.go('confirm');
-             },function(data, status, header, config){
-                 console.log(data);
+               }else{
+                 swal("Oops!",response.data.message,"error");
+                 console.log(response);
+               }
+             },function(response){
+                 console.log(response.data);
              });
            }else{
              regData.email = email;
@@ -28,12 +33,12 @@ function signUpController($scope, $http, $window, userService,registerService,au
              regData.confirm = confirm;
 
              console.log(regData)
-             userService.hostSignup(regData).then(function(data, status, header, config){
-                 console.log(data);
+             userService.hostSignup(regData).then(function(response){
+                 console.log(response.data);
                  registerService.clearRegisterData();
                  $state.go('confirm');
-             },function(data, status, header, config){
-                 console.log(data);
+             },function(response){
+                 console.log(response.data);
              });
            }
          }else{

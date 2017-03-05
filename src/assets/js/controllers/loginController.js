@@ -10,12 +10,12 @@ function loginController($scope,$http,$window,userService,$location,$state,$rout
         // localStorage.setItem('emailHost', email);
         let session = authService.generateSession();
         userService.login(email,pass)
-        .then(function(data, status, header, config){
-          console.log(data);
-          if(data.uniqueCode == undefined){
+        .then(function(response){
+          console.log(response.data);
+          if(response.data.uniqueCode == undefined){
             localStorage.setItem('emailHost', email);
-            localStorage.setItem('idHost', data.idHost);
-            localStorage.setItem('session', data.session);
+            localStorage.setItem('idHost', response.data.idHost);
+            localStorage.setItem('session', response.data.session);
             sessionStorage.setItem("activeTab", 1);
             $state.go('home', {}).then(function() {
               console.log("state go home");
@@ -30,8 +30,8 @@ function loginController($scope,$http,$window,userService,$location,$state,$rout
             });
           }
 
-        },function(data, status, header, config){
-            console.log(data.message);
+        },function(response){
+            console.log(response.data.message);
         });
     }
 };

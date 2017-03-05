@@ -28,20 +28,20 @@ function discoverController($scope, $http, $uibModal,uiService,searchService){
     console.log(searchData);
     console.log(searchData.query);
 
-    searchService.searchTemplate(searchData).then(function(data){
-      if (data.error == "success"){
-        $scope.hosts = data.content.hosts;
-        $scope.products = data.content.products;
+    searchService.searchTemplate(searchData).then(function(response){
+      if (response.data.error == "success"){
+        $scope.hosts = response.data.content.hosts;
+        $scope.products = response.data.content.products;
         //console.log($scope.hosts[0].img_base64);
         //console.log($scope.products[0]);
 
         console.log("success");
-        console.log(data);
+        console.log(response.data);
         console.log($scope.hosts);
         console.log($scope.products);
       }else{
         console.log("error");
-        console.log(data);
+        console.log(response.data);
       }
 
     });
