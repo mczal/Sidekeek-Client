@@ -5,10 +5,10 @@ angular.module('app.confirmation',[])
 confirmationController.$inject = ['$scope', '$http', '$state', '$stateParams','userService','authService'];
 
 function confirmationController($scope, $http, $state, $stateParams, userService, authService){
-  authService.getToken().success(function(data) {
+  authService.getToken().then(function(data) {
     authService.setToken(data.token);
 
-    userService.confirmAccount($stateParams.uq).success(function(data){
+    userService.confirmAccount($stateParams.uq).then(function(data){
       if (data.error != undefined){
         console.log(data);
         debugger;
@@ -25,7 +25,7 @@ function confirmationController($scope, $http, $state, $stateParams, userService
         $state.go("account-host");
       }
 
-    }).error(function(data){
+    },function(data){
         console.log(data.message);
     });
   })
