@@ -8,7 +8,7 @@ function signUpController($scope, $http, $window, userService,registerService,au
        let email = $scope.form.email;
        let pass = $scope.form.password;
        let confirm = $scope.form.confirmation;
-       authService.getToken().success(function(data){
+       authService.getToken().then(function(data){
          console.log(data);
          if(data.error == "success"){
            authService.setToken(data.token);
@@ -19,7 +19,7 @@ function signUpController($scope, $http, $window, userService,registerService,au
                  console.log(data.message);
                  //$window.location.href = '#/confirm';
                  $state.go('confirm');
-             }).error(function(data, status, header, config){
+             },function(data, status, header, config){
                  console.log(data);
              });
            }else{
@@ -28,11 +28,11 @@ function signUpController($scope, $http, $window, userService,registerService,au
              regData.confirm = confirm;
 
              console.log(regData)
-             userService.hostSignup(regData).success(function(data, status, header, config){
+             userService.hostSignup(regData).then(function(data, status, header, config){
                  console.log(data);
                  registerService.clearRegisterData();
                  $state.go('confirm');
-             }).error(function(data, status, header, config){
+             },function(data, status, header, config){
                  console.log(data);
              });
            }

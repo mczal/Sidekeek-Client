@@ -28,7 +28,7 @@ function discoverController($scope, $http, $uibModal,uiService,searchService){
     console.log(searchData);
     console.log(searchData.query);
 
-    searchService.searchTemplate(searchData).success(function(data){
+    searchService.searchTemplate(searchData).then(function(data){
       if (data.error == "success"){
         $scope.hosts = data.content.hosts;
         $scope.products = data.content.products;

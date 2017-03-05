@@ -27,10 +27,10 @@ function accountController($scope, $http, $window,userService,summaryService){
             var imageBase64 = "data:" + $scope.fileUpload.filetype + ";" + "base64," + $scope.fileUpload.base64;
           }
 
-            userService.editAccount(accountData).success(function(data, status, header, config){
+            userService.editAccount(accountData).then(function(data, status, header, config){
               if (localStorage.getItem('tipeMember') == 1) {
                   console.log("success update account");
-                  userService.editAccountPic(imageBase64).success(function(data){
+                  userService.editAccountPic(imageBase64).then(function(data){
                     console.log(data);
                     console.log("success update Pic");
                     $window.location.href="#/edit-profile-host";
@@ -42,26 +42,26 @@ function accountController($scope, $http, $window,userService,summaryService){
                   $window.location.href="#/home";
                   $window.location.reload();
               }
-            }).error(function(data, status, header, config){
+            },
+            function(data, status, header, config){
                 console.log(data.message);
             });
         }
           var idHost = localStorage.getItem('idHost');
-          userService.getAccount(idHost).success(function(data, status, header, config){
+          userService.getAccount(idHost).then(function(data, status, header, config){
             console.log(data);
             var userData = data.content[0];
             $scope.dataAccount = userData;
             $scope.img = userData.img_base64;
-        }).
-        error(function(data, status, header, config){
+        },function(data, status, header, config){
             console.log(data.message);
         });
 
-        summaryService.getCities().success(function(data, status, header, config){
+        summaryService.getCities().then(function(data, status, header, config){
           console.log("cities success");
           console.log(data);
             $scope.citiesData = data;
-        }).error(function(data, status, header, config){
+        },function(data, status, header, config){
             console.log(data.message);
         });
     };

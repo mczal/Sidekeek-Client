@@ -10,7 +10,7 @@ function loginController($scope,$http,$window,userService,$location,$state,$rout
         // localStorage.setItem('emailHost', email);
         let session = authService.generateSession();
         userService.login(email,pass)
-        .success(function(data, status, header, config){
+        .then(function(data, status, header, config){
           console.log(data);
           if(data.uniqueCode == undefined){
             localStorage.setItem('emailHost', email);
@@ -30,7 +30,7 @@ function loginController($scope,$http,$window,userService,$location,$state,$rout
             });
           }
 
-        }).error(function(data, status, header, config){
+        },function(data, status, header, config){
             console.log(data.message);
         });
     }

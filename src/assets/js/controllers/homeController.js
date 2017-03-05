@@ -4,15 +4,15 @@ angular.module("app.home",["app.service"])
 homeController.$inject = ['$scope',"$http","$uibModal","summaryService","searchService"];
 
 function homeController($scope,$http,$uibModal,summaryService,searchService){
-  summaryService.getCategories().success(function(data, status, header, config){
+  summaryService.getCategories().then(function(data, status, header, config){
       $scope.categoriesData = data;
-  }).error(function(data, status, header, config){
+  },function(data, status, header, config){
       console.log(data.message);
   });
 
-  summaryService.getProvince().success(function(data, status, header, config){
+  summaryService.getProvince().then(function(data, status, header, config){
       $scope.provinceData = data;
-  }).error(function(data, status, header, config){
+  },function(data, status, header, config){
       console.log(data.message);
   });
 
@@ -42,7 +42,7 @@ function homeController($scope,$http,$uibModal,summaryService,searchService){
 
     console.log(searchData);
 
-    searchService.searchTemplate(searchData).success(function(data){
+    searchService.searchTemplate(searchData).then(function(data){
       console.log(data);
       if (data.error == "success"){
         if(data.content.hosts.length > 0 || data.content.products.length > 0){

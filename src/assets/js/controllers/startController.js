@@ -10,9 +10,9 @@ function startController($scope, $http, summaryService,generalSerivce,registerSe
   $('#button-goods').hide();
   $('#button-service').hide();
 
-  summaryService.getCategories().success(function(data, status, header, config){
+  summaryService.getCategories().then(function(data, status, header, config){
       $scope.categoriesData = data;
-  }).error(function(data, status, header, config){
+  },function(data, status, header, config){
       console.log(data.message);
   });
 

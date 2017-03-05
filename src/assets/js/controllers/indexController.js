@@ -16,12 +16,12 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
     $scope.idHost = null;
   }
 
-  authService.getToken().success(function(data){
+  authService.getToken().then(function(data){
     if(data.error == "success"){
       let idHost = localStorage.getItem('idHost');
       authService.setToken(data.token);
       userService.getAccount(idHost)
-      .success(function(data){
+      .then(function(data){
         console.log(data);
         if(data.error == 'error'){
           $('#btn-hide').removeClass('hide');//sign-up button
@@ -35,8 +35,7 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
           $('#loginBtn').addClass('hide');
           $('#img-acc').removeClass('hide');
         }
-      })
-      .error(function(data){
+      },function(data){
           $('#btn-hide').removeClass('hide');//sign-up button
           $('.dropdown').removeClass('hide');//login button
           $('#img-acc').addClass('hide');//profile pict
@@ -66,14 +65,14 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
       //     console.log(data.message);
       // });
 
-      summaryService.isHost().success(function(data){
+      summaryService.isHost().then(function(data){
           localStorage.setItem('tipeMember', data.code);
           if (data.code == 1) {
               $("#startHosting").hide();
           }else{
               $("#startHosting").show();
           }
-      }).error(function(data){
+      },function(data){
           console.log(data.message);
       });
 
@@ -89,8 +88,8 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
         })
       }
     } else {
-      console.log("Error");
-      alert("Error Connecting to API");
+      //console.log("Error");
+      //alert("Error Connecting to API");
     }
   });
 
@@ -105,7 +104,7 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
     // logout session
     $scope.logout = function(){
       //console.log("logout");
-        userService.logout().success(function(data, status, header, config){
+        userService.logout().then(function(data, status, header, config){
             //console.log(data);
             $scope.loggedIn = false;
             localStorage.clear();
@@ -118,7 +117,7 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
             // $('#btn-hide').removeClass('hide');
             // $('.dropdown').removeClass('hide');
             // $('#img-acc').addClass('hide');
-        }).error(function(data, status, header, config){
+        },function(data, status, header, config){
             //console.log(data);
             //console.log(data.message);
         });

@@ -33,17 +33,16 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
       // let idHost = localStorage.getItem("idHost");
       let idHost = $stateParams.idHost;
       userService.getAccount(idHost).
-        success(function(data, status, header, config){
+        then(function(data, status, header, config){
           console.log(data);
             $scope.dataAccount = data.content[0];
             $scope.img = data.content[0].img_base64;
-        }).
-        error(function(data, status, header, config){
+        },function(data, status, header, config){
             //console.log(data.message);
         });
 
         userService.getProfile(idHost).
-        success(function(data, status, header, config){
+        then(function(data, status, header, config){
             $scope.dataProfile = data.content[0];
             console.log(data);
             //console.log();
@@ -55,33 +54,30 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
 
             //console.log($scope.dataProfile.rate);
             //console.log(data[0]);
-        }).
-        error(function(data, status, header, config){
+        },function(data, status, header, config){
             //console.log(data);
         });
 
         userService.getProductsEager(10,1).
-        success(function(data, status, header, config){
+        then(function(data, status, header, config){
           //console.log(data);
           //console.log("getProductsEager complete");
           $scope.dataProducts = data.content.products_with_images;
-        }).
-        error(function(data, status, header, config){
+        },function(data, status, header, config){
             //console.log(data.message);
         });
 
         userService.getPortofolios(idHost).
-         success(function(data, status, header, config){
+         then(function(data, status, header, config){
            console.log("success getting Portfolio");
              $scope.dataPortofolios = data.content;
              console.log(data);
-         }).
-         error(function(data, status, header, config){
+         },function(data, status, header, config){
              console.log(data.message);
          });
 
         userService.getHostReview(idHost).
-        success(function(data,status,header,config){
+        then(function(data,status,header,config){
           console.log("Hello Review");
           console.log(data);
           data.content.forEach(function(item){
@@ -89,16 +85,16 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
           })
           $scope.reviewData = data.content;
           console.log($scope.reviewData);
-        }).error(function(data, status, header, config){
+        },function(data, status, header, config){
             //console.log(data.message);
         });
 
         $scope.viewPortoDetails = function (idPortofolio){
             userService.getPortofolioDetail(idPortofolio)
-            .success(function(data, status, header, config){
+            .then(function(data, status, header, config){
                 //console.log(data[0]);
                 $scope.portoDetail = data[0];
-            }).error(function(data, status, header, config){
+            },function(data, status, header, config){
                 //console.log(data.message);
             });
         }
