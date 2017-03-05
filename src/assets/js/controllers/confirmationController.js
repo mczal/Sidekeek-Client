@@ -15,7 +15,7 @@ function confirmationController($scope, $http, $state, $stateParams, userService
         authService.setToken(response.data.token);
         localStorage.setItem('session', response.data.session);
         localStorage.setItem('emailHost', response.data.email);
-        localStorage.setItem('idHost', response.data.idHost
+        localStorage.setItem('idHost', response.data.idHost);
 
         if (response.data.idHost == null) {
           localStorage.setItem('tipeMember', 0);
