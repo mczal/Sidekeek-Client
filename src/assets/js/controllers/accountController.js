@@ -1,50 +1,57 @@
 angular.module("app.account",['app.service'])
        .controller("AccountController",accountController);
 
-accountController.$inject = ['$scope','$http','$window','userService','summaryService'];
+accountController.$inject = ['$scope','$http', 'userService','summaryService','$state'];
 
-function accountController($scope, $http, $window,userService,summaryService){
+function accountController($scope, $http,userService,summaryService,$state){
         $scope.cancel = function(){
             $window.location.reload();
         }
         $scope.editAccount = function(){
+          var coName = $("#coName").val();
           var about = $("#about").val();
-          var city = $("#region").val();
+          var city = $("#region option:selected").val();
           var address = $("#address").val();
+          var handphone = $("#phone").val();
 
           // var companyName = $scope.dataAccount.company_name;
           // var imageBase64 = "data:" + $scope.fileUpload.filetype + ";" + "base64," + $scope.fileUpload.base64;
           // var handphone = $scope.dataAccount.handphone;
 
-          var accountData = {
-            companyName : $scope.dataAccount.company_name,
+          var tempData = {
+            companyName : coName,
             about: about,
-            handphone: $scope.dataAccount.handphone,
+            handphone: handphone,
             city: city,
             address: address
           }
-          if($scope.fileUpload != undefined){
+          console.log($scope.fileUpload);
+          if($scope.fileUpload != undefined || $scope.fileUpload != null){
             var imageBase64 = "data:" + $scope.fileUpload.filetype + ";" + "base64," + $scope.fileUpload.base64;
+          }else{
+            var imageBase64 = $scope.dataAccount.image_base64;
           }
 
-            userService.editAccount(accountData).then(function(response){
-              if (localStorage.getItem('tipeMember') == 1) {
-                  console.log("success update account");
+            userService.editAccount(tempData).then(function(response){
+              console.log(response);
                   userService.editAccountPic(imageBase64).then(function(response){
-                    console.log(response);
-                    console.log("success update Pic");
-                    $window.location.href="#/edit-profile-host";
-                    $window.location.reload();
-                    sessionStorage.setItem("activeTab", 1);
-                  })
-              }else{
-                  console.log("success update account");
-                  $window.location.href="#/home";
-                  $window.location.reload();
-              }
+                    if (localStorage.getItem('tipeMember') == 1) {
+                      console.log("success update account");
+                      console.log(response);
+                      console.log("success update Pic");
+                      sessionStorage.setItem("activeTab", 1);
+                      swal("Success","Account updated!","success");
+                      $state.go("edit-profile-host");
+
+                      } else {
+                          console.log("success update account");
+                          swal("Success","Account updated!","success");
+                          location.reload();
+                      }
+              })
             },
             function(response){
-                console.log(response.data.message);
+              console.log(response);
             });
         }
           var idHost = localStorage.getItem('idHost');

@@ -7,7 +7,7 @@ function loginController($scope,$http,$window,userService,$location,$state,$rout
     $scope.login = function(){
         let email = $('#emailUser').val();
         let pass = $('#passwordUser').val();
-        // localStorage.setItem('emailHost', email);
+
         let session = authService.generateSession();
         userService.login(email,pass)
         .then(function(response){
@@ -17,11 +17,15 @@ function loginController($scope,$http,$window,userService,$location,$state,$rout
             localStorage.setItem('idHost', response.data.idHost);
             localStorage.setItem('session', response.data.session);
             sessionStorage.setItem("activeTab", 1);
-            $state.go('home', {}).then(function() {
-              console.log("state go home");
-              window.location.reload();
-            });
-            //$state.go('home');
+
+            userService.getAccount(response.data.idHost).then(function(response){
+              if(response.data.about == null || response.data.about == ""){
+                $state.go('account');
+              }else{
+                $state.go('home');
+            }
+          });
+
           }else{
             swal({
               title:'Attention!',

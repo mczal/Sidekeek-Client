@@ -30,29 +30,6 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
          $scope.check = 1;
      }
 
-
-    //  activateTab(0);
-     //
-    //  $scope.setActiveTab = function(active){
-    //    activateTab(active);
-    //  }
-     //
-     //
-    //  $scope.active = [{status: false}, {status: false}, {status: false}];
-    //  if (sessionStorage.getItem("profileActiveTab") == 1) {
-    //      $scope.active[0].status = true;
-    //      $scope.active[1].status = false;
-    //      $scope.active[2].status = false;
-    //  }else if(sessionStorage.getItem("profileActiveTab") == 2){
-    //      $scope.active[0].status = false;
-    //      $scope.active[1].status = true;
-    //      $scope.active[2].status = false;
-    //  }else{
-    //      $scope.active[0].status = false;
-    //      $scope.active[1].status = false;
-    //      $scope.active[2].status = true;
-    //  }
-
      $scope.escapeAdd = function(keyCode){
          if (keyCode == 27) {
              $("#freeze").css({'position': '', 'overflow-y': '', 'width': ''});
@@ -96,7 +73,11 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
 
       userService.addNewPortofolio(portfolioData).then(function(response){
              //$window.location.reload();
-             console.log("success add new portofolio");
+             if(response.error == "success"){
+              swal("Success!","Portfolio added","success");
+             }else{
+               swal("Oops","Something went wrong. Please try again","error");
+             }
          },function(response){
              console.log(response.data.message);
          });
@@ -114,7 +95,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
            console.log(response.data);
              $("#add_produk").show();
              for (var i = 0; i < $scope.myFile.length; i++) {
-                 var typeData = "data:" + $scope.myFile[i].fivarype + ";";
+                 var typeData = "data:" + $scope.myFile[i].filetype + ";";
                  var base64Data = "base64," + $scope.myFile[i].base64;
                  var imageBase64 = typeData + base64Data;
                 //  $http({
@@ -133,13 +114,14 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
                 //  })
 
                 var imageData = {
-                  id : data.idProduct ,
+                  id : response.data.idProduct ,
                   source: imageBase64
                 }
                 console.log(imageData);
 
                  userService.addProductImage(imageData).then(function(response){
                      console.log(response.data.message);
+                     debugger;
                      $window.location.reload();
                  },function(response){
                      console.log(response.data.message);
@@ -193,6 +175,11 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
                  source: imgBase64
                }
                userService.editPortofolioImg(imgData).then(function(response){
+                 if(response.error == "success"){
+                  swal("Success!","Portfolio saved","success");
+                 }else{
+                   swal("Oops","Something went wrong. Please try again","error");
+                 }
                  console.log("edit portfolio image");
                  console.log(response.data);
                })
@@ -260,16 +247,21 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
     var idHost = localStorage.getItem('idHost');
     console.log("Getting Profile for " + idHost);
     userService.getProfile(idHost).
-     success(function(response){
-       console.log(response.data);
+     then(function(response){
+       if(response.data.error != "error"){
+         console.log(response.data);
          $scope.dataProfile = response.data.content[0];
          if ($scope.dataProfile.id_tipe == 1) {
-             $(".button_goods").css({'top': '5px', 'box-shadow': 'none', 'outline': 'none'});
-             $(".button_service").css({'top': '', 'box-shadow': '', 'outline': ''});
+           $(".button_goods").css({'top': '5px', 'box-shadow': 'none', 'outline': 'none'});
+           $(".button_service").css({'top': '', 'box-shadow': '', 'outline': ''});
          }else{
-             $(".button_service").css({'top': '5px', 'box-shadow': 'none', 'outline': 'none'});
-             $(".button_goods").css({'top': '', 'box-shadow': '', 'outline': ''});
+           $(".button_service").css({'top': '5px', 'box-shadow': 'none', 'outline': 'none'});
+           $(".button_goods").css({'top': '', 'box-shadow': '', 'outline': ''});
          }
+       }else{
+         console.log("no profile");
+       }
+
      },function(response){
          console.log(response.data.message);
      });
@@ -279,7 +271,6 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      then(function(response){
        console.log("success getting Portfolio");
          $scope.dataPortofolios = response.data.content;
-         console.log(response.data);
      },function(response){
          console.log(response.data.message);
      });
@@ -298,65 +289,15 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      });
 
     userService.getProductsEager(10,1).then(function(response){
+      $scope.dataProducts = [];
       console.log(response.data);
-      $scope.dataProducts = response.data.content.products_with_images;
-      var tempData = response.data.content.products_with_images;
-
-
-      // console.log(tempData.length);
-      // for (var i = 0; i < tempData.length; i++){
-      //   console.log(tempData[i].images);
-      //   var tempImage = tempData[i].images.split(";");
-      //   console.log(tempImage);
-      //
-      //   for(var j = 0; j < tempImage.length - 1; j++){
-      //     console.log(tempImage[j]);
-      //     var image = tempImage[j].split(",");
-      //     console.log(i);
-      //     console.log(image);
-      //   }
-      // }
-      // console.log(tempImages);
-      // var prodImages = tempImages;
-      // console.log(prodImages);
-      $scope.dataProducts.forEach(function(item){
-        // var tempImg = item.images.split(';');
-        // //console.log(tempImg);
-        // //var img = tempImg[0].split(',');
-        // var imgArr = [];
-        // tempImg.forEach(function(x){
-        //   var img = x.split(",");
-        //   //console.log(img);
-        //   var imgObj = {
-        //     id: img[0],
-        //     src: img[1]
-        //   }
-        //   //console.log(imgObj);
-        //   imgArr.push(imgObj);
-        //   console.log(imgArr);
-        // })
-
-        //console.log(img);
-        // var imgObj = {
-        //   id: img[0],
-        //   src: img[1]
-        // }
-        //console.log(imgObj);
-        // imgArr.push(imgObj);
-        // console.log(imgArr);
-        // tempImg.forEach(function(x){
-        //   var imgArr = [];
-        //   var img = x.split(',');
-        //   var imgObj = {
-        //     id: img[0],
-        //     src: img[1]
-        //   }
-        //   imgArr.push(imgObj);
-        //   console.log(imgArr);
-        // })
-        var imgs = item.images
-        .split(';')
-        .map(imgData => ({
+      if(response.data.content !=null && response.data.content.products_with_images != null){
+        $scope.dataProducts = response.data.content.products_with_images;
+        var tempData = response.data.content.products_with_images;
+        $scope.dataProducts.forEach(function(item){
+          var imgs = item.images
+          .split(';')
+          .map(imgData => ({
             id: imgData.split(',')[0],
             src: imgData.split(',')[1]
           })
@@ -368,37 +309,22 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
         item.featured_img = imgs.shift();
         item.images = imgs.filter(imgData => imgData && imgData.id);
         console.log(item);
-
-        // var imgObj = {
-        //   featured_img: imgs.shift(),
-        //   other_imgs: imgs.filter(imgData => imgData && imgData.id)
-        // };
-        //
-        // console.log(imgObj);
+      });
+      response.data.content.products.map(function(x){
+        $scope.dataProducts.push(x);
       })
-
-
       console.log($scope.dataProducts);
-
+    }else if(response.data.content !=null && response.data.content.products != null){
+      response.data.content.products.map(function(x){
+        $scope.dataProducts.push(x);
+      })
+      console.log($scope.dataProducts);
+    }else{
+      console.log("no porduct");
+    }
     },function(response){
          console.log(response.data.message);
      });
-
-    // userService.getProductsEager().success(function(data, status, header, config){
-    //      $scope.dataProductEager = data;
-    //      // console.log($scope.dataProductEager.images.length);
-    //      // for (var i = 0; i < $scope.dataProductEager.images.length; i++) {
-    //      //     if ($scope.dataProductEager.images[i].id_product == $scope.dataProductEager.product[i].id_product) {
-    //      //         console.log($scope.dataProductEager.images[i].id_product);
-    //      //         $scope.data = angular.extend({},$scope.dataProductEager.images[i],$scope.dataProductEager.product[i]);
-    //      //     }
-    //      // }
-    //      // console.log($scope.dataProductEager.images[0].id_product);
-    //      console.log(data);
-    //      // console.log($scope.data);
-    //  }).error(function(data, status, header, config){
-    //      console.log(data.message);
-    //  });
 
      $scope.addProduk = function (){
          produk =[ '<div class="row">',

@@ -101,8 +101,8 @@ appServices.factory('searchService',
 function($http){
   return{
     searchTemplate : function(searchData){
-      console.log(searchData);
-      console.log(searchData.query);
+      // console.log(searchData);
+      // console.log(searchData.query);
       return $http({
         method : 'GET',
         url: credentials.url + '/search-template',
@@ -303,7 +303,7 @@ appServices.factory('userService',
       },
 
       getAccount : function(idHost){
-        console.log(credentials.token);
+        // console.log(credentials.token);
         return $http({
             method: 'GET',
             url: credentials.url + '/getAccount/'+ idHost,
@@ -354,7 +354,7 @@ appServices.factory('userService',
 
       getProfile : function(idHost){
         // let idHost = localStorage.getItem('idHost');
-        //console.log("idHost = " + idHost);
+        //// console.log("idHost = " + idHost);
         return $http({
             method: 'GET',
             url: credentials.url + '/getProfile/' + idHost,

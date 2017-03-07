@@ -15,14 +15,14 @@
                             <input type="file" id="fileUploadImg" class="inputfile inputfile-1" ng-model="fileUpload" maxsize="5000" base-sixty-four-input/>
                             <label for="fileUploadImg"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>
                         </div>
-                        <label>max. size file 2MB</label>
+                        <label>max. size file 5MB</label>
                     </div>
                 </div>
             </div>
             <div class="col-lg-8">
                 <div class="form-group">
                     <label for="">Company Name</label>
-                    <input type="text" class="form-control" ng-model="dataAccount.company_name">
+                    <input type="text" class="form-control" ng-model="dataAccount.company_name" id="coName">
                 </div>
                 <div class="form-group">
                     <label for="">About</label>
@@ -30,12 +30,11 @@
                 </div>
                 <div class="form-group">
                     <label for="">No. Handphone</label>
-                    <input type="text" class="form-control" ng-model="dataAccount.handphone">
+                    <input type="text" class="form-control" ng-model="dataAccount.handphone" id="phone">
                 </div>
                 <label for="">City</label>
-                <select class="form-group form-control" id="region">
-                    <option ng-repeat="cities in citiesData" value="{{cities.id_city}}" ng-if="dataAccount.city_name == cities.city_name" selected="selected">{{cities.city_name}}</option>
-                    <option ng-repeat="cities in citiesData" value="{{cities.id_city}}" ng-if="dataAccount.city_name != cities.city_name">{{cities.city_name}}</option>
+                <select class="form-group form-control" id="region" ng-options="city_name as citiesData.city_name for citiesData in citiesData track by citiesData.id_city" ng-model="city">
+
                 </select>
                 <div class="form-group">
                     <label for="">Address</label>
