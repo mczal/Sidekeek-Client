@@ -67,7 +67,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      $scope.addNewPortofolio = function (){
        var portfolioData = {
          title : $scope.form.title,
-         imageBase64 : "data:" + $scope.myFile.fivarype + ";" + "base64," + $scope.myFile.base64,
+         imageBase64 : "data:" + $scope.portoImg.filetype + ";" + "base64," + $scope.portoImg.base64,
          desc:  $("#portoDesc").val()
        }
 
@@ -75,7 +75,9 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
              //$window.location.reload();
              if(response.error == "success"){
               swal("Success!","Portfolio added","success");
+              console.log(response);
              }else{
+               console.log(response);
                swal("Oops","Something went wrong. Please try again","error");
              }
          },function(response){
@@ -94,9 +96,9 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
            console.log("add new produk");
            console.log(response.data);
              $("#add_produk").show();
-             for (var i = 0; i < $scope.myFile.length; i++) {
-                 var typeData = "data:" + $scope.myFile[i].filetype + ";";
-                 var base64Data = "base64," + $scope.myFile[i].base64;
+             for (var i = 0; i < $scope.portoImg.length; i++) {
+                 var typeData = "data:" + $scope.portoImg[i].filetype + ";";
+                 var base64Data = "base64," + $scope.portoImg[i].base64;
                  var imageBase64 = typeData + base64Data;
                 //  $http({
                 //      method: 'POST',
@@ -148,9 +150,9 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      }
 
      $scope.editPortofolio = function(idPortofolio){
-         console.log($scope.myFile);
-        //  var typeData = "data:" + $scope.myFile.fivarype + ";";
-        //  var base64Data = "base64," + $scope.myFile.base64;
+         console.log($scope.portoImg);
+        //  var typeData = "data:" + $scope.portoImg.fivarype + ";";
+        //  var base64Data = "base64," + $scope.portoImg.base64;
         //  var imgBase64 = typeData + base64Data;
         //  console.log(imageBase64);
          console.log(idPortofolio);
@@ -164,18 +166,18 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
             //  console.log("berhasil");
              console.log(response.data);
 
-             if ($scope.myFile == undefined){
+             if ($scope.portoImg == undefined){
                 console.log("No new images");
              }else{
-               //  var typeData = "data:" + $scope.myFile.fivarype + ";";
-               //  var base64Data = "base64," + $scope.myFile.base64;
-               var imgBase64 = "data:" + $scope.myFile.fivarype + ";" + "base64," + $scope.myFile.base64;
+               //  var typeData = "data:" + $scope.portoImg.fivarype + ";";
+               //  var base64Data = "base64," + $scope.portoImg.base64;
+               var imgBase64 = "data:" + $scope.portoImg.fivarype + ";" + "base64," + $scope.portoImg.base64;
                var imgData = {
                  id: idPortofolio,
                  source: imgBase64
                }
                userService.editPortofolioImg(imgData).then(function(response){
-                 if(response.error == "success"){
+                 if(response.data.error == "success"){
                   swal("Success!","Portfolio saved","success");
                  }else{
                    swal("Oops","Something went wrong. Please try again","error");
@@ -249,7 +251,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
     userService.getProfile(idHost).
      then(function(response){
        if(response.data.error != "error"){
-         console.log(response.data);
+         //console.log(response.data);
          $scope.dataProfile = response.data.content[0];
          if ($scope.dataProfile.id_tipe == 1) {
            $(".button_goods").css({'top': '5px', 'box-shadow': 'none', 'outline': 'none'});
@@ -269,6 +271,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
     console.log("Getting Portfolios for " + idHost);
     userService.getPortofolios(idHost).
      then(function(response){
+       console.log(response);
        console.log("success getting Portfolio");
          $scope.dataPortofolios = response.data.content;
      },function(response){
@@ -308,17 +311,12 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
 
         item.featured_img = imgs.shift();
         item.images = imgs.filter(imgData => imgData && imgData.id);
-        console.log(item);
+        //console.log(item);
       });
-      response.data.content.products.map(function(x){
-        $scope.dataProducts.push(x);
-      })
-      console.log($scope.dataProducts);
     }else if(response.data.content !=null && response.data.content.products != null){
       response.data.content.products.map(function(x){
         $scope.dataProducts.push(x);
       })
-      console.log($scope.dataProducts);
     }else{
       console.log("no porduct");
     }
@@ -333,7 +331,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
          '                                    <div class="box container-fluid">',
          '                                        <div class="file-upload text-center">',
          '                                            <img src="assets/img/uploadfoto.png" alt="" />',
-         '                                            <input type="file" name="file" id="fileUpload" class="inputfile inputfile-1" ng-model="myFile" multiple base-sixty-four-input/>',
+         '                                            <input type="file" name="file" id="fileUpload" class="inputfile inputfile-1" ng-model="portoImg" multiple base-sixty-four-input/>',
          '                                            <label for="fileUpload"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>',
          '                                        </div>',
          '                                    </div>',

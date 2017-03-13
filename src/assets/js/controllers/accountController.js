@@ -35,18 +35,19 @@ function accountController($scope, $http,userService,summaryService,$state){
             userService.editAccount(tempData).then(function(response){
               console.log(response);
                   userService.editAccountPic(imageBase64).then(function(response){
-                    if (localStorage.getItem('tipeMember') == 1) {
+                    if ($scope.dataAccount.id_tipe != null || $scope.dataAccount.id_tipe != undefined) {
                       console.log("success update account");
                       console.log(response);
                       console.log("success update Pic");
                       sessionStorage.setItem("activeTab", 1);
                       swal("Success","Account updated!","success");
-                      $state.go("edit-profile-host");
+                      $state.go("edit-profile");
 
                       } else {
+                          getAccount();
                           console.log("success update account");
                           swal("Success","Account updated!","success");
-                          location.reload();
+                          //location.reload();
                       }
               })
             },
@@ -54,15 +55,20 @@ function accountController($scope, $http,userService,summaryService,$state){
               console.log(response);
             });
         }
+
+        function getAccount(){
           var idHost = localStorage.getItem('idHost');
           userService.getAccount(idHost).then(function(response){
             console.log(response.data);
             var userData = response.data.content[0];
             $scope.dataAccount = userData;
             $scope.img = userData.img_base64;
-        },function(response){
-            console.log(response.data.message);
-        });
+          },function(response){
+              console.log(response.data.message);
+          });
+        };
+
+        getAccount();
 
         summaryService.getCities().then(function(response){
           console.log("cities success");
