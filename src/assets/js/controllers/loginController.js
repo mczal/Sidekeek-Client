@@ -19,11 +19,14 @@ function loginController($scope,$http,$window,userService,$location,$state,$rout
             sessionStorage.setItem("activeTab", 1);
 
             userService.getAccount(response.data.idHost).then(function(response){
-              debugger;
               if(response.data.content[0].about == null || response.data.content[0].about == ""){
-                $state.go('account');
+                $state.go('account',{}).then(function(){
+                  window.location.reload();
+                });
               }else{
-                $state.go('home');
+                $state.go('home', {}).then(function(){
+                  window.location.reload();
+              });
             }
           });
 

@@ -1266,7 +1266,7 @@ footer .footer-above{
   color: #fff !important;
   background-color: #5cb85c !important;
   border-color: #4cae4c !important;
-} 
+}
 
 /*--------------RESPONSIVE----------------*/
 
@@ -1507,4 +1507,12 @@ footer .footer-above{
 /* lg */
 @media(min-width: 1200px){
 
+}
+
+
+.inputButton{
+  background-color: #449D44;
+  -webkit-box-shadow: 0 5px 0 #255625;
+  -moz-box-shadow: 0 5px 0 #255625;
+  box-shadow: 0 5px 0 #255625;
 }
