@@ -8,11 +8,11 @@ function accountController($scope, $http,userService,summaryService,$state){
             $window.location.reload();
         }
         $scope.editAccount = function(){
-          var coName = $("#coName").val();
-          var about = $("#about").val();
-          var city = $("#region option:selected").val();
+          var coName = $scope.dataAccount.company_name;
+          var about = $scope.dataAccount.about;
+          var city = $scope.dataAccount.city;
           var address = $("#address").val();
-          var handphone = $("#phone").val();
+          var handphone = $scope.dataAccount.handphone;
 
           // var companyName = $scope.dataAccount.company_name;
           // var imageBase64 = "data:" + $scope.fileUpload.filetype + ";" + "base64," + $scope.fileUpload.base64;
