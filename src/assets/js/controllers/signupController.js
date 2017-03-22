@@ -16,11 +16,13 @@ function signUpController($scope, $http, $window, userService,registerService,au
            console.log(regData);
            if(regData == null){
              userService.signup(email,pass,confirm).then(function(response){
+               $(".loading").removeClass("hidden");
                if(response.data.error == "success"){
                  console.log(response.data.message);
                  //$window.location.href = '#/confirm';
                  $state.go('confirm');
                }else{
+                 $(".loading").addClass("hidden");
                  swal("Oops!",response.data.message,"error");
                  console.log(response);
                }

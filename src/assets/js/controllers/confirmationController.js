@@ -2,9 +2,9 @@ angular.module('app.confirmation',[])
 
 .controller('ConfirmationController',confirmationController);
 
-confirmationController.$inject = ['$scope', '$http', '$state','$stateParams','userService','authService'];
+confirmationController.$inject = ['$scope', '$http', '$state','$stateParams','userService','authService','$timeout'];
 
-function confirmationController($scope, $http, $state, $stateParams, userService, authService){
+function confirmationController($scope, $http, $state, $stateParams, userService, authService,$timeout){
   authService.getToken().then(function(response) {
     authService.setToken(response.data.token);
     userService.confirmAccount($stateParams.uq).then(function(response){
@@ -19,10 +19,18 @@ function confirmationController($scope, $http, $state, $stateParams, userService
 
         if (response.data.idHost == null) {
           localStorage.setItem('tipeMember', 0);
-          $state.go("home");
+          $timeout(
+            function(){
+              $state.go("home")
+            }, 2000
+          );
         }else{
           localStorage.setItem('tipeMember', 1);
-          $state.go("account-host");
+          $timeout(
+            function(){
+              $state.go("account-host")  
+            }, 2000
+          );
         }
     },function(response){
         console.log(response.data.message);

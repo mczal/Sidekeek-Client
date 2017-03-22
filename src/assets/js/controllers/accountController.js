@@ -8,6 +8,7 @@ function accountController($scope, $http,userService,summaryService,$state){
             $window.location.reload();
         }
         $scope.editAccount = function(){
+          $(".loading").removeClass("hidden");
           var coName = $scope.dataAccount.company_name;
           var about = $scope.dataAccount.about;
           var city = $scope.dataAccount.city;
@@ -33,6 +34,7 @@ function accountController($scope, $http,userService,summaryService,$state){
           }
 
             userService.editAccount(tempData).then(function(response){
+              $(".loading").addClass("hidden");
               console.log(response);
                   userService.editAccountPic(imageBase64).then(function(response){
                     if ($scope.dataAccount.id_tipe != null || $scope.dataAccount.id_tipe != undefined) {
@@ -57,8 +59,10 @@ function accountController($scope, $http,userService,summaryService,$state){
         }
 
         function getAccount(){
+          $(".loading").removeClass("hidden");
           var idHost = localStorage.getItem('idHost');
           userService.getAccount(idHost).then(function(response){
+            $(".loading").addClass("hidden");
             console.log(response.data);
             var userData = response.data.content[0];
             $scope.dataAccount = userData;
