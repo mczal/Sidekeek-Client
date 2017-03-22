@@ -65,6 +65,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      }
 
      $scope.addNewPortofolio = function (){
+       $(".loading").removeClass("hidden");
        var portfolioData = {
          title : $scope.form.title,
          imageBase64 : "data:" + $scope.portoImg.filetype + ";" + "base64," + $scope.portoImg.base64,
@@ -72,6 +73,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
        }
 
       userService.addNewPortofolio(portfolioData).then(function(response){
+        $(".loading").addClass("hidden");
              //$window.location.reload();
              if(response.error == "success"){
               swal("Success!","Portfolio added","success");
@@ -86,6 +88,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      }
 
      $scope.addNewProductDesc = function(){
+       $(".loading").removeClass("hidden");
         var productData = {
           name: $("#product_name").val(),
           price :$("#price").val(),
@@ -123,7 +126,6 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
 
                  userService.addProductImage(imageData).then(function(response){
                      console.log(response.data.message);
-                     debugger;
                      $window.location.reload();
                  },function(response){
                      console.log(response.data.message);
@@ -150,7 +152,8 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      }
 
      $scope.editPortofolio = function(idPortofolio){
-         console.log($scope.portoImg);
+        $(".loading").removeClass("hidden");
+        console.log($scope.portoImg);
         //  var typeData = "data:" + $scope.portoImg.fivarype + ";";
         //  var base64Data = "base64," + $scope.portoImg.base64;
         //  var imgBase64 = typeData + base64Data;
@@ -177,6 +180,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
                  source: imgBase64
                }
                userService.editPortofolioImg(imgData).then(function(response){
+                 $(".loading").addClass("hidden");
                  if(response.data.error == "success"){
                   swal("Success!","Portfolio saved","success");
                  }else{
@@ -192,6 +196,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      }
 
      $scope.editProductDesc = function(idProduct){
+       $(".loading").removeClass("hidden");
        var productData = {
          namaProduk : $("#product_name_"+idProduct).val(),
          harga : $("#price_"+idProduct).val(),
@@ -203,6 +208,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
        var buttonVal = $("#button").val();
 
        userService.editProductDesc(productData).then(function(response){
+            $(".loading").addClass("hidden");
              //$window.location.reload();
              console.log(response.data.message);
              console.log("success edit product.");
@@ -224,6 +230,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      }
 
      $scope.editProfiledesc = function (){
+       $(".loading").removeClass("hidden");
        var newData = {
          title : $('#title').val(),
          category : $("#category").val(),
@@ -237,6 +244,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
        }
        console.log(newData);
          userService.editProfile(newData).then(function(response){
+           $(".loading").addClass("hidden");
             //  window.location.reload();
             console.log(response.data);
             activateTab(1);
