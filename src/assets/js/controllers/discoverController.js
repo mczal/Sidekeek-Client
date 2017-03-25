@@ -1,9 +1,9 @@
 angular.module("app.discover",['app.service'])
    .controller("DiscoverController",discoverController);
 
-discoverController.$inject = ["$scope","$http","$uibModal",'uiService','searchService'];
+discoverController.$inject = ["$scope","$http","$uibModal",'uiService','searchService','summaryService'];
 
-function discoverController($scope, $http, $uibModal,uiService,searchService){
+function discoverController($scope, $http, $uibModal,uiService,searchService,summaryService){
   summaryService.getCategories().then(function(response){
       $scope.categoriesData = response.data;
        console.log(response);
@@ -17,7 +17,7 @@ function discoverController($scope, $http, $uibModal,uiService,searchService){
   },function(response){
       console.log(response.data.message);
   });
-  
+
   var tempSearch = searchService.getTempSearch();
   if(tempSearch != null){
     $scope.hosts = tempSearch.content.hosts;

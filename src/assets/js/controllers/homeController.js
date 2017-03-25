@@ -1,9 +1,9 @@
 angular.module("app.home",["app.service"])
       .controller("HomeController",homeController);
 
-homeController.$inject = ['$scope',"$http","$uibModal","summaryService","searchService","$state"];
+homeController.$inject = ['$scope',"$http","$uibModal","summaryService","searchService","$state","summaryService"];
 
-function homeController($scope,$http,$uibModal,summaryService,searchService,$state){
+function homeController($scope,$http,$uibModal,summaryService,searchService,$state,summaryService){
   summaryService.getCategories().then(function(response){
       $scope.categoriesData = response.data;
        console.log(response);
