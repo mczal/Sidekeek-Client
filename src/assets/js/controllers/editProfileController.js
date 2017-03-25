@@ -4,7 +4,12 @@ angular.module("app.editProfile",["app.service"])
 editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$window','userService','summaryService']
 
  function editProfileController($scope, $http, $compile, $rootScope, $window, userService, summaryService ){
+     if(localStorage.getItem("idHost") == null || localStorage.getItem("idHost") == undefined){
+       $state.go("sign-up");
+     } else {
+
      function activateTab (tabIndex) {
+
        var activeTab;
        activeTab = tabIndex;
 
@@ -319,7 +324,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
 
         item.featured_img = imgs.shift();
         item.images = imgs.filter(imgData => imgData && imgData.id);
-        
+
       });
     }else if(response.data.content !=null && response.data.content.products != null){
       response.data.content.products.map(function(x){
@@ -328,9 +333,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
     }else{
       console.log("no porduct");
     }
-    },function(response){
-         console.log(response.data.message);
-     });
+    });
 
      $scope.addProduk = function (){
          produk =[ '<div class="row">',
@@ -367,4 +370,5 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
          $(".add-produk").append($compile(produk)($scope));
          $("#add_produk").hide();
      }
+   }
  };

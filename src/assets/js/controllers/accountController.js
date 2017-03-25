@@ -34,6 +34,7 @@ function accountController($scope, $http,userService,summaryService,$state){
           }
 
             userService.editAccount(tempData).then(function(response){
+              console.log(response);
               $(".loading").addClass("hidden");
               console.log(response);
                   userService.editAccountPic(imageBase64).then(function(response){
