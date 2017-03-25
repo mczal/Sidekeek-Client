@@ -4,7 +4,7 @@ angular.module("app.profile",["app.service"])
 profileController.$inject = ['$scope', '$http', '$uibModal','$routeParams','userService','$stateParams'];
 
 function profileController($scope, $http, $uibModal, $routeParams, userService,$stateParams){
-      // //// console.log($stateParams.type);
+      console.log($stateParams.idHost);
       // //// console.log(activeTab);
 
       function setTab(tabIndex){
@@ -31,16 +31,13 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
       setTab($stateParams.type);
 
       // var idHost = localStorage.getItem("idHost");
-      var idHost = $stateParams.idHost;
-      userService.getAccount(idHost).
+      userService.getAccount($stateParams.idHost).
         then(function(response){
             $scope.dataAccount = response.data.content[0];
             $scope.img = response.data.content[0].img_base64;
-        },function(response){
-
         });
 
-        userService.getProfile(idHost).
+        userService.getProfile($stateParams.idHost).
         then(function(response){
             $scope.dataProfile = response.data.content[0];
             //console.log(response);
@@ -56,11 +53,11 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
             //// console.log(data);
         });
 
-        userService.getProductsEager(10,1).
+        userService.getProductsEager($stateParams.idHost,10,1).
         then(function(response){
           console.log(response);
           //// console.log("getProductsEager complete");
-          if(response.data.products_with_images == null){
+          if(response.data.content == null){
             $scope.dataProducts = [];
           }else{
             $scope.dataProducts = response.data.content.products_with_images;
@@ -79,13 +76,13 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
 
             item.featured_img = imgs.shift();
             item.images = imgs.filter(imgData => imgData && imgData.id);
-            //console.log(item);
+            console.log($scope.dataProducts);
           });
 
         }
         });
 
-        userService.getPortofolios(idHost).
+        userService.getPortofolios($stateParams.idHost).
          then(function(response){
            // console.log("success getting Portfolio");
              $scope.dataPortofolios = response.data.content;
@@ -94,7 +91,7 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
              // console.log(data.message);
          });
 
-        userService.getHostReview(idHost).
+        userService.getHostReview($stateParams.idHost).
         then(function(response){
           // console.log(response);
           response.data.content.forEach(function(item){

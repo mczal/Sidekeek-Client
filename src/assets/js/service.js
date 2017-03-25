@@ -418,8 +418,7 @@ appServices.factory('userService',
       //   })
       // },
 
-      getProductsEager: function(size, page){
-        var idHost = localStorage.getItem('idHost');
+      getProductsEager: function(idHost,size, page){
         return $http({
             method: 'GET',
             url: credentials.url + '/getProductsEager/' + idHost + '?size='+ size +'&page=' + page,

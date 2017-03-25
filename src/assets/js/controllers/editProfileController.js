@@ -299,7 +299,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
          console.log(response.data.message);
      });
 
-    userService.getProductsEager(10,1).then(function(response){
+    userService.getProductsEager(idHost,10,1).then(function(response){
       $scope.dataProducts = [];
       console.log(response.data);
       if(response.data.content !=null && response.data.content.products_with_images != null){
@@ -319,7 +319,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
 
         item.featured_img = imgs.shift();
         item.images = imgs.filter(imgData => imgData && imgData.id);
-        //console.log(item);
+        
       });
     }else if(response.data.content !=null && response.data.content.products != null){
       response.data.content.products.map(function(x){
