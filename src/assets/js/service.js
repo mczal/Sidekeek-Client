@@ -497,7 +497,7 @@ appServices.factory('userService',
       editPortofolioImg: function(imageData){
         return $http({
             method: 'POST',
-            url: urlAPI + '/editPortofolioImg',
+            url: credentials.url + '/editPortofolioImg',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             },
