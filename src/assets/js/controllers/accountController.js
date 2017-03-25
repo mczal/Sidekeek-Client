@@ -68,6 +68,7 @@ function accountController($scope, $http,userService,summaryService,$state){
             var userData = response.data.content[0];
             $scope.dataAccount = userData;
             $scope.img = userData.img_base64;
+            $scope.img_base64 = userData.img_base64;
           },function(response){
               console.log(response.data.message);
           });
