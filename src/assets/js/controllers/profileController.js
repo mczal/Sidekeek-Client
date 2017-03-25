@@ -43,8 +43,8 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
         userService.getProfile(idHost).
         then(function(response){
             $scope.dataProfile = response.data.content[0];
-            console.log(response);
-            if (response.data.content[0].sumrate_totalreview != ""){
+            //console.log(response);
+            if (response.data.content[0].sumrate_totalreview != "" && response.data.content[0].sumrate_totalreview != null){
               $scope.dataProfile.rate = new Array (Math.floor(response.data.content[0].sumrate_totalreview.split('_')[0] / response.data.content[0].sumrate_totalreview.split('_')[1]));
             }else{
               $scope.dataProfile.rate = null;
@@ -58,16 +58,31 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
 
         userService.getProductsEager(10,1).
         then(function(response){
-          //console.log(response);
+          console.log(response);
           //// console.log("getProductsEager complete");
-          if(response.data.products_with_images == null){
+          if(response.data.content.products_with_images == null){
             $scope.dataProducts = [];
           }else{
-            $scope.dataProducts = response.data.products_with_images;
-          }
+            $scope.dataProducts = response.data.content.products_with_images;
+            var tempData = response.data.content.products_with_images;
+            $scope.dataProducts.forEach(function(item){
+              var imgs = item.images
+              .split(';')
+              .map(imgData => ({
+                id: imgData.split(',')[0],
+                src: imgData.split(',')[1]
+              })
+            )
+            .filter(imgData =>
+              imgData && imgData.id
+            );
 
-        },function(data, status, header, config){
-            //// console.log(data.message);
+            item.featured_img = imgs.shift();
+            item.images = imgs.filter(imgData => imgData && imgData.id);
+            //console.log(item);
+          });
+
+        }
         });
 
         userService.getPortofolios(idHost).
