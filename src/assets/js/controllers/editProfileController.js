@@ -1,9 +1,9 @@
 angular.module("app.editProfile",["app.service"])
        .controller("EditProfileController",editProfileController);
 
-editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$window','userService','summaryService']
+editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$window','userService','summaryService','$state']
 
- function editProfileController($scope, $http, $compile, $rootScope, $window, userService, summaryService ){
+ function editProfileController($scope, $http, $compile, $rootScope, $window, userService, summaryService,$state ){
      if(localStorage.getItem("idHost") == null || localStorage.getItem("idHost") == undefined){
        $state.go("sign-up");
      } else {
