@@ -25,8 +25,8 @@ function discoverController($scope, $http, $uibModal,uiService,searchService){
     //   query:$("#querySearch").val()
     // };
 
-    console.log(searchData);
-    console.log(searchData.query);
+    // console.log(searchData);
+    // console.log(searchData.query);
 
     searchService.searchTemplate(searchData).then(function(response){
       if (response.data.error == "success"){
@@ -35,13 +35,13 @@ function discoverController($scope, $http, $uibModal,uiService,searchService){
         //console.log($scope.hosts[0].img_base64);
         //console.log($scope.products[0]);
 
-        console.log("success");
-        console.log(response.data);
-        console.log($scope.hosts);
-        console.log($scope.products);
+        // console.log("success");
+        // console.log(response.data);
+        // console.log($scope.hosts);
+        // console.log($scope.products);
       }else{
-        console.log("error");
-        console.log(response.data);
+        // console.log("error");
+        // console.log(response.data);
       }
 
     });

@@ -4,28 +4,28 @@ angular.module("app.profile",["app.service"])
 profileController.$inject = ['$scope', '$http', '$uibModal','$routeParams','userService','$stateParams'];
 
 function profileController($scope, $http, $uibModal, $routeParams, userService,$stateParams){
-      // //console.log($stateParams.type);
-      // //console.log(activeTab);
+      // //// console.log($stateParams.type);
+      // //// console.log(activeTab);
 
       function setTab(tabIndex){
-        //console.log(tabIndex);
+        //// console.log(tabIndex);
         let tab = parseInt(tabIndex);
         switch (tab) {
           case 0:
             $scope.active = [{status: true}, {status: false}, {status: false}];
-            // //console.log("activate 0");
+            // //// console.log("activate 0");
             break;
           case 1:
             $scope.active = [{status: false}, {status: true}, {status: false}];
-            // //console.log("activate 1");
+            // //// console.log("activate 1");
             break;
           case 2:
             $scope.active = [{status: false}, {status: false}, {status: true}];
-            // //console.log("activate 2");
+            // //// console.log("activate 2");
             break;
           default:
             $scope.active = [{status: true}, {status: false}, {status: false}];
-            // //console.log("activate default");
+            // //// console.log("activate default");
         }
       }
       setTab($stateParams.type);
@@ -34,7 +34,6 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
       let idHost = $stateParams.idHost;
       userService.getAccount(idHost).
         then(function(response){
-          console.log(response.data);
             $scope.dataAccount = response.data.content[0];
             $scope.img = response.data.content[0].img_base64;
         },function(response){
@@ -44,58 +43,61 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
         userService.getProfile(idHost).
         then(function(response){
             $scope.dataProfile = response.data.content[0];
-            console.log(response.data);
-            //console.log();
+            console.log(response);
             if (response.data.content[0].sumrate_totalreview != ""){
               $scope.dataProfile.rate = new Array (Math.floor(response.data.content[0].sumrate_totalreview.split('_')[0] / response.data.content[0].sumrate_totalreview.split('_')[1]));
             }else{
               $scope.dataProfile.rate = null;
             }
 
-            //console.log($scope.dataProfile.rate);
-            //console.log(data[0]);
+            //// console.log($scope.dataProfile.rate);
+            //// console.log(data[0]);
         },function(data, status, header, config){
-            //console.log(data);
+            //// console.log(data);
         });
 
         userService.getProductsEager(10,1).
-        then(function(data, status, header, config){
-          //console.log(data);
-          //console.log("getProductsEager complete");
-          $scope.dataProducts = data.content.products_with_images;
+        then(function(response){
+          //console.log(response);
+          //// console.log("getProductsEager complete");
+          if(response.data.products_with_images == null){
+            $scope.dataProducts = [];
+          }else{
+            $scope.dataProducts = response.data.products_with_images;
+          }
+
         },function(data, status, header, config){
-            //console.log(data.message);
+            //// console.log(data.message);
         });
 
         userService.getPortofolios(idHost).
-         then(function(data, status, header, config){
-           console.log("success getting Portfolio");
-             $scope.dataPortofolios = data.content;
-             console.log(data);
+         then(function(response){
+           // console.log("success getting Portfolio");
+             $scope.dataPortofolios = response.data.content;
+             // console.log(data);
          },function(data, status, header, config){
-             console.log(data.message);
+             // console.log(data.message);
          });
 
         userService.getHostReview(idHost).
-        then(function(data,status,header,config){
-          console.log("Hello Review");
-          console.log(data);
-          data.content.forEach(function(item){
+        then(function(response){
+          // console.log(response);
+          response.data.content.forEach(function(item){
             item.rate = new Array(item.rate);
           })
-          $scope.reviewData = data.content;
-          console.log($scope.reviewData);
+          $scope.reviewData = response.data.content;
+          // console.log($scope.reviewData);
         },function(data, status, header, config){
-            //console.log(data.message);
+            //// console.log(data.message);
         });
 
         $scope.viewPortoDetails = function (idPortofolio){
             userService.getPortofolioDetail(idPortofolio)
-            .then(function(data, status, header, config){
-                //console.log(data[0]);
-                $scope.portoDetail = data[0];
+            .then(function(response){
+                console.log(response);
+                $scope.portoDetail = response.data[0];
             },function(data, status, header, config){
-                //console.log(data.message);
+                //// console.log(data.message);
             });
         }
 
