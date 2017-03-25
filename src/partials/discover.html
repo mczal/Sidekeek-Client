@@ -32,7 +32,7 @@
     </div>
 </div>
 <div class="container" style="margin-top: 50px;">
-    <div class="row" style="margin-bottom: 10px;">
+    <!-- <div class="row" style="margin-bottom: 10px;">
         <div class="col-lg-12">
             Sort by :
             <div class="btn-group">
@@ -47,7 +47,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="row">
       <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" ng-repeat="host in hosts">
           <a ui-sref="profile({idHost:{{host.id_host}},type:'0'})">
@@ -66,7 +66,7 @@
                   <img ng-src="{{product.img_base64}}" alt="...">
                   <div class="caption">
                       <h3>{{product.product_name}}</h3>
-                      <p>{{product.product_name}}</p>
+                      <p>{{product.company_name}}</p>
                   </div>
               </div>
           </a>

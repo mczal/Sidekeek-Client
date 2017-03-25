@@ -4,6 +4,20 @@ angular.module("app.discover",['app.service'])
 discoverController.$inject = ["$scope","$http","$uibModal",'uiService','searchService'];
 
 function discoverController($scope, $http, $uibModal,uiService,searchService){
+  summaryService.getCategories().then(function(response){
+      $scope.categoriesData = response.data;
+       console.log(response);
+  },function(response){
+      console.log(response.data.message);
+  });
+
+  summaryService.getProvince().then(function(response){
+      $scope.provinceData = response.data;
+      console.log(response);
+  },function(response){
+      console.log(response.data.message);
+  });
+  
   var tempSearch = searchService.getTempSearch();
   if(tempSearch != null){
     $scope.hosts = tempSearch.content.hosts;
@@ -17,6 +31,10 @@ function discoverController($scope, $http, $uibModal,uiService,searchService){
       location: $("#locSearch").prop('selectedIndex'),
       query:$("#querySearch").val()
     };
+
+    if (searchData.query == null || searchData.query == undefined){
+      searchData.query = "";
+    }
 
     // var searchData = {
     //   tipe:null,

@@ -6,12 +6,14 @@ homeController.$inject = ['$scope',"$http","$uibModal","summaryService","searchS
 function homeController($scope,$http,$uibModal,summaryService,searchService,$state){
   summaryService.getCategories().then(function(response){
       $scope.categoriesData = response.data;
+       console.log(response);
   },function(response){
       console.log(response.data.message);
   });
 
   summaryService.getProvince().then(function(response){
       $scope.provinceData = response.data;
+      console.log(response);
   },function(response){
       console.log(response.data.message);
   });

@@ -80,11 +80,11 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
       userService.addNewPortofolio(portfolioData).then(function(response){
         $(".loading").addClass("hidden");
              //$window.location.reload();
-             if(response.error == "success"){
+             if(response.data.error == "success"){
               swal("Success!","Portfolio added","success");
-              console.log(response);
+              // console.log(response);
              }else{
-               console.log(response);
+              //  console.log(response);
                swal("Oops","Something went wrong. Please try again","error");
              }
          },function(response){
@@ -158,6 +158,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
 
      $scope.editPortofolio = function(idPortofolio){
         $(".loading").removeClass("hidden");
+        $('.modal').modal('hide');
         console.log($scope.portoImg);
         //  var typeData = "data:" + $scope.portoImg.fivarype + ";";
         //  var base64Data = "base64," + $scope.portoImg.base64;
@@ -186,10 +187,11 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
                }
                userService.editPortofolioImg(imgData).then(function(response){
                  $(".loading").addClass("hidden");
+                 $('.modal').modal('hide');
                  if(response.data.error == "success"){
-                  swal("Success!","Portfolio saved","success");
+                  swal("Oops","Something went wrong. Please try again","error");
                  }else{
-                   swal("Oops","Something went wrong. Please try again","error");
+                   swal("Success!","Portfolio saved","success");
                  }
                  console.log("edit portfolio image");
                  console.log(response.data);
