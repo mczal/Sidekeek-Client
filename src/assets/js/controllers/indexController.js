@@ -5,7 +5,7 @@ IndexController.$inject = ['$scope', '$http','userService','summaryService','uiS
 
 function IndexController($scope, $http,userService,summaryService,uiService,authService,$state){
 
-  let count = 0;
+  var count = 0;
 
   temp = localStorage.getItem('emailHost') + " ";
   namaUser = temp.split("@");
@@ -18,7 +18,7 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
 
   authService.getToken().then(function(response){
     if(response.data.error == "success"){
-      let idHost = localStorage.getItem('idHost');
+      var idHost = localStorage.getItem('idHost');
       authService.setToken(response.data.token);
       userService.getAccount(idHost)
       .then(function(response){
@@ -56,10 +56,10 @@ function IndexController($scope, $http,userService,summaryService,uiService,auth
           // console.log(response.data.message);
       });
 
-      let uEmail = localStorage.getItem('emailHost');
+      var uEmail = localStorage.getItem('emailHost');
 
       if (uEmail != null){
-        let idHost = localStorage.getItem('idHost');
+        var idHost = localStorage.getItem('idHost');
         $scope.idHost = idHost;
         userService.getAccount(idHost).then(function(response){
             if(response.data.error = "success"){

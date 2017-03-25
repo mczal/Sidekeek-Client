@@ -9,7 +9,7 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
 
       function setTab(tabIndex){
         //// console.log(tabIndex);
-        let tab = parseInt(tabIndex);
+        var tab = parseInt(tabIndex);
         switch (tab) {
           case 0:
             $scope.active = [{status: true}, {status: false}, {status: false}];
@@ -30,8 +30,8 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
       }
       setTab($stateParams.type);
 
-      // let idHost = localStorage.getItem("idHost");
-      let idHost = $stateParams.idHost;
+      // var idHost = localStorage.getItem("idHost");
+      var idHost = $stateParams.idHost;
       userService.getAccount(idHost).
         then(function(response){
             $scope.dataAccount = response.data.content[0];
@@ -60,7 +60,7 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
         then(function(response){
           console.log(response);
           //// console.log("getProductsEager complete");
-          if(response.data.content.products_with_images == null){
+          if(response.data.products_with_images == null){
             $scope.dataProducts = [];
           }else{
             $scope.dataProducts = response.data.content.products_with_images;

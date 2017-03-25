@@ -196,7 +196,7 @@ appServices.factory('uiService',
   function($uibModal){
     return{
       showModal: function(url){
-        let modalInstance = $uibModal.open({
+        var modalInstance = $uibModal.open({
           animation: true,
           templateUrl: url
         });
@@ -353,7 +353,7 @@ appServices.factory('userService',
       },
 
       getProfile : function(idHost){
-        // let idHost = localStorage.getItem('idHost');
+        // var idHost = localStorage.getItem('idHost');
         //// console.log("idHost = " + idHost);
         return $http({
             method: 'GET',
@@ -419,7 +419,7 @@ appServices.factory('userService',
       // },
 
       getProductsEager: function(size, page){
-        let idHost = localStorage.getItem('idHost');
+        var idHost = localStorage.getItem('idHost');
         return $http({
             method: 'GET',
             url: credentials.url + '/getProductsEager/' + idHost + '?size='+ size +'&page=' + page,
@@ -434,7 +434,7 @@ appServices.factory('userService',
       },
 
       getPortofolios: function(idHost){
-        //let idHost = localStorage.getItem('idHost');
+        //var idHost = localStorage.getItem('idHost');
         return $http({
             method: 'GET',
             url: credentials.url + '/getPortofolios/' + idHost,

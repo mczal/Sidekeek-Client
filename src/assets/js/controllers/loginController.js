@@ -6,10 +6,10 @@ loginController.$inject = ['$scope','$http', '$window','userService','$location'
 function loginController($scope,$http,$window,userService,$location,$state,$route,authService){
     $scope.login = function(){
         $(".loading").removeClass("hidden");
-        let email = $('#emailUser').val();
-        let pass = $('#passwordUser').val();
+        var email = $('#emailUser').val();
+        var pass = $('#passwordUser').val();
 
-        let session = authService.generateSession();
+        var session = authService.generateSession();
         userService.login(email,pass)
         .then(function(response){
           console.log(response.data);

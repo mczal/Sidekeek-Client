@@ -5,14 +5,14 @@ signUpController.$inject = ['$scope','$http','$window','userService','registerSe
 
 function signUpController($scope, $http, $window, userService,registerService,authService,$state){
    $scope.signUp = function(){
-       let email = $scope.form.email;
-       let pass = $scope.form.password;
-       let confirm = $scope.form.confirmation;
+       var email = $scope.form.email;
+       var pass = $scope.form.password;
+       var confirm = $scope.form.confirmation;
        authService.getToken().then(function(response){
          console.log(response.data);
          if(response.data.error == "success"){
            authService.setToken(response.data.token);
-           let regData = registerService.getRegisterData();
+           var regData = registerService.getRegisterData();
            console.log(regData);
            if(regData == null){
              userService.signup(email,pass,confirm).then(function(response){

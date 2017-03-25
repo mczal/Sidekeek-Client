@@ -11,14 +11,14 @@ function discoverController($scope, $http, $uibModal,uiService,searchService){
   }
 
   $scope.goSearch = function(){
-    let searchData = {
+    var searchData = {
       tipe:$("#tipeSearch").prop('selectedIndex'),
       categories:$("#catSearch").prop('selectedIndex'),
       location: $("#locSearch").prop('selectedIndex'),
       query:$("#querySearch").val()
     };
 
-    // let searchData = {
+    // var searchData = {
     //   tipe:null,
     //   categories:null,
     //   location:null,

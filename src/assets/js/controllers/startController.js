@@ -36,8 +36,8 @@ function startController($scope, $http, summaryService,generalSerivce,registerSe
   }
 
   $scope.submit = function(){
-      let registerData={};
-      let idCat = $("#idCat").prop('selectedIndex');
+      var registerData={};
+      var idCat = $("#idCat").prop('selectedIndex');
 
       registerData.statTemp = sessionStorage.getItem('statTemp');
       registerData.idTemp = sessionStorage.getItem('idTipe');
