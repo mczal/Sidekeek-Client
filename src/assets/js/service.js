@@ -395,7 +395,7 @@ appServices.factory('userService',
             data: $.param({
                 token : credentials.token,
                 sessionCode : localStorage.getItem("session"),
-                idProduct : productData.idProduct,
+                idProduct : productData.idProduk,
                 namaProduk : productData.namaProduk,
                 harga : productData.harga,
                 productDesc : productData.productDesc,
@@ -476,6 +476,21 @@ appServices.factory('userService',
 
       },
 
+      deletePortofolio: function(id){
+        return $http({
+            method: 'POST',
+            url: credentials.url + '/deletePortofolio',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token : credentials.token,
+                sessionCode : localStorage.getItem("session"),
+                idPortofolio : id
+            })
+        })
+      },
+
       editPortofolio: function(newData){
         return $http({
             method: 'POST',
@@ -539,6 +554,36 @@ appServices.factory('userService',
                 sessionCode : localStorage.getItem('session'),
                 idProduct : imageData.id,
                 imgbase64 : imageData.source
+            })
+        })
+      },
+
+      deleteProductImage: function(id){
+        return $http({
+            method: 'POST',
+            url: credentials.url + '/deleteProductImage',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token : credentials.token,
+                sessionCode : localStorage.getItem('session'),
+                idProductImage : id,
+            })
+        })
+      },
+
+      deleteProduct: function(id){
+        return $http({
+            method: 'POST',
+            url: credentials.url + '/deleteProduct',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            data: $.param({
+                token : credentials.token,
+                sessionCode : localStorage.getItem('session'),
+                idProduct : id,
             })
         })
       },

@@ -9,7 +9,8 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        <img src="/src/assets/img/startbg.jpg" alt=""/>
+                        <img ng-if="dataAccount.img_base64 != null" ng-src={{dataAccount.img_base64}} alt=""/>
+                        <img ng-if="dataAccount.img_base64 == null" src="/src/assets/img/startbg.jpg" alt=""/>
                     </div>
                     <div class="col-lg-6">
                         <h3>{{dataAccount.company_name}}</h3>
@@ -81,7 +82,7 @@
                                                 <img ng-if="(dataProduct.featured_img != null)" ng-src="{{dataProduct.featured_img.src}}" alt="" width="100%"/>
                                             </div>
                                         </div>
-                                        <div class="box-kecil">
+                                        <!-- <div class="box-kecil">
                                             <img ng-if="(dataProduct.images[0] == null)" src="/src/assets/img/uploadfoto.png" alt="" style="width: 30px;"/>
                                             <img ng-if="(dataProduct.images[0] != null)" ng-src="{{dataProduct.images[0].src}}" alt="" />
                                         </div>
@@ -92,7 +93,7 @@
                                         <div class="box-kecil">
                                             <img ng-if="(dataProduct.images[2] == null)" src="/src/assets/img/uploadfoto.png" alt="" style="width: 30px;"/>
                                             <img ng-if="(dataProduct.images[2] != null)" ng-src="{{dataProduct.images[2].src}}" alt="" />
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <div class="col-lg-8">

@@ -47,7 +47,8 @@
                                                 <img ng-if="(product.featured_img != null)" ng-src="{{product.featured_img.src}}" alt="" width="100%"/>
                                             </div>
                                         </div>
-                                        <div class="box-kecil">
+
+                                        <!-- <div class="box-kecil">
                                             <img ng-if="(product.images[0] == null)" src="src/assets/img/uploadfoto.png" alt="" style="width: 30px;"/>
                                             <img ng-if="(product.images[0] != null)" ng-src="{{product.images[0].src}}" alt="" />
                                         </div>
@@ -58,7 +59,7 @@
                                         <div class="box-kecil">
                                             <img ng-if="(product.images[2] == null)" src="src/assets/img/uploadfoto.png" alt="" style="width: 30px;"/>
                                             <img ng-if="(product.images[2] != null)" ng-src="{{product.images[2].src}}" alt="" />
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <div class="col-lg-8">
@@ -68,7 +69,7 @@
                                     </div>
                                     <div class="form-group form-group-xl">
                                         <label for="">Price</label>
-                                        <input type="text" class="form-control inputDisable" ng-model="product.price" id="price_{{product.id_product}}" disabled>
+                                        <input type="text" class="form-control inputDisable" ng-model="product.price" id="product_price_{{product.id_product}}" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label for="">Product Description</label>
@@ -76,8 +77,11 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <button ng-show="dataProducts != null" ng-hide="check == 1" type="button" class="btn btn-success btn-lg pull-right" style="margin-bottom:50px;" id="button" ng-click="removeDisable()">Edit</button>
-                                    <button ng-show="check == 1" type="button" class="btn btn-success btn-lg pull-right" ng-click="editProductDesc(product.id_product)" style="margin-bottom:50px;" id="button">Save Changes</button>
+																	<div class="action-wrapper pull-right">
+																		<button ng-show="dataProducts != null" type="button" class="btn btn-danger btn-lg" style="margin-bottom:50px;" id="button" ng-click="deleteProduct(product.id_product)">Delete</button>
+																		<button ng-show="dataProducts != null" ng-hide="check == 1" type="button" class="btn btn-success btn-lg" style="margin-bottom:50px;" id="button" ng-click="removeDisable()">Edit</button>
+																		<button ng-show="check == 1" type="button" class="btn btn-success btn-lg" ng-click="editProductDesc(product.id_product)" style="margin-bottom:50px;" id="button">Save Changes</button>
+																	</div>
                                 </div>
                             </div>
                         </div>
@@ -101,8 +105,9 @@
                                         <!-- <label for="">{{portofolio.id_portofolio}}</label> -->
                                         <div class="edit-portofolio">
                                             <img ng-src="{{portofolio.img_base64}}">
-                                            <div class="desc-porto-edit text-center hvr-pop"  ng-click="viewPortoEditDetails(portofolio.id_portofolio)" data-toggle="modal" data-target="#editPorto">
-                                                <button class="btn btn-success btn-lg" style="margin-top:150px;">Edit</button>
+                                            <div class="desc-porto-edit text-center hvr-pop">
+                                                <button ng-click="viewPortoEditDetails(portofolio.id_portofolio)" data-toggle="modal" data-target="#editPorto" class="btn btn-success btn-lg" style="margin-top:150px;">Edit</button>
+																								<button ng-click="deletePorto(portofolio.id_portofolio)" class="btn btn-danger btn-lg" style="margin-top:150px;">Delete</button>
                                             </div>
                                         </div>
                                     </div>
@@ -171,9 +176,9 @@
                         <div class="upload">
                             <div class="box">
                                 <div class="text-center">
-                                    <img ng-src="{{editPortoDetails.img_base64}}" alt="" width="100%"/>
-                                    <input type="file" id="fileUploadImg" class="inputfile inputfile-1" ng-model="portoImg" base-sixty-four-input/>
-                                    <label for="fileUploadImg"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label>
+                                    <img ng-src="{{editPortoDetails.img_base64}}" alt=""/>
+                                    <!-- <input type="file" id="editImg" class="inputfile inputfile-1" ng-model="editPortoDetails.img_base64" base-sixty-four-input/>
+                                    <label for="editImg"><span><i class="fa fa-upload" style="padding-right: 5px;"></i>Choose a file&hellip;</span></label> -->
                                 </div>
                             </div>
                         </div>

@@ -69,8 +69,55 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
          $(".offcanvas-portofolio").hide();
      }
 
+     $scope.deleteProduct = function(id) {
+       $(".loading").removeClass("hidden");
+       userService.deleteProduct(id).then(function(response){
+         if(response.data.error != "success"){
+           $(".loading").addClass("hidden");
+           swal("Oops!","cannot delete product","error");
+           return;
+         }else{
+           getProduct();
+           $(".loading").addClass("hidden");
+           swal("Success!","Product deleted!","success");
+         }
+       });
+     };
+
+     $scope.deleteProductImage = function(id) {
+       $(".loading").removeClass("hidden");
+       userService.deleteProductImage(id).then(function(response){
+         if(response.data.error != "success"){
+           $(".loading").addClass("hidden");
+           swal("Oops!","cannot delete product","error");
+           return;
+         }else{
+           getProduct();
+           $(".loading").addClass("hidden");
+           swal("Success!","Product Image deleted!","success");
+         }
+       });
+     };
+
+     $scope.deletePorto = function(id) {
+       $(".loading").removeClass("hidden");
+       userService.deletePortofolio(id).then(function(response){
+         if(response.data.error != "success"){
+           getPorto();
+           $(".loading").addClass("hidden");
+           swal("Oops!","cannot delete portofolio","error");
+           return;
+         }else{
+           getPorto();
+           $(".loading").addClass("hidden");
+           swal("Success!","Portofolio deleted!","success");
+         }
+       });
+     };
+
      $scope.addNewPortofolio = function (){
        $(".loading").removeClass("hidden");
+       $('.modal').modal('hide');
        var portfolioData = {
          title : $scope.form.title,
          imageBase64 : "data:" + $scope.portoImg.filetype + ";" + "base64," + $scope.portoImg.base64,
@@ -79,12 +126,10 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
 
       userService.addNewPortofolio(portfolioData).then(function(response){
         $(".loading").addClass("hidden");
-             //$window.location.reload();
+        getPorto();
              if(response.data.error == "success"){
               swal("Success!","Portfolio added","success");
-              // console.log(response);
              }else{
-              //  console.log(response);
                swal("Oops","Something went wrong. Please try again","error");
              }
          },function(response){
@@ -177,6 +222,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
 
              if ($scope.portoImg == undefined){
                 console.log("No new images");
+                $(".loading").addClass("hidden");
              }else{
                //  var typeData = "data:" + $scope.portoImg.fivarype + ";";
                //  var base64Data = "base64," + $scope.portoImg.base64;
@@ -205,22 +251,29 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      $scope.editProductDesc = function(idProduct){
        $(".loading").removeClass("hidden");
        var productData = {
+         idProduk : idProduct,
          namaProduk : $("#product_name_"+idProduct).val(),
-         harga : $("#price_"+idProduct).val(),
+         harga : $("#product_price_"+idProduct).val(),
          productDesc : $("#product_desc_"+idProduct).val(),
        }
-
-       //productData[namaProduk] = $("#product_name_"+idProduct).val();
-
-       var buttonVal = $("#button").val();
+       debugger;
 
        userService.editProductDesc(productData).then(function(response){
-            $(".loading").addClass("hidden");
-             //$window.location.reload();
-             console.log(response.data.message);
-             console.log("success edit product.");
-         },function(response){
-             console.log(response.data.message);
+         console.log(response.data.error);
+         if(response.data.error == "success"){
+           console.log($scope);
+           $(".loading").addClass("hidden");
+           swal("Success!","Edit Product Success","success");
+           getProduct();
+           console.log($scope);
+           debugger;
+           return;
+         }
+          $(".loading").addClass("hidden");
+          swal("Oops","edit product failed","error");
+          getProduct();
+          console.log($scope);
+          debugger;
          });
      }
 
@@ -284,14 +337,17 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
      });
 
     console.log("Getting Portfolios for " + idHost);
-    userService.getPortofolios(idHost).
-     then(function(response){
-       console.log(response);
-       console.log("success getting Portfolio");
-         $scope.dataPortofolios = response.data.content;
-     },function(response){
-         console.log(response.data.message);
-     });
+    function getPorto(){
+      userService.getPortofolios(idHost).
+      then(function(response){
+        // console.log(response);
+        console.log("success getting Portfolio");
+        $scope.dataPortofolios = response.data.content;
+      },function(response){
+        console.log(response.data.message);
+      });
+    }
+     getPorto();
 
      summaryService.getCities()
      .then(function(response){
@@ -306,36 +362,41 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
          console.log(response.data.message);
      });
 
-    userService.getProductsEager(idHost,10,1).then(function(response){
-      $scope.dataProducts = [];
-      console.log(response.data);
-      if(response.data.content !=null && response.data.content.products_with_images != null){
-        $scope.dataProducts = response.data.content.products_with_images;
-        var tempData = response.data.content.products_with_images;
-        $scope.dataProducts.forEach(function(item){
-          var imgs = item.images
-          .split(';')
-          .map(imgData => ({
-            id: imgData.split(',')[0],
-            src: imgData.split(',')[1]
-          })
-        )
-        .filter(imgData =>
-          imgData && imgData.id
-        );
+     function getProduct(){
+       userService.getProductsEager(idHost,10,1).then(function(response){
+         $scope.dataProducts = [];
+        //  console.log(response.data);
+         if(response.data.content !=null && response.data.content.products_with_images != null){
+           $scope.dataProducts = response.data.content.products_with_images;
+           var tempData = response.data.content.products_with_images;
+           $scope.dataProducts.forEach(function(item){
+             var imgs = item.images
+             .split(';')
+             .map(imgData => ({
+               id: imgData.split(',')[0],
+               src: imgData.split(',')[1]
+             })
+           )
+           .filter(imgData =>
+             imgData && imgData.id
+           );
 
-        item.featured_img = imgs.shift();
-        item.images = imgs.filter(imgData => imgData && imgData.id);
+           item.featured_img = imgs.shift();
+           item.images = imgs.filter(imgData => imgData && imgData.id);
 
-      });
-    }else if(response.data.content !=null && response.data.content.products != null){
-      response.data.content.products.map(function(x){
-        $scope.dataProducts.push(x);
-      })
-    }else{
-      console.log("no porduct");
-    }
-    });
+         });
+       }else if(response.data.content !=null && response.data.content.products != null){
+         response.data.content.products.map(function(x){
+           $scope.dataProducts.push(x);
+         })
+       }else{
+         console.log("no porduct");
+       }
+     });
+     }
+
+     getProduct();
+
 
      $scope.addProduk = function (){
          produk =[ '<div class="row">',

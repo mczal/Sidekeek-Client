@@ -846,7 +846,10 @@ footer .footer-above{
 }
 
 .img-acc{
-    width:45px;
+    object-fit: cover;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
     margin-right: 15px;
     vertical-align: -35px;
 }
@@ -892,8 +895,13 @@ footer .footer-above{
     margin: 0;
 }
 
+.latar .col-lg-6:first-child{
+  text-align: center;
+}
+
 .latar img{
-    width: 100%;
+  display: inline-block;
+   max-height: 200px;
 }
 
 .list-product{
@@ -1540,4 +1548,13 @@ footer .footer-above{
   transform: translate(-50%,-50%);
   padding: 2%;
   border-radius: 20px;
+}
+
+.col-lg-4.col-md-6.col-sm-6.col-xs-6 .thumbnail img{
+  max-height: 200px;
+  width: auto;
+}
+
+#editPorto img {
+    max-height: 200px;
 }

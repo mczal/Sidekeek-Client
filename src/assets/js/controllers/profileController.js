@@ -40,7 +40,6 @@ function profileController($scope, $http, $uibModal, $routeParams, userService,$
         userService.getProfile($stateParams.idHost).
         then(function(response){
             $scope.dataProfile = response.data.content[0];
-            //console.log(response);
             if (response.data.content[0].sumrate_totalreview != "" && response.data.content[0].sumrate_totalreview != null){
               $scope.dataProfile.rate = new Array (Math.floor(response.data.content[0].sumrate_totalreview.split('_')[0] / response.data.content[0].sumrate_totalreview.split('_')[1]));
             }else{
