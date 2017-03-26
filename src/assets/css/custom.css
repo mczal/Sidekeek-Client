@@ -855,8 +855,10 @@ footer .footer-above{
 }
 
 .img-acc-child{
-    width: 100px;
-    left: 20px;
+  left: 20px;
+  object-fit: cover;
+  width: 100px;
+  height: 100px;
 }
 
 .dropdown-login-acc{

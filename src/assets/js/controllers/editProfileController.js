@@ -173,6 +173,7 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
                   source: imageBase64
                 }
                 console.log(imageData);
+                debugger;
 
                  userService.addProductImage(imageData).then(function(response){
                      console.log(response.data.message);
@@ -256,7 +257,6 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
          harga : $("#product_price_"+idProduct).val(),
          productDesc : $("#product_desc_"+idProduct).val(),
        }
-       debugger;
 
        userService.editProductDesc(productData).then(function(response){
          console.log(response.data.error);
@@ -265,15 +265,10 @@ editProfileController.$inject = ['$scope', '$http', '$compile', '$rootScope', '$
            $(".loading").addClass("hidden");
            swal("Success!","Edit Product Success","success");
            getProduct();
-           console.log($scope);
-           debugger;
-           return;
          }
           $(".loading").addClass("hidden");
           swal("Oops","edit product failed","error");
           getProduct();
-          console.log($scope);
-          debugger;
          });
      }
 
